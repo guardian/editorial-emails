@@ -9,7 +9,7 @@ For the MVP, the core tecnologies are: React, Node, Typescript.
 
 TODOs:
 
--   [ ] lint against a whitelist of [allowed CSS
+-   [x] lint against a whitelist of [allowed CSS
         properties](https://www.campaignmonitor.com/css/style-element/style-in-head/)
 -   [ ] make deployable as a lambda
 -   [ ] implement the [film-today](https://www.theguardian.com/email/film-today)
