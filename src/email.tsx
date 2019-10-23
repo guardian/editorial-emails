@@ -1,7 +1,8 @@
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { css } from "./css";
 
-const styles = {
+const styles: css = {
     color: "red"
 };
 
