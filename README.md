@@ -18,6 +18,9 @@ TODOs:
 On the CSS side, emails have some significant restrictions, which is it
 important to be aware of:
 
--   all styles should be inlined (as style attributes on elements)
--   float and older layout methods (no flex/grid)
--   media queries are _mostly_ supported so we will use them
+-   almost all styles should be inlined (as style attributes on elements)
+-   inline styles do not support pseudo-selectors and media questions, which we
+    want to support, so we do these in the head, although <style> in the head is
+    not universally supported
+-   modern layout approaches (flex/grid) are not supported so stick to _tables
+    and floats_
