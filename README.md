@@ -7,6 +7,10 @@ repo so that we can move faster.
 
 For the MVP, the core tecnologies are: React, Node, Typescript.
 
+    $ yarn install // install deps
+    $ yarn dev // run locally
+    $ yarn test // run tests
+
 TODOs:
 
 -   [x] lint against a whitelist of [allowed CSS
