@@ -11,11 +11,9 @@ app.use(compression());
 app.get("/:path", async (req, res) => {
     try {
         const path = req.params.path;
-        const model = await api.get(path);
+        const front = await api.get(path);
 
-        res.send(model);
-
-        //res.send(Email());
+        res.send(Email(front).html);
     } catch (e) {
         res.status(500).send({ error: e.stack });
     }

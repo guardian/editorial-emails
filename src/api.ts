@@ -19,7 +19,7 @@ const toString = (s: Stream): Promise<string> => {
     return promise;
 };
 
-const get = async (path: string): Promise<object> => {
+const get = async (path: string): Promise<Front> => {
     const params = {
         Bucket: "aws-frontend-store",
         Key: `PROD/frontsapi/pressed/live/email/${path}/fapi/pressed.v2.lite.json`,
@@ -34,7 +34,7 @@ const get = async (path: string): Promise<object> => {
 
         const json = await toString(res);
 
-        return Promise.resolve(JSON.parse(json));
+        return Promise.resolve(asFront(JSON.parse(json)));
     } catch (e) {
         return Promise.reject(e);
     }
@@ -42,4 +42,35 @@ const get = async (path: string): Promise<object> => {
 
 export const api = {
     get
+};
+
+interface Properties {
+    byline: string;
+    webTitle: string;
+    webUrl: string;
+}
+
+interface Card {
+    id: string;
+    trailText: string;
+}
+
+interface Content {
+    properties: Properties;
+    card: Card;
+}
+
+interface Collection {
+    id: string;
+    displayName: string;
+    backfill: Content[];
+}
+
+export interface Front {
+    id: string;
+    collections: Collection[];
+}
+
+const asFront = (obj: object): Front => {
+    return obj as Front; // TODO actually validate this and log/handle errors
 };
