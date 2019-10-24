@@ -2,12 +2,15 @@ import React from "react";
 import { css } from "../css";
 import { palette } from "@guardian/src-foundations";
 import { cardPadding } from "../styles/card-padding";
+import { textSans } from "../styles/typography";
 
 const styles: css = {
     width: "100%",
     backgroundColor: palette.neutral[20],
     color: palette.neutral[97],
-    textAlign: "center"
+    textAlign: "center",
+
+    ...textSans({ level: 1 })
 };
 
 export const Footer: React.FC<{}> = () => (
