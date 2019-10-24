@@ -32,6 +32,17 @@ important to be aware of:
 -   modern layout approaches (flex/grid) are not supported so stick to tables
 -   there are various limitations about where you can use padding
 
+Specifically, for layout:
+
+-   only use tables for layout
+-   set width on `table` elements
+-   set padding on `td` elements
+-   avoid margin (it is unreliable on some older Outlook versions)
+-   you can do 'responsive design' by using the 'fluid hybrid' technique (see
+    [here](https://www.emailonacid.com/blog/article/email-development/a-fluid-hybrid-design-primer/)).
+    Essentially, you use nested tables with `width: 100%` and `max-width: 100px`
+    (e.g.). Note, a hack is required for Outlook.
+
 Useful reading:
 
 -   https://www.campaignmonitor.com/css/
