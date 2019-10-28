@@ -44,10 +44,25 @@ export const api = {
     get
 };
 
+interface Image {
+    url: string;
+    fields: { altText: string; };
+}
+
+// e.g. see https://github.com/guardian/frontend/blob/master/common/app/implicits/FaciaContentFrontendHelpers.scala#L19 for image
+interface InnerContent {
+    trail: {
+        trailPicture: {
+            allImages: Image[];
+        };
+    };
+}
+
 interface Properties {
     byline: string;
     webTitle: string;
     webUrl: string;
+    maybeContent: InnerContent;
 }
 
 interface Card {

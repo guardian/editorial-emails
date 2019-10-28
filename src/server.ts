@@ -13,6 +13,12 @@ app.get("/:path", async (req, res) => {
         const path = req.params.path;
         const front = await api.get(path);
 
+        // Purely for development
+        if (req.query.showModel) {
+            res.send(front);
+            return;
+        }
+
         res.send(Email(front).html);
     } catch (e) {
         res.status(500).send({ error: e.stack });
