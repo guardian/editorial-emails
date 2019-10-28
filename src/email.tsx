@@ -5,12 +5,15 @@ import { Banner } from "./components/Banner";
 import { Footer } from "./components/Footer";
 import { Card } from "./components/Card";
 import { css } from "./css";
+import { Padding } from "./layout/Padding";
+import { Heading } from "./components/Heading";
+import { Multiline } from "./components/Multiline";
 
 const canonicalURL = (path: string): string =>
     `https://www.theguardian.com/${path}`;
 
 const center: css = {
-    maxWidth: "500px",
+    maxWidth: "600px",
     margin: "0 auto"
 };
 
@@ -26,22 +29,31 @@ const title = (id: string): string => {
 };
 
 export const Email = (front: Front) => {
+    const collection = front.collections[0];
+
     const body = renderToStaticMarkup(
         <div style={center}>
             <Banner />
+            <Padding px={10} />
+            <Multiline />
+            <Padding px={10} />
+            <Heading heading={collection.displayName} />
 
-            {front.collections[0].backfill.map(content => {
+            {collection.backfill.map(content => {
                 const image =
                     content.properties.maybeContent.trail.trailPicture
                         .allImages[0];
                 return (
-                    <Card
-                        imageURL={image.url}
-                        imageAlt={image.fields.altText}
-                        headline={content.properties.webTitle}
-                        byline={content.properties.byline}
-                        webURL={content.properties.webUrl}
-                    />
+                    <>
+                        <Card
+                            imageURL={image.url}
+                            imageAlt={image.fields.altText}
+                            headline={content.properties.webTitle}
+                            byline={content.properties.byline}
+                            webURL={content.properties.webUrl}
+                        />
+                        <Padding px={10} />
+                    </>
                 );
             })}
 

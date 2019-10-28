@@ -3,6 +3,7 @@
 export interface css {
     color?: string;
     backgroundColor?: string;
+    textDecoration?: "none";
 
     margin?: string;
 
@@ -10,4 +11,20 @@ export interface css {
     width?: string;
 
     textAlign?: "center";
+
+    // TODO table only
+    borderSpacing?: number;
+    borderCollapse?: "collapse";
+    borderTop?: string;
+
+    // TODO td only
+    padding?: string;
+    paddingBottom?: string;
+
+    // TODO typography only
+    fontFamily?: string;
+    fontSize?: string;
+    fontWeight?: number;
+    lineHieght?: string;
+    fontStyle?: "italic";
 }
