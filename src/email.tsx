@@ -4,18 +4,14 @@ import { Front } from "./api";
 import { Banner } from "./components/Banner";
 import { Footer } from "./components/Footer";
 import { Card } from "./components/Card";
-import { css } from "./css";
+import { tableCSS } from "./css";
 import { Padding } from "./layout/Padding";
+import { Center } from "./layout/Center";
 import { Heading } from "./components/Heading";
 import { Multiline } from "./components/Multiline";
 
 const canonicalURL = (path: string): string =>
     `https://www.theguardian.com/${path}`;
-
-const center: css = {
-    maxWidth: "600px",
-    margin: "0 auto"
-};
 
 const title = (id: string): string => {
     const tag = id.substring("email/".length);
@@ -32,7 +28,7 @@ export const Email = (front: Front) => {
     const collection = front.collections[0];
 
     const body = renderToStaticMarkup(
-        <div style={center}>
+        <Center>
             <Banner />
             <Padding px={10} />
             <Multiline />
@@ -58,7 +54,7 @@ export const Email = (front: Front) => {
             })}
 
             <Footer />
-        </div>
+        </Center>
     );
 
     const favicon =

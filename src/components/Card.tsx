@@ -1,20 +1,13 @@
 import React from "react";
-import { css } from "../css";
+import { fontCSS, tdCSS, tableCSS, imageCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
 import { headline } from "../styles/typography";
 
-/* const styles: css = {
-    width: "100%",
-    backgroundColor: palette.neutral[20],
-    color: palette.neutral[97],
-    textAlign: "center"
-}; */
-
-const imgStyle: css = {
+const imgStyle: imageCSS = {
     width: "100%"
 };
 
-const tableStyle: css = {
+const tableStyle: tableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
     backgroundColor: "rgb(251, 246, 239)",
@@ -23,32 +16,32 @@ const tableStyle: css = {
     width: "100%"
 };
 
-const imgWrapperStyle: css = {
+const imgWrapperStyle: tdCSS = {
     padding: "0"
 };
 
-const metaWrapperStyle: css = {
+const metaWrapperStyle: tdCSS = {
     padding: "3px 65px 15px 10px"
 };
 
-const linkStyle: css = {
+const linkStyle: fontCSS = {
     textDecoration: "none"
 };
 
-const headlineStyle: css = {
+const headlineStyle: fontCSS = {
     color: palette.neutral[7],
     ...headline({ level: 4 })
 };
 
-const bylineStyle: css = {
+const bylineStyle: fontCSS = {
     color: palette.culture.main,
     fontStyle: "italic",
 
     ...headline({ level: 4 })
 };
 
-const bottomPaddingStyle: css = {
-    paddingBottom: "26px"
+const bottomPaddingStyle: tdCSS = {
+    paddingBottom: "26px",
 };
 
 interface Props {
@@ -66,35 +59,35 @@ export const Card: React.FC<Props> = ({
     imageURL,
     imageAlt
 }) => (
-    <table style={tableStyle}>
-        <tbody>
-            {imageURL && (
+        <table style={tableStyle}>
+            <tbody>
+                {imageURL && (
+                    <tr>
+                        <td style={imgWrapperStyle}>
+                            <a href={webURL}>
+                                <img
+                                    style={imgStyle}
+                                    alt={imageAlt}
+                                    src={imageURL}
+                                />
+                            </a>
+                        </td>
+                    </tr>
+                )}
+
                 <tr>
-                    <td style={imgWrapperStyle}>
-                        <a href={webURL}>
-                            <img
-                                style={imgStyle}
-                                alt={imageAlt}
-                                src={imageURL}
-                            />
+                    <td style={metaWrapperStyle}>
+                        <a style={linkStyle} href={webURL}>
+                            <span style={headlineStyle}>{headline}</span>
+                            <br />
+                            <span style={bylineStyle}>{byline}</span>
                         </a>
                     </td>
                 </tr>
-            )}
 
-            <tr>
-                <td style={metaWrapperStyle}>
-                    <a style={linkStyle} href={webURL}>
-                        <span style={headlineStyle}>{headline}</span>
-                        <br />
-                        <span style={bylineStyle}>{byline}</span>
-                    </a>
-                </td>
-            </tr>
-
-            <tr>
-                <td style={bottomPaddingStyle}></td>
-            </tr>
-        </tbody>
-    </table>
-);
+                <tr>
+                    <td style={bottomPaddingStyle}></td>
+                </tr>
+            </tbody>
+        </table>
+    );

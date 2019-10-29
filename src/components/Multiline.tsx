@@ -1,16 +1,16 @@
 import React from "react";
-import { css } from "../css";
+import { tableCSS, tdCSS } from "../css";
 
-const tableStyle: css = {
+const tableStyle: tableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
     width: "100%"
 };
 
-const lineStyle: css = {
+const lineStyle: tdCSS = {
     paddingBottom: "3px",
     borderTop: "1px solid rgb(18, 18, 18)",
-    lineHieght: "0",
+    lineHeight: "0",
     fontSize: "0"
 };
 

@@ -11,7 +11,8 @@
     "dev": "ts-node-dev --respawn --transpileOnly src/server.ts",
     "test": "jest",
     "tslint": "tslint -c tslint.json 'src/**/*.ts'",
-    "fix": "tslint -c tslint.json --fix 'src/**/*.ts'"
+    "fix": "tslint -c tslint.json --fix 'src/**/*.ts'",
+    "tsc": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/aws-sdk": "^2.7.0",
