@@ -18,7 +18,7 @@ export interface css {
     borderTop?: string;
 
     // TODO td only
-    padding?: string;
+    padding?: number;
     paddingBottom?: string;
 
     // TODO typography only
@@ -27,4 +27,9 @@ export interface css {
     fontWeight?: number;
     lineHieght?: string;
     fontStyle?: "italic";
+
+    // TODO image only
+    outline?: string;
+    clear?: string;
+    display?: string;
 }
