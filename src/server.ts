@@ -1,7 +1,7 @@
-import express from "express";
 import compression from "compression";
-import { Email } from "./email";
+import express from "express";
 import { api } from "./api";
+import { Email } from "./email";
 
 const app = express();
 

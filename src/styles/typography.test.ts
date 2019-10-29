@@ -6,7 +6,7 @@ test("typography", () => {
         fontFamily:
             "GuardianTextSans, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif",
         fontSize: "12px",
-        lineHeight: "1.45em"
+        lineHeight: "1.45em",
     };
 
     expect(got).toEqual(want);

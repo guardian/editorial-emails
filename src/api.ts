@@ -1,6 +1,6 @@
 import aws from "aws-sdk";
-import zlib from "zlib";
 import { Stream } from "stream";
+import zlib from "zlib";
 
 process.env.AWS_PROFILE = "frontend";
 
@@ -9,7 +9,7 @@ const client = new aws.S3();
 const toString = (s: Stream): Promise<string> => {
     const promise: Promise<string> = new Promise((resolve, reject) => {
         let string = "";
-        s.on("data", data => {
+        s.on("data", (data) => {
             string += data.toString();
         });
         s.on("end", () => resolve(string));
@@ -23,7 +23,7 @@ const get = async (path: string): Promise<Front> => {
     const params = {
         Bucket: "aws-frontend-store",
         Key: `PROD/frontsapi/pressed/live/email/${path}/fapi/pressed.v2.lite.json`,
-        ResponseContentEncoding: "utf-8"
+        ResponseContentEncoding: "utf-8",
     };
 
     try {
@@ -41,7 +41,7 @@ const get = async (path: string): Promise<Front> => {
 };
 
 export const api = {
-    get
+    get,
 };
 
 interface Image {
