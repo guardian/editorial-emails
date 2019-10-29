@@ -29,8 +29,8 @@ export const headline = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
     return fontAsObj(strProperties);
 };
 
-const fontAsObj = (s: string): Font => {
-    const propsArray = s
+const fontAsObj = (str: string): Font => {
+    const propsArray = str
         .split(";")
         .slice(0, -1) // drop after last ';'
         .map((s) => s.trim())

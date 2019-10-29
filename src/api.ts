@@ -8,11 +8,11 @@ const client = new aws.S3();
 
 const toString = (s: Stream): Promise<string> => {
     const promise: Promise<string> = new Promise((resolve, reject) => {
-        let string = "";
+        let str = "";
         s.on("data", (data) => {
-            string += data.toString();
+            str += data.toString();
         });
-        s.on("end", () => resolve(string));
+        s.on("end", () => resolve(str));
         s.on("error", reject);
     });
 
@@ -49,7 +49,9 @@ interface Image {
     fields: { altText: string; };
 }
 
-// e.g. see https://github.com/guardian/frontend/blob/master/common/app/implicits/FaciaContentFrontendHelpers.scala#L19 for image
+// e.g. see
+// https://github.com/guardian/frontend/blob/master/common/app/implicits/FaciaContentFrontendHelpers.scala#L19
+// for image
 interface InnerContent {
     trail: {
         trailPicture: {
