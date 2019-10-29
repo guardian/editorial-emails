@@ -2,8 +2,8 @@
 // into objects we can use for style attributes
 
 import {
+    headline as srcHeadline,
     textSans as srcTextSans,
-    headline as srcHeadline
 } from "@guardian/src-foundations";
 
 interface Font {
@@ -29,21 +29,21 @@ export const headline = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
     return fontAsObj(strProperties);
 };
 
-const fontAsObj = (s: string): Font => {
-    const propsArray = s
+const fontAsObj = (str: string): Font => {
+    const propsArray = str
         .split(";")
         .slice(0, -1) // drop after last ';'
-        .map(s => s.trim())
-        .map(s => s.replace("\n", ""));
+        .map((s) => s.trim())
+        .map((s) => s.replace("\n", ""));
 
-    let font = {
+    const font = {
         fontFamily: "",
         fontSize: "",
         fontWeight: 400,
-        lineHeight: ""
+        lineHeight: "",
     };
 
-    propsArray.map(property => {
+    propsArray.map((property) => {
         const [key, value] = property.split(":");
         const trValue = value.trim();
         switch (key.trim()) {

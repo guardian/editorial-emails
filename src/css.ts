@@ -1,5 +1,7 @@
 // TODO possibly use a map definition with key values to simplify
 // TODO split out table css from td css
+
+// tslint:disable:class-name
 export interface css {
     color?: string;
     backgroundColor?: string;

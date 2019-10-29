@@ -9,7 +9,9 @@
   "private": false,
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly src/server.ts",
-    "test": "jest"
+    "test": "jest",
+    "tslint": "tslint -c tslint.json 'src/**/*.ts'",
+    "fix": "tslint -c tslint.json --fix 'src/**/*.ts'"
   },
   "devDependencies": {
     "@types/aws-sdk": "^2.7.0",
@@ -22,6 +24,7 @@
     "jest": "^24.9.0",
     "ts-jest": "^24.1.0",
     "ts-node-dev": "^1.0.0-pre.43",
+    "tslint": "^5.20.0",
     "typescript": "^3.6.4"
   },
   "dependencies": {
