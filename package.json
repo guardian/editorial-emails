@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly src/server.ts",
     "test": "jest",
+    "tsc": "tsc --noEmit",
     "tslint": "tslint -c tslint.json 'src/**/*.ts'",
     "fix": "tslint -c tslint.json --fix 'src/**/*.ts'"
   },
