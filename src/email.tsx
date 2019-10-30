@@ -9,7 +9,7 @@ import { Padding } from "./layout/Padding";
 import { Center } from "./layout/Center";
 import { Heading } from "./components/Heading";
 import { Multiline } from "./components/Multiline";
-import { formatImage } from './image';
+import { formatImage } from "./image";
 
 const canonicalURL = (path: string): string =>
     `https://www.theguardian.com/${path}`;
@@ -40,7 +40,11 @@ export const Email = (front: Front, salt: string) => {
                 const image =
                     content.properties.maybeContent.trail.trailPicture
                         .allImages[0];
-                const formattedImage = formatImage(image.url, salt);
+                const formattedImage = formatImage(
+                    image.url,
+                    salt,
+                    content.card.starRating
+                );
 
                 return (
                     <>
