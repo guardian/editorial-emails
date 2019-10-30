@@ -8,14 +8,6 @@ const tableStyle: TableCSS = {
     borderCollapse: "collapse",
 };
 
-const tdPadding: TdCSS = {
-    paddingTop: "20px",
-};
-
-const tdInnerPadding: TdCSS = {
-    padding: "35px 0",
-};
-
 const tableWrapper: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
@@ -23,6 +15,14 @@ const tableWrapper: TableCSS = {
     backgroundRepeat: "no-repeat",
     backgroundPosition: "bottom right",
     backgroundImage: "url(https://assets.guim.co.uk/images/email/f189dff5bfa4dc66d092f57e973a51b9/grey-g.png)",
+};
+
+const tdPadding: TdCSS = {
+    paddingTop: "20px",
+};
+
+const tdInnerPadding: TdCSS = {
+    padding: "35px 0",
 };
 
 const tdStyle: TdCSS = {
