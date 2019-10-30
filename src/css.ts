@@ -10,6 +10,7 @@ export interface FontCSS {
     lineHeight?: string;
     fontStyle?: "italic";
     color?: string;
+    textAlign?: string;
 }
 
 export interface TableCSS {
@@ -22,11 +23,15 @@ export interface TableCSS {
     padding?: string;
     color?: string;
     textAlign?: "center";
+    backgroundRepeat?: string;
+    backgroundPosition?: string;
+    backgroundImage?: string;
 }
 
 export interface TdCSS extends FontCSS {
     padding?: string;
     paddingBottom?: string;
+    paddingTop?: string;
     borderTop?: string;
 }
 
@@ -34,4 +39,11 @@ export interface ImageCSS {
     width?: string;
     outline?: string;
     display?: string;
+}
+
+export interface linkCSS extends FontCSS {
+    padding?: string;
+    paddingBottom?: string;
+    paddingTop?: string;
+    borderTop?: string;
 }
