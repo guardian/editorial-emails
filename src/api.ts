@@ -9,7 +9,7 @@ const client = new aws.S3();
 const toString = (s: Stream): Promise<string> => {
     const promise: Promise<string> = new Promise((resolve, reject) => {
         let str = "";
-        s.on("data", (data) => {
+        s.on("data", data => {
             str += data.toString();
         });
         s.on("end", () => resolve(str));
@@ -23,7 +23,7 @@ const get = async (path: string): Promise<Front> => {
     const params = {
         Bucket: "aws-frontend-store",
         Key: `PROD/frontsapi/pressed/live/email/${path}/fapi/pressed.v2.lite.json`,
-        ResponseContentEncoding: "utf-8",
+        ResponseContentEncoding: "utf-8"
     };
 
     try {
@@ -41,12 +41,12 @@ const get = async (path: string): Promise<Front> => {
 };
 
 export const api = {
-    get,
+    get
 };
 
 interface Image {
     url: string;
-    fields: { altText: string; };
+    fields: { altText: string };
 }
 
 // e.g. see
@@ -70,6 +70,7 @@ interface Properties {
 interface Card {
     id: string;
     trailText: string;
+    starRating?: number;
 }
 
 interface Content {
