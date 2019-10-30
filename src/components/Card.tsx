@@ -1,20 +1,13 @@
 import React from "react";
-import { css } from "../css";
+import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
 import { headline } from "../styles/typography";
 
-/* const styles: css = {
-    width: "100%",
-    backgroundColor: palette.neutral[20],
-    color: palette.neutral[97],
-    textAlign: "center"
-}; */
-
-const imgStyle: css = {
+const imgStyle: ImageCSS = {
     width: "100%"
 };
 
-const tableStyle: css = {
+const tableStyle: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
     backgroundColor: "rgb(251, 246, 239)",
@@ -23,31 +16,31 @@ const tableStyle: css = {
     width: "100%"
 };
 
-const imgWrapperStyle: css = {
+const imgWrapperStyle: TdCSS = {
     padding: "0"
 };
 
-const metaWrapperStyle: css = {
+const metaWrapperStyle: TdCSS = {
     padding: "3px 65px 15px 10px"
 };
 
-const linkStyle: css = {
+const linkStyle: FontCSS = {
     textDecoration: "none"
 };
 
-const headlineStyle: css = {
+const headlineStyle: FontCSS = {
     color: palette.neutral[7],
     ...headline({ level: 4 })
 };
 
-const bylineStyle: css = {
+const bylineStyle: FontCSS = {
     color: palette.culture.main,
     fontStyle: "italic",
 
     ...headline({ level: 4 })
 };
 
-const bottomPaddingStyle: css = {
+const bottomPaddingStyle: TdCSS = {
     paddingBottom: "26px"
 };
 

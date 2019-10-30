@@ -1,37 +1,37 @@
 // TODO possibly use a map definition with key values to simplify
 // TODO split out table css from td css
 
-// tslint:disable:class-name
-export interface css {
-    color?: string;
-    backgroundColor?: string;
+// For spans and a elements
+export interface FontCSS {
     textDecoration?: "none";
-
-    margin?: string;
-
-    maxWidth?: string;
-    width?: string;
-
-    textAlign?: "center";
-
-    // TODO table only
-    borderSpacing?: number;
-    borderCollapse?: "collapse";
-    borderTop?: string;
-
-    // TODO td only
-    padding?: number;
-    paddingBottom?: string;
-
-    // TODO typography only
     fontFamily?: string;
     fontSize?: string;
     fontWeight?: number;
-    lineHieght?: string;
+    lineHeight?: string;
     fontStyle?: "italic";
+    color?: string;
+}
 
-    // TODO image only
+export interface TableCSS {
+    borderSpacing?: number;
+    borderCollapse?: "collapse";
+    borderTop?: string;
+    width?: string;
+    maxWidth?: string;
+    backgroundColor?: string;
+    padding?: string;
+    color?: string;
+    textAlign?: "center";
+}
+
+export interface TdCSS extends FontCSS {
+    padding?: string;
+    paddingBottom?: string;
+    borderTop?: string;
+}
+
+export interface ImageCSS {
+    width?: string;
     outline?: string;
-    clear?: string;
     display?: string;
 }

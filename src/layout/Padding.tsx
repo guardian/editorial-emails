@@ -1,7 +1,7 @@
 import React from "react";
-import { css } from "../css";
+import { TableCSS } from "../css";
 
-const tableStyle: css = {
+const tableStyle: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse"
 };
