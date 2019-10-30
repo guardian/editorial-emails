@@ -9,7 +9,7 @@ For the MVP, the core tecnologies are: React, Node, Typescript.
 
     $ yarn install // install deps
     $ yarn dev // run locally
-    $ yarn test // run tests
+    $ yarn [test|tslint|tsc|..] // see package.json scripts for options here
 
 TODOs:
 
@@ -42,6 +42,10 @@ Specifically, for layout:
     [here](https://www.emailonacid.com/blog/article/email-development/a-fluid-hybrid-design-primer/)).
     Essentially, you use nested tables with `width: 100%` and `max-width: 100px`
     (e.g.). Note, a hack is required for Outlook.
+
+To help stick to these, specific typings have been added to constrain CSS
+property use - for example `tableCSS`, which differs from `tdCSS` and so on. See
+the `css.ts` file for all available here.
 
 Useful reading:
 
