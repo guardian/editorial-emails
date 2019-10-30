@@ -10,7 +10,7 @@ const tableStyle: TableCSS = {
 
 const lineStyle: TdCSS = {
     paddingBottom: "3px",
-    borderTop: "1px solid " + palette.neutral[7],
+    borderTop: `1px solid ${palette.neutral[7]}`,
     lineHeight: "0",
     fontSize: "0"
 };

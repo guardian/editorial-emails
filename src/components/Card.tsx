@@ -11,7 +11,7 @@ const tableStyle: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
     backgroundColor: palette.culture.faded,
-    borderTop: "2px solid " + palette.culture.main,
+    borderTop: `2px solid ${palette.culture.main}`,
     padding: "0",
     width: "100%"
 };
