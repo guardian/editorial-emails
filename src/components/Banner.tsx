@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageCSS, TableCSS, TdCSS } from "../css";
+import { ImageCSS, TableCSS } from "../css";
 
 const tableStyle: TableCSS = {
     borderSpacing: 0,
