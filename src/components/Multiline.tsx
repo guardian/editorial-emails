@@ -16,12 +16,10 @@ const lineStyle: TdCSS = {
 
 export const Multiline: React.FC<{}> = () => (
     <table style={tableStyle}>
-        <tbody>
-            {[0, 1, 2].map(line => (
-                <tr>
-                    <td style={lineStyle}>&nbsp;</td>
-                </tr>
-            ))}
-        </tbody>
+        {[0, 1, 2, 3].map(line => (
+            <tr>
+                <td style={lineStyle}>&nbsp;</td>
+            </tr>
+        ))}
     </table>
 );

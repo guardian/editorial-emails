@@ -32,7 +32,6 @@ export const Email = (front: Front) => {
             <Banner />
             <Padding px={10} />
             <Multiline />
-            <Padding px={10} />
             <Heading heading={collection.displayName} />
 
             {collection.backfill.map(content => {
@@ -72,6 +71,9 @@ export const Email = (front: Front) => {
     <title>${title(front.id)}</title>
     <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
 </head>
+<style>
+    td {padding: 0;}
+</style>
 <body>
         ${body}
 </body>
