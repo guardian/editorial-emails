@@ -4,7 +4,7 @@ import { Front } from "./api";
 import { Banner } from "./components/Banner";
 import { Footer } from "./components/Footer";
 import { Card } from "./components/Card";
-import { tableCSS } from "./css";
+import { TableCSS } from "./css";
 import { Padding } from "./layout/Padding";
 import { Center } from "./layout/Center";
 import { Heading } from "./components/Heading";

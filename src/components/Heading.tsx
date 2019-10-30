@@ -1,9 +1,9 @@
 import React from "react";
-import { tdCSS } from "../css";
+import { TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
 import { headline } from "../styles/typography";
 
-const headingStyle: tdCSS = {
+const headingStyle: TdCSS = {
     color: palette.neutral[7],
     padding: "3px 65px 15px 10px",
 

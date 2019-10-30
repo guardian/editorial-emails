@@ -1,17 +1,17 @@
 import React from "react";
-import { imageCSS, tableCSS, tdCSS } from "../css";
+import { ImageCSS, TableCSS, TdCSS } from "../css";
 
-const tableStyle: tableCSS = {
+const tableStyle: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
     width: "100%"
 };
 
-const tdStyle: tdCSS = {
+const tdStyle: TdCSS = {
     padding: "0"
 };
 
-const styles: imageCSS = {
+const styles: ImageCSS = {
     outline: "none",
     display: "block"
 };

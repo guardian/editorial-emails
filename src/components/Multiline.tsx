@@ -1,13 +1,13 @@
 import React from "react";
-import { tableCSS, tdCSS } from "../css";
+import { TableCSS, TdCSS } from "../css";
 
-const tableStyle: tableCSS = {
+const tableStyle: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
     width: "100%"
 };
 
-const lineStyle: tdCSS = {
+const lineStyle: TdCSS = {
     paddingBottom: "3px",
     borderTop: "1px solid rgb(18, 18, 18)",
     lineHeight: "0",

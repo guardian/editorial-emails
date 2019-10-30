@@ -2,7 +2,7 @@
 // TODO split out table css from td css
 
 // For spans and a elements
-export interface fontCSS {
+export interface FontCSS {
     textDecoration?: "none";
     fontFamily?: string;
     fontSize?: string;
@@ -12,7 +12,7 @@ export interface fontCSS {
     color?: string;
 }
 
-export interface tableCSS {
+export interface TableCSS {
     borderSpacing?: number;
     borderCollapse?: "collapse";
     borderTop?: string;
@@ -24,13 +24,13 @@ export interface tableCSS {
     textAlign?: "center";
 }
 
-export interface tdCSS extends fontCSS {
+export interface TdCSS extends FontCSS {
     padding?: string;
     paddingBottom?: string;
     borderTop?: string;
 }
 
-export interface imageCSS {
+export interface ImageCSS {
     width?: string;
     outline?: string;
     display?: string;
