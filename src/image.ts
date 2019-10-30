@@ -1,10 +1,11 @@
-import md5 from 'md5';
+import md5 from "md5";
+import { URL } from "url";
 
 const fastlyURL = "https://i.guim.co.uk/img/";
 
 export const sign = (s: string, salt: string): string => {
     return md5(salt + s);
-}
+};
 
 export const source = (guimURL: string): string => {
     const re = /(media|static|uploads|sport).guim.co.uk/;
@@ -20,14 +21,13 @@ export const source = (guimURL: string): string => {
 // See:
 // https://github.com/guardian/frontend/blob/master/common/app/views/support/ImageProfile.scala#L242
 export const formatImage = (masterURL: string, salt: string): string => {
-
     // https://docs.fastly.com/api/imageopto/
     const params = {
         quality: "45",
         sharpen: "a0.8,r1,t1",
         width: "600",
         dpr: "2",
-        fit: "max", // Note, this value looks invalid
+        fit: "max" // Note, this value looks invalid
     };
 
     const qs = Object.entries(params)
@@ -38,7 +38,7 @@ export const formatImage = (masterURL: string, salt: string): string => {
     const pathQuery = url.pathname + "?" + qs;
     const src = source(masterURL);
     const sig = sign(pathQuery, salt);
-    const updatedPathQuery = pathQuery + '&s=' + sig;
+    const updatedPathQuery = pathQuery + "&s=" + sig;
 
     return fastlyURL + src + updatedPathQuery;
-}
+};

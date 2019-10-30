@@ -1,8 +1,9 @@
+import { URL } from "url";
 import { formatImage, sign, source } from "./image";
 
 test("images are signed correctly", () => {
     const testURLs = [
-        'http://media.guim.co.uk/67222cbde87dc147dd34041c2e8692b81f24f546/0_0_1204_1181/500.jpg?width=300&quality=50&height=100',
+        "http://media.guim.co.uk/67222cbde87dc147dd34041c2e8692b81f24f546/0_0_1204_1181/500.jpg?width=300&quality=50&height=100"
     ];
 
     const salt = "haha";
@@ -18,7 +19,7 @@ test("images are signed correctly", () => {
 test("extract image source", () => {
     const cases = [
         ["//uploads.guim.co.uk", "uploads"],
-        ["//lol.guim.co.uk", "media"],
+        ["//lol.guim.co.uk", "media"]
     ];
 
     cases.forEach(testCase => {
@@ -30,13 +31,13 @@ test("extract image source", () => {
 
 test("formats full URL", () => {
     const testURLs = [
-        'http://media.guim.co.uk/67222cbde87dc147dd34041c2e8692b81f24f546/0_0_1204_1181/500.jpg',
+        "http://media.guim.co.uk/67222cbde87dc147dd34041c2e8692b81f24f546/0_0_1204_1181/500.jpg"
     ];
 
     testURLs.forEach(url => {
         const got = formatImage(url, "foo");
-        const want = "https://i.guim.co.uk/img/media/67222cbde87dc147dd34041c2e8692b81f24f546/0_0_1204_1181/500.jpg?quality=45&sharpen=a0.8,r1,t1&width=600&dpr=2&fit=max&s=e6f7cfcca297387ce8efb4ce5164f822";
+        const want =
+            "https://i.guim.co.uk/img/media/67222cbde87dc147dd34041c2e8692b81f24f546/0_0_1204_1181/500.jpg?quality=45&sharpen=a0.8,r1,t1&width=600&dpr=2&fit=max&s=e6f7cfcca297387ce8efb4ce5164f822";
         expect(got).toEqual(want);
     });
-
 });
