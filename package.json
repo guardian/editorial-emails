@@ -12,8 +12,7 @@
     "test": "jest",
     "tsc": "tsc --noEmit",
     "tslint": "tslint -c tslint.json 'src/**/*.ts'",
-    "fix": "tslint -c tslint.json --fix 'src/**/*.ts'",
-    "tsc": "tsc --noEmit"
+    "fix": "tslint -c tslint.json --fix 'src/**/*.ts'"
   },
   "devDependencies": {
     "@types/aws-sdk": "^2.7.0",
@@ -35,8 +34,6 @@
     "@types/md5": "^2.1.33",
     "aws-sdk": "^2.554.0",
     "compression": "^1.7.4",
-    "emotion": "^10.0.17",
-    "emotion-server": "^10.0.17",
     "express": "^4.17.1",
     "md5": "^2.2.1",
     "react": "^16.11.0",
