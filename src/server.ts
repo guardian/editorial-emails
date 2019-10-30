@@ -8,6 +8,11 @@ const app = express();
 app.use(express.json({ limit: "50mb" }));
 app.use(compression());
 
+const salt = process.env.IMAGE_SALT;
+if (!salt) {
+    throw new Error("Required IMAGE_SALT env var is empty");
+}
+
 app.get("/:path", async (req, res) => {
     try {
         const path = req.params.path;
@@ -19,7 +24,7 @@ app.get("/:path", async (req, res) => {
             return;
         }
 
-        res.send(Email(front).html);
+        res.send(Email(front, salt).html);
     } catch (e) {
         res.status(500).send({ error: e.stack });
     }

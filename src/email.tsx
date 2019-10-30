@@ -9,6 +9,7 @@ import { Padding } from "./layout/Padding";
 import { Center } from "./layout/Center";
 import { Heading } from "./components/Heading";
 import { Multiline } from "./components/Multiline";
+import { formatImage } from './image';
 
 const canonicalURL = (path: string): string =>
     `https://www.theguardian.com/${path}`;
@@ -24,7 +25,7 @@ const title = (id: string): string => {
     );
 };
 
-export const Email = (front: Front) => {
+export const Email = (front: Front, salt: string) => {
     const collection = front.collections[0];
 
     const body = renderToStaticMarkup(
@@ -39,10 +40,12 @@ export const Email = (front: Front) => {
                 const image =
                     content.properties.maybeContent.trail.trailPicture
                         .allImages[0];
+                const formattedImage = formatImage(image.url, salt);
+
                 return (
                     <>
                         <Card
-                            imageURL={image.url}
+                            imageURL={formattedImage}
                             imageAlt={image.fields.altText}
                             headline={content.properties.webTitle}
                             byline={content.properties.byline}
