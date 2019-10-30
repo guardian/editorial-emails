@@ -1,4 +1,5 @@
 import React from "react";
+import { palette } from "@guardian/src-foundations";
 import { TableCSS, TdCSS } from "../css";
 
 const tableStyle: TableCSS = {
@@ -9,7 +10,7 @@ const tableStyle: TableCSS = {
 
 const lineStyle: TdCSS = {
     paddingBottom: "3px",
-    borderTop: "1px solid rgb(18, 18, 18)",
+    borderTop: `1px solid ${palette.neutral[7]}`,
     lineHeight: "0",
     fontSize: "0"
 };

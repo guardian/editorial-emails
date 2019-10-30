@@ -10,14 +10,10 @@ const imgStyle: ImageCSS = {
 const tableStyle: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
-    backgroundColor: "rgb(251, 246, 239)",
-    borderTop: "2px solid rgb(161, 132, 92)",
+    backgroundColor: palette.culture.faded,
+    borderTop: `2px solid ${palette.culture.main}`,
     padding: "0",
     width: "100%"
-};
-
-const imgWrapperStyle: TdCSS = {
-    padding: "0"
 };
 
 const metaWrapperStyle: TdCSS = {
@@ -63,7 +59,7 @@ export const Card: React.FC<Props> = ({
         <tbody>
             {imageURL && (
                 <tr>
-                    <td style={imgWrapperStyle}>
+                    <td>
                         <a href={webURL}>
                             <img
                                 style={imgStyle}

@@ -33,6 +33,7 @@ export const Email = (front: Front, salt: string) => {
             <Banner />
             <Padding px={10} />
             <Multiline />
+            <Padding px={5} />
             <Heading heading={collection.displayName} />
 
             {collection.backfill.map(content => {
