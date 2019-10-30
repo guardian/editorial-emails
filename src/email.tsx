@@ -2,13 +2,12 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { Front } from "./api";
 import { Banner } from "./components/Banner";
+import { Collection } from "./components/Collection";
 import { Footer } from "./components/Footer";
-import { Card } from "./components/Card";
-import { Padding } from "./layout/Padding";
-import { Center } from "./layout/Center";
 import { Heading } from "./components/Heading";
 import { Multiline } from "./components/Multiline";
-import { formatImage } from "./image";
+import { Center } from "./layout/Center";
+import { Padding } from "./layout/Padding";
 
 const canonicalURL = (path: string): string =>
     `https://www.theguardian.com/${path}`;
@@ -33,32 +32,7 @@ export const Email = (front: Front, salt: string) => {
             <Padding px={10} />
             <Multiline />
             <Heading heading={collection.displayName} />
-            <Padding px={10} />
-
-            {collection.backfill.map(content => {
-                const image =
-                    content.properties.maybeContent.trail.trailPicture
-                        .allImages[0];
-                const formattedImage = formatImage(
-                    image.url,
-                    salt,
-                    content.card.starRating
-                );
-
-                return (
-                    <>
-                        <Card
-                            imageURL={formattedImage}
-                            imageAlt={image.fields.altText}
-                            headline={content.properties.webTitle}
-                            byline={content.properties.byline}
-                            webURL={content.properties.webUrl}
-                        />
-                        <Padding px={10} />
-                    </>
-                );
-            })}
-
+            <Collection collection={collection} salt={salt} />
             <Footer />
         </Center>
     );
@@ -116,5 +90,5 @@ export const Email = (front: Front, salt: string) => {
     </body>
         `;
 
-        return { html: html };
+    return { html };
     };
