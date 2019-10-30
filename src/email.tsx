@@ -72,6 +72,7 @@ export const Email = (front: Front) => {
     <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
 </head>
 <style>
+    /* Reset CSS and !important rules */
     td {padding: 0;}
 </style>
 <body>
