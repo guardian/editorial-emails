@@ -5,7 +5,8 @@
     "rules": {
         "interface-name": false,
         "object-literal-sort-keys": false,
-        "trailing-comma": true
+        "trailing-comma": true,
+        "arrow-parens": false
     },
     "rulesDirectory": []
 }
