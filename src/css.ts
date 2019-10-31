@@ -36,12 +36,17 @@ export interface TdCSS extends FontCSS {
     paddingBottom?: string;
     paddingTop?: string;
     borderTop?: string;
+    backgroundColor?: string;
 }
 
 export interface ImageCSS {
     width?: string;
     outline?: string;
     display?: string;
+    textDecoration?: string;
+    maxWidth?: string;
+    clear?: string;
+    border?: string;
 }
 
 export interface LinkCSS extends FontCSS {

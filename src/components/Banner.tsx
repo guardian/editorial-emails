@@ -7,9 +7,14 @@ const tableStyle: TableCSS = {
     width: "100%"
 };
 
-const styles: ImageCSS = {
+const imgStyle: ImageCSS = {
     outline: "none",
-    display: "block"
+    textDecoration: "none",
+    maxWidth: "100%",
+    clear: "both",
+    display: "block",
+    border: "0",
+    width: "100%",
 };
 
 export const Banner: React.FC<{}> = () => (
@@ -20,7 +25,7 @@ export const Banner: React.FC<{}> = () => (
                     width="600"
                     src="https://assets.guim.co.uk/images/email/banners/0dbd7be9345b28a8678baaae474e6548/film-today.png"
                     alt="Film Today"
-                    style={styles}
+                    style={imgStyle}
                 ></img>
             </td>
         </tr>

@@ -32,8 +32,8 @@ export const Email = (front: Front, salt: string) => {
             <Banner />
             <Padding px={10} />
             <Multiline />
-            <Padding px={5} />
             <Heading heading={collection.displayName} />
+            <Padding px={10} />
 
             {collection.backfill.map(content => {
                 const image =
@@ -102,11 +102,12 @@ export const Email = (front: Front, salt: string) => {
         u + .body .gwfw { width:100% !important; width:100vw !important; }
         /* Mobile styles */
         @media only screen and (max-device-width: 480px), only screen and (max-width: 480px) {
-            .h-pad { font-size: 24px!important; line-height: 28px!important; padding: 3px 10px 5px 10px!important }
-            .headline-sm { font-size: 16px!important; line-height: 20px!important }
-            .ct__padding { font-size: 28px!important; line-height: 34px!important }
+            .m-heading { font-size: 28px!important; line-height: 34px!important; padding:4px 8px 0!important }
+            .h-pad { padding: 3px 8px 5px 8px!important }
+            .h-small { font-size: 24px!important; line-height: 28px!important; }
             .m-hide { display: none!important }
-            .sm__pad { padding-bottom: 15px!important }
+            .col-h-sm { font-size: 16px!important; line-height: 20px!important }
+            .col-pad { padding-bottom: 15px!important }
         }
         </style>
     </head>

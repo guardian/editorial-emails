@@ -28,17 +28,20 @@ const tdInnerPadding: TdCSS = {
 const tdStyle: TdCSS = {
     color: palette.neutral[100],
     textAlign: "center",
-    padding: "3px 10px 5px",
-
-    ...textSans({ level: 1 })
+    fontFamily: "Helvetica, Arial, sans-serif",
+    fontSize: "12px",
+    fontWeight: 100,
+    lineHeight: "14px",
+    textDecoration: "none",
 };
 
 const tdDisclaimer: TdCSS = {
     color: palette.neutral[86],
     textAlign: "center",
     padding: "20px 12px 0",
-
-    ...textSans({ level: 1 })
+    fontFamily: "Helvetica, Arial, sans-serif",
+    fontSize: "10px",
+    lineHeight: "14px",
 };
 
 const linkStyle: LinkCSS = {
