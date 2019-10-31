@@ -17,12 +17,15 @@ export interface TableCSS {
     borderSpacing?: number;
     borderCollapse?: "collapse";
     borderTop?: string;
+    height?: string;
     width?: string;
     maxWidth?: string;
     backgroundColor?: string;
+    margin?: string;
     padding?: string;
     color?: string;
     textAlign?: "center";
+    background?: string;
     backgroundRepeat?: string;
     backgroundPosition?: string;
     backgroundImage?: string;
@@ -41,7 +44,7 @@ export interface ImageCSS {
     display?: string;
 }
 
-export interface linkCSS extends FontCSS {
+export interface LinkCSS extends FontCSS {
     padding?: string;
     paddingBottom?: string;
     paddingTop?: string;

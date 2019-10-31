@@ -4,7 +4,6 @@ import { Front } from "./api";
 import { Banner } from "./components/Banner";
 import { Footer } from "./components/Footer";
 import { Card } from "./components/Card";
-import { TableCSS } from "./css";
 import { Padding } from "./layout/Padding";
 import { Center } from "./layout/Center";
 import { Heading } from "./components/Heading";
@@ -70,23 +69,51 @@ export const Email = (front: Front, salt: string) => {
             : "favicon-32x32-dev-yellow.ico";
 
     const html = `
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="robots" content="noindex" />
-    <link rel="canonical" href=${canonicalURL(front.id)} />
-    <title>${title(front.id)}</title>
-    <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
-</head>
-<style>
-    /* Reset CSS and !important rules */
-    td {padding: 0;}
-</style>
-<body>
-        ${body}
-</body>
-    `;
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en" xml:lang="en">
+    <head>
+        <!--[if gte mso 9]>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:AllowPNG/>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+        <![endif]-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="robots" content="noindex" />
+        <link rel="canonical" href=${canonicalURL(front.id)} />
+        <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
+        <title>${title(front.id)}</title>
+        <!--[if mso]>
+        <style>
+            h1, h2, h3, h4, h5, h6, p, blockquote {
+                font-family: Georgia, serif !important;
+            }
+        </style>
+        <![endif]-->
+        <style>td {padding: 0} .ft__links a:visited { font-family: Helvetica, Arial, sans-serif !important; color: rgb(255, 255, 255) !important; font-size: 12px !important; font-weight: lighter !important; line-height: 14px !important; text-decoration: none !important } .ft__links a:hover { font-family: Helvetica, Arial, sans-serif !important; color: rgb(255, 255, 255) !important; font-size: 12px !important; font-weight: lighter !important; line-height: 14px !important; text-decoration: none !important } .ft__links a:active { font-family: Helvetica, Arial, sans-serif !important; color: rgb(255, 255, 255) !important; font-size: 12px !important; font-weight: lighter !important; line-height: 14px !important; text-decoration: none !important } .free-text a:hover { color: rgb(5, 86, 137) !important } @media screen and (-webkit-min-device-pixel-ratio: 0) {td { -webkit-font-smoothing: antialiased } } @-moz-document url-prefix(){td{-moz-osx-font-smoothing:grayscale}} @font-face {font-family: "Guardian Egyptian Web Header"; src: url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Bold.woff2) format("woff2"), url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Bold.woff) format("woff"); font-weight: 700; font-style: normal} @font-face {font-family: "Guardian Egyptian Web Headline"; src: url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Medium.woff2) format("woff2"), url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Medium.woff) format("woff"); font-weight: 600; font-style: normal} @font-face {font-family: "Guardian Egyptian Web Headline Italic"; src: url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-RegularItalic.woff2) format("woff2"), url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-RegularItalic.woff) format("woff"); font-weight: 400; font-style: normal} @media only screen and (max-width: 600px) {.center-element { min-width: 0 !important } .container { width: 100% !important } }</style>
+        <style type="text/css">
+        /* Removes blue links on Gmail and Samsung */
+        u + .body a,
+        #MessageViewBody a { color: inherit; text-decoration: none; font-size: inherit; font-family: inherit; font-weight: inherit; line-height: inherit }
+        /* Sets the full width of the table on Gmail iOS */
+        u + .body .gwfw { width:100% !important; width:100vw !important; }
+        /* Mobile styles */
+        @media only screen and (max-device-width: 480px), only screen and (max-width: 480px) {
+            .h-pad { font-size: 24px!important; line-height: 28px!important; padding: 3px 10px 5px 10px!important }
+            .headline-sm { font-size: 16px!important; line-height: 20px!important }
+            .ct__padding { font-size: 28px!important; line-height: 34px!important }
+            .m-hide { display: none!important }
+            .sm__pad { padding-bottom: 15px!important }
+        }
+        </style>
+    </head>
+    <body class="body" style="min-width:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;margin:0;padding:0;box-sizing:border-box;width:100%">
+            ${body}
+    </body>
+        `;
 
-    return { html: html };
-};
+        return { html: html };
+    };
