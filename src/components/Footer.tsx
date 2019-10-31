@@ -1,7 +1,6 @@
 import React from "react";
 import { TableCSS, TdCSS, LinkCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
-import { textSans } from "../styles/typography";
 
 const tableStyle: TableCSS = {
     borderSpacing: 0,
