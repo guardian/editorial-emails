@@ -24,7 +24,6 @@ export const Collection: React.FC<{
                     webURL={content.properties.webUrl + brazeParameter}
                     key={content.properties.webUrl}
                 />
-                <Padding px={10} />
             </>
         );
     });

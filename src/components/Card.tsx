@@ -18,9 +18,20 @@ const tableStyle: TableCSS = {
     width: "100%"
 };
 
-const tdStyle: TdCSS = {
+const innerTableStyle: TableCSS = {
+    borderSpacing: "0",
+    borderCollapse: "collapse",
     backgroundColor: palette.culture.faded,
-    borderTop: `2px solid ${palette.culture.main}`
+    borderTop: `2px solid ${palette.culture.main}`,
+    padding: "0",
+    width: "100%",
+    position: "relative",
+    height: "56px"
+};
+
+const tdStyle: TdCSS = {
+    width: "100%",
+    paddingBottom: "10px"
 };
 
 const metaWrapperStyle: TdCSS = {
@@ -69,10 +80,10 @@ export const Card: React.FC<Props> = ({
     <table style={tableStyle}>
         <tr>
             <td style={tdStyle}>
-                <table style={tableStyle}>
+                <table style={innerTableStyle}>
                     {imageURL && (
-                        <tr>
-                            <td>
+                        <tr valign="top">
+                            <td style={{ padding: 0 }}>
                                 <a href={webURL}>
                                     <img
                                         width="600"
@@ -85,7 +96,7 @@ export const Card: React.FC<Props> = ({
                         </tr>
                     )}
 
-                    <tr>
+                    <tr valign="top">
                         <td className="h-pad" style={metaWrapperStyle}>
                             <a style={linkStyle} href={webURL}>
                                 <span className="h-small" style={headlineStyle}>
@@ -100,7 +111,7 @@ export const Card: React.FC<Props> = ({
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr valign="top">
                         <td style={bottomPaddingStyle}></td>
                     </tr>
                 </table>

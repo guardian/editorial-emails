@@ -37,7 +37,6 @@ export const Grid: React.FC<{
                 imageURL2={formattedImage2}
                 imageAlt2={image2.fields.altText}
             />
-            <Padding px={10} />
             <Columns
                 headline1={content3.properties.webTitle}
                 webURL1={content3.properties.webUrl}
@@ -48,7 +47,6 @@ export const Grid: React.FC<{
                 imageURL2={formattedImage4}
                 imageAlt2={image4.fields.altText}
             />
-            <Padding px={10} />
         </>
     );
 

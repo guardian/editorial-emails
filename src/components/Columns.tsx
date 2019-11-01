@@ -34,6 +34,11 @@ const tdColumnStyle: TdCSS = {
     borderTop: `2px solid ${palette.culture.main}`,
 };
 
+const tdCellStyle: TdCSS = {
+    padding: "0",
+    width: "100%",
+}
+
 const innerTableStyle: TableCSS = {
     borderSpacing: "0",
     borderCollapse: "collapse",
@@ -44,19 +49,17 @@ const innerTableStyle: TableCSS = {
 };
 
 const metaWrapperStyle: TdCSS = {
-    padding: "3px 10px 5px"
-};
-
-const linkStyle: FontCSS = {
-    textDecoration: "none"
-};
-
-const headlineStyle: FontCSS = {
+    padding: "3px 10px 5px",
     color: palette.neutral[7],
     fontFamily: "'Guardian Egyptian Web Headline', Georgia, serif",
     fontSize: "24px",
     lineHeight: "28px",
     fontWeight: 400,
+};
+
+const linkStyle: FontCSS = {
+    textDecoration: "none",
+    color: palette.neutral[7],
 };
 
 const bottomPaddingStyle: TdCSS = {
@@ -87,7 +90,7 @@ const GridCell: React.FC<{
 }) => (
     <table style={tableStyle}>
         <tr valign="top">
-            <td>
+            <td style={tdCellStyle}>
                 <a href={webURL}>
                     <img
                         width="294"
@@ -99,10 +102,8 @@ const GridCell: React.FC<{
             </td>
         </tr>
         <tr valign="top">
-            <td className="h-pad" style={metaWrapperStyle}>
-                <a style={linkStyle} href={webURL}>
-                    <span className="col-h-sm" style={headlineStyle}>{headline}</span>
-                </a>
+            <td className="col-h-sm" style={metaWrapperStyle}>
+                <a style={linkStyle} href={webURL}>{headline}</a>
             </td>
         </tr>
         <tr valign="top">
@@ -131,7 +132,7 @@ export const Columns: React.FC<ColumnsProps> = ({
                                 <GridCell headline={headline1} webURL={webURL1} imageURL={imageURL1} imageAlt={imageAlt1} />
                             )}
                         </td>
-                        <td className="gutter">&nbsp;</td>
+                        <td className="gutter" width="2%">&nbsp;</td>
                         <td style={tdColumnStyle}>
                             {imageURL2 && (
                                 <GridCell headline={headline2} webURL={webURL2} imageURL={imageURL2} imageAlt={imageAlt2} />

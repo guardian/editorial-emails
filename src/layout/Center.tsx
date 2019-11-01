@@ -26,6 +26,7 @@ const containerTableStyle: TableCSS = {
     borderCollapse: "collapse",
     background: palette.neutral[100],
     margin: "0 auto",
+    textAlign: "left",
 };
 export const Center: React.FC<{ children: React.ReactNode }> = ({
     children
