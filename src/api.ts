@@ -78,7 +78,7 @@ interface Content {
     card: Card;
 }
 
-interface Collection {
+export interface Collection {
     id: string;
     displayName: string;
     backfill: Content[];
