@@ -4,15 +4,14 @@ import { formatImage } from "../image";
 import { Padding } from "../layout/Padding";
 import { Card } from "./Card";
 
-export const Collection: React.FC<{
+export const Grid: React.FC<{
     collection: ICollection;
     salt: string;
 }> = ({ collection, salt }) => {
-    const col = collection.backfill.slice(0, 2).map(content => {
+    const col = collection.backfill.slice(2, 6).map(content => {
         const image =
             content.properties.maybeContent.trail.trailPicture.allImages[0];
         const formattedImage = formatImage(image.url, salt);
-        const brazeParameter = "?##braze_utm##";
 
         return (
             <>
@@ -21,7 +20,7 @@ export const Collection: React.FC<{
                     imageAlt={image.fields.altText}
                     headline={content.properties.webTitle}
                     byline={content.properties.byline}
-                    webURL={content.properties.webUrl + brazeParameter}
+                    webURL={content.properties.webUrl}
                     key={content.properties.webUrl}
                 />
                 <Padding px={10} />

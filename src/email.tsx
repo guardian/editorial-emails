@@ -4,6 +4,7 @@ import { Front } from "./api";
 import { Banner } from "./components/Banner";
 import { Collection } from "./components/Collection";
 import { Footer } from "./components/Footer";
+import { Grid } from "./components/Grid";
 import { Heading } from "./components/Heading";
 import { Multiline } from "./components/Multiline";
 import { Center } from "./layout/Center";
@@ -33,6 +34,7 @@ export const Email = (front: Front, salt: string): string => {
             <Multiline />
             <Heading heading={collection.displayName} />
             <Collection collection={collection} salt={salt} />
+            <Grid collection={collection} salt={salt} />
             <Footer />
         </Center>
     );
