@@ -2,7 +2,7 @@ import React from "react";
 import { Collection as ICollection } from "../api";
 import { formatImage } from "../image";
 import { Padding } from "../layout/Padding";
-import { Card } from "./Card";
+import { Columns } from "./Columns";
 
 export const Grid: React.FC<{
     collection: ICollection;
@@ -15,7 +15,7 @@ export const Grid: React.FC<{
 
         return (
             <>
-                <Card
+                <Columns
                     imageURL={formattedImage}
                     imageAlt={image.fields.altText}
                     headline={content.properties.webTitle}
