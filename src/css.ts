@@ -17,12 +17,15 @@ export interface TableCSS {
     borderSpacing?: number;
     borderCollapse?: "collapse";
     borderTop?: string;
+    height?: string;
     width?: string;
     maxWidth?: string;
     backgroundColor?: string;
+    margin?: string;
     padding?: string;
     color?: string;
     textAlign?: "center";
+    background?: string;
     backgroundRepeat?: string;
     backgroundPosition?: string;
     backgroundImage?: string;
@@ -33,15 +36,20 @@ export interface TdCSS extends FontCSS {
     paddingBottom?: string;
     paddingTop?: string;
     borderTop?: string;
+    backgroundColor?: string;
 }
 
 export interface ImageCSS {
     width?: string;
     outline?: string;
     display?: string;
+    textDecoration?: string;
+    maxWidth?: string;
+    clear?: string;
+    border?: string;
 }
 
-export interface linkCSS extends FontCSS {
+export interface LinkCSS extends FontCSS {
     padding?: string;
     paddingBottom?: string;
     paddingTop?: string;

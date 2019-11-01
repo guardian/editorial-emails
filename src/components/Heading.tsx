@@ -1,7 +1,6 @@
 import React from "react";
 import { TableCSS, TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
-import { headline } from "../styles/typography";
 
 const tableStyle: TableCSS = {
     borderSpacing: 0,
@@ -10,16 +9,17 @@ const tableStyle: TableCSS = {
 };
 
 const headingStyle: TdCSS = {
+    fontFamily: "'Guardian Egyptian Web Header', Georgia, serif",
+    fontSize: "30px",
+    lineHeight: "38px",
     color: palette.neutral[7],
-    padding: "4px 65px 12px 10px",
-
-    ...headline({ level: 4, fontWeight: "bold" })
+    padding: "4px 12px 0",
 };
 
 export const Heading: React.FC<{ heading: string }> = ({ heading }) => (
     <table style={tableStyle}>
         <tr>
-            <td style={headingStyle}>{heading}</td>
+            <td className="m-heading" style={headingStyle}>{heading}</td>
         </tr>
     </table>
 );

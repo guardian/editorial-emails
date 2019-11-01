@@ -8,10 +8,8 @@ const tableStyle: TableCSS = {
 
 export const Padding: React.FC<{ px: number }> = ({ px }) => (
     <table style={tableStyle}>
-        <tbody>
-            <tr>
-                <td style={{ paddingTop: `${px}px` }}></td>
-            </tr>
-        </tbody>
+        <tr>
+            <td style={{ paddingTop: `${px}px` }}></td>
+        </tr>
     </table>
 );
