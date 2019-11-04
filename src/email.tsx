@@ -73,8 +73,6 @@ export const Email = (front: Front, salt: string): string => {
         /* Removes blue links on Gmail and Samsung */
         u + .body a,
         #MessageViewBody a { color: inherit; text-decoration: none; font-size: inherit; font-family: inherit; font-weight: inherit; line-height: inherit }
-        /* Sets the full width of the table on Gmail iOS */
-        u + .body .gwfw { width:100% !important; width:100vw !important; }
         /* Mobile styles */
         @media only screen and (max-device-width: 480px), only screen and (max-width: 480px) {
             .m-heading { font-size: 28px!important; line-height: 34px!important; padding:4px 8px 0!important }

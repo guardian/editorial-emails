@@ -32,6 +32,7 @@ const tdColumnStyle: TdCSS = {
     width: "49%",
     backgroundColor: palette.culture.faded,
     borderTop: `2px solid ${palette.culture.main}`,
+    padding: "0",
 };
 
 const tdCellStyle: TdCSS = {
@@ -45,7 +46,6 @@ const innerTableStyle: TableCSS = {
     padding: "0",
     width: "100%",
     position: "relative",
-    height: "56px",
 };
 
 const metaWrapperStyle: TdCSS = {

@@ -25,8 +25,7 @@ const innerTableStyle: TableCSS = {
     borderTop: `2px solid ${palette.culture.main}`,
     padding: "0",
     width: "100%",
-    position: "relative",
-    height: "56px"
+    position: "relative"
 };
 
 const tdStyle: TdCSS = {
