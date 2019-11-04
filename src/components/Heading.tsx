@@ -19,7 +19,13 @@ const headingStyle: TdCSS = {
 export const Heading: React.FC<{ heading: string }> = ({ heading }) => (
     <table style={tableStyle}>
         <tr>
-            <td className="m-heading" style={headingStyle}>{heading}</td>
+            <td style={{ paddingBottom: "12px" }}>
+                <table style={tableStyle}>
+                    <tr>
+                        <td className="m-heading" style={headingStyle}>{heading}</td>
+                    </tr>
+                </table>
+            </td>
         </tr>
     </table>
 );

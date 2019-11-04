@@ -8,6 +8,11 @@ const tableStyle: TableCSS = {
     width: "100%"
 };
 
+const tdStyle: tdCSS = {
+    width: "100%",
+    paddingTop: "10px"
+}
+
 const lineStyle: TdCSS = {
     paddingBottom: "3px",
     borderTop: `1px solid ${palette.neutral[7]}`,
@@ -17,10 +22,16 @@ const lineStyle: TdCSS = {
 
 export const Multiline: React.FC<{}> = () => (
     <table style={tableStyle}>
-        {[0, 1, 2, 3].map(line => (
-            <tr>
-                <td style={lineStyle}>&nbsp;</td>
-            </tr>
-        ))}
+        <tr>
+            <td style={tdStyle}>
+                <table style={tableStyle}>
+                {[0, 1, 2, 3].map(line => (
+                    <tr>
+                        <td style={lineStyle}>&nbsp;</td>
+                    </tr>
+                ))}
+                </table>
+            </td>
+        </tr>
     </table>
 );

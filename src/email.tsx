@@ -30,10 +30,8 @@ export const Email = (front: Front, salt: string): string => {
     const body = renderToStaticMarkup(
         <Center>
             <Banner />
-            <Padding px={10} />
             <Multiline />
             <Heading heading={collection.displayName} />
-            <Padding px={10} />
             <Collection collection={collection} salt={salt} />
             <Grid collection={collection} salt={salt} />
             <Footer />
