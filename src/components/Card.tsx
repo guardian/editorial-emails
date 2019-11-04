@@ -9,7 +9,7 @@ const imgStyle: ImageCSS = {
     clear: "both",
     display: "block",
     border: "0",
-    width: "100%",
+    width: "100%"
 };
 
 const tableStyle: TableCSS = {
@@ -20,7 +20,7 @@ const tableStyle: TableCSS = {
 
 const tdStyle: TdCSS = {
     backgroundColor: palette.culture.faded,
-    borderTop: `2px solid ${palette.culture.main}`,
+    borderTop: `2px solid ${palette.culture.main}`
 };
 
 const metaWrapperStyle: TdCSS = {
@@ -36,7 +36,7 @@ const headlineStyle: FontCSS = {
     fontFamily: "'Guardian Egyptian Web Headline', Georgia, serif",
     fontSize: "30px",
     lineHeight: "38px",
-    fontWeight: 400,
+    fontWeight: 400
 };
 
 const bylineStyle: FontCSS = {
@@ -44,11 +44,11 @@ const bylineStyle: FontCSS = {
     fontFamily: "'Guardian Egyptian Web Headline Italic', Georgia, serif",
     fontSize: "30px",
     lineHeight: "38px",
-    fontStyle: "italic",
+    fontStyle: "italic"
 };
 
 const bottomPaddingStyle: TdCSS = {
-    paddingBottom: "20px"
+    /*     paddingBottom: "20px" */
 };
 
 interface Props {
@@ -88,9 +88,14 @@ export const Card: React.FC<Props> = ({
                     <tr>
                         <td className="h-pad" style={metaWrapperStyle}>
                             <a style={linkStyle} href={webURL}>
-                                <span className="h-small" style={headlineStyle}>{headline}</span>
+                                <span className="h-small" style={headlineStyle}>
+                                    {headline}
+                                </span>
                                 <br className="m-hide" />
-                                <span className="h-small" style={bylineStyle}> {byline}</span>
+                                <span className="h-small" style={bylineStyle}>
+                                    {" "}
+                                    {byline}
+                                </span>
                             </a>
                         </td>
                     </tr>

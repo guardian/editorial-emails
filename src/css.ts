@@ -10,7 +10,7 @@ export interface FontCSS {
     lineHeight?: string;
     fontStyle?: "italic";
     color?: string;
-    textAlign?: string;
+    textAlign?: "center" | "left";
 }
 
 export interface TableCSS {
@@ -43,9 +43,9 @@ export interface ImageCSS {
     width?: string;
     outline?: string;
     display?: string;
-    textDecoration?: string;
+    textDecoration?: "none";
     maxWidth?: string;
-    clear?: string;
+    clear?: "both";
     border?: string;
 }
 
