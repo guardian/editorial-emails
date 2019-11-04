@@ -1,5 +1,5 @@
 #!/bin/bash
 
-yarn tsc
-yarn tslint
+yarn tsc || exit 1
+yarn tslint || exit 1
 
