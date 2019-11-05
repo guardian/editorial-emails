@@ -57,7 +57,7 @@ export const Email = (front: Front, salt: string) => {
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width" />
         <meta name="robots" content="noindex" />
-        <link rel="canonical" href=${canonicalURL(front.id)} />
+        <link rel="canonical" href="${canonicalURL(front.id)}" />
         <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
         <title>${title(front.id)}</title>
         <!--[if mso]>
