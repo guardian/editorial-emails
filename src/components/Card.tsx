@@ -48,7 +48,7 @@ const bylineStyle: FontCSS = {
 };
 
 const bottomPaddingStyle: TdCSS = {
-    /*     paddingBottom: "20px" */
+    paddingBottom: "20px"
 };
 
 interface Props {
