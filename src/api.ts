@@ -93,7 +93,7 @@ interface Header {
     isComment: boolean;
 }
 
-interface Content {
+export interface Content {
     properties: Properties;
     card: Card;
     header: Header;
