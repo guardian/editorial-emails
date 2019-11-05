@@ -57,6 +57,11 @@ const bottomPaddingStyle: TdCSS = {
     paddingBottom: "20px"
 };
 
+const quoteIconStyle: ImageCSS = {
+    height: "0.8em",
+    display: "inline-block"
+};
+
 interface Props {
     headline: string;
     byline: string;
@@ -64,6 +69,7 @@ interface Props {
     imageURL?: string;
     imageAlt?: string;
     kicker?: string;
+    isComment: boolean;
 }
 
 export const Card: React.FC<Props> = ({
@@ -72,7 +78,8 @@ export const Card: React.FC<Props> = ({
     webURL,
     imageURL,
     imageAlt,
-    kicker
+    kicker,
+    isComment
 }) => (
     <table style={tableStyle}>
         <tr>
@@ -105,6 +112,16 @@ export const Card: React.FC<Props> = ({
                                     </span>
                                 )}
                                 <span className="h-small" style={headlineStyle}>
+                                    {isComment && (
+                                        <>
+                                            <img
+                                                style={quoteIconStyle}
+                                                src="https://assets.guim.co.uk/images/email/icons/9682728db696148fd5a6b149e556df8c/quote-culture.png"
+                                                alt="quote icon"
+                                            />{" "}
+                                        </>
+                                    )}
+
                                     {headline}
                                 </span>
                                 <br className="m-hide" />

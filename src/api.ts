@@ -84,6 +84,7 @@ export interface Kicker {
 
 interface Header {
     kicker?: Kicker;
+    isComment: boolean;
 }
 
 interface Content {

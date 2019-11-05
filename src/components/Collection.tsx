@@ -28,6 +28,7 @@ export const Collection: React.FC<{
                     webURL={content.properties.webUrl + brazeParameter}
                     key={content.properties.webUrl}
                     kicker={kicker}
+                    isComment={content.header.isComment}
                 />
                 <Padding px={10} />
             </>

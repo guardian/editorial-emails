@@ -47,6 +47,7 @@ export interface ImageCSS {
     maxWidth?: string;
     clear?: "both";
     border?: string;
+    height?: string;
 }
 
 export interface LinkCSS extends FontCSS {
