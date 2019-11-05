@@ -12,7 +12,7 @@ export const Collection: React.FC<{
         const image =
             content.properties.maybeContent.trail.trailPicture.allImages[0];
         const formattedImage = formatImage(image.url, salt);
-        const brazeParameter = "/##braze_utm##";
+        const brazeParameter = "?##braze_utm##";
 
         return (
             <>

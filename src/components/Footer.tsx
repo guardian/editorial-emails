@@ -58,7 +58,7 @@ export const Footer: React.FC<{}> = () => (
                             <table style={tableStyle}>
                                 <tr>
                                     <td className="ft__links" style={tdStyle}>
-                                        <a href="#" style={linkStyle}>Manage your emails</a> | <a href="#" style={linkStyle}>Unsubscribe</a> | <a href="#" style={linkStyle}>Trouble viewing?</a>
+                                        <a href="https://profile.theguardian.com/email-prefs?##braze_utm##" style={linkStyle}>Manage your emails</a> | <a href="%%unsub_center_url%%" style={linkStyle}>Unsubscribe</a> | <a href="https://www.theguardian.com/email/film-today?##braze_utm##" style={linkStyle}>Trouble viewing?</a>
                                     </td>
                                 </tr>
                                 <tr>
