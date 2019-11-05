@@ -1,22 +1,34 @@
 import aws from "aws-sdk";
-import { Stream } from "stream";
+import { pipeline, Stream } from "stream";
 import zlib from "zlib";
 
 process.env.AWS_PROFILE = "frontend";
 
 const client = new aws.S3();
 
-const toString = (s: Stream): Promise<string> => {
-    const promise: Promise<string> = new Promise((resolve, reject) => {
+// The pipeline helps handle all errors - otherwise, we have to ensure we handle
+// errors for each stream explicitly (separately).
+const pipelinePromise = (
+    s1: NodeJS.ReadableStream,
+    s2: NodeJS.WritableStream
+): Promise<string> => {
+    const p: Promise<string> = new Promise((resolve, reject) => {
+        const pipe = pipeline(s1, s2, err => {
+            if (err) {
+                reject(err);
+            }
+        });
+
         let str = "";
-        s.on("data", data => {
+        pipe.on("data", data => {
             str += data.toString();
         });
-        s.on("end", () => resolve(str));
-        s.on("error", reject);
+        pipe.on("end", () => {
+            resolve(str);
+        });
     });
 
-    return promise;
+    return p;
 };
 
 const get = async (path: string): Promise<Front> => {
@@ -26,18 +38,12 @@ const get = async (path: string): Promise<Front> => {
         ResponseContentEncoding: "utf-8"
     };
 
-    try {
-        const res = client
-            .getObject(params)
-            .createReadStream()
-            .pipe(zlib.createGunzip());
+    const json = await pipelinePromise(
+        client.getObject(params).createReadStream(),
+        zlib.createGunzip()
+    );
 
-        const json = await toString(res);
-
-        return Promise.resolve(asFront(JSON.parse(json)));
-    } catch (e) {
-        return Promise.reject(e);
-    }
+    return asFront(JSON.parse(json));
 };
 
 export const api = {

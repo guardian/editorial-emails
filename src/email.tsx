@@ -23,7 +23,7 @@ const title = (id: string): string => {
     );
 };
 
-export const Email = (front: Front, salt: string) => {
+export const Email = (front: Front, salt: string): string => {
     const collection = front.collections[0];
 
     const body = renderToStaticMarkup(
@@ -88,7 +88,7 @@ export const Email = (front: Front, salt: string) => {
     <body class="body" style="min-width:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;margin:0;padding:0;box-sizing:border-box;width:100%">
             ${body}
     </body>
-    </html>`;
+</html>`;
 
-    return { html };
+    return html;
 };
