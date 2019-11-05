@@ -88,7 +88,7 @@ export const Email = (front: Front, salt: string) => {
     <body class="body" style="min-width:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;margin:0;padding:0;box-sizing:border-box;width:100%">
             ${body}
     </body>
-        `;
+    </html>`;
 
     return { html };
 };
