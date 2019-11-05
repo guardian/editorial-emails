@@ -1,7 +1,9 @@
 import compression from "compression";
 import express from "express";
+import asyncHandler from "express-async-handler";
 import { api } from "./api";
-import { Email } from "./email";
+import { Email } from "./Email";
+import { Text } from "./Text";
 
 const app = express();
 
@@ -13,22 +15,52 @@ if (!salt) {
     throw new Error("Required IMAGE_SALT env var is empty");
 }
 
-app.get("/:path", async (req, res) => {
-    try {
-        const path = req.params.path;
-        const front = await api.get(path);
+// HTML version as JSON - for Braze/clients
+app.get(
+    "/:path.json",
+    asyncHandler(async (req, res) => {
+        const email = await getFront(req.params.path);
+        res.send({ json: email });
+    })
+);
 
-        // Purely for development
-        if (req.query.showModel) {
-            res.send(front);
-            return;
-        }
+// HTML version - for visual testing
+app.get(
+    "/:path",
+    asyncHandler(async (req, res, next) => {
+        const email = await getFront(req.params.path);
+        res.send(email);
+    })
+);
 
-        res.send(Email(front, salt).html);
-    } catch (e) {
-        res.status(500).send({ error: e.stack });
-    }
-});
+// Text version as JSON - for Braze/clients
+app.get(
+    "/:path/text.json",
+    asyncHandler(async (req, res) => {
+        const text = await getTextFront(req.params.path);
+        res.send({ json: text });
+    })
+);
+
+// Text version - for visual testing
+app.get(
+    "/:path/text",
+    asyncHandler(async (req, res) => {
+        const text = await getTextFront(req.params.path);
+        res.contentType("text/plain");
+        res.send(text);
+    })
+);
+
+const getFront = async (path: string): Promise<string> => {
+    const front = await api.get(path);
+    return Email(front, salt);
+};
+
+const getTextFront = async (path: string): Promise<string> => {
+    const front = await api.get(path);
+    return Text(front);
+};
 
 app.use((err: any, req: any, res: any, next: any) => {
     res.status(500).send(`<pre>${err.stack}</pre>`);
