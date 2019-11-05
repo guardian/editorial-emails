@@ -10,7 +10,6 @@ const tableStyle: TableCSS = {
 const tableWrapper: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
-    backgroundColor: palette.neutral[20],
     backgroundRepeat: "no-repeat",
     backgroundPosition: "bottom right",
     backgroundImage: "url(https://assets.guim.co.uk/images/email/f189dff5bfa4dc66d092f57e973a51b9/grey-g.png)",
@@ -52,7 +51,7 @@ export const Footer: React.FC<{}> = () => (
     <table style={tableStyle}>
         <tr>
             <td style={tdPadding}>
-                <table style={tableWrapper}>
+                <table bgcolor={palette.neutral[20]} style={tableWrapper}>
                     <tr>
                         <td style={tdInnerPadding}>
                             <table style={tableStyle}>
