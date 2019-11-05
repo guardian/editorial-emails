@@ -91,4 +91,4 @@ export const Email = (front: Front, salt: string) => {
         `;
 
     return { html };
-    };
+};

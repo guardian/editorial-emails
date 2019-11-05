@@ -2,4 +2,4 @@
 
 yarn tsc || exit 1
 yarn tslint || exit 1
-
+yarn test || exit 1
