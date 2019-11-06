@@ -40,7 +40,7 @@ const tdStyle: TdCSS = {
 };
 
 const metaWrapperStyle: TdCSS = {
-    padding: "3px 65px 5px 12px"
+    padding: "3px 40px 5px 10px"
 };
 
 const linkStyle: FontCSS = {
@@ -113,7 +113,7 @@ export const Card: React.FC<Props> = ({ content, salt, size }) => {
                     <table style={tableStyle}>
                         {imageURL && (
                             <tr>
-                                <td>
+                                <td style={{ padding: 0 }}>
                                     <a href={webURL}>
                                         <img
                                             width="600"
@@ -127,18 +127,16 @@ export const Card: React.FC<Props> = ({ content, salt, size }) => {
                         )}
 
                         <tr>
-                            <td className="h-pad" style={metaWrapperStyle}>
+                            <td className="m-pad" style={metaWrapperStyle}>
                                 <a style={linkStyle} href={webURL}>
                                     {kicker && (
                                         <span
-                                            className="h-small"
                                             style={kickerStyle}
                                         >
                                             {kicker + " / "}
                                         </span>
                                     )}
                                     <span
-                                        className="h-small"
                                         style={headlineStyle(size)}
                                     >
                                         {isComment && (
@@ -155,7 +153,6 @@ export const Card: React.FC<Props> = ({ content, salt, size }) => {
                                     </span>
                                     <br className="m-hide" />
                                     <span
-                                        className="h-small"
                                         style={bylineStyle(size)}
                                     >
                                         {" "}
@@ -166,7 +163,7 @@ export const Card: React.FC<Props> = ({ content, salt, size }) => {
                         </tr>
 
                         <tr>
-                            <td style={bottomPaddingStyle}></td>
+                            <td className="m-col-pad" style={bottomPaddingStyle}></td>
                         </tr>
                     </table>
                 </td>
