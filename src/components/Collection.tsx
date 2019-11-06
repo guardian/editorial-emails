@@ -12,10 +12,10 @@ export const Collection: React.FC<{
 
     return (
         <>
-            <Card content={collection.backfill[0]} salt={salt} />
+            <Card content={collection.backfill[0]} salt={salt} size={"large"} />
             <Padding px={10} />
 
-            <Card content={collection.backfill[1]} salt={salt} />
+            <Card content={collection.backfill[1]} salt={salt} size={"large"} />
             <Padding px={10} />
 
             <Grid content={rest} salt={salt} />

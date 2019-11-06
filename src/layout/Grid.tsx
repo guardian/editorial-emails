@@ -41,11 +41,11 @@ export const Grid: React.FC<Props> = ({ content, salt }) => {
         <>
             <tr key={i} style={rowStyle}>
                 <td style={colStyle}>
-                    <Card content={pair[0]} salt={salt} />
+                    <Card content={pair[0]} salt={salt} size={"small"} />
                 </td>
                 <td style={gutterStyle}>&nbsp;</td>
                 <td style={colStyle}>
-                    <Card content={pair[1]} salt={salt} />
+                    <Card content={pair[1]} salt={salt} size={"small"} />
                 </td>
             </tr>
             <tr key={i + "pad"}>

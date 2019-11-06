@@ -5,6 +5,19 @@ import { Content } from "../api";
 import { formatImage } from "../image";
 import { kickerText } from "../kicker";
 
+type Size = "small" | "large";
+
+const fontSizes = {
+    large: {
+        fontSize: "22px",
+        lineHeight: "26px"
+    },
+    small: {
+        fontSize: "16px",
+        lineHeight: "20px"
+    }
+};
+
 const imgStyle: ImageCSS = {
     outline: "none",
     textDecoration: "none",
@@ -34,12 +47,14 @@ const linkStyle: FontCSS = {
     textDecoration: "none"
 };
 
-const headlineStyle: FontCSS = {
-    color: palette.neutral[7],
-    fontFamily: "'Guardian Egyptian Web Headline', Georgia, serif",
-    fontSize: "30px",
-    lineHeight: "38px",
-    fontWeight: 400
+const headlineStyle = (size: Size): FontCSS => {
+    return {
+        color: palette.neutral[7],
+        fontFamily: "'Guardian Egyptian Web Headline', Georgia, serif",
+        fontWeight: 400,
+
+        ...fontSizes[size]
+    };
 };
 
 const kickerStyle: FontCSS = {
@@ -48,12 +63,14 @@ const kickerStyle: FontCSS = {
     color: palette.culture.main
 };
 
-const bylineStyle: FontCSS = {
-    color: palette.culture.main,
-    fontFamily: "'Guardian Egyptian Web Headline Italic', Georgia, serif",
-    fontSize: "30px",
-    lineHeight: "38px",
-    fontStyle: "italic"
+const bylineStyle = (size: Size): FontCSS => {
+    return {
+        color: palette.culture.main,
+        fontFamily: "'Guardian Egyptian Web Headline Italic', Georgia, serif",
+        fontStyle: "italic",
+
+        ...fontSizes[size]
+    };
 };
 
 const bottomPaddingStyle: TdCSS = {
@@ -68,11 +85,12 @@ const quoteIconStyle: ImageCSS = {
 interface Props {
     content: Content;
     salt: string;
+    size: "large" | "small";
 }
 
 const brazeParameter = "?##braze_utm##";
 
-export const Card: React.FC<Props> = ({ content, salt }) => {
+export const Card: React.FC<Props> = ({ content, salt, size }) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(image.url, salt);
@@ -121,7 +139,7 @@ export const Card: React.FC<Props> = ({ content, salt }) => {
                                     )}
                                     <span
                                         className="h-small"
-                                        style={headlineStyle}
+                                        style={headlineStyle(size)}
                                     >
                                         {isComment && (
                                             <>
@@ -138,7 +156,7 @@ export const Card: React.FC<Props> = ({ content, salt }) => {
                                     <br className="m-hide" />
                                     <span
                                         className="h-small"
-                                        style={bylineStyle}
+                                        style={bylineStyle(size)}
                                     >
                                         {" "}
                                         {byline}
