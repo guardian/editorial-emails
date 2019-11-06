@@ -15,10 +15,6 @@ const tableWrapper: TableCSS = {
     backgroundImage: "url(https://assets.guim.co.uk/images/email/f189dff5bfa4dc66d092f57e973a51b9/grey-g.png)",
 };
 
-const tdPadding: TdCSS = {
-    paddingTop: "20px",
-};
-
 const tdInnerPadding: TdCSS = {
     padding: "35px 0",
 };
@@ -50,7 +46,7 @@ const linkStyle: LinkCSS = {
 export const Footer: React.FC<{}> = () => (
     <table style={tableStyle}>
         <tr>
-            <td style={tdPadding}>
+            <td>
                 <table bgcolor={palette.neutral[20]} style={tableWrapper}>
                     <tr>
                         <td style={tdInnerPadding}>
