@@ -39,6 +39,12 @@ const headlineStyle: FontCSS = {
     fontWeight: 400
 };
 
+const kickerStyle: FontCSS = {
+    ...headlineStyle,
+
+    color: palette.culture.main
+};
+
 const bylineStyle: FontCSS = {
     color: palette.culture.main,
     fontFamily: "'Guardian Egyptian Web Headline Italic', Georgia, serif",
@@ -51,12 +57,19 @@ const bottomPaddingStyle: TdCSS = {
     paddingBottom: "20px"
 };
 
+const quoteIconStyle: ImageCSS = {
+    height: "0.8em",
+    display: "inline-block"
+};
+
 interface Props {
     headline: string;
     byline: string;
     webURL: string;
     imageURL?: string;
     imageAlt?: string;
+    kicker?: string;
+    isComment: boolean;
 }
 
 export const Card: React.FC<Props> = ({
@@ -64,7 +77,9 @@ export const Card: React.FC<Props> = ({
     byline,
     webURL,
     imageURL,
-    imageAlt
+    imageAlt,
+    kicker,
+    isComment
 }) => (
     <table style={tableStyle}>
         <tr>
@@ -88,7 +103,25 @@ export const Card: React.FC<Props> = ({
                     <tr>
                         <td className="h-pad" style={metaWrapperStyle}>
                             <a style={linkStyle} href={webURL}>
+                                {kicker && (
+                                    <span
+                                        className="h-small"
+                                        style={kickerStyle}
+                                    >
+                                        {kicker + " / "}
+                                    </span>
+                                )}
                                 <span className="h-small" style={headlineStyle}>
+                                    {isComment && (
+                                        <>
+                                            <img
+                                                style={quoteIconStyle}
+                                                src="https://assets.guim.co.uk/images/email/icons/9682728db696148fd5a6b149e556df8c/quote-culture.png"
+                                                alt="quote icon"
+                                            />{" "}
+                                        </>
+                                    )}
+
                                     {headline}
                                 </span>
                                 <br className="m-hide" />

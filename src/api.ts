@@ -79,9 +79,24 @@ interface Card {
     starRating?: number;
 }
 
+export interface Kicker {
+    type: string;
+    item: {
+        properties: {
+            kickerText?: string;
+        };
+    };
+}
+
+interface Header {
+    kicker?: Kicker;
+    isComment: boolean;
+}
+
 interface Content {
     properties: Properties;
     card: Card;
+    header: Header;
 }
 
 export interface Collection {
