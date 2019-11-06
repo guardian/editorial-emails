@@ -7,18 +7,18 @@ const mainTableStyle: TableCSS = {
     borderCollapse: "collapse",
     background: palette.neutral[100],
     height: "100%",
-    width: "100%",
+    width: "100%"
 };
 
 const tableStyle: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
     width: "100%"
-}
+};
 
 const innerTableStyle: TableCSS = {
     borderSpacing: 0,
-    borderCollapse: "collapse",
+    borderCollapse: "collapse"
 };
 
 const containerTableStyle: TableCSS = {
@@ -26,6 +26,7 @@ const containerTableStyle: TableCSS = {
     borderCollapse: "collapse",
     background: palette.neutral[100],
     margin: "0 auto",
+    textAlign: "left"
 };
 export const Center: React.FC<{ children: React.ReactNode }> = ({
     children
@@ -39,7 +40,11 @@ export const Center: React.FC<{ children: React.ReactNode }> = ({
                             <table style={innerTableStyle}>
                                 <tr>
                                     <td style={{ width: "600px" }}>
-                                        <table align="center" className="container" style={containerTableStyle}>
+                                        <table
+                                            align="center"
+                                            className="container"
+                                            style={containerTableStyle}
+                                        >
                                             <tr>
                                                 <td>{children}</td>
                                             </tr>
