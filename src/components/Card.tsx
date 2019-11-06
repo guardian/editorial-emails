@@ -36,7 +36,8 @@ const tableStyle: TableCSS = {
 
 const tdStyle: TdCSS = {
     backgroundColor: palette.culture.faded,
-    borderTop: `2px solid ${palette.culture.main}`
+    borderTop: `2px solid ${palette.culture.main}`,
+    padding: "0"
 };
 
 const metaWrapperStyle = (size: Size): TdCSS => {
