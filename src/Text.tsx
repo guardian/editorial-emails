@@ -4,7 +4,9 @@ import { Front } from "./api";
 export const Text = (front: Front): string => {
     const collection = front.collections[0];
 
-    return `${collection.displayName}
+    return `Film Today | The Guardian
+
+${collection.displayName}
 
 ${collection.backfill
     .map(
