@@ -96,7 +96,11 @@ const brazeParameter = "?##braze_utm##";
 export const Card: React.FC<Props> = ({ content, salt, size }) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
-    const formattedImage = formatImage(image.url, salt);
+    const formattedImage = formatImage(
+        image.url,
+        salt,
+        content.card.starRating
+    );
 
     const headline = content.properties.webTitle;
     const byline = content.properties.byline;
