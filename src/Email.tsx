@@ -7,7 +7,6 @@ import { Footer } from "./components/Footer";
 import { Heading } from "./components/Heading";
 import { Multiline } from "./components/Multiline";
 import { Center } from "./layout/Center";
-import { Padding } from "./layout/Padding";
 
 const canonicalURL = (path: string): string =>
     `https://www.theguardian.com/${path}`;
@@ -82,5 +81,12 @@ export const Email = (front: Front, salt: string): string => {
     </body>
 </html>`;
 
-    return html;
+    // Add Braze placeholder
+    const htmlComment = "<!-- Braze Placeholder - Above Footer -->";
+    const modifiedHTML = html.replace(
+        "###MERCHANDISING_PLACEHOLDER###",
+        htmlComment
+    );
+
+    return modifiedHTML;
 };
