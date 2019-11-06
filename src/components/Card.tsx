@@ -39,8 +39,11 @@ const tdStyle: TdCSS = {
     borderTop: `2px solid ${palette.culture.main}`
 };
 
-const metaWrapperStyle: TdCSS = {
-    padding: "3px 40px 5px 10px"
+const metaWrapperStyle = ( size: Size ): TdCSS => {
+    const rightPad = size === "large" ? "40px" : "10px";
+    return {
+        padding: `3px ${rightPad} 5px 10px`
+    };
 };
 
 const linkStyle: FontCSS = {
@@ -127,7 +130,7 @@ export const Card: React.FC<Props> = ({ content, salt, size }) => {
                         )}
 
                         <tr>
-                            <td className="m-pad" style={metaWrapperStyle}>
+                            <td className="m-pad" style={metaWrapperStyle(size)}>
                                 <a style={linkStyle} href={webURL}>
                                     {kicker && (
                                         <span
