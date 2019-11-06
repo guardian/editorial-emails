@@ -1,6 +1,26 @@
 import React from "react";
 import { Content } from "../api";
 import { Card } from "../components/Card";
+import { TdCSS, TrCSS, TableCSS } from "../css";
+import { palette } from "@guardian/src-foundations";
+
+const tableStyle: TableCSS = {
+    borderCollapse: "collapse",
+    borderSpacing: 0
+};
+
+const rowStyle: TrCSS = {
+    verticalAlign: "top"
+};
+
+const gutterStyle: TdCSS = {
+    width: "2%"
+};
+
+const colStyle: TdCSS = {
+    width: "49%",
+    backgroundColor: palette.culture.faded
+};
 
 interface Props {
     content: Content[];
@@ -17,12 +37,22 @@ export const Grid: React.FC<Props> = ({ content, salt }) => {
         pairs.push(content.splice(0, 2));
     }
 
-    const rows = pairs.map(pair => (
+    const rows = pairs.map((pair, i) => (
         <>
-            <Card content={pair[0]} salt={salt} />
-            <Card content={pair[1]} salt={salt} />
+            <tr key={i} style={rowStyle}>
+                <td style={colStyle}>
+                    <Card content={pair[0]} salt={salt} />
+                </td>
+                <td style={gutterStyle}>&nbsp;</td>
+                <td style={colStyle}>
+                    <Card content={pair[1]} salt={salt} />
+                </td>
+            </tr>
+            <tr key={i + "pad"}>
+                <td style={{ paddingTop: "10px" }}></td>
+            </tr>
         </>
     ));
 
-    return <>{rows}</>;
+    return <table style={tableStyle}>{rows}</table>;
 };
