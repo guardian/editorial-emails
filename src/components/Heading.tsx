@@ -10,10 +10,10 @@ const tableStyle: TableCSS = {
 
 const headingStyle: TdCSS = {
     fontFamily: "'Guardian Egyptian Web Header', Georgia, serif",
-    fontSize: "30px",
-    lineHeight: "38px",
+    fontSize: "22px",
+    lineHeight: "26px",
     color: palette.neutral[7],
-    padding: "4px 12px 0",
+    padding: "0 10px 12px",
 };
 
 export const Heading: React.FC<{ heading: string }> = ({ heading }) => (

@@ -24,7 +24,7 @@ export interface TableCSS {
     margin?: string;
     padding?: string;
     color?: string;
-    textAlign?: "center";
+    textAlign?: "center" | "left";
     background?: string;
     backgroundRepeat?: string;
     backgroundPosition?: string;
