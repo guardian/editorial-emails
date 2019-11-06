@@ -20,7 +20,7 @@ app.get(
     "/:path.json",
     asyncHandler(async (req, res) => {
         const email = await getFront(req.params.path);
-        res.send({ json: email });
+        res.send({ body: email });
     })
 );
 
@@ -38,7 +38,7 @@ app.get(
     "/:path/text.json",
     asyncHandler(async (req, res) => {
         const text = await getTextFront(req.params.path);
-        res.send({ json: text });
+        res.send({ body: text });
     })
 );
 
