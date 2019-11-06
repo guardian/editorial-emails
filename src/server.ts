@@ -28,6 +28,12 @@ app.get(
 app.get(
     "/:path",
     asyncHandler(async (req, res, next) => {
+        if (req.query.showModel) {
+            const model = await api.get(req.params.path);
+            res.send(model);
+            return;
+        }
+
         const email = await getFront(req.params.path);
         res.send(email);
     })
