@@ -71,7 +71,6 @@ const bylineStyle = (size: Size): FontCSS => {
     return {
         color: palette.culture.main,
         fontFamily: "'Guardian Egyptian Web Headline Italic', Georgia, serif",
-        fontStyle: "italic",
 
         ...fontSizes[size]
     };
