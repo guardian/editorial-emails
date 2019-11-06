@@ -39,7 +39,7 @@ const tdStyle: TdCSS = {
     borderTop: `2px solid ${palette.culture.main}`
 };
 
-const metaWrapperStyle = ( size: Size ): TdCSS => {
+const metaWrapperStyle = (size: Size): TdCSS => {
     const rightPad = size === "large" ? "40px" : "10px";
     return {
         padding: `3px ${rightPad} 5px 10px`
@@ -119,7 +119,9 @@ export const Card: React.FC<Props> = ({ content, salt, size }) => {
                                 <td style={{ padding: 0 }}>
                                     <a href={webURL}>
                                         <img
-                                            width="600"
+                                            width={
+                                                size === "large" ? "600" : "294"
+                                            }
                                             style={imgStyle}
                                             alt={imageAlt}
                                             src={imageURL}
@@ -130,18 +132,17 @@ export const Card: React.FC<Props> = ({ content, salt, size }) => {
                         )}
 
                         <tr>
-                            <td className="m-pad" style={metaWrapperStyle(size)}>
+                            <td
+                                className="m-pad"
+                                style={metaWrapperStyle(size)}
+                            >
                                 <a style={linkStyle} href={webURL}>
                                     {kicker && (
-                                        <span
-                                            style={kickerStyle}
-                                        >
+                                        <span style={kickerStyle}>
                                             {kicker + " / "}
                                         </span>
                                     )}
-                                    <span
-                                        style={headlineStyle(size)}
-                                    >
+                                    <span style={headlineStyle(size)}>
                                         {isComment && (
                                             <>
                                                 <img
@@ -155,9 +156,7 @@ export const Card: React.FC<Props> = ({ content, salt, size }) => {
                                         {headline}
                                     </span>
                                     <br className="m-hide" />
-                                    <span
-                                        style={bylineStyle(size)}
-                                    >
+                                    <span style={bylineStyle(size)}>
                                         {" "}
                                         {byline}
                                     </span>
@@ -166,7 +165,10 @@ export const Card: React.FC<Props> = ({ content, salt, size }) => {
                         </tr>
 
                         <tr>
-                            <td className="m-col-pad" style={bottomPaddingStyle}></td>
+                            <td
+                                className="m-col-pad"
+                                style={bottomPaddingStyle}
+                            ></td>
                         </tr>
                     </table>
                 </td>
