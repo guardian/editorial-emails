@@ -8,10 +8,10 @@ const tableStyle: TableCSS = {
     width: "100%"
 };
 
-const tdStyle: tdCSS = {
+const tdStyle: TdCSS = {
     width: "100%",
     paddingTop: "10px"
-}
+};
 
 const lineStyle: TdCSS = {
     paddingBottom: "3px",
@@ -25,11 +25,11 @@ export const Multiline: React.FC<{}> = () => (
         <tr>
             <td style={tdStyle}>
                 <table style={tableStyle}>
-                {[0, 1, 2, 3].map(line => (
-                    <tr>
-                        <td style={lineStyle}>&nbsp;</td>
-                    </tr>
-                ))}
+                    {[0, 1, 2, 3].map(line => (
+                        <tr>
+                            <td style={lineStyle}>&nbsp;</td>
+                        </tr>
+                    ))}
                 </table>
             </td>
         </tr>
