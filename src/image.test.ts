@@ -35,7 +35,7 @@ test("formats full URL", () => {
     ];
 
     testURLs.forEach(url => {
-        const got = formatImage(url, "foo");
+        const got = formatImage(url, "foo", 600);
         const want =
             "https://i.guim.co.uk/img/media/67222cbde87dc147dd34041c2e8692b81f24f546/0_0_1204_1181/500.jpg?quality=45&sharpen=a0.8,r1,t1&width=600&dpr=2&fit=max&s=e6f7cfcca297387ce8efb4ce5164f822";
         expect(got).toEqual(want);
@@ -48,7 +48,7 @@ test("adds star rating overlay", () => {
     ];
 
     testURLs.forEach(url => {
-        const got = formatImage(url, "foo", 3);
+        const got = formatImage(url, "foo", 600, 3);
         const want =
             "https://i.guim.co.uk/img/media/67222cbde87dc147dd34041c2e8692b81f24f546/0_0_1204_1181/500.jpg?quality=45&sharpen=a0.8,r1,t1&width=600&dpr=2&fit=max&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvZW1haWwtc3Rhci1yYXRpbmctMy5wbmc=&overlay-align=bottom,left&s=36ddc65c8a88349a21aed46b7d08c9c5";
         expect(got).toEqual(want);

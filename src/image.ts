@@ -28,13 +28,14 @@ export const starImage = (rating: number): string => {
 export const formatImage = (
     masterURL: string,
     salt: string,
+    width: number,
     starRating?: number
 ): string => {
     // https://docs.fastly.com/api/imageopto/
     const params: any = {
         quality: "45",
         sharpen: "a0.8,r1,t1",
-        width: "600",
+        width: width.toString(),
         dpr: "2",
         fit: "max" // Note, this value looks invalid
     };
