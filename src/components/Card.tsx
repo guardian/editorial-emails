@@ -25,7 +25,9 @@ const imgStyle: ImageCSS = {
     clear: "both",
     display: "block",
     border: "0",
-    width: "100%"
+    width: "100%",
+    fontFamily: "Georgia, serif",
+    color: palette.culture.main
 };
 
 const tableStyle: TableCSS = {

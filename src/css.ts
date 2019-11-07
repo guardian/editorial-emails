@@ -53,6 +53,8 @@ export interface ImageCSS {
     clear?: "both";
     border?: string;
     height?: string;
+    fontFamily?: string;
+    color?: string;
 }
 
 export interface LinkCSS extends FontCSS {
