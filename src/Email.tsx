@@ -71,7 +71,6 @@ export const Email = (front: Front, salt: string): string => {
         #MessageViewBody a { color: inherit; text-decoration: none; font-size: inherit; font-family: inherit; font-weight: inherit; line-height: inherit }
         @media screen and (max-width: 480px) {
             .m-pad { padding-right: 10px !important }
-            .m-hide { display: none !important }
             .m-col-pad { padding-bottom: 15px !important }
         }
         </style>
