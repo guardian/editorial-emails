@@ -3,6 +3,18 @@ td {
     padding: 0;
 }
 
+/** https://litmus.com/community/snippets/113-override-gmail-blue-links **/
+/** https://litmus.com/community/snippets/118-remove-samsung-blue-links **/
+u + .body a,
+#MessageViewBody a {
+    color: inherit;
+    text-decoration: none;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit
+}
+
 .ft__links a:visited {
     font-family: Helvetica, Arial, sans-serif !important;
     color: rgb(255, 255, 255) !important;

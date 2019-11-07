@@ -45,6 +45,8 @@ export const Email = (front: Front, salt: string): string => {
 
     const html = `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- https://litmus.com/community/snippets/112-outlook-2013-120dpi-make-images-scale-properly -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en" xml:lang="en">
     <head>
         <!--[if gte mso 9]>
@@ -62,6 +64,7 @@ export const Email = (front: Front, salt: string): string => {
         <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
         <title>${title(front.id)}</title>
 
+        <!-- Font resets for MS Outlook -->
         <!--[if mso]>
         <style>
             h1, h2, h3, h4, h5, h6, p, blockquote {
@@ -71,14 +74,9 @@ export const Email = (front: Front, salt: string): string => {
         <![endif]-->
 
         <style>${minifyCssString(fontStyles + responsiveStyles)}</style>
-
-        <style type="text/css">
-        u + .body a,
-        #MessageViewBody a { color: inherit; text-decoration: none; font-size: inherit; font-family: inherit; font-weight: inherit; line-height: inherit }
-        </style>
     </head>
     <body class="body" style="min-width:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;margin:0;padding:0;box-sizing:border-box;width:100%">
-            ${body}
+        ${body}
     </body>
 </html>`;
 
