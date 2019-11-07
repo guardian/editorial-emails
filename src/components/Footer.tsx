@@ -50,6 +50,8 @@ export const Footer: React.FC<{}> = () => (
         <table style={tableStyle}>
             <tr>
                 <td style={{ paddingTop: "10px" }}>
+                    // @ts-ignore: bgcolor is deprecated but we require it for
+                    // certain clients.
                     <table bgcolor={palette.neutral[20]} style={tableWrapper}>
                         <tr>
                             <td style={tdInnerPadding}>
