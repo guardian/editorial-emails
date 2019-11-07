@@ -38,8 +38,8 @@ export const Grid: React.FC<Props> = ({ content, salt }) => {
     }
 
     const rows = pairs.map((pair, i) => (
-        <>
-            <tr key={i} style={rowStyle}>
+        <React.Fragment key={i}>
+            <tr style={rowStyle}>
                 <td style={colStyle}>
                     <Card content={pair[0]} salt={salt} size={"small"} />
                 </td>
@@ -48,10 +48,10 @@ export const Grid: React.FC<Props> = ({ content, salt }) => {
                     <Card content={pair[1]} salt={salt} size={"small"} />
                 </td>
             </tr>
-            <tr key={i + "pad"}>
+            <tr>
                 <td style={{ paddingTop: "10px" }}></td>
             </tr>
-        </>
+        </React.Fragment>
     ));
 
     return <table style={tableStyle}>{rows}</table>;

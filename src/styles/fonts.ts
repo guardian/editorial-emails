@@ -1,3 +1,5 @@
+const CDNFontPath = "https://assets.guim.co.uk/static/frontend";
+
 export const fontStyles = `
 td {
     padding: 0;
@@ -53,32 +55,26 @@ u + .body a,
 }
 
 @font-face {
-    font-family: "Guardian Egyptian Web Header";
-    src: url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Bold.woff2)
-            format("woff2"),
-        url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Bold.woff)
-            format("woff");
+    font-family: "GH Guardian Headline";
+    src: url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff) format("woff");
     font-weight: 700;
-    font-style: normal;
+    font-style: bold;
 }
 
 @font-face {
-    font-family: "Guardian Egyptian Web Headline";
-    src: url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Medium.woff2)
-            format("woff2"),
-        url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Medium.woff)
-            format("woff");
-    font-weight: 600;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Guardian Egyptian Web Headline Italic";
-    src: url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-RegularItalic.woff2)
-            format("woff2"),
-        url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-RegularItalic.woff)
-            format("woff");
+    font-family: "GH Guardian Headline";
+    src: url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff) format("woff");
     font-weight: 400;
     font-style: normal;
+}
+
+@font-face {
+    font-family: "GH Guardian Headline";
+    src: url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff) format("woff");
+    font-weight: 400;
+    font-style: italic;
 }
 `;
