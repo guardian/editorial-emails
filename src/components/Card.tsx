@@ -99,6 +99,7 @@ export const Card: React.FC<Props> = ({ content, salt, size }) => {
     const formattedImage = formatImage(
         image.url,
         salt,
+        size === "large" ? 600 : 300,
         content.card.starRating
     );
 
