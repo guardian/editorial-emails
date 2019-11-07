@@ -105,9 +105,14 @@ export interface Collection {
     backfill: Content[];
 }
 
+interface SEOData {
+    webTitle: string;
+}
+
 export interface Front {
     id: string;
     collections: Collection[];
+    seoData: SEOData;
 }
 
 const asFront = (obj: object): Front => {
