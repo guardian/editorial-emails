@@ -41,7 +41,6 @@ export const Center: React.FC<{ children: React.ReactNode }> = ({
                                 <tr>
                                     <td style={{ width: "600px" }}>
                                         <table
-                                            align="center"
                                             className="container"
                                             style={containerTableStyle}
                                         >
