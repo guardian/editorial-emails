@@ -159,7 +159,7 @@ export const Card: React.FC<Props> = ({ content, salt, size }) => {
 
                                         {headline}
                                     </span>
-                                    <br className="m-hide" />
+                                    <br />
                                     <span style={bylineStyle(size)}>
                                         {" "}
                                         {byline}
