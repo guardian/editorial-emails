@@ -83,7 +83,6 @@ const bottomPaddingStyle: TdCSS = {
 };
 
 const quoteIconStyle: ImageCSS = {
-    height: "0.8em",
     display: "inline-block"
 };
 
@@ -152,6 +151,7 @@ export const Card: React.FC<Props> = ({ content, salt, size }) => {
                                         {isComment && (
                                             <>
                                                 <img
+                                                    height={"16"}
                                                     style={quoteIconStyle}
                                                     src="https://assets.guim.co.uk/images/email/icons/9682728db696148fd5a6b149e556df8c/quote-culture.png"
                                                     alt="quote icon"
