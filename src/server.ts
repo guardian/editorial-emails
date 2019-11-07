@@ -4,16 +4,17 @@ import asyncHandler from "express-async-handler";
 import { api } from "./api";
 import { Email } from "./Email";
 import { Text } from "./Text";
+import { getParam } from "./config";
 
 const app = express();
 
 app.use(express.json({ limit: "50mb" }));
 app.use(compression());
 
-const salt = process.env.IMAGE_SALT;
-if (!salt) {
-    throw new Error("Required IMAGE_SALT env var is empty");
-}
+// Prefer env var (as quicker), but otherwise grab from config
+const imageSalt: Promise<string> = process.env.IMAGE_SALT
+    ? Promise.resolve(process.env.IMAGE_SALT)
+    : getParam("/frontend/images.signature-salt");
 
 // HTML version as JSON - for Braze/clients
 app.get(
@@ -59,6 +60,7 @@ app.get(
 );
 
 const getFront = async (path: string): Promise<string> => {
+    const salt = await imageSalt;
     const front = await api.get(path);
     return Email(front, salt);
 };
