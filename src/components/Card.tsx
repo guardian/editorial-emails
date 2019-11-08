@@ -84,7 +84,8 @@ const bottomPaddingStyle: TdCSS = {
 
 const quoteIconStyle: ImageCSS = {
     height: "0.8em",
-    display: "inline-block"
+    display: "inline-block",
+    border: "0"
 };
 
 interface Props {
