@@ -4,6 +4,7 @@ import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
+import { ColumnPadding } from "../../layout/ColumnPadding";
 
 type Size = "small" | "large";
 
@@ -77,10 +78,6 @@ const bylineStyle = (size: Size): FontCSS => {
 
         ...fontSizes[size]
     };
-};
-
-const bottomPaddingStyle: TdCSS = {
-    paddingBottom: "20px"
 };
 
 const quoteIconStyle: ImageCSS = {
@@ -173,13 +170,7 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
                                 </a>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td
-                                className="m-col-pad"
-                                style={bottomPaddingStyle}
-                            ></td>
-                        </tr>
+                        <ColumnPadding px={20}></ColumnPadding>
                     </table>
                 </td>
             </tr>
