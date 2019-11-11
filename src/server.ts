@@ -1,15 +1,15 @@
-import compression from "compression";
 import express from "express";
 import asyncHandler from "express-async-handler";
 import { api } from "./api";
 import { Email } from "./Email";
 import { Text } from "./Text";
 import { getParam } from "./config";
+import awsServerlessExpress from "aws-serverless-express";
+import { Context } from "aws-lambda";
 
 const app = express();
 
 app.use(express.json({ limit: "50mb" }));
-app.use(compression());
 
 // Prefer env var (as quicker), but otherwise grab from config
 const imageSalt: Promise<string> = process.env.IMAGE_SALT
@@ -73,4 +73,12 @@ app.use((err: any, req: any, res: any, next: any) => {
     res.status(500).send(`<pre>${err.stack}</pre>`);
 });
 
-app.listen(3030);
+// If local then don't wrap in serverless
+if (process.env.NODE_ENV === "development") {
+    app.listen(3030);
+} else {
+    const server = awsServerlessExpress.createServer(app);
+    exports.handler = (event: any, context: Context) => {
+        awsServerlessExpress.proxy(server, event, context);
+    };
+}

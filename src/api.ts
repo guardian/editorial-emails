@@ -2,7 +2,9 @@ import aws from "aws-sdk";
 import { pipeline, Stream } from "stream";
 import zlib from "zlib";
 
-process.env.AWS_PROFILE = "frontend";
+if (process.env.NODE_ENV === "development") {
+    process.env.AWS_PROFILE = "frontend";
+}
 
 const client = new aws.S3();
 
