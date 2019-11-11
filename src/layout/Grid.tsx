@@ -1,6 +1,6 @@
 import React from "react";
 import { Content } from "../api";
-import { Card } from "../components/Card";
+import { Card } from "../components/cards/Card";
 import { TdCSS, TrCSS, TableCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
 

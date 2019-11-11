@@ -97,6 +97,9 @@ export interface Content {
     properties: Properties;
     card: Card;
     header: Header;
+    cardStyle: {
+        type: string;
+    };
 }
 
 export interface Collection {

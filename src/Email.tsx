@@ -28,6 +28,9 @@ const title = (id: string): string => {
 export const Email = (front: Front, salt: string): string => {
     const collection = front.collections[0];
 
+    // handle multiple collections
+    //
+
     const body = renderToStaticMarkup(
         <Center>
             <Banner />
