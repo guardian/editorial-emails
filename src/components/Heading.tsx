@@ -9,17 +9,19 @@ const tableStyle: TableCSS = {
 };
 
 const headingStyle: TdCSS = {
-    fontFamily: "'Guardian Egyptian Web Header', Georgia, serif",
+    fontFamily: "'GH Guardian Headline', Georgia, serif",
     fontSize: "22px",
     lineHeight: "26px",
     color: palette.neutral[7],
-    padding: "0 10px 12px",
+    padding: "0 10px 12px"
 };
 
 export const Heading: React.FC<{ heading: string }> = ({ heading }) => (
     <table style={tableStyle}>
         <tr>
-            <td className="m-heading" style={headingStyle}>{heading}</td>
+            <td className="m-heading" style={headingStyle}>
+                {heading}
+            </td>
         </tr>
     </table>
 );

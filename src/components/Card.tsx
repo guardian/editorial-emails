@@ -56,7 +56,7 @@ const linkStyle: FontCSS = {
 const headlineStyle = (size: Size): FontCSS => {
     return {
         color: palette.neutral[7],
-        fontFamily: "'Guardian Egyptian Web Headline', Georgia, serif",
+        fontFamily: "'GH Guardian Headline', Georgia, serif",
         fontWeight: 400,
 
         ...fontSizes[size]
@@ -72,7 +72,8 @@ const kickerStyle: FontCSS = {
 const bylineStyle = (size: Size): FontCSS => {
     return {
         color: palette.culture.main,
-        fontFamily: "'Guardian Egyptian Web Headline Italic', Georgia, serif",
+        fontFamily: "'GH Guardian Headline', Georgia, serif",
+        fontStyle: "italic",
 
         ...fontSizes[size]
     };

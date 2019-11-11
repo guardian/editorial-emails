@@ -25,8 +25,8 @@ export const Multiline: React.FC<{}> = () => (
         <tr>
             <td style={tdStyle}>
                 <table style={tableStyle}>
-                    {[0, 1, 2, 3].map(line => (
-                        <tr>
+                    {[0, 1, 2, 3].map((line, i) => (
+                        <tr key={i}>
                             <td style={lineStyle}>&nbsp;</td>
                         </tr>
                     ))}
