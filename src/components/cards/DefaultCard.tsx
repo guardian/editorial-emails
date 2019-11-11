@@ -1,9 +1,9 @@
 import React from "react";
-import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../css";
+import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content } from "../api";
-import { formatImage } from "../image";
-import { kickerText } from "../kicker";
+import { Content } from "../../api";
+import { formatImage } from "../../image";
+import { kickerText } from "../../kicker";
 
 type Size = "small" | "large";
 
@@ -97,7 +97,7 @@ interface Props {
 
 const brazeParameter = "?##braze_utm##";
 
-export const Card: React.FC<Props> = ({ content, salt, size }) => {
+export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(
