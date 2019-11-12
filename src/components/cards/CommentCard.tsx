@@ -5,6 +5,7 @@ import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import { ColumnPadding } from "../../layout/ColumnPadding";
+import sanitizeHtml from "sanitize-html";
 
 type Size = "small" | "large";
 
@@ -132,7 +133,16 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
     const profilePic = contributor
         ? contributor.properties.contributorLargeImagePath
         : null;
-    const standfirst = content.properties.maybeContent.fields.standfirst;
+
+    const standfirst = sanitizeHtml(
+        content.properties.maybeContent.fields.standfirst,
+        {
+            allowedTags: ["a"],
+            allowedAttributes: {
+                a: ["href"]
+            } // strip *all* html
+        }
+    );
 
     return (
         <table style={tableStyle}>
@@ -233,7 +243,11 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
                                         </table>
                                     </td>
                                     <td style={columnStyleRight}>
-                                        <img src={profilePic} alt="" />
+                                        <img
+                                            width="100px"
+                                            src={profilePic}
+                                            alt=""
+                                        />
                                     </td>
                                 </table>
                             </td>
