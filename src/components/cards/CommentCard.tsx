@@ -4,9 +4,9 @@ import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
-import { RowPadding } from "../../layout/ColumnPadding";
+import { RowCellPadding } from "../../layout/RowCellPadding";
 import sanitizeHtml from "sanitize-html";
-import { Table } from "../../layout/Table";
+import { Table, RowCell, TableRowCell } from "../../layout/Table";
 
 type Size = "small" | "large";
 
@@ -100,6 +100,68 @@ interface Props {
 
 const brazeParameter = "?##braze_utm##";
 
+const Standfirst: React.FC<{
+    text: string;
+    linkURL: string;
+    size: Size;
+}> = ({ text, linkURL, size }) => {
+    return (
+        <td className="m-pad" style={metaWrapperStyle(size)}>
+            <a style={linkStyle} href={linkURL}>
+                {" "}
+                <span>{text}</span>
+            </a>
+        </td>
+    );
+};
+
+// TODO add alt text
+const ContributorImage: React.FC<{
+    src: string;
+}> = ({ src }) => {
+    return (
+        <td style={columnStyleRight}>
+            <img width="100px" src={src} alt="" />
+        </td>
+    );
+};
+
+const SupplementaryMeta: React.FC<{
+    standfirst: string;
+    linkURL: string;
+    contributorImageSrc: string;
+    size: Size;
+}> = ({ standfirst, contributorImageSrc, linkURL, size }) => {
+    if (standfirst && contributorImageSrc) {
+        return (
+            <RowCell>
+                <Table>
+                    <Standfirst
+                        text={standfirst}
+                        linkURL={linkURL}
+                        size={size}
+                    />
+                    <ContributorImage src={contributorImageSrc} />
+                </Table>
+            </RowCell>
+        );
+    } else if (standfirst) {
+        return (
+            <tr>
+                <Standfirst text={standfirst} linkURL={linkURL} size={size} />
+            </tr>
+        );
+    } else if (contributorImageSrc) {
+        return (
+            <tr>
+                <ContributorImage src={contributorImageSrc} />
+            </tr>
+        );
+    }
+
+    return null;
+};
+
 const Headline: React.FC<{
     size: Size;
     linkURL: string;
@@ -141,25 +203,16 @@ const Image: React.FC<{
     src?: string;
     linkURL: string;
     alt: string;
-    size: Size;
-}> = ({ src, linkURL, alt, size }) => {
+    width: number;
+}> = ({ src, linkURL, alt, width }) => {
     if (!src) {
         return null;
     }
 
     return (
-        <tr>
-            <td style={{ padding: 0 }}>
-                <a href={linkURL}>
-                    <img
-                        width={size === "large" ? "600" : "294"}
-                        style={imgStyle}
-                        alt={alt}
-                        src={src}
-                    />
-                </a>
-            </td>
-        </tr>
+        <a href={linkURL}>
+            <img width={width} style={imgStyle} alt={alt} src={src} />
+        </a>
     );
 };
 
@@ -202,85 +255,36 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
         }
     );
 
-    /*     return (
-        <Table>
-            <Image src={imageURL} linkURL={webURL} size={size} alt={imageAlt} />
-            <Headline />
-            <Byline />
-            {/* <Standfirst />
-            <ContributorImage />
-        </Table>
-    ) */
-
     return (
-        <Table>
-            <tr>
-                <td style={tdStyle}>
-                    <Table>
-                        <Image
-                            src={imageURL}
-                            linkURL={webURL}
-                            size={size}
-                            alt={imageAlt}
-                        />
-                        <Headline
-                            size={size}
-                            linkURL={webURL}
-                            isComment={isComment}
-                            kicker={kicker}
-                            headline={headline}
-                            byline={byline}
-                        />
+        <TableRowCell tdStyle={tdStyle}>
+            <Table>
+                <RowCell>
+                    <Image
+                        src={imageURL}
+                        linkURL={webURL}
+                        alt={imageAlt}
+                        width={size === "large" ? 600 : 294}
+                    />
+                </RowCell>
 
-                        <RowPadding px={20}></RowPadding>
+                <Headline
+                    size={size}
+                    linkURL={webURL}
+                    isComment={isComment}
+                    kicker={kicker}
+                    headline={headline}
+                    byline={byline}
+                />
 
-                        {/* <tr>
-                            <td>
-                                <Table>
-                                    <td style={columnStyleLeft}>
-                                        <Table>
-                                            <RowPadding px={30}></RowPadding>
+                <SupplementaryMeta
+                    standfirst={standfirst}
+                    linkURL={webURL}
+                    contributorImageSrc={profilePic}
+                    size={size}
+                />
 
-                                            <tr>
-                                                <td
-                                                    className="m-pad"
-                                                    style={metaWrapperStyle(
-                                                        size
-                                                    )}
-                                                >
-                                                    <a
-                                                        style={linkStyle}
-                                                        href=""
-                                                    >
-                                                        {" "}
-                                                        <span>
-                                                            {standfirst}
-                                                        </span>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td
-                                                    style={{
-                                                        paddingBottom: "5px"
-                                                    }}
-                                                ></td>
-                                            </tr>
-                                        </Table>
-                                    </td>
-                                    <td style={columnStyleRight}>
-                                        <img
-                                            width="100px"
-                                            src={profilePic}
-                                            alt=""
-                                        />
-                                    </td>
-                                </Table>
-                            </td>
-                        </tr> */}
-                    </Table>
-                </td>
-            </tr>
-        </Table>
+                <RowCellPadding px={20}></RowCellPadding>
+            </Table>
+        </TableRowCell>
     );
 };
