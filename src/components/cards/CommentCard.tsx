@@ -28,7 +28,7 @@ const imgStyle: ImageCSS = {
     border: "0",
     width: "100%",
     fontFamily: "Georgia, serif",
-    color: palette.culture.main
+    color: palette.opinion.main
 };
 
 const tableStyle: TableCSS = {
@@ -38,8 +38,8 @@ const tableStyle: TableCSS = {
 };
 
 const tdStyle: TdCSS = {
-    backgroundColor: palette.culture.faded,
-    borderTop: `2px solid ${palette.culture.main}`,
+    backgroundColor: palette.opinion.faded,
+    borderTop: `2px solid ${palette.opinion.main}`,
     padding: "0"
 };
 
@@ -67,12 +67,12 @@ const headlineStyle = (size: Size): FontCSS => {
 const kickerStyle: FontCSS = {
     ...headlineStyle,
 
-    color: palette.culture.main
+    color: palette.opinion.main
 };
 
 const bylineStyle = (size: Size): FontCSS => {
     return {
-        color: palette.culture.main,
+        color: palette.opinion.main,
         fontFamily: "'GH Guardian Headline', Georgia, serif",
         fontStyle: "italic",
 
@@ -115,6 +115,11 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
         ? kickerText(content.header.kicker)
         : "";
 
+    const contributor = content.properties.maybeContent.tags.tags.find(
+        tag => tag.tagType === "Contributor"
+    );
+    const profilePic = contributor ? contributor.bylineImageUrl : null;
+
     return (
         <table style={tableStyle}>
             <tr>
@@ -154,7 +159,7 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
                                                 <img
                                                     height={"14"}
                                                     style={quoteIconStyle}
-                                                    src="https://assets.guim.co.uk/images/email/icons/9682728db696148fd5a6b149e556df8c/quote-culture.png"
+                                                    src="https://assets.guim.co.uk/images/email/icons/cc614106682d8de187a64eb222116f3a/quote-opinion.png"
                                                     alt="quote icon"
                                                 />{" "}
                                             </>

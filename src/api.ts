@@ -55,6 +55,11 @@ interface Image {
     fields: { altText: string };
 }
 
+
+interface Tag {
+    tagType: string;
+    bylineImageUrl?: string;
+}
 // e.g. see
 // https://github.com/guardian/frontend/blob/master/common/app/implicits/FaciaContentFrontendHelpers.scala#L19
 // for image
@@ -63,6 +68,9 @@ interface InnerContent {
         trailPicture: {
             allImages: Image[];
         };
+    };
+    tags: {
+        tags: Tag[];
     };
 }
 
