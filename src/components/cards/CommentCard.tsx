@@ -86,6 +86,16 @@ const quoteIconStyle: ImageCSS = {
     border: "0"
 };
 
+const columnStyleLeft: TdCSS = {
+    width: "70%",
+    verticalAlign: "bottom"
+};
+
+const columnStyleRight: TdCSS = {
+    width: "30%",
+    verticalAlign: "bottom"
+};
+
 interface Props {
     content: Content;
     salt: string;
@@ -115,10 +125,14 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
         ? kickerText(content.header.kicker)
         : "";
 
-    const contributor = content.properties.maybeContent.tags.tags.find(
-        tag => tag.tagType === "Contributor"
-    );
-    const profilePic = contributor ? contributor.bylineImageUrl : null;
+    const contributor = content.properties.maybeContent.tags.tags.find(tag => {
+        return tag.properties.tagType === "Contributor";
+    });
+
+    const profilePic = contributor
+        ? contributor.properties.contributorLargeImagePath
+        : null;
+    const standfirst = content.properties.maybeContent.fields.standfirst;
 
     return (
         <table style={tableStyle}>
@@ -175,7 +189,55 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
                                 </a>
                             </td>
                         </tr>
+
                         <ColumnPadding px={20}></ColumnPadding>
+
+                        <tr>
+                            <td>
+                                <table style={tableStyle}>
+                                    <td style={columnStyleLeft}>
+                                        <table style={tableStyle}>
+                                            <tr>
+                                                <td
+                                                    className="m-col-pad"
+                                                    style={{
+                                                        paddingBottom: "30px"
+                                                    }}
+                                                ></td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    className="m-pad"
+                                                    style={metaWrapperStyle(
+                                                        size
+                                                    )}
+                                                >
+                                                    <a
+                                                        style={linkStyle}
+                                                        href=""
+                                                    >
+                                                        {" "}
+                                                        <span>
+                                                            {standfirst}
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    style={{
+                                                        paddingBottom: "5px"
+                                                    }}
+                                                ></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style={columnStyleRight}>
+                                        <img src={profilePic} alt="" />
+                                    </td>
+                                </table>
+                            </td>
+                        </tr>
                     </table>
                 </td>
             </tr>

@@ -56,8 +56,10 @@ interface Image {
 }
 
 interface Tag {
-    tagType: string;
-    bylineImageUrl?: string;
+    properties: {
+        tagType: string;
+        contributorLargeImagePath?: string;
+    };
 }
 // e.g. see
 // https://github.com/guardian/frontend/blob/master/common/app/implicits/FaciaContentFrontendHelpers.scala#L19
