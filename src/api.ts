@@ -55,7 +55,6 @@ interface Image {
     fields: { altText: string };
 }
 
-
 interface Tag {
     tagType: string;
     bylineImageUrl?: string;
