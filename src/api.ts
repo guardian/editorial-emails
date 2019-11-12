@@ -73,6 +73,9 @@ interface InnerContent {
     tags: {
         tags: Tag[];
     };
+    fields: {
+        standfirst: string;
+    };
 }
 
 interface Properties {
