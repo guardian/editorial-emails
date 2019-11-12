@@ -38,6 +38,7 @@ export interface TdCSS extends FontCSS {
     borderTop?: string;
     backgroundColor?: string;
     width?: string;
+    verticalAlign?: "bottom";
 }
 
 export interface TrCSS {

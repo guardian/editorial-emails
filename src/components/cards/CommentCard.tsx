@@ -4,7 +4,9 @@ import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
-import { ColumnPadding } from "../../layout/ColumnPadding";
+import { RowCellPadding } from "../../layout/RowCellPadding";
+import sanitizeHtml from "sanitize-html";
+import { Table, RowCell, TableRowCell } from "../../layout/Table";
 
 type Size = "small" | "large";
 
@@ -28,18 +30,12 @@ const imgStyle: ImageCSS = {
     border: "0",
     width: "100%",
     fontFamily: "Georgia, serif",
-    color: palette.culture.main
-};
-
-const tableStyle: TableCSS = {
-    borderSpacing: 0,
-    borderCollapse: "collapse",
-    width: "100%"
+    color: palette.opinion.main
 };
 
 const tdStyle: TdCSS = {
-    backgroundColor: palette.culture.faded,
-    borderTop: `2px solid ${palette.culture.main}`,
+    backgroundColor: palette.opinion.faded,
+    borderTop: `2px solid ${palette.opinion.main}`,
     padding: "0"
 };
 
@@ -67,12 +63,12 @@ const headlineStyle = (size: Size): FontCSS => {
 const kickerStyle: FontCSS = {
     ...headlineStyle,
 
-    color: palette.culture.main
+    color: palette.opinion.main
 };
 
 const bylineStyle = (size: Size): FontCSS => {
     return {
-        color: palette.culture.main,
+        color: palette.opinion.main,
         fontFamily: "'GH Guardian Headline', Georgia, serif",
         fontStyle: "italic",
 
@@ -86,6 +82,16 @@ const quoteIconStyle: ImageCSS = {
     border: "0"
 };
 
+const columnStyleLeft: TdCSS = {
+    width: "70%",
+    verticalAlign: "bottom"
+};
+
+const columnStyleRight: TdCSS = {
+    width: "30%",
+    verticalAlign: "bottom"
+};
+
 interface Props {
     content: Content;
     salt: string;
@@ -93,6 +99,122 @@ interface Props {
 }
 
 const brazeParameter = "?##braze_utm##";
+
+const Standfirst: React.FC<{
+    text: string;
+    linkURL: string;
+    size: Size;
+}> = ({ text, linkURL, size }) => {
+    return (
+        <td className="m-pad" style={metaWrapperStyle(size)}>
+            <a style={linkStyle} href={linkURL}>
+                {" "}
+                <span>{text}</span>
+            </a>
+        </td>
+    );
+};
+
+// TODO add alt text
+const ContributorImage: React.FC<{
+    src: string;
+}> = ({ src }) => {
+    return (
+        <td style={columnStyleRight}>
+            <img width="100px" src={src} alt="" />
+        </td>
+    );
+};
+
+const SupplementaryMeta: React.FC<{
+    standfirst: string;
+    linkURL: string;
+    contributorImageSrc: string;
+    size: Size;
+}> = ({ standfirst, contributorImageSrc, linkURL, size }) => {
+    if (standfirst && contributorImageSrc) {
+        return (
+            <RowCell>
+                <Table>
+                    <Standfirst
+                        text={standfirst}
+                        linkURL={linkURL}
+                        size={size}
+                    />
+                    <ContributorImage src={contributorImageSrc} />
+                </Table>
+            </RowCell>
+        );
+    } else if (standfirst) {
+        return (
+            <tr>
+                <Standfirst text={standfirst} linkURL={linkURL} size={size} />
+            </tr>
+        );
+    } else if (contributorImageSrc) {
+        return (
+            <tr>
+                <ContributorImage src={contributorImageSrc} />
+            </tr>
+        );
+    }
+
+    return null;
+};
+
+const Headline: React.FC<{
+    size: Size;
+    linkURL: string;
+    isComment: boolean;
+    kicker: string;
+    headline: string;
+    byline: string;
+}> = ({ size, linkURL, isComment, kicker, headline, byline }) => {
+    return (
+        <tr>
+            <td className="m-pad" style={metaWrapperStyle(size)}>
+                <a style={linkStyle} href={linkURL}>
+                    {kicker && (
+                        <span style={kickerStyle}>{kicker + " / "}</span>
+                    )}
+                    <span style={headlineStyle(size)}>
+                        {isComment && (
+                            <>
+                                <img
+                                    height={"14"}
+                                    style={quoteIconStyle}
+                                    src="https://assets.guim.co.uk/images/email/icons/cc614106682d8de187a64eb222116f3a/quote-opinion.png"
+                                    alt="quote icon"
+                                />{" "}
+                            </>
+                        )}
+
+                        {headline}
+                    </span>
+                    <br />
+                    <span style={bylineStyle(size)}> {byline}</span>
+                </a>
+            </td>
+        </tr>
+    );
+};
+
+const Image: React.FC<{
+    src?: string;
+    linkURL: string;
+    alt: string;
+    width: number;
+}> = ({ src, linkURL, alt, width }) => {
+    if (!src) {
+        return null;
+    }
+
+    return (
+        <a href={linkURL}>
+            <img width={width} style={imgStyle} alt={alt} src={src} />
+        </a>
+    );
+};
 
 export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
     const image =
@@ -115,65 +237,54 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
         ? kickerText(content.header.kicker)
         : "";
 
+    const contributor = content.properties.maybeContent.tags.tags.find(tag => {
+        return tag.properties.tagType === "Contributor";
+    });
+
+    const profilePic = contributor
+        ? contributor.properties.contributorLargeImagePath
+        : null;
+
+    const standfirst = sanitizeHtml(
+        content.properties.maybeContent.fields.standfirst,
+        {
+            allowedTags: ["a"],
+            allowedAttributes: {
+                a: ["href"]
+            } // strip *all* html
+        }
+    );
+
     return (
-        <table style={tableStyle}>
-            <tr>
-                <td style={tdStyle}>
-                    <table style={tableStyle}>
-                        {imageURL && (
-                            <tr>
-                                <td style={{ padding: 0 }}>
-                                    <a href={webURL}>
-                                        <img
-                                            width={
-                                                size === "large" ? "600" : "294"
-                                            }
-                                            style={imgStyle}
-                                            alt={imageAlt}
-                                            src={imageURL}
-                                        />
-                                    </a>
-                                </td>
-                            </tr>
-                        )}
+        <TableRowCell tdStyle={tdStyle}>
+            <Table>
+                <RowCell>
+                    <Image
+                        src={imageURL}
+                        linkURL={webURL}
+                        alt={imageAlt}
+                        width={size === "large" ? 600 : 294}
+                    />
+                </RowCell>
 
-                        <tr>
-                            <td
-                                className="m-pad"
-                                style={metaWrapperStyle(size)}
-                            >
-                                <a style={linkStyle} href={webURL}>
-                                    {kicker && (
-                                        <span style={kickerStyle}>
-                                            {kicker + " / "}
-                                        </span>
-                                    )}
-                                    <span style={headlineStyle(size)}>
-                                        {isComment && (
-                                            <>
-                                                <img
-                                                    height={"14"}
-                                                    style={quoteIconStyle}
-                                                    src="https://assets.guim.co.uk/images/email/icons/9682728db696148fd5a6b149e556df8c/quote-culture.png"
-                                                    alt="quote icon"
-                                                />{" "}
-                                            </>
-                                        )}
+                <Headline
+                    size={size}
+                    linkURL={webURL}
+                    isComment={isComment}
+                    kicker={kicker}
+                    headline={headline}
+                    byline={byline}
+                />
 
-                                        {headline}
-                                    </span>
-                                    <br />
-                                    <span style={bylineStyle(size)}>
-                                        {" "}
-                                        {byline}
-                                    </span>
-                                </a>
-                            </td>
-                        </tr>
-                        <ColumnPadding px={20}></ColumnPadding>
-                    </table>
-                </td>
-            </tr>
-        </table>
+                <SupplementaryMeta
+                    standfirst={standfirst}
+                    linkURL={webURL}
+                    contributorImageSrc={profilePic}
+                    size={size}
+                />
+
+                <RowCellPadding px={20}></RowCellPadding>
+            </Table>
+        </TableRowCell>
     );
 };
