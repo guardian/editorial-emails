@@ -4,7 +4,7 @@ import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
-import { ColumnPadding } from "../../layout/ColumnPadding";
+import { RowPadding } from "../../layout/ColumnPadding";
 import sanitizeHtml from "sanitize-html";
 import { Table } from "../../layout/Table";
 
@@ -100,6 +100,69 @@ interface Props {
 
 const brazeParameter = "?##braze_utm##";
 
+const Headline: React.FC<{
+    size: Size;
+    linkURL: string;
+    isComment: boolean;
+    kicker: string;
+    headline: string;
+    byline: string;
+}> = ({ size, linkURL, isComment, kicker, headline, byline }) => {
+    return (
+        <tr>
+            <td className="m-pad" style={metaWrapperStyle(size)}>
+                <a style={linkStyle} href={linkURL}>
+                    {kicker && (
+                        <span style={kickerStyle}>{kicker + " / "}</span>
+                    )}
+                    <span style={headlineStyle(size)}>
+                        {isComment && (
+                            <>
+                                <img
+                                    height={"14"}
+                                    style={quoteIconStyle}
+                                    src="https://assets.guim.co.uk/images/email/icons/cc614106682d8de187a64eb222116f3a/quote-opinion.png"
+                                    alt="quote icon"
+                                />{" "}
+                            </>
+                        )}
+
+                        {headline}
+                    </span>
+                    <br />
+                    <span style={bylineStyle(size)}> {byline}</span>
+                </a>
+            </td>
+        </tr>
+    );
+};
+
+const Image: React.FC<{
+    src?: string;
+    linkURL: string;
+    alt: string;
+    size: Size;
+}> = ({ src, linkURL, alt, size }) => {
+    if (!src) {
+        return null;
+    }
+
+    return (
+        <tr>
+            <td style={{ padding: 0 }}>
+                <a href={linkURL}>
+                    <img
+                        width={size === "large" ? "600" : "294"}
+                        style={imgStyle}
+                        alt={alt}
+                        src={src}
+                    />
+                </a>
+            </td>
+        </tr>
+    );
+};
+
 export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
@@ -139,77 +202,45 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
         }
     );
 
+    /*     return (
+        <Table>
+            <Image src={imageURL} linkURL={webURL} size={size} alt={imageAlt} />
+            <Headline />
+            <Byline />
+            {/* <Standfirst />
+            <ContributorImage />
+        </Table>
+    ) */
+
     return (
         <Table>
             <tr>
                 <td style={tdStyle}>
                     <Table>
-                        {imageURL && (
-                            <tr>
-                                <td style={{ padding: 0 }}>
-                                    <a href={webURL}>
-                                        <img
-                                            width={
-                                                size === "large" ? "600" : "294"
-                                            }
-                                            style={imgStyle}
-                                            alt={imageAlt}
-                                            src={imageURL}
-                                        />
-                                    </a>
-                                </td>
-                            </tr>
-                        )}
+                        <Image
+                            src={imageURL}
+                            linkURL={webURL}
+                            size={size}
+                            alt={imageAlt}
+                        />
+                        <Headline
+                            size={size}
+                            linkURL={webURL}
+                            isComment={isComment}
+                            kicker={kicker}
+                            headline={headline}
+                            byline={byline}
+                        />
 
-                        <tr>
-                            <td
-                                className="m-pad"
-                                style={metaWrapperStyle(size)}
-                            >
-                                <a style={linkStyle} href={webURL}>
-                                    {kicker && (
-                                        <span style={kickerStyle}>
-                                            {kicker + " / "}
-                                        </span>
-                                    )}
-                                    <span style={headlineStyle(size)}>
-                                        {isComment && (
-                                            <>
-                                                <img
-                                                    height={"14"}
-                                                    style={quoteIconStyle}
-                                                    src="https://assets.guim.co.uk/images/email/icons/cc614106682d8de187a64eb222116f3a/quote-opinion.png"
-                                                    alt="quote icon"
-                                                />{" "}
-                                            </>
-                                        )}
+                        <RowPadding px={20}></RowPadding>
 
-                                        {headline}
-                                    </span>
-                                    <br />
-                                    <span style={bylineStyle(size)}>
-                                        {" "}
-                                        {byline}
-                                    </span>
-                                </a>
-                            </td>
-                        </tr>
-
-                        <ColumnPadding px={20}></ColumnPadding>
-
-                        <tr>
+                        {/* <tr>
                             <td>
                                 <Table>
                                     <td style={columnStyleLeft}>
                                         <Table>
-                                            <tr>
-                                                <td
-                                                    className="m-col-pad"
-                                                    style={{
-                                                        paddingBottom: "30px"
-                                                    }}
-                                                ></td>
-                                            </tr>
+                                            <RowPadding px={30}></RowPadding>
+
                                             <tr>
                                                 <td
                                                     className="m-pad"
@@ -246,7 +277,7 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
                                     </td>
                                 </Table>
                             </td>
-                        </tr>
+                        </tr> */}
                     </Table>
                 </td>
             </tr>
