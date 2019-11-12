@@ -6,6 +6,7 @@ import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import { ColumnPadding } from "../../layout/ColumnPadding";
 import sanitizeHtml from "sanitize-html";
+import { Table } from "../../layout/Table";
 
 type Size = "small" | "large";
 
@@ -30,12 +31,6 @@ const imgStyle: ImageCSS = {
     width: "100%",
     fontFamily: "Georgia, serif",
     color: palette.opinion.main
-};
-
-const tableStyle: TableCSS = {
-    borderSpacing: 0,
-    borderCollapse: "collapse",
-    width: "100%"
 };
 
 const tdStyle: TdCSS = {
@@ -145,10 +140,10 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
     );
 
     return (
-        <table style={tableStyle}>
+        <Table>
             <tr>
                 <td style={tdStyle}>
-                    <table style={tableStyle}>
+                    <Table>
                         {imageURL && (
                             <tr>
                                 <td style={{ padding: 0 }}>
@@ -204,9 +199,9 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
 
                         <tr>
                             <td>
-                                <table style={tableStyle}>
+                                <Table>
                                     <td style={columnStyleLeft}>
-                                        <table style={tableStyle}>
+                                        <Table>
                                             <tr>
                                                 <td
                                                     className="m-col-pad"
@@ -240,7 +235,7 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
                                                     }}
                                                 ></td>
                                             </tr>
-                                        </table>
+                                        </Table>
                                     </td>
                                     <td style={columnStyleRight}>
                                         <img
@@ -249,12 +244,12 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
                                             alt=""
                                         />
                                     </td>
-                                </table>
+                                </Table>
                             </td>
                         </tr>
-                    </table>
+                    </Table>
                 </td>
             </tr>
-        </table>
+        </Table>
     );
 };
