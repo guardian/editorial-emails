@@ -3,6 +3,8 @@ import { Content } from "../api";
 import { Card } from "../components/cards/Card";
 import { TdCSS, TrCSS, TableCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
+import { TableRow, TableRowCell } from "./Table";
+import { Padding } from "./Padding";
 
 const tableStyle: TableCSS = {
     borderCollapse: "collapse",
@@ -19,13 +21,26 @@ const gutterStyle: TdCSS = {
 
 const colStyle: TdCSS = {
     width: "49%",
-    backgroundColor: palette.culture.faded
+    backgroundColor: palette.culture.faded,
+
+    ...rowStyle
 };
 
 interface Props {
     content: Content[];
     salt: string;
 }
+
+const GridRow: React.FC<{ left: React.ReactNode; right: React.ReactNode }> = ({
+    left,
+    right
+}) => (
+    <TableRow>
+        <td style={colStyle}>{left}</td>
+        <td style={gutterStyle}>&nbsp;</td>
+        <td style={colStyle}>{right}</td>
+    </TableRow>
+);
 
 // TODO really should accept a React element so that it doesn't have to know
 // about Card or salt.
@@ -37,20 +52,15 @@ export const Grid: React.FC<Props> = ({ content, salt }) => {
         pairs.push(content.splice(0, 2));
     }
 
+    // TODO handle contributor images
     const rows = pairs.map((pair, i) => (
         <React.Fragment key={i}>
-            <tr style={rowStyle}>
-                <td style={colStyle}>
-                    <Card content={pair[0]} salt={salt} size={"small"} />
-                </td>
-                <td style={gutterStyle}>&nbsp;</td>
-                <td style={colStyle}>
-                    <Card content={pair[1]} salt={salt} size={"small"} />
-                </td>
-            </tr>
-            <tr>
-                <td style={{ paddingTop: "10px" }}></td>
-            </tr>
+            <GridRow
+                left={<Card content={pair[0]} salt={salt} size={"small"} />}
+                right={<Card content={pair[1]} salt={salt} size={"small"} />}
+            />
+
+            <Padding px={10} />
         </React.Fragment>
     ));
 
