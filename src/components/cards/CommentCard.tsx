@@ -140,7 +140,6 @@ const Standfirst: React.FC<{
 const ContributorImage: React.FC<{
     src: string;
     width: number;
-    size: Size;
 }> = ({ src, width }) => {
     return (
         <td style={columnStyleRight}>
@@ -178,7 +177,7 @@ const SupplementaryMeta: React.FC<{
     } else if (contributorImageSrc) {
         return (
             <tr>
-                <ContributorImage src={contributorImageSrc} />
+                <ContributorImage src={contributorImageSrc} width={width} />
             </tr>
         );
     }
@@ -269,15 +268,9 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
         ? contributor.properties.contributorLargeImagePath
         : null;
 
-    const standfirst = sanitizeHtml(
-        content.properties.maybeContent.fields.standfirst,
-        {
-            allowedTags: ["a"],
-            allowedAttributes: {
-                a: ["href"]
-            } // strip *all* html
-        }
-    );
+    const trailText = sanitizeHtml(content.card.trailText, {
+        allowedTags: []
+    });
 
     return (
         <TableRowCell tdStyle={tdStyle}>
@@ -303,7 +296,7 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
                 <RowCellPadding px={20}></RowCellPadding>
 
                 <SupplementaryMeta
-                    standfirst={standfirst}
+                    standfirst={trailText}
                     linkURL={webURL}
                     contributorImageSrc={profilePic}
                     size={size}
