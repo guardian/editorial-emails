@@ -59,6 +59,7 @@ interface Tag {
     properties: {
         tagType: string;
         contributorLargeImagePath?: string;
+        webTitle?: string;
     };
 }
 // e.g. see

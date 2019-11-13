@@ -140,8 +140,13 @@ const TrailText: React.FC<{
 const ContributorImage: React.FC<{
     src: string;
     width: number;
-}> = ({ src, width }) => {
-    return <img width={width} src={src} alt="" />;
+    alt: string;
+}> = ({ src, width, alt }) => {
+    if (!src) {
+        return null;
+    }
+
+    return <img width={width} src={src} alt={alt} />;
 };
 
 // TODO make testable, and also separate layout logic from individual components
@@ -150,12 +155,24 @@ const SupplementaryMeta: React.FC<{
     trailText: string;
     linkURL: string;
     contributorImageSrc: string;
+    contributirImageAlt: string;
     size: Size;
     width: number;
-}> = ({ trailText, contributorImageSrc, linkURL, size, width }) => {
+}> = ({
+    trailText,
+    contributorImageSrc,
+    linkURL,
+    size,
+    width,
+    contributirImageAlt
+}) => {
     const contributorImage = (
         <td style={columnStyleRight}>
-            <ContributorImage width={width} src={contributorImageSrc} />
+            <ContributorImage
+                width={width}
+                src={contributorImageSrc}
+                alt={contributirImageAlt}
+            />
         </td>
     );
 
@@ -301,6 +318,7 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
                         trailText={trailText}
                         linkURL={webURL}
                         contributorImageSrc={profilePic}
+                        contributirImageAlt={contributor.properties.webTitle}
                         size={size}
                         width={size === "large" ? 180 : 147}
                     />
@@ -321,5 +339,11 @@ export const ContributorImageWrapper: React.FC<{
         ? contributor.properties.contributorLargeImagePath
         : null;
 
-    return <ContributorImage width={147} src={profilePic} />;
+    return (
+        <ContributorImage
+            width={147}
+            src={profilePic}
+            alt={contributor.properties.webTitle}
+        />
+    );
 };
