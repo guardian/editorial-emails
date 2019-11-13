@@ -11,10 +11,21 @@ const tdStyle: TdCSS = {
     color: "white",
     fontSize: "22px",
     lineHeight: "26px",
-
     fontFamily: "'GH Guardian Headline', Georgia, serif",
     fontWeight: 400,
     padding: "10px"
+};
+
+const imgStyle: ImageCSS = {
+    outline: "none",
+    textDecoration: "none",
+    maxWidth: "100%",
+    clear: "both",
+    display: "block",
+    border: "0",
+    width: "100%",
+    fontFamily: "Georgia, serif",
+    color: palette.opinion.main
 };
 
 interface Props {
@@ -36,7 +47,7 @@ const Image: React.FC<{
 
     return (
         <a href={linkURL}>
-            <img width={width} style={{}} alt={alt} src={src} />
+            <img width={width} style={imgStyle} alt={alt} src={src} />
         </a>
     );
 };
