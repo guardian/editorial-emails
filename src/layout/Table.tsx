@@ -21,8 +21,8 @@ export const TableRow: React.FC<{ children: React.ReactNode }> = ({
 
 export const TableRowCell: React.FC<{
     children: React.ReactNode;
-    tdStyle: TdCSS;
-}> = ({ children, tdStyle }) => (
+    tdStyle?: TdCSS;
+}> = ({ children, tdStyle = {} }) => (
     <table style={tableStyle}>
         <tr>
             <td style={tdStyle}>{children}</td>

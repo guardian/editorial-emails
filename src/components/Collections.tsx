@@ -6,6 +6,7 @@ import {
     CommentCollection
 } from "./Collection";
 import { Content } from "../api";
+import { TableRowCell } from "../layout/Table";
 
 type DesignType = "default" | "comment" | "media";
 
@@ -51,5 +52,5 @@ export const Collections: React.FC<{
         }
     });
 
-    return <>{res}</>;
+    return <TableRowCell>{res}</TableRowCell>;
 };
