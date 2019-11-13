@@ -59,7 +59,9 @@ export const CommentCollection: React.FC<{
             <CommentCard content={contentOne} salt={salt} size={"large"} />
             <Padding px={10} />
 
-            <CommentCard content={contentTwo} salt={salt} size={"large"} />
+            {contentTwo && (
+                <CommentCard content={contentTwo} salt={salt} size={"large"} />
+            )}
             <Padding px={10} />
 
             <CommentGrid content={rest} salt={salt} />

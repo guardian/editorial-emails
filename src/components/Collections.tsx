@@ -20,6 +20,8 @@ const getDesignType = (content: Content[]): DesignType => {
     switch (cardTypes.values().next().value) {
         case "Comment":
             return "comment";
+        case "Editorial":
+            return "comment";
         case "Media":
             return "media";
         default:
@@ -34,8 +36,6 @@ export const Collections: React.FC<{
     const res = collections.map(collection => {
         const content = collection.backfill; // TODO support curated too
         const designType = getDesignType(content);
-
-        console.log("design type is: " + designType);
 
         switch (designType) {
             case "comment":
