@@ -4,6 +4,18 @@ import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
+import { Padding } from "../../layout/Padding";
+
+const tdStyle: TdCSS = {
+    backgroundColor: palette.neutral[20],
+    color: "white",
+    fontSize: "22px",
+    lineHeight: "26px",
+
+    fontFamily: "'GH Guardian Headline', Georgia, serif",
+    fontWeight: 400,
+    padding: "10px"
+};
 
 interface Props {
     content: Content;
@@ -45,9 +57,12 @@ export const MediaCard: React.FC<Props> = ({ content, salt }) => {
     const imageAlt = image.fields.altText;
 
     return (
-        <TableRowCell tdStyle={{}}>
+        <TableRowCell tdStyle={tdStyle}>
             <Table>
                 <RowCell>{headline}</RowCell>
+                <RowCell>
+                    <Padding px={20} />
+                </RowCell>
                 <RowCell>
                     <Image
                         src={imageURL}
