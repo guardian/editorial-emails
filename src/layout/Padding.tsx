@@ -6,6 +6,7 @@ const tableStyle: TableCSS = {
     borderCollapse: "collapse"
 };
 
+// TODO fix this for all clients
 export const Padding: React.FC<{ px: number }> = ({ px }) => (
     <table style={tableStyle}>
         <tr>

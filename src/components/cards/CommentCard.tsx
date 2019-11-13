@@ -46,6 +46,11 @@ const metaWrapperStyle = (size: Size): TdCSS => {
     };
 };
 
+const standfirstStyle: TdCSS = {
+    padding: "3px 10px 5px 10px",
+    verticalAlign: "bottom"
+};
+
 const linkStyle: FontCSS = {
     textDecoration: "none"
 };
@@ -58,6 +63,14 @@ const headlineStyle = (size: Size): FontCSS => {
 
         ...fontSizes[size]
     };
+};
+
+const spanStyle: FontCSS = {
+    color: palette.neutral[7],
+    fontFamily: "'GH Guardian Headline', Georgia, serif",
+    fontWeight: 400,
+    fontSize: "16px",
+    lineHeight: "20px"
 };
 
 const kickerStyle: FontCSS = {
@@ -92,6 +105,14 @@ const columnStyleRight: TdCSS = {
     verticalAlign: "bottom"
 };
 
+// const columnStyleRight = (size: Size): TdCSS => {
+//     const width = size === "large" ? "30%" : "50%";
+//     return {
+//         width: `${width}`,
+//         verticalAlign: "bottom"
+//     };
+// };
+
 interface Props {
     content: Content;
     salt: string;
@@ -100,16 +121,16 @@ interface Props {
 
 const brazeParameter = "?##braze_utm##";
 
-const Standfirst: React.FC<{
+const TrailText: React.FC<{
     text: string;
     linkURL: string;
     size: Size;
 }> = ({ text, linkURL, size }) => {
     return (
-        <td className="m-pad" style={metaWrapperStyle(size)}>
+        <td className="m-pad" style={standfirstStyle}>
             <a style={linkStyle} href={linkURL}>
                 {" "}
-                <span>{text}</span>
+                <span style={spanStyle}>{text}</span>
             </a>
         </td>
     );
@@ -118,44 +139,66 @@ const Standfirst: React.FC<{
 // TODO add alt text
 const ContributorImage: React.FC<{
     src: string;
-}> = ({ src }) => {
-    return (
-        <td style={columnStyleRight}>
-            <img width="100px" src={src} alt="" />
-        </td>
-    );
+    width: number;
+    alt: string;
+}> = ({ src, width, alt }) => {
+    if (!src) {
+        return null;
+    }
+
+    return <img width={width} src={src} alt={alt} />;
 };
 
+// TODO make testable, and also separate layout logic from individual components
+// TODO split into SupplementaryMetaLarge and Small
 const SupplementaryMeta: React.FC<{
-    standfirst: string;
+    trailText: string;
     linkURL: string;
     contributorImageSrc: string;
+    contributirImageAlt: string;
     size: Size;
-}> = ({ standfirst, contributorImageSrc, linkURL, size }) => {
-    if (standfirst && contributorImageSrc) {
+    width: number;
+}> = ({
+    trailText,
+    contributorImageSrc,
+    linkURL,
+    size,
+    width,
+    contributirImageAlt
+}) => {
+    const contributorImage = (
+        <td style={columnStyleRight}>
+            <ContributorImage
+                width={width}
+                src={contributorImageSrc}
+                alt={contributirImageAlt}
+            />
+        </td>
+    );
+
+    if (trailText && contributorImageSrc) {
         return (
             <RowCell>
                 <Table>
-                    <Standfirst
-                        text={standfirst}
-                        linkURL={linkURL}
-                        size={size}
-                    />
-                    <ContributorImage src={contributorImageSrc} />
+                    <TrailText text={trailText} linkURL={linkURL} size={size} />
+                    {contributorImage}
                 </Table>
             </RowCell>
         );
-    } else if (standfirst) {
+    } else if (trailText) {
         return (
             <tr>
-                <Standfirst text={standfirst} linkURL={linkURL} size={size} />
+                <TrailText text={trailText} linkURL={linkURL} size={size} />
             </tr>
         );
     } else if (contributorImageSrc) {
         return (
-            <tr>
-                <ContributorImage src={contributorImageSrc} />
-            </tr>
+            <RowCell>
+                <Table>
+                    <td style={{ width: "50%" }}></td>
+                    {contributorImage}
+                </Table>
+            </RowCell>
         );
     }
 
@@ -226,7 +269,7 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
         content.card.starRating
     );
 
-    const headline = content.properties.webTitle;
+    const headline = content.header.headline;
     const byline = content.properties.byline;
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
@@ -245,15 +288,9 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
         ? contributor.properties.contributorLargeImagePath
         : null;
 
-    const standfirst = sanitizeHtml(
-        content.properties.maybeContent.fields.standfirst,
-        {
-            allowedTags: ["a"],
-            allowedAttributes: {
-                a: ["href"]
-            } // strip *all* html
-        }
-    );
+    const trailText = sanitizeHtml(content.card.trailText, {
+        allowedTags: []
+    });
 
     return (
         <TableRowCell tdStyle={tdStyle}>
@@ -276,15 +313,37 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
                     byline={byline}
                 />
 
-                <SupplementaryMeta
-                    standfirst={standfirst}
-                    linkURL={webURL}
-                    contributorImageSrc={profilePic}
-                    size={size}
-                />
-
-                <RowCellPadding px={20}></RowCellPadding>
+                {size === "large" && (
+                    <SupplementaryMeta
+                        trailText={trailText}
+                        linkURL={webURL}
+                        contributorImageSrc={profilePic}
+                        contributirImageAlt={contributor.properties.webTitle}
+                        size={size}
+                        width={size === "large" ? 180 : 147}
+                    />
+                )}
             </Table>
         </TableRowCell>
+    );
+};
+
+export const ContributorImageWrapper: React.FC<{
+    content: Content;
+    salt: string;
+}> = ({ content, salt }) => {
+    const contributor = content.properties.maybeContent.tags.tags.find(tag => {
+        return tag.properties.tagType === "Contributor";
+    });
+    const profilePic = contributor
+        ? contributor.properties.contributorLargeImagePath
+        : null;
+
+    return (
+        <ContributorImage
+            width={147}
+            src={profilePic}
+            alt={contributor.properties.webTitle}
+        />
     );
 };

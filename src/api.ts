@@ -59,6 +59,7 @@ interface Tag {
     properties: {
         tagType: string;
         contributorLargeImagePath?: string;
+        webTitle?: string;
     };
 }
 // e.g. see
@@ -103,12 +104,14 @@ export interface Kicker {
 interface Header {
     kicker?: Kicker;
     isComment: boolean;
+    headline: string;
 }
 
 export interface Content {
     properties: Properties;
     card: Card;
     header: Header;
+
     cardStyle: {
         type: string;
     };
