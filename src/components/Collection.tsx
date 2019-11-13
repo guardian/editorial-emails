@@ -1,21 +1,46 @@
 import React from "react";
 import { Collection as ICollection } from "../api";
 import { Card } from "./cards/Card";
+import { CommentCard } from "./cards/CommentCard";
+import { MediaCard } from "./cards/MediaCard";
 import { DefaultGrid, CommentGrid } from "../layout/Grid";
 import { Padding } from "../layout/Padding";
-import { Content } from "../api";
+import { Heading } from "./Heading";
+import { Multiline } from "./Multiline";
 
-type CollectionStyle = "default" | "comment";
-
-const collectionStyle = (content: Content[]): CollectionStyle => {
-    if (content.every(c => c.cardStyle.type === "Comment")) {
-        return "comment";
+export const DefaultCollection: React.FC<{
+    collection: ICollection;
+    salt: string;
+}> = ({ collection, salt }) => {
+    if (collection.backfill.length < 1) {
+        return null;
     }
 
-    return "default";
+    // TODO handle curated collections
+    const rest = collection.backfill.slice(2);
+
+    const contentOne = collection.backfill[0];
+    const contentTwo = collection.backfill[1];
+
+    return (
+        <>
+            <Multiline />
+            <Heading heading={collection.displayName} />
+
+            <Card content={contentOne} salt={salt} size={"large"} />
+            <Padding px={10} />
+
+            {contentTwo && (
+                <Card content={contentTwo} salt={salt} size={"large"} />
+            )}
+            <Padding px={10} />
+
+            {rest && <DefaultGrid content={rest} salt={salt} />}
+        </>
+    );
 };
 
-export const Collection: React.FC<{
+export const CommentCollection: React.FC<{
     collection: ICollection;
     salt: string;
 }> = ({ collection, salt }) => {
@@ -24,21 +49,37 @@ export const Collection: React.FC<{
 
     const contentOne = collection.backfill[0];
     const contentTwo = collection.backfill[1];
-    const designType = collectionStyle(collection.backfill);
+
+    // TODO
+    return (
+        <>
+            <Multiline />
+            <Heading heading={collection.displayName} />
+
+            <CommentCard content={contentOne} salt={salt} size={"large"} />
+            <Padding px={10} />
+
+            <CommentCard content={contentTwo} salt={salt} size={"large"} />
+            <Padding px={10} />
+
+            <CommentGrid content={rest} salt={salt} />
+        </>
+    );
+};
+
+export const MediaCollection: React.FC<{
+    collection: ICollection;
+    salt: string;
+}> = ({ collection, salt }) => {
+    const items = collection.backfill.map(content => (
+        <MediaCard content={content} salt={salt} />
+    ));
 
     return (
         <>
-            <Card content={contentOne} salt={salt} size={"large"} />
-            <Padding px={10} />
-
-            <Card content={contentTwo} salt={salt} size={"large"} />
-            <Padding px={10} />
-
-            {designType === "comment" ? (
-                <CommentGrid content={rest} salt={salt} />
-            ) : (
-                <DefaultGrid content={rest} salt={salt} />
-            )}
+            <Multiline />
+            <Heading heading={collection.displayName} />
+            {items}
         </>
     );
 };
