@@ -103,12 +103,14 @@ export interface Kicker {
 interface Header {
     kicker?: Kicker;
     isComment: boolean;
+    headline: string;
 }
 
 export interface Content {
     properties: Properties;
     card: Card;
     header: Header;
+
     cardStyle: {
         type: string;
     };

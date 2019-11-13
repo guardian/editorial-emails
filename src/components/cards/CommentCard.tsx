@@ -46,6 +46,11 @@ const metaWrapperStyle = (size: Size): TdCSS => {
     };
 };
 
+const standfirstStyle: TdCSS = {
+    padding: "3px 10px 5px 10px",
+    verticalAlign: "bottom"
+};
+
 const linkStyle: FontCSS = {
     textDecoration: "none"
 };
@@ -58,6 +63,14 @@ const headlineStyle = (size: Size): FontCSS => {
 
         ...fontSizes[size]
     };
+};
+
+const spanStyle: FontCSS = {
+    color: palette.neutral[7],
+    fontFamily: "'GH Guardian Headline', Georgia, serif",
+    fontWeight: 400,
+    fontSize: "16px",
+    lineHeight: "20px"
 };
 
 const kickerStyle: FontCSS = {
@@ -92,6 +105,14 @@ const columnStyleRight: TdCSS = {
     verticalAlign: "bottom"
 };
 
+// const columnStyleRight = (size: Size): TdCSS => {
+//     const width = size === "large" ? "30%" : "50%";
+//     return {
+//         width: `${width}`,
+//         verticalAlign: "bottom"
+//     };
+// };
+
 interface Props {
     content: Content;
     salt: string;
@@ -106,10 +127,10 @@ const Standfirst: React.FC<{
     size: Size;
 }> = ({ text, linkURL, size }) => {
     return (
-        <td className="m-pad" style={metaWrapperStyle(size)}>
+        <td className="m-pad" style={standfirstStyle}>
             <a style={linkStyle} href={linkURL}>
                 {" "}
-                <span>{text}</span>
+                <span style={spanStyle}>{text}</span>
             </a>
         </td>
     );
@@ -118,10 +139,12 @@ const Standfirst: React.FC<{
 // TODO add alt text
 const ContributorImage: React.FC<{
     src: string;
-}> = ({ src }) => {
+    width: number;
+    size: Size;
+}> = ({ src, width }) => {
     return (
         <td style={columnStyleRight}>
-            <img width="100px" src={src} alt="" />
+            <img width={width} src={src} alt="" />
         </td>
     );
 };
@@ -131,7 +154,8 @@ const SupplementaryMeta: React.FC<{
     linkURL: string;
     contributorImageSrc: string;
     size: Size;
-}> = ({ standfirst, contributorImageSrc, linkURL, size }) => {
+    width: number;
+}> = ({ standfirst, contributorImageSrc, linkURL, size, width }) => {
     if (standfirst && contributorImageSrc) {
         return (
             <RowCell>
@@ -141,7 +165,7 @@ const SupplementaryMeta: React.FC<{
                         linkURL={linkURL}
                         size={size}
                     />
-                    <ContributorImage src={contributorImageSrc} />
+                    <ContributorImage width={width} src={contributorImageSrc} />
                 </Table>
             </RowCell>
         );
@@ -226,7 +250,7 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
         content.card.starRating
     );
 
-    const headline = content.properties.webTitle;
+    const headline = content.header.headline;
     const byline = content.properties.byline;
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
@@ -276,14 +300,15 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
                     byline={byline}
                 />
 
+                <RowCellPadding px={20}></RowCellPadding>
+
                 <SupplementaryMeta
                     standfirst={standfirst}
                     linkURL={webURL}
                     contributorImageSrc={profilePic}
                     size={size}
+                    width={size === "large" ? 180 : 147}
                 />
-
-                <RowCellPadding px={20}></RowCellPadding>
             </Table>
         </TableRowCell>
     );
