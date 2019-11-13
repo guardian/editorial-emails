@@ -1,8 +1,19 @@
 import React from "react";
 import { Collection as ICollection } from "../api";
 import { Card } from "./cards/Card";
-import { Grid } from "../layout/Grid";
+import { DefaultGrid, CommentGrid } from "../layout/Grid";
 import { Padding } from "../layout/Padding";
+import { Content } from "../api";
+
+type CollectionStyle = "default" | "comment";
+
+const collectionStyle = (content: Content[]): CollectionStyle => {
+    if (content.every(c => c.cardStyle.type === "Comment")) {
+        return "comment";
+    }
+
+    return "default";
+};
 
 export const Collection: React.FC<{
     collection: ICollection;
@@ -13,6 +24,7 @@ export const Collection: React.FC<{
 
     const contentOne = collection.backfill[0];
     const contentTwo = collection.backfill[1];
+    const designType = collectionStyle(collection.backfill);
 
     return (
         <>
@@ -22,7 +34,11 @@ export const Collection: React.FC<{
             <Card content={contentTwo} salt={salt} size={"large"} />
             <Padding px={10} />
 
-            <Grid content={rest} salt={salt} />
+            {designType === "comment" ? (
+                <CommentGrid content={rest} salt={salt} />
+            ) : (
+                <DefaultGrid content={rest} salt={salt} />
+            )}
         </>
     );
 };

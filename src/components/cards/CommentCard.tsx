@@ -121,7 +121,7 @@ interface Props {
 
 const brazeParameter = "?##braze_utm##";
 
-const Standfirst: React.FC<{
+const TrailText: React.FC<{
     text: string;
     linkURL: string;
     size: Size;
@@ -141,11 +141,7 @@ const ContributorImage: React.FC<{
     src: string;
     width: number;
 }> = ({ src, width }) => {
-    return (
-        <td style={columnStyleRight}>
-            <img width={width} src={src} alt="" />
-        </td>
-    );
+    return <img width={width} src={src} alt="" />;
 };
 
 // TODO make testable, and also separate layout logic from individual components
@@ -157,29 +153,25 @@ const SupplementaryMeta: React.FC<{
     size: Size;
     width: number;
 }> = ({ trailText, contributorImageSrc, linkURL, size, width }) => {
-    let ignoreStandfirst = false;
+    const contributorImage = (
+        <td style={columnStyleRight}>
+            <ContributorImage width={width} src={contributorImageSrc} />
+        </td>
+    );
 
-    if (size === "small") {
-        ignoreStandfirst = true;
-    }
-
-    if (!ignoreStandfirst && trailText && contributorImageSrc) {
+    if (trailText && contributorImageSrc) {
         return (
             <RowCell>
                 <Table>
-                    <Standfirst
-                        text={trailText}
-                        linkURL={linkURL}
-                        size={size}
-                    />
-                    <ContributorImage width={width} src={contributorImageSrc} />
+                    <TrailText text={trailText} linkURL={linkURL} size={size} />
+                    {contributorImage}
                 </Table>
             </RowCell>
         );
-    } else if (!ignoreStandfirst && trailText) {
+    } else if (trailText) {
         return (
             <tr>
-                <Standfirst text={trailText} linkURL={linkURL} size={size} />
+                <TrailText text={trailText} linkURL={linkURL} size={size} />
             </tr>
         );
     } else if (contributorImageSrc) {
@@ -187,7 +179,7 @@ const SupplementaryMeta: React.FC<{
             <RowCell>
                 <Table>
                     <td style={{ width: "50%" }}></td>
-                    <ContributorImage width={width} src={contributorImageSrc} />
+                    {contributorImage}
                 </Table>
             </RowCell>
         );
@@ -304,16 +296,30 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
                     byline={byline}
                 />
 
-                <RowCellPadding px={20}></RowCellPadding>
-
-                <SupplementaryMeta
-                    trailText={trailText}
-                    linkURL={webURL}
-                    contributorImageSrc={profilePic}
-                    size={size}
-                    width={size === "large" ? 180 : 147}
-                />
+                {size === "large" && (
+                    <SupplementaryMeta
+                        trailText={trailText}
+                        linkURL={webURL}
+                        contributorImageSrc={profilePic}
+                        size={size}
+                        width={size === "large" ? 180 : 147}
+                    />
+                )}
             </Table>
         </TableRowCell>
     );
+};
+
+export const ContributorImageWrapper: React.FC<{
+    content: Content;
+    salt: string;
+}> = ({ content, salt }) => {
+    const contributor = content.properties.maybeContent.tags.tags.find(tag => {
+        return tag.properties.tagType === "Contributor";
+    });
+    const profilePic = contributor
+        ? contributor.properties.contributorLargeImagePath
+        : null;
+
+    return <ContributorImage width={147} src={profilePic} />;
 };
