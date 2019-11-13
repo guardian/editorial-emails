@@ -139,14 +139,16 @@ const TrailText: React.FC<{
 // TODO add alt text
 const ContributorImage: React.FC<{
     src: string;
+    salt: string;
     width: number;
     alt: string;
-}> = ({ src, width, alt }) => {
+}> = ({ src, salt, width, alt }) => {
     if (!src) {
         return null;
     }
 
-    return <img width={width} src={src} alt={alt} />;
+    const formattedImage = formatImage(src, salt, width);
+    return <img width={width} src={formattedImage} alt={alt} />;
 };
 
 // TODO make testable, and also separate layout logic from individual components
@@ -158,18 +160,21 @@ const SupplementaryMeta: React.FC<{
     contributirImageAlt: string;
     size: Size;
     width: number;
+    salt: string;
 }> = ({
     trailText,
     contributorImageSrc,
     linkURL,
     size,
     width,
-    contributirImageAlt
+    contributirImageAlt,
+    salt
 }) => {
     const contributorImage = (
         <td style={columnStyleRight}>
             <ContributorImage
                 width={width}
+                salt={salt}
                 src={contributorImageSrc}
                 alt={contributirImageAlt}
             />
@@ -315,6 +320,7 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
 
                 {size === "large" && (
                     <SupplementaryMeta
+                        salt={salt}
                         trailText={trailText}
                         linkURL={webURL}
                         contributorImageSrc={profilePic}
@@ -341,6 +347,7 @@ export const ContributorImageWrapper: React.FC<{
 
     return (
         <ContributorImage
+            salt={salt}
             width={147}
             src={profilePic}
             alt={contributor.properties.webTitle}
