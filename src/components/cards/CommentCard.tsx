@@ -148,6 +148,7 @@ const ContributorImage: React.FC<{
     );
 };
 
+// TODO make testable, and also separate layout logic from individual components
 const SupplementaryMeta: React.FC<{
     trailText: string;
     linkURL: string;
@@ -182,9 +183,12 @@ const SupplementaryMeta: React.FC<{
         );
     } else if (contributorImageSrc) {
         return (
-            <tr>
-                <ContributorImage src={contributorImageSrc} width={width} />
-            </tr>
+            <RowCell>
+                <Table>
+                    <td style={{ width: "50%" }}></td>
+                    <ContributorImage width={width} src={contributorImageSrc} />
+                </Table>
+            </RowCell>
         );
     }
 
