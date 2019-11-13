@@ -149,18 +149,24 @@ const ContributorImage: React.FC<{
 };
 
 const SupplementaryMeta: React.FC<{
-    standfirst: string;
+    trailText: string;
     linkURL: string;
     contributorImageSrc: string;
     size: Size;
     width: number;
-}> = ({ standfirst, contributorImageSrc, linkURL, size, width }) => {
-    if (standfirst && contributorImageSrc) {
+}> = ({ trailText, contributorImageSrc, linkURL, size, width }) => {
+    let ignoreStandfirst = false;
+
+    if (size === "small") {
+        ignoreStandfirst = true;
+    }
+
+    if (!ignoreStandfirst && trailText && contributorImageSrc) {
         return (
             <RowCell>
                 <Table>
                     <Standfirst
-                        text={standfirst}
+                        text={trailText}
                         linkURL={linkURL}
                         size={size}
                     />
@@ -168,10 +174,10 @@ const SupplementaryMeta: React.FC<{
                 </Table>
             </RowCell>
         );
-    } else if (standfirst) {
+    } else if (!ignoreStandfirst && trailText) {
         return (
             <tr>
-                <Standfirst text={standfirst} linkURL={linkURL} size={size} />
+                <Standfirst text={trailText} linkURL={linkURL} size={size} />
             </tr>
         );
     } else if (contributorImageSrc) {
@@ -296,7 +302,7 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
                 <RowCellPadding px={20}></RowCellPadding>
 
                 <SupplementaryMeta
-                    standfirst={trailText}
+                    trailText={trailText}
                     linkURL={webURL}
                     contributorImageSrc={profilePic}
                     size={size}
