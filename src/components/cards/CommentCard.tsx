@@ -149,6 +149,7 @@ const ContributorImage: React.FC<{
 };
 
 // TODO make testable, and also separate layout logic from individual components
+// TODO split into SupplementaryMetaLarge and Small
 const SupplementaryMeta: React.FC<{
     trailText: string;
     linkURL: string;

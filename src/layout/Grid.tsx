@@ -42,6 +42,9 @@ const GridRow: React.FC<{ left: React.ReactNode; right: React.ReactNode }> = ({
     </TableRow>
 );
 
+// Card owns contributor image
+//
+
 // TODO really should accept a React element so that it doesn't have to know
 // about Card or salt.
 export const Grid: React.FC<Props> = ({ content, salt }) => {
