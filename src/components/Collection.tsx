@@ -79,10 +79,13 @@ export const CommentCollection: React.FC<{
     salt: string;
 }> = ({ frontId, collection, salt }) => {
     // TODO handle curated collections
-    const rest = collection.backfill.slice(2);
 
-    const contentOne = collection.backfill[0];
-    const contentTwo = collection.backfill[1];
+    const c0 = collection.backfill[0];
+    const c1 = collection.backfill[1];
+    const grid_2_5 = collection.backfill.slice(2, 6);
+    const c6 = collection.backfill[6];
+    const grid_7_8 = collection.backfill.slice(7, 9);
+    const c9 = collection.backfill[9];
 
     // TODO
     return (
@@ -91,29 +94,52 @@ export const CommentCollection: React.FC<{
             <Heading heading={collection.displayName} />
 
             <CommentCard
-                content={contentOne}
+                content={c0}
                 salt={salt}
                 size={"large"}
                 shouldShowImage={false}
             />
             <Padding px={10} />
 
-            {contentTwo && (
-                <CommentCard
-                    content={contentTwo}
-                    salt={salt}
-                    size={"large"}
-                    shouldShowImage={false}
-                />
-            )}
+            <CommentCard
+                content={c1}
+                salt={salt}
+                size={"large"}
+                shouldShowImage={false}
+            />
             <Padding px={10} />
 
             <CommentGrid
-                content={rest}
+                content={grid_2_5}
                 salt={salt}
                 shouldShowGridImages={frontIdShouldShowCommentGridImages(
                     frontId
                 )}
+            />
+            <Padding px={10} />
+
+            <CommentCard
+                content={c6}
+                salt={salt}
+                size={"large"}
+                shouldShowImage={false}
+            />
+            <Padding px={10} />
+
+            <CommentGrid
+                content={grid_7_8}
+                salt={salt}
+                shouldShowGridImages={frontIdShouldShowCommentGridImages(
+                    frontId
+                )}
+            />
+            <Padding px={10} />
+
+            <CommentCard
+                content={c9}
+                salt={salt}
+                size={"large"}
+                shouldShowImage={false}
             />
         </>
     );

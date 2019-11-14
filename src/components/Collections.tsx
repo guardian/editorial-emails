@@ -1,10 +1,10 @@
 import React from "react";
 import { Collection as ICollection } from "../api";
 import {
-    DefaultCollection,
-    MediaCollection,
     CommentCollection,
-    EditorialCollection
+    DefaultCollection,
+    EditorialCollection,
+    MediaCollection
 } from "./Collection";
 import { Content } from "../api";
 import { TableRowCell } from "../layout/Table";
