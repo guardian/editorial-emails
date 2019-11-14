@@ -20,14 +20,20 @@ export const Banner: React.FC<{ frontID: string }> = ({ frontID }) => {
             "https://assets.guim.co.uk/images/email/banners/0dbd7be9345b28a8678baaae474e6548/film-today.png"
     };
 
+    const bannersAlt: { [key in string]: string } = {
+        "email/opinion": "The Best of Guardian Opinion",
+        default: "Film Today"
+    };
+
     const bannerSrc = banners[frontID] || banners.default;
+    const bannerAltText = bannersAlt[frontID] || bannersAlt.default;
 
     return (
         <Table>
             <img
                 width="600"
                 src={bannerSrc}
-                alt="Film Today"
+                alt={bannerAltText}
                 style={imgStyle}
             ></img>
         </Table>
