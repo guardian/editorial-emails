@@ -48,7 +48,6 @@ export const EditorialCollection: React.FC<{
     const rest = collection.backfill.slice(2);
 
     const contentOne = collection.backfill[0];
-    const contentTwo = collection.backfill[1];
 
     // TODO
     return (
@@ -56,15 +55,13 @@ export const EditorialCollection: React.FC<{
             <Multiline />
             <Heading heading={collection.displayName} />
 
-            <CommentCard content={contentOne} salt={salt} size={"large"} />
+            <CommentCard
+                content={contentOne}
+                salt={salt}
+                size={"large"}
+                shouldShowImage={true}
+            />
             <Padding px={10} />
-
-            {contentTwo && (
-                <CommentCard content={contentTwo} salt={salt} size={"large"} />
-            )}
-            <Padding px={10} />
-
-            <CommentGrid content={rest} salt={salt} />
         </>
     );
 };
@@ -85,11 +82,21 @@ export const CommentCollection: React.FC<{
             <Multiline />
             <Heading heading={collection.displayName} />
 
-            <CommentCard content={contentOne} salt={salt} size={"large"} />
+            <CommentCard
+                content={contentOne}
+                salt={salt}
+                size={"large"}
+                shouldShowImage={false}
+            />
             <Padding px={10} />
 
             {contentTwo && (
-                <CommentCard content={contentTwo} salt={salt} size={"large"} />
+                <CommentCard
+                    content={contentTwo}
+                    salt={salt}
+                    size={"large"}
+                    shouldShowImage={false}
+                />
             )}
             <Padding px={10} />
 

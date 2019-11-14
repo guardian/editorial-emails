@@ -79,10 +79,20 @@ export const CommentGrid: React.FC<Props> = ({ content, salt }) => {
         <React.Fragment key={i}>
             <GridRow
                 left={
-                    <CommentCard content={pair[0]} salt={salt} size={"small"} />
+                    <CommentCard
+                        content={pair[0]}
+                        salt={salt}
+                        size={"small"}
+                        shouldShowImage={true}
+                    />
                 }
                 right={
-                    <CommentCard content={pair[1]} salt={salt} size={"small"} />
+                    <CommentCard
+                        content={pair[1]}
+                        salt={salt}
+                        size={"small"}
+                        shouldShowImage={true}
+                    />
                 }
                 bgdColour={palette.opinion.faded}
             />

@@ -117,6 +117,7 @@ interface Props {
     content: Content;
     salt: string;
     size: "large" | "small";
+    shouldShowImage: boolean;
 }
 
 const brazeParameter = "?##braze_utm##";
@@ -264,7 +265,12 @@ const Image: React.FC<{
     );
 };
 
-export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
+export const CommentCard: React.FC<Props> = ({
+    content,
+    salt,
+    size,
+    shouldShowImage
+}) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(
@@ -300,14 +306,16 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
     return (
         <TableRowCell tdStyle={tdStyle}>
             <Table>
-                <RowCell>
-                    <Image
-                        src={imageURL}
-                        linkURL={webURL}
-                        alt={imageAlt}
-                        width={size === "large" ? 600 : 294}
-                    />
-                </RowCell>
+                {shouldShowImage && (
+                    <RowCell>
+                        <Image
+                            src={imageURL}
+                            linkURL={webURL}
+                            alt={imageAlt}
+                            width={size === "large" ? 600 : 294}
+                        />
+                    </RowCell>
+                )}
 
                 <Headline
                     size={size}
