@@ -8,6 +8,7 @@ import { Center } from "./layout/Center";
 import { default as minifyCssString } from "minify-css-string";
 import { fontStyles } from "./styles/fonts";
 import { responsiveStyles } from "./styles/responsive-styles";
+import { TableRowCell } from "./layout/Table";
 
 const canonicalURL = (path: string): string =>
     `https://www.theguardian.com/${path}`;
@@ -26,13 +27,15 @@ const title = (id: string): string => {
 export const Email = (front: Front, salt: string): string => {
     const body = renderToStaticMarkup(
         <Center>
-            <Banner frontID={front.id} />
-            <Collections
-                frontId={front.id}
-                collections={front.collections}
-                salt={salt}
-            />
-            <Footer />
+            <TableRowCell>
+                <Banner frontID={front.id} />
+                <Collections
+                    frontId={front.id}
+                    collections={front.collections}
+                    salt={salt}
+                />
+                <Footer />
+            </TableRowCell>
         </Center>
     );
 
