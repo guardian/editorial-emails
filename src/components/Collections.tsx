@@ -3,12 +3,13 @@ import { Collection as ICollection } from "../api";
 import {
     DefaultCollection,
     MediaCollection,
-    CommentCollection
+    CommentCollection,
+    EditorialCollection
 } from "./Collection";
 import { Content } from "../api";
 import { TableRowCell } from "../layout/Table";
 
-type DesignType = "default" | "comment" | "media";
+type DesignType = "default" | "comment" | "media" | "editorial";
 
 const getDesignType = (content: Content[]): DesignType => {
     const cardTypes: Set<string> = new Set();
@@ -22,7 +23,7 @@ const getDesignType = (content: Content[]): DesignType => {
         case "Comment":
             return "comment";
         case "Editorial":
-            return "comment";
+            return "editorial";
         case "Media":
             return "media";
         default:
@@ -39,6 +40,10 @@ export const Collections: React.FC<{
         const designType = getDesignType(content);
 
         switch (designType) {
+            case "editorial":
+                return (
+                    <EditorialCollection collection={collection} salt={salt} />
+                );
             case "comment":
                 return (
                     <CommentCollection collection={collection} salt={salt} />
