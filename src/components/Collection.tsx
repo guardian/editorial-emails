@@ -61,7 +61,6 @@ export const EditorialCollection: React.FC<{
                 size={"large"}
                 shouldShowImage={true}
             />
-            <Padding px={10} />
         </>
     );
 };
@@ -116,7 +115,6 @@ export const CommentCollection: React.FC<{
                     frontId
                 )}
             />
-            <Padding px={10} />
 
             <CommentCard
                 content={c6}
@@ -133,7 +131,6 @@ export const CommentCollection: React.FC<{
                     frontId
                 )}
             />
-            <Padding px={10} />
 
             <CommentCard
                 content={c9}
