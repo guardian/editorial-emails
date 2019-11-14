@@ -4,7 +4,6 @@ import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
-import { RowCellPadding } from "../../layout/RowCellPadding";
 import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
 
@@ -47,7 +46,7 @@ const metaWrapperStyle = (size: Size): TdCSS => {
 };
 
 const standfirstStyle: TdCSS = {
-    padding: "3px 10px 5px 10px",
+    padding: "20px 10px 10px 10px",
     verticalAlign: "bottom"
 };
 

@@ -8,12 +8,15 @@ import { Padding } from "../../layout/Padding";
 
 const tdStyle: TdCSS = {
     backgroundColor: palette.neutral[20],
-    color: "white",
+    padding: "10px"
+};
+
+const tdHeadlineStyle: TdCSS = {
+    color: palette.neutral[100],
     fontSize: "22px",
     lineHeight: "26px",
     fontFamily: "'GH Guardian Headline', Georgia, serif",
-    fontWeight: 400,
-    padding: "10px"
+    fontWeight: 400
 };
 
 const imgStyle: ImageCSS = {
@@ -70,7 +73,7 @@ export const MediaCard: React.FC<Props> = ({ content, salt }) => {
     return (
         <TableRowCell tdStyle={tdStyle}>
             <Table>
-                <RowCell>{headline}</RowCell>
+                <RowCell tdStyle={tdHeadlineStyle}>{headline}</RowCell>
                 <RowCell>
                     <Padding px={20} />
                 </RowCell>

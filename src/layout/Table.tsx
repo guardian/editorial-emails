@@ -32,8 +32,9 @@ export const TableRowCell: React.FC<{
 
 export const RowCell: React.FC<{
     children: React.ReactNode;
-}> = ({ children }) => (
+    tdStyle?: TdCSS;
+}> = ({ children, tdStyle = {} }) => (
     <tr>
-        <td>{children}</td>
+        <td style={tdStyle}>{children}</td>
     </tr>
 );
