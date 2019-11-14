@@ -27,7 +27,11 @@ export const Email = (front: Front, salt: string): string => {
     const body = renderToStaticMarkup(
         <Center>
             <Banner frontID={front.id} />
-            <Collections collections={front.collections} salt={salt} />
+            <Collections
+                frontId={front.id}
+                collections={front.collections}
+                salt={salt}
+            />
             <Footer />
         </Center>
     );

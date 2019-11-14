@@ -66,10 +66,18 @@ export const EditorialCollection: React.FC<{
     );
 };
 
+const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
+    if (frontId === "email/opinion") {
+        return false;
+    }
+    return true;
+};
+
 export const CommentCollection: React.FC<{
+    frontId: string;
     collection: ICollection;
     salt: string;
-}> = ({ collection, salt }) => {
+}> = ({ frontId, collection, salt }) => {
     // TODO handle curated collections
     const rest = collection.backfill.slice(2);
 
@@ -100,7 +108,13 @@ export const CommentCollection: React.FC<{
             )}
             <Padding px={10} />
 
-            <CommentGrid content={rest} salt={salt} />
+            <CommentGrid
+                content={rest}
+                salt={salt}
+                shouldShowGridImages={frontIdShouldShowCommentGridImages(
+                    frontId
+                )}
+            />
         </>
     );
 };

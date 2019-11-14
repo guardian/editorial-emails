@@ -32,9 +32,10 @@ const getDesignType = (content: Content[]): DesignType => {
 };
 
 export const Collections: React.FC<{
+    frontId: string;
     collections: ICollection[];
     salt: string;
-}> = ({ collections, salt }) => {
+}> = ({ frontId, collections, salt }) => {
     const res = collections.map(collection => {
         const content = collection.backfill; // TODO support curated too
         const designType = getDesignType(content);
@@ -46,7 +47,11 @@ export const Collections: React.FC<{
                 );
             case "comment":
                 return (
-                    <CommentCollection collection={collection} salt={salt} />
+                    <CommentCollection
+                        frontId={frontId}
+                        collection={collection}
+                        salt={salt}
+                    />
                 );
             case "media":
                 return <MediaCollection collection={collection} salt={salt} />;

@@ -52,14 +52,19 @@ function partition<T>(seq: T[], n: number): T[][] {
     return groups;
 }
 
-interface Props {
+interface DefaultGridProps {
     content: Content[];
     salt: string;
+}
+interface CommentGridProps {
+    content: Content[];
+    salt: string;
+    shouldShowGridImages: boolean;
 }
 
 // TODO really should accept a React element so that it doesn't have to know
 // about Card or salt.
-export const DefaultGrid: React.FC<Props> = ({ content, salt }) => {
+export const DefaultGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
     const rows = partition(content, 2).map((pair, i) => (
         <React.Fragment key={i}>
             <GridRow
@@ -74,7 +79,11 @@ export const DefaultGrid: React.FC<Props> = ({ content, salt }) => {
     return <table style={tableStyle}>{rows}</table>;
 };
 
-export const CommentGrid: React.FC<Props> = ({ content, salt }) => {
+export const CommentGrid: React.FC<CommentGridProps> = ({
+    content,
+    salt,
+    shouldShowGridImages
+}) => {
     const rows = partition(content, 2).map((pair, i) => (
         <React.Fragment key={i}>
             <GridRow
@@ -83,7 +92,7 @@ export const CommentGrid: React.FC<Props> = ({ content, salt }) => {
                         content={pair[0]}
                         salt={salt}
                         size={"small"}
-                        shouldShowImage={true}
+                        shouldShowImage={shouldShowGridImages}
                     />
                 }
                 right={
@@ -91,7 +100,7 @@ export const CommentGrid: React.FC<Props> = ({ content, salt }) => {
                         content={pair[1]}
                         salt={salt}
                         size={"small"}
-                        shouldShowImage={true}
+                        shouldShowImage={shouldShowGridImages}
                     />
                 }
                 bgdColour={palette.opinion.faded}
