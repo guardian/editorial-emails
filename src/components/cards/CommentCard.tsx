@@ -1,5 +1,5 @@
 import React from "react";
-import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
+import { FontCSS, TdCSS, ImageCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
@@ -312,7 +312,7 @@ export const CommentCard: React.FC<Props> = ({
         <TableRowCell tdStyle={tdStyle}>
             <Table>
                 {shouldShowImage && (
-                    <RowCell>
+                    <RowCell tdStyle={{ padding: "0" }}>
                         <Image
                             src={imageURL}
                             linkURL={webURL}
