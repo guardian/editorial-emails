@@ -33,7 +33,7 @@ const colStyle = (
     textAlign: align
 });
 
-const GridRow: React.FC<{
+export const GridRow: React.FC<{
     left: React.ReactNode;
     right: React.ReactNode;
     bgdColour?: string;

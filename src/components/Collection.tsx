@@ -7,6 +7,7 @@ import { DefaultGrid, CommentGrid } from "../layout/Grid";
 import { Padding } from "../layout/Padding";
 import { Heading } from "./Heading";
 import { Multiline } from "./Multiline";
+import { MoreFromCommentGrid } from "./MoreFromGuardianUtils";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -155,6 +156,23 @@ export const MediaCollection: React.FC<{
             <Multiline />
             <Heading heading={collection.displayName} />
             {items}
+        </>
+    );
+};
+
+export const MoreFromGuardianCollection: React.FC<{
+    collection: ICollection;
+    salt: string;
+}> = ({ collection, salt }) => {
+    return (
+        <>
+            <Multiline />
+            <Heading heading={"More from Guardian Opinion"} />
+            <MoreFromCommentGrid
+                content={collection.backfill}
+                salt={salt}
+                shouldShowGridImages={false}
+            />
         </>
     );
 };

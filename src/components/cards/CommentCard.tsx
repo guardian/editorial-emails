@@ -159,7 +159,7 @@ const ContributorImage: React.FC<{
 
 // TODO make testable, and also separate layout logic from individual components
 // TODO split into SupplementaryMetaLarge and Small
-const SupplementaryMeta: React.FC<{
+export const SupplementaryMeta: React.FC<{
     trailText: string;
     linkURL: string;
     contributorImageSrc: string;
@@ -216,7 +216,7 @@ const SupplementaryMeta: React.FC<{
     return null;
 };
 
-const Headline: React.FC<{
+export const Headline: React.FC<{
     size: Size;
     linkURL: string;
     isComment: boolean;
@@ -253,7 +253,7 @@ const Headline: React.FC<{
     );
 };
 
-const Image: React.FC<{
+export const Image: React.FC<{
     src?: string;
     linkURL: string;
     alt: string;

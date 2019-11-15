@@ -4,10 +4,12 @@ import {
     CommentCollection,
     DefaultCollection,
     EditorialCollection,
-    MediaCollection
+    MediaCollection,
+    MoreFromGuardianCollection
 } from "./Collection";
 import { Content } from "../api";
 import { TableRowCell } from "../layout/Table";
+import { moreFromGuardianICollection } from "./MoreFromGuardianUtils";
 
 type DesignType = "default" | "comment" | "media" | "editorial";
 
@@ -41,6 +43,8 @@ export const Collections: React.FC<{
         const designType = getDesignType(content);
 
         switch (designType) {
+            case "media":
+                return <MediaCollection collection={collection} salt={salt} />;
             case "editorial":
                 return (
                     <EditorialCollection collection={collection} salt={salt} />
@@ -53,8 +57,6 @@ export const Collections: React.FC<{
                         salt={salt}
                     />
                 );
-            case "media":
-                return <MediaCollection collection={collection} salt={salt} />;
             case "default":
                 return (
                     <DefaultCollection collection={collection} salt={salt} />
@@ -62,5 +64,15 @@ export const Collections: React.FC<{
         }
     });
 
-    return <TableRowCell>{res}</TableRowCell>;
+    return (
+        <TableRowCell>
+            {res}
+            {frontId === "email/opinion" && (
+                <MoreFromGuardianCollection
+                    collection={moreFromGuardianICollection()}
+                    salt={salt}
+                />
+            )}
+        </TableRowCell>
+    );
 };

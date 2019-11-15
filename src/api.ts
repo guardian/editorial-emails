@@ -50,12 +50,12 @@ export const api = {
     get
 };
 
-interface Image {
+export interface Image {
     url: string;
     fields: { altText: string };
 }
 
-interface Tag {
+export interface Tag {
     properties: {
         tagType: string;
         contributorLargeImagePath?: string;
@@ -65,7 +65,7 @@ interface Tag {
 // e.g. see
 // https://github.com/guardian/frontend/blob/master/common/app/implicits/FaciaContentFrontendHelpers.scala#L19
 // for image
-interface InnerContent {
+export interface InnerContent {
     trail: {
         trailPicture: {
             allImages: Image[];
@@ -79,14 +79,14 @@ interface InnerContent {
     };
 }
 
-interface Properties {
+export interface Properties {
     byline: string;
     webTitle: string;
     webUrl: string;
     maybeContent: InnerContent;
 }
 
-interface Card {
+export interface Card {
     id: string;
     trailText: string;
     starRating?: number;
@@ -101,7 +101,7 @@ export interface Kicker {
     };
 }
 
-interface Header {
+export interface Header {
     kicker?: Kicker;
     isComment: boolean;
     headline: string;
