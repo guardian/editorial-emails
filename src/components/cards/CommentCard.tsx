@@ -32,6 +32,13 @@ const imgStyle: ImageCSS = {
     color: palette.opinion.main
 };
 
+const imgProfileStyle: ImageCSS = {
+    outline: "none",
+    maxWidth: "100%",
+    fontFamily: "Georgia, serif",
+    color: palette.opinion.main
+};
+
 const tdStyle: TdCSS = {
     backgroundColor: palette.opinion.faded,
     borderTop: `2px solid ${palette.opinion.main}`,
@@ -104,14 +111,6 @@ const columnStyleRight: TdCSS = {
     verticalAlign: "bottom"
 };
 
-// const columnStyleRight = (size: Size): TdCSS => {
-//     const width = size === "large" ? "30%" : "50%";
-//     return {
-//         width: `${width}`,
-//         verticalAlign: "bottom"
-//     };
-// };
-
 interface Props {
     content: Content;
     salt: string;
@@ -148,7 +147,14 @@ const ContributorImage: React.FC<{
     }
 
     const formattedImage = formatImage(src, salt, width);
-    return <img width={width} src={formattedImage} alt={alt} />;
+    return (
+        <img
+            width={width}
+            src={formattedImage}
+            alt={alt}
+            style={imgProfileStyle}
+        />
+    );
 };
 
 // TODO make testable, and also separate layout logic from individual components

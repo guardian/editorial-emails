@@ -20,11 +20,16 @@ const gutterStyle: TdCSS = {
 };
 
 type Align = "left" | "right";
+type VAlign = "top" | "bottom";
 
-const colStyle = (bgdColour: string, align: Align = "left"): TdCSS => ({
+const colStyle = (
+    bgdColour: string,
+    align: Align = "left",
+    valign: VAlign = "top"
+): TdCSS => ({
     width: "49%",
     backgroundColor: bgdColour,
-    verticalAlign: "top",
+    verticalAlign: valign,
     textAlign: align
 });
 
@@ -33,11 +38,12 @@ const GridRow: React.FC<{
     right: React.ReactNode;
     bgdColour?: string;
     align?: "right";
-}> = ({ left, right, align, bgdColour = palette.culture.faded }) => (
+    valign?: "bottom";
+}> = ({ left, right, align, valign, bgdColour = palette.culture.faded }) => (
     <TableRow>
-        <td style={colStyle(bgdColour, align)}>{left}</td>
+        <td style={colStyle(bgdColour, align, valign)}>{left}</td>
         <td style={gutterStyle}>&nbsp;</td>
-        <td style={colStyle(bgdColour, align)}>{right}</td>
+        <td style={colStyle(bgdColour, align, valign)}>{right}</td>
     </TableRow>
 );
 
@@ -112,6 +118,7 @@ export const CommentGrid: React.FC<CommentGridProps> = ({
                 }
                 bgdColour={palette.opinion.faded}
                 align="right"
+                valign="bottom"
             />
 
             <Padding px={10} />
