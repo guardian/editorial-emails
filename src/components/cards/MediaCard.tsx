@@ -77,7 +77,7 @@ export const MediaCard: React.FC<Props> = ({ content, salt }) => {
                 <RowCell>
                     <Padding px={20} />
                 </RowCell>
-                <RowCell>
+                <RowCell tdStyle={{ padding: "0" }}>
                     <Image
                         src={imageURL}
                         linkURL={webURL}
