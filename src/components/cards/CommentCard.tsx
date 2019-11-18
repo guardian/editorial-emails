@@ -73,10 +73,14 @@ const spanStyle: FontCSS = {
     lineHeight: "20px"
 };
 
-const kickerStyle: FontCSS = {
-    ...headlineStyle,
+const kickerStyle = (size: Size): FontCSS => {
+    return {
+        color: palette.culture.main,
+        fontFamily: "'GH Guardian Headline', Georgia, serif",
+        fontWeight: 400,
 
-    color: palette.opinion.main
+        ...fontSizes[size]
+    };
 };
 
 const bylineStyle = (size: Size): FontCSS => {
@@ -104,14 +108,6 @@ const columnStyleRight: TdCSS = {
     width: "30%",
     verticalAlign: "bottom"
 };
-
-// const columnStyleRight = (size: Size): TdCSS => {
-//     const width = size === "large" ? "30%" : "50%";
-//     return {
-//         width: `${width}`,
-//         verticalAlign: "bottom"
-//     };
-// };
 
 interface Props {
     content: Content;
@@ -218,7 +214,7 @@ const Headline: React.FC<{
             <td className="m-pad" style={metaWrapperStyle(size)}>
                 <a style={linkStyle} href={linkURL}>
                     {kicker && (
-                        <span style={kickerStyle}>{kicker + " / "}</span>
+                        <span style={kickerStyle(size)}>{kicker + " / "}</span>
                     )}
                     <span style={headlineStyle(size)}>
                         {isComment && (
