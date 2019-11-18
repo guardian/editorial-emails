@@ -89,15 +89,13 @@ const quoteIconStyle: ImageCSS = {
     border: "0"
 };
 
-interface Props {
+const brazeParameter = "?##braze_utm##";
+
+const DefaultCardBackfill: React.FC<{
     content: Content;
     salt: string;
     size: "large" | "small";
-}
-
-const brazeParameter = "?##braze_utm##";
-
-export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
+}> = ({ content, salt, size }) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(
@@ -185,4 +183,34 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
             </tr>
         </table>
     );
+};
+
+const DefaultCardCurated: React.FC<{
+    content: Content;
+    salt: string;
+    size: "large" | "small";
+}> = ({ content, salt, size }) => {
+    return <div>Temporary (DefaultCardCurated)</div>;
+};
+
+interface DefaultCardProps {
+    content: Content;
+    salt: string;
+    size: "large" | "small";
+    isBackfillContent: boolean;
+}
+
+export const DefaultCard: React.FC<DefaultCardProps> = ({
+    content,
+    salt,
+    size,
+    isBackfillContent
+}) => {
+    if (isBackfillContent) {
+        return (
+            <DefaultCardBackfill content={content} salt={salt} size={size} />
+        );
+    } else {
+        return <DefaultCardCurated content={content} salt={salt} size={size} />;
+    }
 };

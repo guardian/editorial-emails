@@ -33,7 +33,7 @@ const colStyle = (
     textAlign: align
 });
 
-const GridRow: React.FC<{
+export const GridRow: React.FC<{
     left: React.ReactNode;
     right: React.ReactNode;
     bgdColour?: string;
@@ -74,8 +74,22 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
     const rows = partition(content, 2).map((pair, i) => (
         <React.Fragment key={i}>
             <GridRow
-                left={<Card content={pair[0]} salt={salt} size={"small"} />}
-                right={<Card content={pair[1]} salt={salt} size={"small"} />}
+                left={
+                    <Card
+                        content={pair[0]}
+                        salt={salt}
+                        size={"small"}
+                        isBackfillContent={false}
+                    />
+                }
+                right={
+                    <Card
+                        content={pair[1]}
+                        salt={salt}
+                        size={"small"}
+                        isBackfillContent={false}
+                    />
+                }
             />
 
             <Padding px={10} />

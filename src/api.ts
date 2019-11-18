@@ -90,6 +90,9 @@ interface Card {
     id: string;
     trailText: string;
     starRating?: number;
+    cardStyle?: {
+        type: string;
+    };
 }
 
 export interface Kicker {
@@ -111,7 +114,6 @@ export interface Content {
     properties: Properties;
     card: Card;
     header: Header;
-
     cardStyle: {
         type: string;
     };
@@ -121,6 +123,7 @@ export interface Collection {
     id: string;
     displayName: string;
     backfill: Content[];
+    curated: Content[];
 }
 
 interface SEOData {

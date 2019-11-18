@@ -7,6 +7,7 @@ import { DefaultGrid, CommentGrid } from "../layout/Grid";
 import { Padding } from "../layout/Padding";
 import { Heading } from "./Heading";
 import { Multiline } from "./Multiline";
+import { GridRow } from "../layout/Grid";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -27,11 +28,21 @@ export const DefaultCollection: React.FC<{
             <Multiline />
             <Heading heading={collection.displayName} />
 
-            <Card content={contentOne} salt={salt} size={"large"} />
+            <Card
+                content={contentOne}
+                salt={salt}
+                size={"large"}
+                isBackfillContent={false}
+            />
             <Padding px={10} />
 
             {contentTwo && (
-                <Card content={contentTwo} salt={salt} size={"large"} />
+                <Card
+                    content={contentTwo}
+                    salt={salt}
+                    size={"large"}
+                    isBackfillContent={false}
+                />
             )}
             <Padding px={10} />
 
@@ -156,5 +167,34 @@ export const MediaCollection: React.FC<{
             <Heading heading={collection.displayName} />
             {items}
         </>
+    );
+};
+
+export const CuratedCollection: React.FC<{
+    collection: ICollection;
+    salt: string;
+    isBackfillContent: boolean;
+}> = ({ collection, salt, isBackfillContent }) => {
+    const content1 = collection.curated[0];
+    const content2 = collection.curated[1];
+    return (
+        <GridRow
+            left={
+                <Card
+                    content={content1}
+                    salt={salt}
+                    size={"small"}
+                    isBackfillContent={isBackfillContent}
+                />
+            }
+            right={
+                <Card
+                    content={content2}
+                    salt={salt}
+                    size={"small"}
+                    isBackfillContent={isBackfillContent}
+                />
+            }
+        />
     );
 };
