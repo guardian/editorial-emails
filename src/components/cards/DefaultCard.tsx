@@ -63,10 +63,14 @@ const headlineStyle = (size: Size): FontCSS => {
     };
 };
 
-const kickerStyle: FontCSS = {
-    ...headlineStyle,
+const kickerStyle = (size: Size): FontCSS => {
+    return {
+        color: palette.culture.main,
+        fontFamily: "'GH Guardian Headline', Georgia, serif",
+        fontWeight: 400,
 
-    color: palette.culture.main
+        ...fontSizes[size]
+    };
 };
 
 const bylineStyle = (size: Size): FontCSS => {
@@ -147,7 +151,7 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
                             >
                                 <a style={linkStyle} href={webURL}>
                                     {kicker && (
-                                        <span style={kickerStyle}>
+                                        <span style={kickerStyle(size)}>
                                             {kicker + " / "}
                                         </span>
                                     )}
