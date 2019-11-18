@@ -107,10 +107,15 @@ interface Header {
     headline: string;
 }
 
+interface Display {
+    showQuotedHeadline: boolean;
+}
+
 export interface Content {
     properties: Properties;
     card: Card;
     header: Header;
+    display: Display;
 
     cardStyle: {
         type: string;

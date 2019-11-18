@@ -111,12 +111,12 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
         content.card.starRating
     );
 
-    const headline = content.properties.webTitle;
+    const headline = content.header.headline;
     const byline = content.properties.byline;
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
     const imageAlt = image.fields.altText;
-    const isComment = content.header.isComment;
+    const isComment = content.display.showQuotedHeadline;
 
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)
