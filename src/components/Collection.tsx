@@ -17,10 +17,9 @@ export const DefaultCollection: React.FC<{
     }
 
     // TODO handle curated collections
-    const rest = collection.backfill.slice(2);
+    const rest = collection.backfill.slice(1);
 
     const contentOne = collection.backfill[0];
-    const contentTwo = collection.backfill[1];
 
     return (
         <>
@@ -30,9 +29,6 @@ export const DefaultCollection: React.FC<{
             <Card content={contentOne} salt={salt} size={"large"} />
             <Padding px={10} />
 
-            {contentTwo && (
-                <Card content={contentTwo} salt={salt} size={"large"} />
-            )}
             <Padding px={10} />
 
             {rest && <DefaultGrid content={rest} salt={salt} />}
