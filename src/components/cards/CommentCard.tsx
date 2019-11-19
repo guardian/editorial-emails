@@ -36,7 +36,9 @@ const imgProfileStyle: ImageCSS = {
     outline: "none",
     maxWidth: "100%",
     fontFamily: "Georgia, serif",
-    color: palette.opinion.main
+    color: palette.opinion.main,
+    display: "block",
+    border: "0"
 };
 
 const tdStyle: TdCSS = {
