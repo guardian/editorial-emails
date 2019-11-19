@@ -75,7 +75,11 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
         <React.Fragment key={i}>
             <GridRow
                 left={<Card content={pair[0]} salt={salt} size={"small"} />}
-                right={<Card content={pair[1]} salt={salt} size={"small"} />}
+                right={
+                    pair[1] ? (
+                        <Card content={pair[1]} salt={salt} size={"small"} />
+                    ) : null
+                }
             />
 
             <Padding px={10} />
