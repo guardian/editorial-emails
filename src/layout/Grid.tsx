@@ -94,40 +94,57 @@ export const CommentGrid: React.FC<CommentGridProps> = ({
     salt,
     shouldShowGridImages
 }) => {
-    const rows = partition(content, 2).map((pair, i) => (
-        <React.Fragment key={i}>
-            <GridRow
-                left={
-                    <CommentCard
-                        content={pair[0]}
-                        salt={salt}
-                        size={"small"}
-                        shouldShowImage={shouldShowGridImages}
-                    />
-                }
-                right={
-                    <CommentCard
-                        content={pair[1]}
-                        salt={salt}
-                        size={"small"}
-                        shouldShowImage={shouldShowGridImages}
-                    />
-                }
-                bgdColour={palette.opinion.faded}
-            />
-            <GridRow
-                left={<ContributorImageWrapper content={pair[0]} salt={salt} />}
-                right={
-                    <ContributorImageWrapper content={pair[1]} salt={salt} />
-                }
-                bgdColour={palette.opinion.faded}
-                align="right"
-                valign="bottom"
-            />
+    const rows = partition(content, 2).map((pair, i) => {
+        const contributorLeft = (
+            <TableRow>
+                <td style={{ width: "50%" }}></td>
+                <td style={{ width: "50%" }}>
+                    <ContributorImageWrapper content={pair[0]} salt={salt} />
+                </td>
+            </TableRow>
+        );
 
-            <Padding px={10} />
-        </React.Fragment>
-    ));
+        const contributorRight = (
+            <TableRow>
+                <td style={{ width: "50%" }}></td>
+                <td style={{ width: "50%" }}>
+                    <ContributorImageWrapper content={pair[1]} salt={salt} />
+                </td>
+            </TableRow>
+        );
+
+        return (
+            <React.Fragment key={i}>
+                <GridRow
+                    left={
+                        <CommentCard
+                            content={pair[0]}
+                            salt={salt}
+                            size={"small"}
+                            shouldShowImage={shouldShowGridImages}
+                        />
+                    }
+                    right={
+                        <CommentCard
+                            content={pair[1]}
+                            salt={salt}
+                            size={"small"}
+                            shouldShowImage={shouldShowGridImages}
+                        />
+                    }
+                    bgdColour={palette.opinion.faded}
+                />
+                <GridRow
+                    left={contributorLeft}
+                    right={contributorRight}
+                    bgdColour={palette.opinion.faded}
+                    valign="bottom"
+                />
+
+                <Padding px={10} />
+            </React.Fragment>
+        );
+    });
 
     return <table style={tableStyle}>{rows}</table>;
 };
