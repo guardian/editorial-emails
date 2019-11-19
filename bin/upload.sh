@@ -12,4 +12,7 @@ fi
 wget --quiet localhost:3030/film-today.json --directory-prefix=tmp/
 wget --quiet localhost:3030/film-today/text.json --directory-prefix=tmp/
 
+wget --quiet localhost:3030/opinion.json --directory-prefix=tmp/
+wget --quiet localhost:3030/opinion/text.json --directory-prefix=tmp/
+
 aws s3 cp --profile=frontend --acl=public-read --recursive tmp/ s3://aws-frontend-emails-test/

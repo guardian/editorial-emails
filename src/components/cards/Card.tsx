@@ -25,6 +25,13 @@ export const Card: React.FC<CardProps> = ({ content, salt, size }) => {
         case "default":
             return <DefaultCard content={content} salt={salt} size={size} />;
         case "comment":
-            return <CommentCard content={content} salt={salt} size={size} />;
+            return (
+                <CommentCard
+                    content={content}
+                    salt={salt}
+                    size={size}
+                    shouldShowImage={true}
+                />
+            );
     }
 };

@@ -1,10 +1,9 @@
 import React from "react";
-import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
+import { FontCSS, TdCSS, ImageCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
-import { RowCellPadding } from "../../layout/RowCellPadding";
 import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
 
@@ -33,6 +32,13 @@ const imgStyle: ImageCSS = {
     color: palette.opinion.main
 };
 
+const imgProfileStyle: ImageCSS = {
+    outline: "none",
+    maxWidth: "100%",
+    fontFamily: "Georgia, serif",
+    color: palette.opinion.main
+};
+
 const tdStyle: TdCSS = {
     backgroundColor: palette.opinion.faded,
     borderTop: `2px solid ${palette.opinion.main}`,
@@ -47,7 +53,7 @@ const metaWrapperStyle = (size: Size): TdCSS => {
 };
 
 const standfirstStyle: TdCSS = {
-    padding: "3px 10px 5px 10px",
+    padding: "20px 10px 10px 10px",
     verticalAlign: "bottom"
 };
 
@@ -113,6 +119,7 @@ interface Props {
     content: Content;
     salt: string;
     size: "large" | "small";
+    shouldShowImage: boolean;
 }
 
 const brazeParameter = "?##braze_utm##";
@@ -135,14 +142,23 @@ const TrailText: React.FC<{
 // TODO add alt text
 const ContributorImage: React.FC<{
     src: string;
+    salt: string;
     width: number;
     alt: string;
-}> = ({ src, width, alt }) => {
+}> = ({ src, salt, width, alt }) => {
     if (!src) {
         return null;
     }
 
-    return <img width={width} src={src} alt={alt} />;
+    const formattedImage = formatImage(src, salt, width);
+    return (
+        <img
+            width={width}
+            src={formattedImage}
+            alt={alt}
+            style={imgProfileStyle}
+        />
+    );
 };
 
 // TODO make testable, and also separate layout logic from individual components
@@ -154,18 +170,21 @@ const SupplementaryMeta: React.FC<{
     contributirImageAlt: string;
     size: Size;
     width: number;
+    salt: string;
 }> = ({
     trailText,
     contributorImageSrc,
     linkURL,
     size,
     width,
-    contributirImageAlt
+    contributirImageAlt,
+    salt
 }) => {
     const contributorImage = (
         <td style={columnStyleRight}>
             <ContributorImage
                 width={width}
+                salt={salt}
                 src={contributorImageSrc}
                 alt={contributirImageAlt}
             />
@@ -255,7 +274,12 @@ const Image: React.FC<{
     );
 };
 
-export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
+export const CommentCard: React.FC<Props> = ({
+    content,
+    salt,
+    size,
+    shouldShowImage
+}) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(
@@ -291,14 +315,16 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
     return (
         <TableRowCell tdStyle={tdStyle}>
             <Table>
-                <RowCell>
-                    <Image
-                        src={imageURL}
-                        linkURL={webURL}
-                        alt={imageAlt}
-                        width={size === "large" ? 600 : 294}
-                    />
-                </RowCell>
+                {shouldShowImage && (
+                    <RowCell tdStyle={{ padding: "0" }}>
+                        <Image
+                            src={imageURL}
+                            linkURL={webURL}
+                            alt={imageAlt}
+                            width={size === "large" ? 600 : 294}
+                        />
+                    </RowCell>
+                )}
 
                 <Headline
                     size={size}
@@ -311,6 +337,7 @@ export const CommentCard: React.FC<Props> = ({ content, salt, size }) => {
 
                 {size === "large" && (
                     <SupplementaryMeta
+                        salt={salt}
                         trailText={trailText}
                         linkURL={webURL}
                         contributorImageSrc={profilePic}
@@ -337,6 +364,7 @@ export const ContributorImageWrapper: React.FC<{
 
     return (
         <ContributorImage
+            salt={salt}
             width={147}
             src={profilePic}
             alt={contributor.properties.webTitle}

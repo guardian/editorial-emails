@@ -2,14 +2,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { Front } from "./api";
 import { Banner } from "./components/Banner";
-import { Collection } from "./components/Collection";
+import { Collections } from "./components/Collections";
 import { Footer } from "./components/Footer";
-import { Heading } from "./components/Heading";
-import { Multiline } from "./components/Multiline";
 import { Center } from "./layout/Center";
 import { default as minifyCssString } from "minify-css-string";
 import { fontStyles } from "./styles/fonts";
 import { responsiveStyles } from "./styles/responsive-styles";
+import { TableRowCell } from "./layout/Table";
 
 const canonicalURL = (path: string): string =>
     `https://www.theguardian.com/${path}`;
@@ -26,18 +25,17 @@ const title = (id: string): string => {
 };
 
 export const Email = (front: Front, salt: string): string => {
-    const collection = front.collections[0];
-
-    // handle multiple collections
-    //
-
     const body = renderToStaticMarkup(
         <Center>
-            <Banner />
-            <Multiline />
-            <Heading heading={collection.displayName} />
-            <Collection collection={collection} salt={salt} />
-            <Footer />
+            <TableRowCell>
+                <Banner frontID={front.id} />
+                <Collections
+                    frontId={front.id}
+                    collections={front.collections}
+                    salt={salt}
+                />
+                <Footer />
+            </TableRowCell>
         </Center>
     );
 
