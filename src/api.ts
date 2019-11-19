@@ -84,12 +84,16 @@ interface Properties {
     webTitle: string;
     webUrl: string;
     maybeContent: InnerContent;
+    href?: string;
 }
 
 interface Card {
     id: string;
     trailText: string;
     starRating?: number;
+    cardStyle: {
+        type: string;
+    };
 }
 
 export interface Kicker {
@@ -116,16 +120,14 @@ export interface Content {
     card: Card;
     header: Header;
     display: Display;
-
-    cardStyle: {
-        type: string;
-    };
+    type: string;
 }
 
 export interface Collection {
     id: string;
     displayName: string;
     backfill: Content[];
+    curated: Content[];
 }
 
 interface SEOData {

@@ -3,7 +3,7 @@ import { Collection as ICollection } from "../api";
 import { Card } from "./cards/Card";
 import { CommentCard } from "./cards/CommentCard";
 import { MediaCard } from "./cards/MediaCard";
-import { DefaultGrid, CommentGrid } from "../layout/Grid";
+import { DefaultGrid, CommentGrid, LinkGrid } from "../layout/Grid";
 import { Padding } from "../layout/Padding";
 import { Heading } from "./Heading";
 import { Multiline } from "./Multiline";
@@ -151,6 +151,26 @@ export const MediaCollection: React.FC<{
             <Multiline />
             <Heading heading={collection.displayName} />
             {items}
+        </>
+    );
+};
+
+export const LinkCollection: React.FC<{
+    collection: ICollection;
+    salt: string;
+}> = ({ collection, salt }) => {
+    if (collection.curated.length < 1) {
+        return null;
+    }
+
+    const content = collection.curated;
+
+    return (
+        <>
+            <Multiline />
+            <Heading heading={collection.displayName} />
+
+            {content && <LinkGrid content={content} salt={salt} />}
         </>
     );
 };

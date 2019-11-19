@@ -12,7 +12,7 @@ interface CardProps {
 }
 
 const cardDisplayType = (c: Content): CardType => {
-    switch (c.cardStyle.type.toLowerCase()) {
+    switch (c.card.cardStyle.type.toLowerCase()) {
         case "comment":
             return "comment";
         default:
