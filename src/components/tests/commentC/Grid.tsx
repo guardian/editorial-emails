@@ -116,5 +116,5 @@ export const Grid: React.FC<CommentGridProps> = ({
         );
     });
 
-    return <table style={tableStyle}>{rows}</table>;
+    return <TableRowCell>{rows}</TableRowCell>;
 };

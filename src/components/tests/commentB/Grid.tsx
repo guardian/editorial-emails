@@ -1,11 +1,10 @@
 import React from "react";
 import { ContributorImageWrapper, getContributor } from "./Card";
 import { palette } from "@guardian/src-foundations";
-import { TableRow } from "../../../layout/Table";
+import { TableRowCell, TableRow } from "../../../layout/Table";
 import { Padding } from "../../../layout/Padding";
 import { Content } from "../../../api";
 import { GridRow, partition } from "../../../layout/Grid";
-import { TableCSS } from "../../../css";
 import { Card as CommentCard } from "./Card";
 
 interface CommentGridProps {
@@ -13,11 +12,6 @@ interface CommentGridProps {
     salt: string;
     shouldShowGridImages: boolean;
 }
-
-const tableStyle: TableCSS = {
-    borderCollapse: "collapse",
-    borderSpacing: 0
-};
 
 export const Grid: React.FC<CommentGridProps> = ({
     content,
@@ -87,5 +81,5 @@ export const Grid: React.FC<CommentGridProps> = ({
         );
     });
 
-    return <table style={tableStyle}>{rows}</table>;
+    return <TableRowCell>{rows}</TableRowCell>;
 };

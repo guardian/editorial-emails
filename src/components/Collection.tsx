@@ -67,7 +67,6 @@ export const LinkCollection: React.FC<{
         <>
             <Multiline />
             <Heading heading={collection.displayName} />
-
             {content && <LinkGrid content={content} salt={salt} />}
         </>
     );

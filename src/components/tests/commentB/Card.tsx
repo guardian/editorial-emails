@@ -5,7 +5,7 @@ import { Content, Tag } from "../../../api";
 import { formatImage } from "../../../image";
 import { kickerText } from "../../../kicker";
 import sanitizeHtml from "sanitize-html";
-import { Table, RowCell, TableRowCell } from "../../../layout/Table";
+import { Table, RowCell, TableRowCell, TableRow } from "../../../layout/Table";
 
 type Size = "small" | "large";
 
@@ -196,10 +196,10 @@ const SupplementaryMeta: React.FC<{
     if (trailText && contributorImageSrc) {
         return (
             <RowCell>
-                <Table>
+                <TableRow>
                     <TrailText text={trailText} linkURL={linkURL} size={size} />
                     {contributorImage}
-                </Table>
+                </TableRow>
             </RowCell>
         );
     } else if (trailText) {

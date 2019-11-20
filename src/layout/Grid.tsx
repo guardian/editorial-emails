@@ -2,15 +2,10 @@ import React from "react";
 import { Content } from "../api";
 import { Card } from "../components/cards/Card";
 import { LinkCard } from "../components/cards/LinkCard";
-import { TdCSS, TableCSS } from "../css";
+import { TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
-import { TableRow } from "./Table";
+import { TableRow, TableRowCell } from "./Table";
 import { Padding } from "./Padding";
-
-const tableStyle: TableCSS = {
-    borderCollapse: "collapse",
-    borderSpacing: 0
-};
 
 const gutterStyle: TdCSS = {
     width: "2%",
@@ -92,7 +87,7 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
         </React.Fragment>
     ));
 
-    return <table style={tableStyle}>{rows}</table>;
+    return <TableRowCell>{rows}</TableRowCell>;
 };
 
 // TODO really should accept a React element so that it doesn't have to know
@@ -119,5 +114,5 @@ export const LinkGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
         </React.Fragment>
     ));
 
-    return <table style={tableStyle}>{rows}</table>;
+    return <TableRowCell>{rows}</TableRowCell>;
 };
