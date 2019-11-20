@@ -29,8 +29,6 @@ export const DefaultCollection: React.FC<{
             <Card content={contentOne} salt={salt} size={"large"} />
             <Padding px={10} />
 
-            <Padding px={10} />
-
             {rest && <DefaultGrid content={rest} salt={salt} />}
         </>
     );
