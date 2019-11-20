@@ -45,7 +45,7 @@ export const LinkCard: React.FC<{
                 {content.header.headline}
                 <br />
                 <br />
-                <img height="23" style={iconStyle} src={arrow} alt={arrow} />
+                <img height="23" style={iconStyle} src={arrow} alt="arrow" />
             </a>
         </TableRowCell>
     );
