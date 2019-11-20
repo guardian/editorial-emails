@@ -1,12 +1,12 @@
 import React from "react";
 import { Collection as ICollection } from "../api";
 import {
-    CommentCollection,
     DefaultCollection,
     EditorialCollection,
-    MediaCollection,
-    LinkCollection
+    LinkCollection,
+    MediaCollection
 } from "./Collection";
+import { Collection as CommentCollection } from "./tests/commentB/Collection";
 import { Content } from "../api";
 import { TableRowCell } from "../layout/Table";
 

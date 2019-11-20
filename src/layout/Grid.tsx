@@ -1,11 +1,6 @@
 import React from "react";
 import { Content } from "../api";
 import { Card } from "../components/cards/Card";
-import {
-    ContributorImageWrapper,
-    CommentCard,
-    getContributor
-} from "../components/cards/CommentCard";
 import { LinkCard } from "../components/cards/LinkCard";
 import { TdCSS, TableCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
@@ -38,7 +33,7 @@ const defaultRowStyles: RowStyle = {
     backgroundColor: palette.culture.faded
 };
 
-const GridRow: React.FC<{
+export const GridRow: React.FC<{
     left: React.ReactNode;
     right: React.ReactNode;
     leftStyles?: RowStyle;
@@ -56,7 +51,7 @@ const GridRow: React.FC<{
     </TableRow>
 );
 
-function partition<T>(seq: T[], n: number): T[][] {
+export function partition<T>(seq: T[], n: number): T[][] {
     // split into groups of two
     // return half-width cards
     const groups = [];
@@ -70,11 +65,6 @@ function partition<T>(seq: T[], n: number): T[][] {
 interface DefaultGridProps {
     content: Content[];
     salt: string;
-}
-interface CommentGridProps {
-    content: Content[];
-    salt: string;
-    shouldShowGridImages: boolean;
 }
 
 // TODO really should accept a React element so that it doesn't have to know
@@ -121,77 +111,6 @@ export const LinkGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
             <Padding px={10} />
         </React.Fragment>
     ));
-
-    return <table style={tableStyle}>{rows}</table>;
-};
-
-export const CommentGrid: React.FC<CommentGridProps> = ({
-    content,
-    salt,
-    shouldShowGridImages
-}) => {
-    const rows = partition(content, 2).map((pair, i) => {
-        const hasContributor = pair.find(content => {
-            const contributor = getContributor(content);
-            return contributor.properties.contributorLargeImagePath;
-        });
-
-        const contributorLeft = (
-            <ContributorImageWrapper content={pair[0]} salt={salt} />
-        );
-
-        const contributorRight = (
-            <ContributorImageWrapper content={pair[1]} salt={salt} />
-        );
-
-        const contributor = (node: React.ReactNode): React.ReactNode => (
-            <TableRow>
-                <td style={{ width: "50%" }}></td>
-                <td style={{ width: "50%" }}>{node}</td>
-            </TableRow>
-        );
-
-        return (
-            <React.Fragment key={i}>
-                <GridRow
-                    left={
-                        <CommentCard
-                            content={pair[0]}
-                            salt={salt}
-                            size={"small"}
-                            shouldShowImage={shouldShowGridImages}
-                        />
-                    }
-                    right={
-                        <CommentCard
-                            content={pair[1]}
-                            salt={salt}
-                            size={"small"}
-                            shouldShowImage={shouldShowGridImages}
-                        />
-                    }
-                    leftStyles={{ backgroundColor: palette.opinion.faded }}
-                    rightStyles={{ backgroundColor: palette.opinion.faded }}
-                />
-                {hasContributor && (
-                    <GridRow
-                        left={contributor(contributorLeft)}
-                        right={contributor(contributorRight)}
-                        leftStyles={{
-                            backgroundColor: palette.opinion.faded,
-                            verticalAlign: "bottom"
-                        }}
-                        rightStyles={{
-                            backgroundColor: palette.opinion.faded,
-                            verticalAlign: "bottom"
-                        }}
-                    />
-                )}
-
-                <Padding px={10} />
-            </React.Fragment>
-        );
-    });
 
     return <table style={tableStyle}>{rows}</table>;
 };

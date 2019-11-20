@@ -1,11 +1,11 @@
 import React from "react";
-import { FontCSS, TdCSS, ImageCSS } from "../../css";
+import { FontCSS, TdCSS, ImageCSS } from "../../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content, Tag } from "../../api";
-import { formatImage } from "../../image";
-import { kickerText } from "../../kicker";
+import { Content, Tag } from "../../../api";
+import { formatImage } from "../../../image";
+import { kickerText } from "../../../kicker";
 import sanitizeHtml from "sanitize-html";
-import { Table, RowCell, TableRowCell } from "../../layout/Table";
+import { Table, RowCell, TableRowCell } from "../../../layout/Table";
 
 type Size = "small" | "large";
 
@@ -276,7 +276,7 @@ const Image: React.FC<{
     );
 };
 
-export const CommentCard: React.FC<Props> = ({
+export const Card: React.FC<Props> = ({
     content,
     salt,
     size,
