@@ -29,7 +29,10 @@ export const LinkCard: React.FC<{
     content: Content;
     theme: Theme;
 }> = ({ content, theme }) => {
-    const webURL = content.properties.href + brazeParameter; // TODO type curated content separately?
+    const webURL =
+        "https://www.theguardian.com" +
+        content.properties.href +
+        brazeParameter; // TODO type curated content separately?
 
     const arrow =
         theme === "light"
