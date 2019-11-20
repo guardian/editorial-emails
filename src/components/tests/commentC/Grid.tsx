@@ -66,12 +66,10 @@ export const Grid: React.FC<CommentGridProps> = ({
                     }
                     leftStyles={{
                         backgroundColor: palette.neutral[100],
-                        verticalAlign: "bottom",
                         borderLeft: `1px solid ${palette.opinion.main}`
                     }}
                     rightStyles={{
                         backgroundColor: palette.neutral[100],
-                        verticalAlign: "bottom",
                         borderLeft: `1px solid ${palette.opinion.main}`
                     }}
                 />
