@@ -34,7 +34,7 @@ export const Email = (front: Front, salt: string): string => {
                     collections={front.collections}
                     salt={salt}
                 />
-                <Footer />
+                <Footer id={front.id} />
             </TableRowCell>
         </Center>
     );
