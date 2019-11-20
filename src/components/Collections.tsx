@@ -1,12 +1,18 @@
 import React from "react";
 import { Collection as ICollection } from "../api";
 import {
-    CommentCollection,
     DefaultCollection,
-    EditorialCollection,
-    MediaCollection,
-    LinkCollection
+    LinkCollection,
+    MediaCollection
 } from "./Collection";
+import {
+    Collection as CommentCollectionB,
+    EditorialCollection as EditorialCollectionB
+} from "./tests/commentB/Collection";
+import {
+    Collection as CommentCollectionC,
+    EditorialCollection as EditorialCollectionC
+} from "./tests/commentC/Collection";
 import { Content } from "../api";
 import { TableRowCell } from "../layout/Table";
 
@@ -44,19 +50,43 @@ export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
     salt: string;
-}> = ({ frontId, collections, salt }) => {
+    variant?: string;
+}> = ({ frontId, collections, salt, variant }) => {
     const res = collections.map(collection => {
         const content = [].concat(collection.backfill, collection.curated); // TODO support curated too
         const designType = getDesignType(content);
 
+        if (collection.displayName === "Save 50% for three months") {
+            return null; // ignore the jobs collection for now
+        }
+
         switch (designType) {
             case "editorial":
+                if (variant === "c") {
+                    return (
+                        <EditorialCollectionC
+                            collection={collection}
+                            salt={salt}
+                        />
+                    );
+                }
+
                 return (
-                    <EditorialCollection collection={collection} salt={salt} />
+                    <EditorialCollectionB collection={collection} salt={salt} />
                 );
             case "comment":
+                if (variant === "c") {
+                    return (
+                        <CommentCollectionC
+                            frontId={frontId}
+                            collection={collection}
+                            salt={salt}
+                        />
+                    );
+                }
+
                 return (
-                    <CommentCollection
+                    <CommentCollectionB
                         frontId={frontId}
                         collection={collection}
                         salt={salt}

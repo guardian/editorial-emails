@@ -1,6 +1,6 @@
 import React from "react";
 import { ImageCSS } from "../css";
-import { Table } from "../layout/Table";
+import { TableRowCell } from "../layout/Table";
 
 const imgStyle: ImageCSS = {
     outline: "none",
@@ -29,13 +29,13 @@ export const Banner: React.FC<{ frontID: string }> = ({ frontID }) => {
     const bannerAltText = bannersAlt[frontID] || bannersAlt.default;
 
     return (
-        <Table>
+        <TableRowCell>
             <img
                 width="600"
                 src={bannerSrc}
                 alt={bannerAltText}
                 style={imgStyle}
             ></img>
-        </Table>
+        </TableRowCell>
     );
 };

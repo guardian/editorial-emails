@@ -24,7 +24,7 @@ const title = (id: string): string => {
     );
 };
 
-export const Email = (front: Front, salt: string): string => {
+export const Email = (front: Front, salt: string, variant?: string): string => {
     const body = renderToStaticMarkup(
         <Center>
             <TableRowCell>
@@ -33,6 +33,7 @@ export const Email = (front: Front, salt: string): string => {
                     frontId={front.id}
                     collections={front.collections}
                     salt={salt}
+                    variant={variant}
                 />
                 <Footer id={front.id} />
             </TableRowCell>
@@ -62,19 +63,21 @@ export const Email = (front: Front, salt: string): string => {
         <meta name="viewport" content="width=device-width" />
         <meta name="robots" content="noindex" />
         <link rel="canonical" href="${canonicalURL(front.id)}" />
-        <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
+        <link rel="icon" href="https://static.guim.co.uk/images/${favicon}" />
         <title>${title(front.id)}</title>
 
         <!-- Font resets for MS Outlook -->
         <!--[if mso]>
-        <style>
+        <style type="text/css">
             h1, h2, h3, h4, h5, h6, p, blockquote {
                 font-family: Georgia, serif !important;
             }
         </style>
         <![endif]-->
 
-        <style>${minifyCssString(fontStyles + responsiveStyles)}</style>
+        <style type="text/css">${minifyCssString(
+            fontStyles + responsiveStyles
+        )}</style>
     </head>
     <body class="body" style="min-width:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;margin:0;padding:0;box-sizing:border-box;width:100%">
         ${body}

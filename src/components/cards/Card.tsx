@@ -1,6 +1,6 @@
 import React from "react";
 import { DefaultCard } from "./DefaultCard";
-import { CommentCard } from "./CommentCard";
+import { Card as CommentCard } from "../tests/commentB/Card";
 import { Content } from "../../api";
 
 type CardType = "default" | "comment";

@@ -20,7 +20,7 @@ const imageSalt: Promise<string> = process.env.IMAGE_SALT
 app.get(
     "/:path.json",
     asyncHandler(async (req, res) => {
-        const email = await getFront(req.params.path);
+        const email = await getFront(req.params.path, req.query.variant);
         res.send({ body: email });
     })
 );
@@ -35,7 +35,7 @@ app.get(
             return;
         }
 
-        const email = await getFront(req.params.path);
+        const email = await getFront(req.params.path, req.query.variant);
         res.send(email);
     })
 );
@@ -59,10 +59,10 @@ app.get(
     })
 );
 
-const getFront = async (path: string): Promise<string> => {
+const getFront = async (path: string, variant?: string): Promise<string> => {
     const salt = await imageSalt;
     const front = await api.get(path);
-    return Email(front, salt);
+    return Email(front, salt, variant);
 };
 
 const getTextFront = async (path: string): Promise<string> => {

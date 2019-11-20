@@ -1,24 +1,15 @@
 import React from "react";
 import { Content } from "../api";
 import { Card } from "../components/cards/Card";
-import {
-    ContributorImageWrapper,
-    CommentCard,
-    getContributor
-} from "../components/cards/CommentCard";
 import { LinkCard } from "../components/cards/LinkCard";
-import { TdCSS, TableCSS } from "../css";
+import { TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
-import { TableRow } from "./Table";
+import { TableRow, TableRowCell } from "./Table";
 import { Padding } from "./Padding";
 
-const tableStyle: TableCSS = {
-    borderCollapse: "collapse",
-    borderSpacing: 0
-};
-
 const gutterStyle: TdCSS = {
-    width: "2%"
+    width: "2%",
+    lineHeight: "0"
 };
 
 type VAlign = "top" | "bottom";
@@ -26,19 +17,25 @@ type VAlign = "top" | "bottom";
 interface RowStyle {
     backgroundColor: string;
     verticalAlign?: VAlign;
+    borderBottom?: string;
+    borderLeft?: string;
+    lineHeight?: string;
 }
 
 const colStyle = (styles: RowStyle): TdCSS => ({
     width: "49%",
     backgroundColor: styles.backgroundColor,
-    verticalAlign: styles.verticalAlign || "top"
+    verticalAlign: styles.verticalAlign || "top",
+    borderBottom: styles.borderBottom || "none",
+    borderLeft: styles.borderLeft || "none",
+    lineHeight: styles.lineHeight || "inherit"
 });
 
 const defaultRowStyles: RowStyle = {
-    backgroundColor: palette.culture.faded
+    backgroundColor: palette.neutral[100]
 };
 
-const GridRow: React.FC<{
+export const GridRow: React.FC<{
     left: React.ReactNode;
     right: React.ReactNode;
     leftStyles?: RowStyle;
@@ -56,7 +53,7 @@ const GridRow: React.FC<{
     </TableRow>
 );
 
-function partition<T>(seq: T[], n: number): T[][] {
+export function partition<T>(seq: T[], n: number): T[][] {
     // split into groups of two
     // return half-width cards
     const groups = [];
@@ -71,11 +68,6 @@ interface DefaultGridProps {
     content: Content[];
     salt: string;
 }
-interface CommentGridProps {
-    content: Content[];
-    salt: string;
-    shouldShowGridImages: boolean;
-}
 
 // TODO really should accept a React element so that it doesn't have to know
 // about Card or salt.
@@ -89,13 +81,19 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
                         <Card content={pair[1]} salt={salt} size={"small"} />
                     ) : null
                 }
+                leftStyles={{
+                    backgroundColor: palette.culture.faded
+                }}
+                rightStyles={{
+                    backgroundColor: palette.culture.faded
+                }}
             />
 
             <Padding px={10} />
         </React.Fragment>
     ));
 
-    return <table style={tableStyle}>{rows}</table>;
+    return <TableRowCell>{rows}</TableRowCell>;
 };
 
 // TODO really should accept a React element so that it doesn't have to know
@@ -122,76 +120,5 @@ export const LinkGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
         </React.Fragment>
     ));
 
-    return <table style={tableStyle}>{rows}</table>;
-};
-
-export const CommentGrid: React.FC<CommentGridProps> = ({
-    content,
-    salt,
-    shouldShowGridImages
-}) => {
-    const rows = partition(content, 2).map((pair, i) => {
-        const hasContributor = pair.find(content => {
-            const contributor = getContributor(content);
-            return contributor.properties.contributorLargeImagePath;
-        });
-
-        const contributorLeft = (
-            <ContributorImageWrapper content={pair[0]} salt={salt} />
-        );
-
-        const contributorRight = (
-            <ContributorImageWrapper content={pair[1]} salt={salt} />
-        );
-
-        const contributor = (node: React.ReactNode): React.ReactNode => (
-            <TableRow>
-                <td style={{ width: "50%" }}></td>
-                <td style={{ width: "50%" }}>{node}</td>
-            </TableRow>
-        );
-
-        return (
-            <React.Fragment key={i}>
-                <GridRow
-                    left={
-                        <CommentCard
-                            content={pair[0]}
-                            salt={salt}
-                            size={"small"}
-                            shouldShowImage={shouldShowGridImages}
-                        />
-                    }
-                    right={
-                        <CommentCard
-                            content={pair[1]}
-                            salt={salt}
-                            size={"small"}
-                            shouldShowImage={shouldShowGridImages}
-                        />
-                    }
-                    leftStyles={{ backgroundColor: palette.opinion.faded }}
-                    rightStyles={{ backgroundColor: palette.opinion.faded }}
-                />
-                {hasContributor && (
-                    <GridRow
-                        left={contributor(contributorLeft)}
-                        right={contributor(contributorRight)}
-                        leftStyles={{
-                            backgroundColor: palette.opinion.faded,
-                            verticalAlign: "bottom"
-                        }}
-                        rightStyles={{
-                            backgroundColor: palette.opinion.faded,
-                            verticalAlign: "bottom"
-                        }}
-                    />
-                )}
-
-                <Padding px={10} />
-            </React.Fragment>
-        );
-    });
-
-    return <table style={tableStyle}>{rows}</table>;
+    return <TableRowCell>{rows}</TableRowCell>;
 };

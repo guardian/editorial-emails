@@ -36,6 +36,8 @@ export interface TdCSS extends FontCSS {
     paddingBottom?: string;
     paddingTop?: string;
     borderTop?: string;
+    borderLeft?: string;
+    borderBottom?: string;
     backgroundColor?: string;
     width?: string;
     verticalAlign?: "bottom" | "top";

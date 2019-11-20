@@ -10,7 +10,7 @@ const tableStyle: TableCSS = {
 export const Padding: React.FC<{ px: number }> = ({ px }) => (
     <table style={tableStyle}>
         <tr>
-            <td style={{ paddingTop: `${px}px` }}></td>
+            <td style={{ lineHeight: "0", paddingTop: `${px}px` }}>&nbsp;</td>
         </tr>
     </table>
 );
