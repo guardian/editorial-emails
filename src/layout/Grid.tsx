@@ -81,6 +81,12 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
                         <Card content={pair[1]} salt={salt} size={"small"} />
                     ) : null
                 }
+                leftStyles={{
+                    backgroundColor: palette.culture.faded
+                }}
+                rightStyles={{
+                    backgroundColor: palette.culture.faded
+                }}
             />
 
             <Padding px={10} />
