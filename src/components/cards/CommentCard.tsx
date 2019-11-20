@@ -1,7 +1,7 @@
 import React from "react";
 import { FontCSS, TdCSS, ImageCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content } from "../../api";
+import { Content, Tag } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import sanitizeHtml from "sanitize-html";
@@ -50,7 +50,7 @@ const tdStyle: TdCSS = {
 const metaWrapperStyle = (size: Size): TdCSS => {
     const rightPad = size === "large" ? "40px" : "10px";
     return {
-        padding: `3px ${rightPad} 5px 10px`
+        padding: `3px ${rightPad} 10px 10px`
     };
 };
 
@@ -355,16 +355,18 @@ export const CommentCard: React.FC<Props> = ({
     );
 };
 
+export const getContributor = (content: Content): Tag => {
+    return content.properties.maybeContent.tags.tags.find(tag => {
+        return tag.properties.tagType === "Contributor";
+    });
+};
+
 export const ContributorImageWrapper: React.FC<{
     content: Content;
     salt: string;
 }> = ({ content, salt }) => {
-    const contributor = content.properties.maybeContent.tags.tags.find(tag => {
-        return tag.properties.tagType === "Contributor";
-    });
-    const profilePic = contributor
-        ? contributor.properties.contributorLargeImagePath
-        : null;
+    const contributor = getContributor(content);
+    const profilePic = contributor.properties.contributorLargeImagePath || null;
 
     return (
         <ContributorImage

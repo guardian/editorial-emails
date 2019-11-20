@@ -55,7 +55,7 @@ interface Image {
     fields: { altText: string };
 }
 
-interface Tag {
+export interface Tag {
     properties: {
         tagType: string;
         contributorLargeImagePath?: string;

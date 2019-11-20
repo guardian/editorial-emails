@@ -3,10 +3,11 @@ import { Content } from "../api";
 import { Card } from "../components/cards/Card";
 import {
     ContributorImageWrapper,
-    CommentCard
+    CommentCard,
+    getContributor
 } from "../components/cards/CommentCard";
 import { LinkCard } from "../components/cards/LinkCard";
-import { TdCSS, TrCSS, TableCSS } from "../css";
+import { TdCSS, TableCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
 import { TableRow } from "./Table";
 import { Padding } from "./Padding";
@@ -20,7 +21,6 @@ const gutterStyle: TdCSS = {
     width: "2%"
 };
 
-type Align = "left" | "right";
 type VAlign = "top" | "bottom";
 
 interface RowStyle {
@@ -131,21 +131,23 @@ export const CommentGrid: React.FC<CommentGridProps> = ({
     shouldShowGridImages
 }) => {
     const rows = partition(content, 2).map((pair, i) => {
+        const hasContributor = pair.find(content => {
+            const contributor = getContributor(content);
+            return contributor.properties.contributorLargeImagePath;
+        });
+
         const contributorLeft = (
-            <TableRow>
-                <td style={{ width: "50%" }}></td>
-                <td style={{ width: "50%" }}>
-                    <ContributorImageWrapper content={pair[0]} salt={salt} />
-                </td>
-            </TableRow>
+            <ContributorImageWrapper content={pair[0]} salt={salt} />
         );
 
         const contributorRight = (
+            <ContributorImageWrapper content={pair[1]} salt={salt} />
+        );
+
+        const contributor = (node: React.ReactNode): React.ReactNode => (
             <TableRow>
                 <td style={{ width: "50%" }}></td>
-                <td style={{ width: "50%" }}>
-                    <ContributorImageWrapper content={pair[1]} salt={salt} />
-                </td>
+                <td style={{ width: "50%" }}>{node}</td>
             </TableRow>
         );
 
@@ -171,18 +173,20 @@ export const CommentGrid: React.FC<CommentGridProps> = ({
                     leftStyles={{ backgroundColor: palette.opinion.faded }}
                     rightStyles={{ backgroundColor: palette.opinion.faded }}
                 />
-                <GridRow
-                    left={contributorLeft}
-                    right={contributorRight}
-                    leftStyles={{
-                        backgroundColor: palette.opinion.faded,
-                        verticalAlign: "bottom"
-                    }}
-                    rightStyles={{
-                        backgroundColor: palette.opinion.faded,
-                        verticalAlign: "bottom"
-                    }}
-                />
+                {hasContributor && (
+                    <GridRow
+                        left={contributor(contributorLeft)}
+                        right={contributor(contributorRight)}
+                        leftStyles={{
+                            backgroundColor: palette.opinion.faded,
+                            verticalAlign: "bottom"
+                        }}
+                        rightStyles={{
+                            backgroundColor: palette.opinion.faded,
+                            verticalAlign: "bottom"
+                        }}
+                    />
+                )}
 
                 <Padding px={10} />
             </React.Fragment>
