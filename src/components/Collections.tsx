@@ -56,6 +56,10 @@ export const Collections: React.FC<{
         const content = [].concat(collection.backfill, collection.curated); // TODO support curated too
         const designType = getDesignType(content);
 
+        if (collection.displayName === "Save 50% for three months") {
+            return null; // ignore the jobs collection for now
+        }
+
         switch (designType) {
             case "editorial":
                 if (variant === "c") {
