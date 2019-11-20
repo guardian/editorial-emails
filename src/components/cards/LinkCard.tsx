@@ -3,6 +3,7 @@ import { Content } from "../../api";
 import { TableRowCell } from "../../layout/Table";
 import { TdCSS, LinkCSS, ImageCSS } from "../../css";
 import { headline } from "../../styles/typography";
+import { palette } from "@guardian/src-foundations";
 
 type Theme = "light" | "dark";
 
@@ -13,7 +14,7 @@ const containerStyle: TdCSS = {
 };
 
 const fontStyle = (theme: Theme): LinkCSS => ({
-    color: theme === "dark" ? "#dcdcdc" : "#121212",
+    color: theme === "dark" ? palette.neutral[86] : palette.neutral[7],
     textDecoration: "none",
 
     ...headline({ level: 1 })
