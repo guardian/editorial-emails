@@ -3,7 +3,7 @@
 
 import {
     headline as srcHeadline,
-    textSans as srcTextSans,
+    textSans as srcTextSans
 } from "@guardian/src-foundations";
 
 interface Font {
@@ -19,31 +19,21 @@ interface FontArgs {
     fontWeight?: "light" | "regular" | "medium" | "bold";
 }
 
-export const textSans = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
-    const strProperties = srcTextSans({ level, lineHeight, fontWeight });
-    return fontAsObj(strProperties);
-};
-
-export const headline = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
-    const strProperties = srcHeadline({ level, lineHeight, fontWeight });
-    return fontAsObj(strProperties);
-};
-
 const fontAsObj = (str: string): Font => {
     const propsArray = str
         .split(";")
         .slice(0, -1) // drop after last ';'
-        .map((s) => s.trim())
-        .map((s) => s.replace("\n", ""));
+        .map(s => s.trim())
+        .map(s => s.replace("\n", ""));
 
     const font = {
         fontFamily: "",
         fontSize: "",
         fontWeight: 400,
-        lineHeight: "",
+        lineHeight: ""
     };
 
-    propsArray.map((property) => {
+    propsArray.map(property => {
         const [key, value] = property.split(":");
         const trValue = value.trim();
         switch (key.trim()) {
@@ -60,3 +50,15 @@ const fontAsObj = (str: string): Font => {
 
     return font;
 };
+
+export const textSans = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
+    const strProperties = srcTextSans({ level, lineHeight, fontWeight });
+    return fontAsObj(strProperties);
+};
+
+export const headline = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
+    const strProperties = srcHeadline({ level, lineHeight, fontWeight });
+    return fontAsObj(strProperties);
+};
+
+export const altText: Font = textSans({ level: 1 });

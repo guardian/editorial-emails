@@ -6,6 +6,7 @@ import { formatImage } from "../../../image";
 import { kickerText } from "../../../kicker";
 import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell, TableRow } from "../../../layout/Table";
+import { altText } from "../../../styles/typography";
 
 type Size = "small" | "large";
 
@@ -28,17 +29,19 @@ const imgStyle: ImageCSS = {
     display: "block",
     border: "0",
     width: "100%",
-    fontFamily: "Georgia, serif",
-    color: palette.opinion.main
+    color: palette.opinion.main,
+
+    ...altText
 };
 
 const imgProfileStyle: ImageCSS = {
     outline: "none",
     maxWidth: "100%",
-    fontFamily: "Georgia, serif",
     color: palette.opinion.main,
     display: "block",
-    border: "0"
+    border: "0",
+
+    ...altText
 };
 
 const tdStyle = (isLarge: boolean): TdCSS => ({

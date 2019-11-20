@@ -4,6 +4,7 @@ import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
+import { altText } from "../../styles/typography";
 
 type Size = "small" | "large";
 
@@ -26,8 +27,9 @@ const imgStyle: ImageCSS = {
     display: "block",
     border: "0",
     width: "100%",
-    fontFamily: "Georgia, serif",
-    color: palette.culture.main
+    color: palette.culture.main,
+
+    ...altText
 };
 
 const tableStyle: TableCSS = {

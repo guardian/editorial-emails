@@ -2,6 +2,7 @@ import React from "react";
 import { FontCSS, TdCSS, ImageCSS } from "../../../css";
 import { palette } from "@guardian/src-foundations";
 import { Content, Tag } from "../../../api";
+import { altText } from "../../../styles/typography";
 import { formatImage } from "../../../image";
 import { kickerText } from "../../../kicker";
 import sanitizeHtml from "sanitize-html";
@@ -28,17 +29,19 @@ const imgStyle: ImageCSS = {
     display: "block",
     border: "0",
     width: "100%",
-    fontFamily: "Georgia, serif",
-    color: palette.opinion.main
+    color: palette.opinion.main,
+
+    ...altText
 };
 
 const imgProfileStyle: ImageCSS = {
     outline: "none",
     maxWidth: "100%",
-    fontFamily: "Georgia, serif",
     color: palette.opinion.main,
     display: "block",
-    border: "0"
+    border: "0",
+
+    ...altText
 };
 
 const tdStyle: TdCSS = {

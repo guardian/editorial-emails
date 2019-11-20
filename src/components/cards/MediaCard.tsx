@@ -1,6 +1,7 @@
 import React from "react";
-import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
+import { TdCSS, ImageCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
+import { altText } from "../../styles/typography";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
@@ -27,8 +28,9 @@ const imgStyle: ImageCSS = {
     display: "block",
     border: "0",
     width: "100%",
-    fontFamily: "Georgia, serif",
-    color: palette.opinion.main
+    color: palette.opinion.main,
+
+    ...altText
 };
 
 interface Props {
