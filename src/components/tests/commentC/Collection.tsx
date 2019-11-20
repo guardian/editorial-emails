@@ -1,11 +1,11 @@
 import React from "react";
 import { Collection as ICollection } from "../../../api";
-import { Card as CommentCard } from "././../commentB/Card";
+import { Card as CommentCard } from "././../commentC/Card";
 import { MediaCard } from "../../cards/MediaCard";
 import { Padding } from "../../../layout/Padding";
 import { Heading } from "./../../Heading";
 import { Multiline } from "./../../Multiline";
-import { Grid as CommentGrid } from "../commentB/Grid";
+import { Grid as CommentGrid } from "../commentC/Grid";
 
 const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
     if (frontId === "email/opinion") {
@@ -32,7 +32,7 @@ export const Collection: React.FC<{
     return (
         <>
             <Multiline />
-            <Heading heading={"VARIANT C!!!"} />
+            <Heading heading={collection.displayName} />
 
             <CommentCard
                 content={c0}
@@ -79,6 +79,28 @@ export const Collection: React.FC<{
                 salt={salt}
                 size={"large"}
                 shouldShowImage={false}
+            />
+        </>
+    );
+};
+
+export const EditorialCollection: React.FC<{
+    collection: ICollection;
+    salt: string;
+}> = ({ collection, salt }) => {
+    const contentOne = collection.backfill[0];
+
+    // TODO
+    return (
+        <>
+            <Multiline />
+            <Heading heading={collection.displayName} />
+
+            <CommentCard
+                content={contentOne}
+                salt={salt}
+                size={"large"}
+                shouldShowImage={true}
             />
         </>
     );

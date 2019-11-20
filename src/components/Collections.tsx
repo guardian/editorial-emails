@@ -2,12 +2,17 @@ import React from "react";
 import { Collection as ICollection } from "../api";
 import {
     DefaultCollection,
-    EditorialCollection,
     LinkCollection,
     MediaCollection
 } from "./Collection";
-import { Collection as CommentCollectionB } from "./tests/commentB/Collection";
-import { Collection as CommentCollectionC } from "./tests/commentC/Collection";
+import {
+    Collection as CommentCollectionB,
+    EditorialCollection as EditorialCollectionB
+} from "./tests/commentB/Collection";
+import {
+    Collection as CommentCollectionC,
+    EditorialCollection as EditorialCollectionC
+} from "./tests/commentC/Collection";
 import { Content } from "../api";
 import { TableRowCell } from "../layout/Table";
 
@@ -53,11 +58,19 @@ export const Collections: React.FC<{
 
         switch (designType) {
             case "editorial":
+                if (variant === "c") {
+                    return (
+                        <EditorialCollectionC
+                            collection={collection}
+                            salt={salt}
+                        />
+                    );
+                }
+
                 return (
-                    <EditorialCollection collection={collection} salt={salt} />
+                    <EditorialCollectionB collection={collection} salt={salt} />
                 );
             case "comment":
-                console.log("variant is: " + variant);
                 if (variant === "c") {
                     return (
                         <CommentCollectionC

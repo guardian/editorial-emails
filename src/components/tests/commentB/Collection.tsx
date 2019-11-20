@@ -83,3 +83,25 @@ export const Collection: React.FC<{
         </>
     );
 };
+
+export const EditorialCollection: React.FC<{
+    collection: ICollection;
+    salt: string;
+}> = ({ collection, salt }) => {
+    const contentOne = collection.backfill[0];
+
+    // TODO
+    return (
+        <>
+            <Multiline />
+            <Heading heading={collection.displayName} />
+
+            <CommentCard
+                content={contentOne}
+                salt={salt}
+                size={"large"}
+                shouldShowImage={true}
+            />
+        </>
+    );
+};

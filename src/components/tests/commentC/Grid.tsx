@@ -1,7 +1,7 @@
 import React from "react";
 import { ContributorImageWrapper, getContributor } from "./Card";
 import { palette } from "@guardian/src-foundations";
-import { TableRow } from "../../../layout/Table";
+import { TableRow, TableRowCell } from "../../../layout/Table";
 import { Padding } from "../../../layout/Padding";
 import { Content } from "../../../api";
 import { GridRow, partition } from "../../../layout/Grid";
@@ -64,20 +64,51 @@ export const Grid: React.FC<CommentGridProps> = ({
                             shouldShowImage={shouldShowGridImages}
                         />
                     }
-                    leftStyles={{ backgroundColor: palette.opinion.faded }}
-                    rightStyles={{ backgroundColor: palette.opinion.faded }}
+                    leftStyles={{
+                        backgroundColor: palette.neutral[100],
+                        verticalAlign: "bottom",
+                        borderLeft: `1px solid ${palette.opinion.main}`
+                    }}
+                    rightStyles={{
+                        backgroundColor: palette.neutral[100],
+                        verticalAlign: "bottom",
+                        borderLeft: `1px solid ${palette.opinion.main}`
+                    }}
                 />
-                {hasContributor && (
+                {hasContributor ? (
                     <GridRow
                         left={contributor(contributorLeft)}
                         right={contributor(contributorRight)}
                         leftStyles={{
-                            backgroundColor: palette.opinion.faded,
-                            verticalAlign: "bottom"
+                            backgroundColor: palette.neutral[100],
+                            verticalAlign: "bottom",
+                            borderLeft: `1px solid ${palette.opinion.main}`,
+                            borderBottom: `1px solid ${palette.opinion.main}`
                         }}
                         rightStyles={{
-                            backgroundColor: palette.opinion.faded,
-                            verticalAlign: "bottom"
+                            backgroundColor: palette.neutral[100],
+                            verticalAlign: "bottom",
+                            borderLeft: `1px solid ${palette.opinion.main}`,
+                            borderBottom: `1px solid ${palette.opinion.main}`
+                        }}
+                    />
+                ) : (
+                    <GridRow
+                        left="&nbsp;"
+                        right="&nbsp;"
+                        leftStyles={{
+                            backgroundColor: palette.neutral[100],
+                            verticalAlign: "bottom",
+                            borderLeft: `1px solid ${palette.opinion.main}`,
+                            borderBottom: `1px solid ${palette.opinion.main}`,
+                            lineHeight: "0"
+                        }}
+                        rightStyles={{
+                            backgroundColor: palette.neutral[100],
+                            verticalAlign: "bottom",
+                            borderLeft: `1px solid ${palette.opinion.main}`,
+                            borderBottom: `1px solid ${palette.opinion.main}`,
+                            lineHeight: "0"
                         }}
                     />
                 )}

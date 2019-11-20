@@ -41,11 +41,11 @@ const imgProfileStyle: ImageCSS = {
     border: "0"
 };
 
-const tdStyle: TdCSS = {
-    backgroundColor: palette.opinion.faded,
-    borderTop: `2px solid ${palette.opinion.main}`,
-    padding: "0"
-};
+const tdStyle = (isLarge: boolean): TdCSS => ({
+    padding: "0",
+    borderLeft: isLarge ? `1px solid ${palette.opinion.main}` : "none",
+    borderBottom: isLarge ? `1px solid ${palette.opinion.main}` : "none"
+});
 
 const metaWrapperStyle = (size: Size): TdCSS => {
     const rightPad = size === "large" ? "40px" : "10px";
@@ -315,7 +315,7 @@ export const Card: React.FC<Props> = ({
     });
 
     return (
-        <TableRowCell tdStyle={tdStyle}>
+        <TableRowCell tdStyle={tdStyle(size === "large")}>
             <Table>
                 {shouldShowImage && (
                     <RowCell tdStyle={{ padding: "0" }}>

@@ -13,7 +13,8 @@ const tableStyle: TableCSS = {
 };
 
 const gutterStyle: TdCSS = {
-    width: "2%"
+    width: "2%",
+    lineHeight: "0"
 };
 
 type VAlign = "top" | "bottom";
@@ -21,16 +22,22 @@ type VAlign = "top" | "bottom";
 interface RowStyle {
     backgroundColor: string;
     verticalAlign?: VAlign;
+    borderBottom?: string;
+    borderLeft?: string;
+    lineHeight?: string;
 }
 
 const colStyle = (styles: RowStyle): TdCSS => ({
     width: "49%",
     backgroundColor: styles.backgroundColor,
-    verticalAlign: styles.verticalAlign || "top"
+    verticalAlign: styles.verticalAlign || "top",
+    borderBottom: styles.borderBottom || "none",
+    borderLeft: styles.borderLeft || "none",
+    lineHeight: styles.lineHeight || "inherit"
 });
 
 const defaultRowStyles: RowStyle = {
-    backgroundColor: palette.culture.faded
+    backgroundColor: palette.neutral[100]
 };
 
 export const GridRow: React.FC<{
