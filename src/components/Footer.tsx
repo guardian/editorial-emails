@@ -44,7 +44,7 @@ const linkStyle: LinkCSS = {
     textDecoration: "none"
 };
 
-export const Footer: React.FC<{}> = () => (
+export const Footer: React.FC<{ id: string }> = ({ id }) => (
     <>
         {"###MERCHANDISING_PLACEHOLDER###"}
         <table style={tableStyle}>
@@ -76,7 +76,7 @@ export const Footer: React.FC<{}> = () => (
                                             </a>{" "}
                                             |{" "}
                                             <a
-                                                href="https://www.theguardian.com/email/film-today?##braze_utm##"
+                                                href={`https://www.theguardian.com/${id}?##braze_utm##`}
                                                 style={linkStyle}
                                             >
                                                 Trouble viewing?
