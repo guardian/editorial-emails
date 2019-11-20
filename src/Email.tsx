@@ -24,7 +24,7 @@ const title = (id: string): string => {
     );
 };
 
-export const Email = (front: Front, salt: string): string => {
+export const Email = (front: Front, salt: string, variant?: string): string => {
     const body = renderToStaticMarkup(
         <Center>
             <TableRowCell>
@@ -33,6 +33,7 @@ export const Email = (front: Front, salt: string): string => {
                     frontId={front.id}
                     collections={front.collections}
                     salt={salt}
+                    variant={variant}
                 />
                 <Footer id={front.id} />
             </TableRowCell>

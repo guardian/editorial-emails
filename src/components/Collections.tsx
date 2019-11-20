@@ -6,7 +6,8 @@ import {
     LinkCollection,
     MediaCollection
 } from "./Collection";
-import { Collection as CommentCollection } from "./tests/commentB/Collection";
+import { Collection as CommentCollectionB } from "./tests/commentB/Collection";
+import { Collection as CommentCollectionC } from "./tests/commentC/Collection";
 import { Content } from "../api";
 import { TableRowCell } from "../layout/Table";
 
@@ -44,7 +45,8 @@ export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
     salt: string;
-}> = ({ frontId, collections, salt }) => {
+    variant?: string;
+}> = ({ frontId, collections, salt, variant }) => {
     const res = collections.map(collection => {
         const content = [].concat(collection.backfill, collection.curated); // TODO support curated too
         const designType = getDesignType(content);
@@ -55,8 +57,19 @@ export const Collections: React.FC<{
                     <EditorialCollection collection={collection} salt={salt} />
                 );
             case "comment":
+                console.log("variant is: " + variant);
+                if (variant === "c") {
+                    return (
+                        <CommentCollectionC
+                            frontId={frontId}
+                            collection={collection}
+                            salt={salt}
+                        />
+                    );
+                }
+
                 return (
-                    <CommentCollection
+                    <CommentCollectionB
                         frontId={frontId}
                         collection={collection}
                         salt={salt}
