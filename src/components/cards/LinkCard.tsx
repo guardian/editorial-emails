@@ -9,14 +9,14 @@ type Theme = "light" | "dark";
 const brazeParameter = "?##braze_utm##"; // TODO solve link generation
 
 const containerStyle: TdCSS = {
-    padding: "10px 10px 100px 10px"
+    padding: "10px 10px 30px 10px"
 };
 
 const fontStyle = (theme: Theme): LinkCSS => ({
     color: theme === "dark" ? "#dcdcdc" : "#121212",
     textDecoration: "none",
 
-    ...headline({ level: 1 })
+    ...headline({ level: 2 })
 });
 
 const iconStyle: ImageCSS = {
