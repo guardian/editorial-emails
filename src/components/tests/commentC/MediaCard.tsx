@@ -1,18 +1,20 @@
 import React from "react";
-import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
+import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content } from "../../api";
-import { formatImage } from "../../image";
-import { Table, RowCell, TableRowCell } from "../../layout/Table";
-import { Padding } from "../../layout/Padding";
+import { Content } from "../../../api";
+import { formatImage } from "../../../image";
+import { Table, RowCell, TableRowCell } from "../../../layout/Table";
+import { Padding } from "../../../layout/Padding";
 
 const tdStyle: TdCSS = {
-    backgroundColor: palette.neutral[20],
-    padding: "10px"
+    backgroundColor: palette.neutral[100],
+    padding: "0px 10px 20px 10px",
+    borderLeft: `1px solid ${palette.neutral[20]}`,
+    borderBottom: `1px solid ${palette.neutral[20]}`
 };
 
 const tdHeadlineStyle: TdCSS = {
-    color: palette.neutral[100],
+    color: palette.neutral[20],
     fontSize: "22px",
     lineHeight: "26px",
     fontFamily: "'GH Guardian Headline', Georgia, serif",
@@ -73,10 +75,6 @@ export const MediaCard: React.FC<Props> = ({ content, salt }) => {
     return (
         <TableRowCell tdStyle={tdStyle}>
             <Table>
-                <RowCell tdStyle={tdHeadlineStyle}>{headline}</RowCell>
-                <RowCell>
-                    <Padding px={20} />
-                </RowCell>
                 <RowCell tdStyle={{ padding: "0" }}>
                     <Image
                         src={imageURL}
@@ -85,6 +83,7 @@ export const MediaCard: React.FC<Props> = ({ content, salt }) => {
                         width={580}
                     />
                 </RowCell>
+                <RowCell tdStyle={tdHeadlineStyle}>{headline}</RowCell>
             </Table>
         </TableRowCell>
     );

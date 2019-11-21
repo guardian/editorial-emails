@@ -49,7 +49,7 @@ export const Footer: React.FC<{ id: string }> = ({ id }) => (
         {"###MERCHANDISING_PLACEHOLDER###"}
         <table style={tableStyle}>
             <tr>
-                <td style={{ paddingTop: "10px" }}>
+                <td style={{ paddingTop: "12px" }}>
                     {/*
                     // @ts-ignore as bgcolor required by some clients */}
                     <table bgcolor={palette.neutral[20]} style={tableWrapper}>

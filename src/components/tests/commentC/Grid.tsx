@@ -7,6 +7,7 @@ import { Content } from "../../../api";
 import { GridRow, partition } from "../../../layout/Grid";
 import { TableCSS } from "../../../css";
 import { Card as CommentCard } from "./Card";
+import { LinkCard } from "./LinkCard";
 
 interface CommentGridProps {
     content: Content[];
@@ -111,10 +112,42 @@ export const Grid: React.FC<CommentGridProps> = ({
                     />
                 )}
 
-                <Padding px={10} />
+                <Padding px={12} />
             </React.Fragment>
         );
     });
+
+    return <TableRowCell>{rows}</TableRowCell>;
+};
+
+interface LinkGridProps {
+    content: Content[];
+    salt: string;
+}
+
+// TODO really should accept a React element so that it doesn't have to know
+// about Card or salt.
+export const LinkGrid: React.FC<LinkGridProps> = ({ content, salt }) => {
+    const rows = partition(content, 2).map((pair, i) => (
+        <React.Fragment key={i}>
+            <GridRow
+                left={<LinkCard content={pair[0]} />}
+                right={pair[1] ? <LinkCard content={pair[0]} /> : null}
+                leftStyles={{
+                    backgroundColor: palette.neutral[100],
+                    borderLeft: `1px solid ${palette.neutral[20]}`,
+                    borderBottom: `1px solid ${palette.neutral[20]}`
+                }}
+                rightStyles={{
+                    backgroundColor: palette.neutral[100],
+                    borderLeft: `1px solid ${palette.neutral[20]}`,
+                    borderBottom: `1px solid ${palette.neutral[20]}`
+                }}
+            />
+
+            <Padding px={12} />
+        </React.Fragment>
+    ));
 
     return <TableRowCell>{rows}</TableRowCell>;
 };

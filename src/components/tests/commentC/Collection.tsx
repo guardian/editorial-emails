@@ -1,7 +1,7 @@
 import React from "react";
 import { Collection as ICollection } from "../../../api";
 import { Card as CommentCard } from "././../commentC/Card";
-import { MediaCard } from "../../cards/MediaCard";
+import { MediaCard } from "./MediaCard";
 import { Padding } from "../../../layout/Padding";
 import { Heading } from "./../../Heading";
 import { Multiline } from "./../../Multiline";
@@ -40,7 +40,7 @@ export const Collection: React.FC<{
                 size={"large"}
                 shouldShowImage={false}
             />
-            <Padding px={10} />
+            <Padding px={12} />
 
             <CommentCard
                 content={c1}
@@ -48,7 +48,7 @@ export const Collection: React.FC<{
                 size={"large"}
                 shouldShowImage={false}
             />
-            <Padding px={10} />
+            <Padding px={12} />
 
             <CommentGrid
                 content={grid_2_5}
@@ -64,7 +64,7 @@ export const Collection: React.FC<{
                 size={"large"}
                 shouldShowImage={false}
             />
-            <Padding px={10} />
+            <Padding px={12} />
 
             <CommentGrid
                 content={grid_7_8}
@@ -102,6 +102,23 @@ export const EditorialCollection: React.FC<{
                 size={"large"}
                 shouldShowImage={true}
             />
+        </>
+    );
+};
+
+export const MediaCollection: React.FC<{
+    collection: ICollection;
+    salt: string;
+}> = ({ collection, salt }) => {
+    const items = collection.backfill.map(content => (
+        <MediaCard content={content} salt={salt} />
+    ));
+
+    return (
+        <>
+            <Multiline />
+            <Heading heading={collection.displayName} />
+            {items}
         </>
     );
 };
