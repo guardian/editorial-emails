@@ -132,7 +132,7 @@ export const LinkGrid: React.FC<LinkGridProps> = ({ content, salt }) => {
         <React.Fragment key={i}>
             <GridRow
                 left={<LinkCard content={pair[0]} />}
-                right={pair[1] ? <LinkCard content={pair[0]} /> : null}
+                right={pair[1] ? <LinkCard content={pair[1]} /> : null}
                 leftStyles={{
                     backgroundColor: palette.neutral[100],
                     borderLeft: `1px solid ${palette.neutral[20]}`,

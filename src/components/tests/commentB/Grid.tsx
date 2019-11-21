@@ -99,7 +99,7 @@ export const LinkGrid: React.FC<LinkGridProps> = ({ content, salt }) => {
                 left={<LinkCard content={pair[0]} theme="dark" />}
                 right={
                     pair[1] ? (
-                        <LinkCard content={pair[0]} theme="light" />
+                        <LinkCard content={pair[1]} theme="light" />
                     ) : null
                 }
                 leftStyles={{
