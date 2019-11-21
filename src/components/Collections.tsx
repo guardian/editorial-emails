@@ -1,17 +1,15 @@
 import React from "react";
 import { Collection as ICollection } from "../api";
-import {
-    DefaultCollection,
-    LinkCollection,
-    MediaCollection
-} from "./Collection";
+import { DefaultCollection, LinkCollection } from "./Collection";
 import {
     Collection as CommentCollectionB,
-    EditorialCollection as EditorialCollectionB
+    EditorialCollection as EditorialCollectionB,
+    MediaCollection as MediaCollectionB
 } from "./tests/commentB/Collection";
 import {
     Collection as CommentCollectionC,
-    EditorialCollection as EditorialCollectionC
+    EditorialCollection as EditorialCollectionC,
+    MediaCollection as MediaCollectionC
 } from "./tests/commentC/Collection";
 import { Content } from "../api";
 import { TableRowCell } from "../layout/Table";
@@ -93,12 +91,29 @@ export const Collections: React.FC<{
                     />
                 );
             case "media":
-                return <MediaCollection collection={collection} salt={salt} />;
+                if (variant === "c") {
+                    return (
+                        <MediaCollectionC collection={collection} salt={salt} />
+                    );
+                }
+
+                return <MediaCollectionB collection={collection} salt={salt} />;
+
             case "link":
-                return <LinkCollection collection={collection} salt={salt} />;
+                return (
+                    <LinkCollection
+                        collection={collection}
+                        salt={salt}
+                        variant={variant}
+                    />
+                );
             case "default":
                 return (
-                    <DefaultCollection collection={collection} salt={salt} />
+                    <DefaultCollection
+                        collection={collection}
+                        salt={salt}
+                        variant={variant}
+                    />
                 );
         }
     });

@@ -1,7 +1,8 @@
 import React from "react";
 import { Content } from "../api";
 import { Card } from "../components/cards/Card";
-import { LinkCard } from "../components/cards/LinkCard";
+import { LinkCard as LinkCardB } from "../components/tests/commentB/LinkCard";
+import { LinkCard as LinkCardC } from "../components/tests/commentC/LinkCard";
 import { TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
 import { TableRow, TableRowCell } from "./Table";
@@ -89,34 +90,7 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
                 }}
             />
 
-            <Padding px={10} />
-        </React.Fragment>
-    ));
-
-    return <TableRowCell>{rows}</TableRowCell>;
-};
-
-// TODO really should accept a React element so that it doesn't have to know
-// about Card or salt.
-export const LinkGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
-    const rows = partition(content, 2).map((pair, i) => (
-        <React.Fragment key={i}>
-            <GridRow
-                left={<LinkCard content={pair[0]} theme={"dark"} />}
-                right={
-                    pair[1] ? (
-                        <LinkCard content={pair[1]} theme={"light"} />
-                    ) : null
-                }
-                leftStyles={{
-                    backgroundColor: palette.neutral[20]
-                }}
-                rightStyles={{
-                    backgroundColor: palette.neutral[86]
-                }}
-            />
-
-            <Padding px={10} />
+            <Padding px={12} />
         </React.Fragment>
     ));
 
