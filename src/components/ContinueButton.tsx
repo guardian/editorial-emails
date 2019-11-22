@@ -1,4 +1,5 @@
 import React from "react";
+import { LinkCSS, ImageCSS } from "../css";
 import { TableRowCell } from "../layout/Table";
 
 interface Props {
@@ -6,9 +7,30 @@ interface Props {
     linkTo: string;
 }
 
+const anchorStyles: any = {
+    backgroundColor: "#a1845c",
+    borderRadius: "20px",
+    color: "#ffffff",
+    display: "inline-block",
+    fontFamily: "'Guardian Text Sans',sans-serif",
+    fontSize: "17px",
+    lineHeight: "36px",
+    textAlign: "center",
+    textDecoration: "none",
+    minWidth: "200px",
+    padding: "0"
+};
+
+const WebkitTextSizeAdjust = "none";
+const MsoHide = "all";
+
+const imgStyles: ImageCSS = {
+    verticalAlign: "middle",
+    border: "0"
+};
+
 export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
-    const buttonMarkup = `<div>
-    <!--[if mso]>
+    const buttonMSOMarkup = `<!--[if mso]>
     <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${linkTo}" style="height:28pt;v-text-anchor:middle;width:150pt;" arcsize="50%" strokecolor="#a1845c" fillcolor="#a1845c">
     <w:anchorlock></w:anchorlock>
     <center>
@@ -20,12 +42,38 @@ export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
         </table>
     </center>
     </v:roundrect>
-    <![endif]--><a href="${linkTo}" target="_blank" style="background-color:#a1845c;border-radius:20px;color:#ffffff;display:inline-block;font-family:'Guardian Text Sans',sans-serif;font-size:17px;line-height:36px;text-align:center;text-decoration:none;min-width:200px;padding:0;-webkit-text-size-adjust:none;mso-hide:all;">${label}&nbsp;&nbsp;<img style="vertical-align: middle !important; vertical-align: middle;" src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5d1b164d98cf4b77c40ec17a/original.png?1562056269" width="21" height="19" border="0" alt="" /></a>
-    </div>`;
+    <![endif]-->`;
     return (
         <table>
             <tr>
-                <td dangerouslySetInnerHTML={{ __html: buttonMarkup }}></td>
+                <td></td>
+                <td>
+                    <div>
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: buttonMSOMarkup
+                            }}
+                        />
+                        {/*
+// @ts-ignore  */}
+                        <a
+                            href={linkTo}
+                            target="_blank"
+                            style={anchorStyles}
+                            WebkitTextSizeAdjust={WebkitTextSizeAdjust}
+                            MsoHide={MsoHide}
+                        >
+                            {label}&nbsp;&nbsp;
+                            <img
+                                style={imgStyles}
+                                src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5d1b164d98cf4b77c40ec17a/original.png?1562056269"
+                                width="21"
+                                height="19"
+                                alt=""
+                            />
+                        </a>
+                    </div>
+                </td>
             </tr>
         </table>
     );
