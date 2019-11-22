@@ -11,12 +11,23 @@ import {
     EditorialCollection as EditorialCollectionC,
     MediaCollection as MediaCollectionC
 } from "./tests/commentC/Collection";
+
+import { Collection as FilmCollectionB } from "./tests/filmB/Collection";
+
 import { Content } from "../api";
 import { TableRowCell } from "../layout/Table";
 
-type DesignType = "default" | "comment" | "media" | "editorial" | "link";
+type DesignType =
+    | "default"
+    | "comment"
+    | "media"
+    | "editorial"
+    | "link"
+    | "film";
 
 const getDesignType = (content: Content[]): DesignType => {
+    console.log("=== CONTENT");
+    console.log(content[0]);
     const designTypes: Set<string> = new Set();
     content.forEach(c => {
         if (c.type === "LinkSnap") {
@@ -52,7 +63,13 @@ export const Collections: React.FC<{
 }> = ({ frontId, collections, salt, variant }) => {
     const res = collections.map(collection => {
         const content = [].concat(collection.backfill, collection.curated); // TODO support curated too
-        const designType = getDesignType(content);
+
+        let designType;
+        if (frontId === "email/film-today") {
+            designType = "film";
+        } else {
+            designType = getDesignType(content);
+        }
 
         if (collection.displayName === "Save 50% for three months") {
             return null; // ignore the jobs collection for now
@@ -102,6 +119,23 @@ export const Collections: React.FC<{
             case "link":
                 return (
                     <LinkCollection
+                        collection={collection}
+                        salt={salt}
+                        variant={variant}
+                    />
+                );
+            case "film":
+                if (variant === "b") {
+                    return (
+                        <FilmCollectionB
+                            frontId={frontId}
+                            collection={collection}
+                            salt={salt}
+                        />
+                    );
+                }
+                return (
+                    <DefaultCollection
                         collection={collection}
                         salt={salt}
                         variant={variant}
