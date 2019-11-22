@@ -7,10 +7,10 @@ import { Heading } from "../../Heading";
 import { Multiline } from "../../Multiline";
 
 export const Collection: React.FC<{
+    frontId: string;
     collection: ICollection;
     salt: string;
-    variant: string;
-}> = ({ collection, salt, variant }) => {
+}> = ({ collection, salt }) => {
     if (collection.backfill.length < 1) {
         return null;
     }
