@@ -1,11 +1,11 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
-import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../../css";
-import { ContinueButton } from "../../ContinueButton";
+import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
+import { ContinueButton } from "../ContinueButton";
 import { palette } from "@guardian/src-foundations";
-import { Content } from "../../../api";
-import { formatImage } from "../../../image";
-import { kickerText } from "../../../kicker";
+import { Content } from "../../api";
+import { formatImage } from "../../image";
+import { kickerText } from "../../kicker";
 
 type Size = "small" | "large";
 
