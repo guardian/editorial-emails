@@ -11,6 +11,7 @@ fi
 
 wget --quiet localhost:3030/film-today.json --directory-prefix=tmp/film/
 wget --quiet localhost:3030/film-today/text.json --directory-prefix=tmp/film/
+wget --quiet localhost:3030/film-today.json?variant=b --directory-prefix=tmp/film/
 
 wget --quiet localhost:3030/opinion/text.json --directory-prefix=tmp/opinion-b/
 wget --quiet localhost:3030/opinion.json --directory-prefix=tmp/opinion-b/
