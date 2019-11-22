@@ -34,7 +34,6 @@ app.get(
             res.send(model);
             return;
         }
-
         const email = await getFront(req.params.path, req.query.variant);
         res.send(email);
     })
