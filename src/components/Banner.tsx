@@ -29,7 +29,7 @@ export const Banner: React.FC<{ frontID: string }> = ({ frontID }) => {
     const bannerAltText = bannersAlt[frontID] || bannersAlt.default;
 
     return (
-        <TableRowCell>
+        <TableRowCell tdStyle={{ padding: "0" }}>
             <img
                 width="600"
                 src={bannerSrc}

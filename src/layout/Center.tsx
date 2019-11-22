@@ -1,5 +1,5 @@
 import React from "react";
-import { TableCSS } from "../css";
+import { TableCSS, TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
 
 const mainTableStyle: TableCSS = {
@@ -28,6 +28,11 @@ const containerTableStyle: TableCSS = {
     margin: "0 auto",
     textAlign: "left"
 };
+
+const noPadding: TdCSS = {
+    padding: "0"
+};
+
 export const Center: React.FC<{ children: React.ReactNode }> = ({
     children
 }) => (
@@ -45,7 +50,9 @@ export const Center: React.FC<{ children: React.ReactNode }> = ({
                                             style={containerTableStyle}
                                         >
                                             <tr>
-                                                <td>{children}</td>
+                                                <td style={noPadding}>
+                                                    {children}
+                                                </td>
                                             </tr>
                                         </table>
                                     </td>
