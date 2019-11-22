@@ -76,6 +76,7 @@ interface InnerContent {
     };
     fields: {
         standfirst: string;
+        body: string;
     };
 }
 

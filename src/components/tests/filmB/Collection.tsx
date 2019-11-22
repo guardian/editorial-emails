@@ -1,7 +1,7 @@
 import React from "react";
 import { Collection as ICollection } from "../../../api";
-import { Card } from "../../cards/Card";
 import { HeadlineCard } from "../../cards/HeadlineCard";
+import { DescriptiveCard } from "./DescriptiveCard";
 import { DefaultGrid } from "../../../layout/Grid";
 import { Padding } from "../../../layout/Padding";
 import { Heading } from "../../Heading";
@@ -22,11 +22,10 @@ export const Collection: React.FC<{
 
     return (
         <>
-            <Card content={firstContent} salt={salt} size={"large"} />
+            <DescriptiveCard content={firstContent} salt={salt} size="large" />
             <Multiline />
             <Heading heading="More top stories" />
             {gridContent && <DefaultGrid content={gridContent} salt={salt} />}
-            <Padding px={12} />
             <HeadlineCard content={lastContent} />
         </>
     );

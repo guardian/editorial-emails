@@ -105,12 +105,6 @@ export const HeadlineCard: React.FC<Props> = ({ content }) => {
                                 </a>
                             </td>
                         </tr>
-                        <tr>
-                            <td
-                                className="m-col-pad"
-                                style={bottomPaddingStyle}
-                            ></td>
-                        </tr>
                     </table>
                 </td>
             </tr>
