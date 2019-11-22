@@ -1,9 +1,8 @@
 import React from "react";
 import { Collection as ICollection } from "../../../api";
 import { HeadlineCard } from "../../cards/HeadlineCard";
-import { DescriptiveCard } from "./DescriptiveCard";
+import { DescriptiveCard } from "./../../cards/DescriptiveCard";
 import { DefaultGrid } from "../../../layout/Grid";
-import { Padding } from "../../../layout/Padding";
 import { Heading } from "../../Heading";
 import { Multiline } from "../../Multiline";
 
