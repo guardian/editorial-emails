@@ -31,7 +31,7 @@ export const Collection: React.FC<{
     // TODO
     return (
         <>
-            <Multiline />
+            <Multiline topPadding />
             <Heading heading={collection.displayName} />
 
             <CommentCard
@@ -93,7 +93,7 @@ export const EditorialCollection: React.FC<{
     // TODO
     return (
         <>
-            <Multiline />
+            <Multiline topPadding />
             <Heading heading={collection.displayName} />
 
             <CommentCard
@@ -116,7 +116,7 @@ export const MediaCollection: React.FC<{
 
     return (
         <>
-            <Multiline />
+            <Multiline topPadding />
             <Heading heading={collection.displayName} />
             {items}
         </>
