@@ -39,6 +39,7 @@ const tableStyle: TableCSS = {
 };
 
 const tdStyle: TdCSS = {
+    verticalAlign: "top",
     backgroundColor: palette.culture.faded,
     borderTop: `2px solid ${palette.culture.main}`,
     padding: "0"

@@ -17,7 +17,7 @@ const tableStyle: TableCSS = {
 };
 
 const tdStyle: TdCSS = {
-    backgroundColor: palette.neutral[100],
+    backgroundColor: palette.culture.faded,
     borderTop: `2px solid ${palette.culture.main}`,
     padding: "0"
 };
