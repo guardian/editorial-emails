@@ -27,7 +27,7 @@ const title = (id: string): string => {
 export const Email = (front: Front, salt: string, variant?: string): string => {
     const body = renderToStaticMarkup(
         <Center>
-            <TableRowCell>
+            <TableRowCell tdStyle={{ padding: "0" }}>
                 <Banner frontID={front.id} />
                 <Collections
                     frontId={front.id}
