@@ -58,6 +58,7 @@ export interface ImageCSS {
     height?: string;
     fontFamily?: string;
     color?: string;
+    verticalAlign?: string;
 }
 
 export interface LinkCSS extends FontCSS {
