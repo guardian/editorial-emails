@@ -24,7 +24,7 @@ export const DefaultCollection: React.FC<{
 
     return (
         <>
-            <Multiline />
+            <Multiline topPadding />
             <Heading heading={collection.displayName} />
 
             <Card content={contentOne} salt={salt} size={"large"} />
@@ -48,7 +48,7 @@ export const LinkCollection: React.FC<{
 
     return (
         <>
-            <Multiline />
+            <Multiline topPadding />
             <Heading heading={collection.displayName} />
             {content &&
                 (variant === "c" ? (

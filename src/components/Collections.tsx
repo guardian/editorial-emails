@@ -26,8 +26,6 @@ type DesignType =
     | "film";
 
 const getDesignType = (content: Content[]): DesignType => {
-    console.log("=== CONTENT");
-    console.log(content[0]);
     const designTypes: Set<string> = new Set();
     content.forEach(c => {
         if (c.type === "LinkSnap") {

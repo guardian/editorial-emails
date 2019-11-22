@@ -49,7 +49,7 @@ const bylineStyle: FontCSS = {
 };
 
 const bottomPaddingStyle: TdCSS = {
-    paddingBottom: "20px"
+    paddingBottom: "12px"
 };
 
 const quoteIconStyle: ImageCSS = {
