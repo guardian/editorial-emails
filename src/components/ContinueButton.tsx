@@ -20,7 +20,7 @@ const anchorStyles: any = {
     minWidth: "200px",
     padding: "0",
     WebkitTextSizeAdjust: "none",
-    MsoHide: "all"
+    msoHide: "all"
 };
 
 const imgStyles: ImageCSS = {
