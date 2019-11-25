@@ -212,16 +212,20 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt }) => {
                         )}
                         <tr>
                             <td className="m-pad" style={cellPadding}>
-                                <span style={trailTextStyle}>{trailText}</span>
+                                <span
+                                    style={trailTextStyle}
+                                    dangerouslySetInnerHTML={{
+                                        __html: sanitizeHtml(
+                                            trailText,
+                                            sanitizeOptions
+                                        )
+                                    }}
+                                />
                             </td>
                         </tr>
                         {bodyParagraphs.map((pText, pIndex) => {
                             if (pIndex < 2) {
                                 if (pText) {
-                                    const sanitizedText = sanitizeHtml(
-                                        pText,
-                                        sanitizeOptions
-                                    );
                                     return (
                                         <tr key={`tableRow${pIndex}`}>
                                             <td
@@ -232,7 +236,10 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt }) => {
                                                     className="bodyText"
                                                     style={bodyTextStyle}
                                                     dangerouslySetInnerHTML={{
-                                                        __html: sanitizedText
+                                                        __html: sanitizeHtml(
+                                                            pText,
+                                                            sanitizeOptions
+                                                        )
                                                     }}
                                                 ></span>
                                             </td>
