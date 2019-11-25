@@ -36,6 +36,7 @@ export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
         <table style="border-spacing:0;border-collapse:collapse;width:100%">
         <tr>
             <td style="color:#ffffff;font-family:'Guardian Text Sans',sans-serif;font-size:17px;line-height:17px;">${label}&nbsp;&nbsp;</td>
+
             <td><img style="vertical-align: middle !important; vertical-align: middle;" src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264" width="23" height="22" border="0" alt="" /></td>
         </tr>
         </table>
