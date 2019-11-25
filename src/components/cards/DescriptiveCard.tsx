@@ -7,7 +7,14 @@ import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 
-type Size = "small" | "large";
+const fontFamily = {
+    headline: {
+        fontFamily: "'GH Guardian Headline', Georgia, serif"
+    },
+    body: {
+        fontFamily: "'Guardian Text Egyptian', Georgia, serif"
+    }
+};
 
 const fontSizes = {
     large: {
@@ -45,11 +52,8 @@ const tdStyle: TdCSS = {
     padding: "0"
 };
 
-const metaWrapperStyle = (size: Size): TdCSS => {
-    const rightPad = size === "large" ? "40px" : "10px";
-    return {
-        padding: `3px ${rightPad} 5px 10px`
-    };
+const metaWrapperStyle = {
+    padding: `3px 40px 5px 10px`
 };
 
 const cellPadding: TdCSS = {
@@ -64,47 +68,36 @@ const linkStyle: FontCSS = {
     textDecoration: "none"
 };
 
-const headlineStyle = (size: Size): FontCSS => {
-    return {
-        color: palette.neutral[7],
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontWeight: 400,
-
-        ...fontSizes[size]
-    };
+const headlineStyle = {
+    ...fontFamily.headline,
+    ...fontSizes.large,
+    fontWeight: 400,
+    color: palette.neutral[7]
 };
 
-const kickerStyle = (size: Size): FontCSS => {
-    return {
-        color: palette.culture.main,
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontWeight: 400,
-
-        ...fontSizes[size]
-    };
+const kickerStyle = {
+    ...fontFamily.headline,
+    ...fontSizes.large,
+    fontWeight: 400,
+    color: palette.culture.main
 };
 
-const bylineStyle = (size: Size): FontCSS => {
-    return {
-        color: palette.culture.main,
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontStyle: "italic",
-
-        ...fontSizes[size]
-    };
+const bylineStyle = {
+    ...fontFamily.headline,
+    ...fontSizes.large,
+    fontStyle: "italic",
+    color: palette.culture.main
 };
 
 const trailTextStyle: FontCSS = {
-    fontFamily: "'GH Guardian Headline', Georgia, serif",
-    fontSize: "16px",
-    lineHeight: "20px",
+    ...fontFamily.headline,
+    ...fontSizes.small,
     fontWeight: 400
 };
 
 const bodyTextStyle: FontCSS = {
-    fontFamily: "'Guardian Text Egyptian', Georgia, serif",
-    fontSize: "16px",
-    lineHeight: "20px",
+    ...fontFamily.body,
+    ...fontSizes.small,
     fontWeight: 400
 };
 
@@ -121,18 +114,17 @@ const quoteIconStyle: ImageCSS = {
 interface Props {
     content: Content;
     salt: string;
-    size: "large" | "small";
 }
 
 const brazeParameter = "?##braze_utm##";
 
-export const DescriptiveCard: React.FC<Props> = ({ content, salt, size }) => {
+export const DescriptiveCard: React.FC<Props> = ({ content, salt }) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(
         image.url,
         salt,
-        size === "large" ? 600 : 300,
+        600,
         content.card.starRating
     );
 
@@ -151,8 +143,6 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt, size }) => {
 
     const bodyText = content.properties.maybeContent.fields.body;
     const bodyParagraphs = bodyText.split("</p>");
-    console.log("bodyParagraphs:");
-    console.log(bodyParagraphs);
 
     const sanitizeOptions = {
         allowedTags: ["a"],
@@ -167,17 +157,14 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt, size }) => {
                 <td style={tdStyle}>
                     <table style={tableStyle}>
                         <tr>
-                            <td
-                                className="m-pad"
-                                style={metaWrapperStyle(size)}
-                            >
+                            <td className="m-pad" style={metaWrapperStyle}>
                                 <a style={linkStyle} href={webURL}>
                                     {kicker && (
-                                        <span style={kickerStyle(size)}>
+                                        <span style={kickerStyle}>
                                             {kicker + " / "}
                                         </span>
                                     )}
-                                    <span style={headlineStyle(size)}>
+                                    <span style={headlineStyle}>
                                         {isComment && (
                                             <>
                                                 <img
@@ -192,10 +179,7 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt, size }) => {
                                         {headline}
                                     </span>
                                     <br />
-                                    <span style={bylineStyle(size)}>
-                                        {" "}
-                                        {byline}
-                                    </span>
+                                    <span style={bylineStyle}> {byline}</span>
                                 </a>
                             </td>
                         </tr>
@@ -210,9 +194,7 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt, size }) => {
                                 <td style={{ padding: 0 }}>
                                     <a href={webURL}>
                                         <img
-                                            width={
-                                                size === "large" ? "600" : "294"
-                                            }
+                                            width="600"
                                             style={imgStyle}
                                             alt={imageAlt}
                                             src={imageURL}
@@ -234,14 +216,17 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt, size }) => {
                                         sanitizeOptions
                                     );
                                     return (
-                                        <tr>
+                                        <tr key={`tableRow${pIndex}`}>
                                             <td
                                                 className="m-pad"
                                                 style={cellPadding}
                                             >
-                                                <span style={bodyTextStyle}>
-                                                    {sanitizedText}
-                                                </span>
+                                                <span
+                                                    style={bodyTextStyle}
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: sanitizedText
+                                                    }}
+                                                ></span>
                                             </td>
                                         </tr>
                                     );
