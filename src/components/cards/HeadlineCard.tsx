@@ -23,7 +23,7 @@ const tdStyle: TdCSS = {
 };
 
 const metaWrapperStyle: TdCSS = {
-    padding: `3px 10px 5px 10px`
+    padding: `3px 10px 20px 10px`
 };
 
 const linkStyle: FontCSS = {
@@ -80,7 +80,7 @@ export const HeadlineCard: React.FC<Props> = ({ content }) => {
                 <td style={tdStyle}>
                     <table style={tableStyle}>
                         <tr>
-                            <td className="m-pad" style={metaWrapperStyle}>
+                            <td className="m-col-pad" style={metaWrapperStyle}>
                                 <a style={linkStyle} href={webURL}>
                                     {kicker && (
                                         <span style={kickerStyle}>

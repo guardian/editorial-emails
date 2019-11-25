@@ -92,7 +92,7 @@ const bylineStyle = {
 const trailTextStyle: FontCSS = {
     ...fontFamily.headline,
     ...fontSizes.small,
-    fontWeight: 400
+    fontWeight: 700
 };
 
 const bodyTextStyle: FontCSS = {
@@ -144,10 +144,17 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt }) => {
     const bodyText = content.properties.maybeContent.fields.body;
     const bodyParagraphs = bodyText.split("</p>");
 
+    // Strip HTML tags but preserve <a> tags
+    // Transform <a> tags to allow an HREF and a style attrbute
     const sanitizeOptions = {
         allowedTags: ["a"],
         allowedAttributes: {
-            a: ["href"]
+            a: ["href", "style"]
+        },
+        transformTags: {
+            a: sanitizeHtml.simpleTransform("a", {
+                style: `color: ${palette.culture.main};`
+            })
         }
     };
 
@@ -222,6 +229,7 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt }) => {
                                                 style={cellPadding}
                                             >
                                                 <span
+                                                    className="bodyText"
                                                     style={bodyTextStyle}
                                                     dangerouslySetInnerHTML={{
                                                         __html: sanitizedText

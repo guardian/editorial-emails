@@ -59,7 +59,7 @@ u + .body a,
     src: url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2) format("woff2"),
          url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff) format("woff");
     font-weight: 700;
-    font-style: bold;
+    font-style: normal;
 }
 
 @font-face {
