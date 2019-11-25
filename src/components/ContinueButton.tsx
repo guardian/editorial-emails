@@ -46,7 +46,6 @@ export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
     return (
         <table>
             <tr>
-                <td></td>
                 <td>
                     <div>
                         <div
