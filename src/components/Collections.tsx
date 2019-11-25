@@ -109,6 +109,24 @@ export const Collections: React.FC<{
                         salt={salt}
                     />
                 );
+            case "comment":
+                if (variant === "c") {
+                    return (
+                        <CommentCollectionC
+                            frontId={frontId}
+                            collection={collection}
+                            salt={salt}
+                        />
+                    );
+                }
+
+                return (
+                    <CommentCollectionB
+                        frontId={frontId}
+                        collection={collection}
+                        salt={salt}
+                    />
+                );
             case "media":
                 if (variant === "c") {
                     return (

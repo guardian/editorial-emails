@@ -86,6 +86,7 @@ interface Properties {
     webUrl: string;
     maybeContent: InnerContent;
     href?: string;
+    showByline?: boolean;
 }
 
 interface Card {

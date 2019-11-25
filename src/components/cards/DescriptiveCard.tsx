@@ -114,11 +114,16 @@ const quoteIconStyle: ImageCSS = {
 interface Props {
     content: Content;
     salt: string;
+    showByline?: boolean;
 }
 
 const brazeParameter = "?##braze_utm##";
 
-export const DescriptiveCard: React.FC<Props> = ({ content, salt }) => {
+export const DescriptiveCard: React.FC<Props> = ({
+    content,
+    salt,
+    showByline
+}) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(
@@ -185,8 +190,15 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt }) => {
 
                                         {headline}
                                     </span>
-                                    <br />
-                                    <span style={bylineStyle}> {byline}</span>
+                                    {showByline && (
+                                        <>
+                                            <br />
+                                            <span style={bylineStyle}>
+                                                {" "}
+                                                {byline}
+                                            </span>
+                                        </>
+                                    )}
                                 </a>
                             </td>
                         </tr>

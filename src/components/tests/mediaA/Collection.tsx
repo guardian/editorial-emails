@@ -19,6 +19,9 @@ export const Collection: React.FC<{
     const gridContent = collection.backfill.slice(1, 5);
     const lastContent = collection.backfill[5];
 
+    console.log("firstContent: ");
+    console.log(firstContent);
+
     // return (
     //     <>
     //         <DescriptiveCard content={firstContent} salt={salt} />
@@ -31,7 +34,11 @@ export const Collection: React.FC<{
 
     return (
         <>
-            <DescriptiveCard content={firstContent} salt={salt} />
+            <DescriptiveCard
+                content={firstContent}
+                salt={salt}
+                showByline={firstContent.properties.showByline}
+            />
         </>
     );
 };
