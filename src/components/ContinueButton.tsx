@@ -18,11 +18,10 @@ const anchorStyles: any = {
     textAlign: "center",
     textDecoration: "none",
     minWidth: "200px",
-    padding: "0"
+    padding: "0",
+    WebkitTextSizeAdjust: "none",
+    MsoHide: "all"
 };
-
-const WebkitTextSizeAdjust = "none";
-const MsoHide = "all";
 
 const imgStyles: ImageCSS = {
     verticalAlign: "middle",
@@ -37,7 +36,7 @@ export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
         <table style="border-spacing:0;border-collapse:collapse;width:100%">
         <tr>
             <td style="color:#ffffff;font-family:'Guardian Text Sans',sans-serif;font-size:17px;line-height:17px;">${label}&nbsp;&nbsp;</td>
-            <td><img style="vertical-align: middle !important; vertical-align: middle;" src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5d1b164d98cf4b77c40ec17a/original.png?1562056269" width="21" height="19" border="0" alt="" /></td>
+            <td><img style="vertical-align: middle !important; vertical-align: middle;" src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264" width="23" height="22" border="0" alt="" /></td>
         </tr>
         </table>
     </center>
@@ -54,21 +53,13 @@ export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
                                 __html: buttonMSOMarkup
                             }}
                         />
-                        {/*
-// @ts-ignore  */}
-                        <a
-                            href={linkTo}
-                            target="_blank"
-                            style={anchorStyles}
-                            WebkitTextSizeAdjust={WebkitTextSizeAdjust}
-                            MsoHide={MsoHide}
-                        >
+                        <a href={linkTo} target="_blank" style={anchorStyles}>
                             {label}&nbsp;&nbsp;
                             <img
                                 style={imgStyles}
-                                src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5d1b164d98cf4b77c40ec17a/original.png?1562056269"
-                                width="21"
-                                height="19"
+                                src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264"
+                                width="23"
+                                height="22"
                                 alt=""
                             />
                         </a>
