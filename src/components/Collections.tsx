@@ -12,7 +12,7 @@ import {
     MediaCollection as MediaCollectionC
 } from "./tests/commentC/Collection";
 
-import { Collection as FilmCollectionB } from "./tests/filmB/Collection";
+import { Collection as FilmCollectionC } from "./tests/filmC/Collection";
 
 import { Content } from "../api";
 import { TableRowCell } from "../layout/Table";
@@ -123,9 +123,9 @@ export const Collections: React.FC<{
                     />
                 );
             case "film":
-                if (variant === "b") {
+                if (variant === "c") {
                     return (
-                        <FilmCollectionB
+                        <FilmCollectionC
                             frontId={frontId}
                             collection={collection}
                             salt={salt}

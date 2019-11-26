@@ -7,18 +7,25 @@ interface Props {
     linkTo: string;
 }
 
-const anchorStyles: any = {
-    backgroundColor: "#a1845c",
-    borderRadius: "20px",
+// Standard LinkCSS properties added so they can be type checked
+const standardAnchorStyles: LinkCSS = {
     color: "#ffffff",
-    display: "inline-block",
     fontFamily: "'Guardian Text Sans',sans-serif",
     fontSize: "17px",
     lineHeight: "36px",
     textAlign: "center",
     textDecoration: "none",
+    padding: "0"
+};
+
+// Actual anchorStyles to use typechecked LinkCSS properties from `standardAnchorStyles
+// plus the properties below, which are to specific to be added to LinkCSS.
+const anchorStyles: any = {
+    ...standardAnchorStyles,
+    backgroundColor: "#a1845c",
+    borderRadius: "20px",
+    display: "inline-block",
     minWidth: "200px",
-    padding: "0",
     WebkitTextSizeAdjust: "none",
     msoHide: "all"
 };
@@ -36,7 +43,6 @@ export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
         <table style="border-spacing:0;border-collapse:collapse;width:100%">
         <tr>
             <td style="color:#ffffff;font-family:'Guardian Text Sans',sans-serif;font-size:17px;line-height:17px;">${label}&nbsp;&nbsp;</td>
-
             <td><img style="vertical-align: middle !important; vertical-align: middle;" src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264" width="23" height="22" border="0" alt="" /></td>
         </tr>
         </table>
