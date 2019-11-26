@@ -1,5 +1,8 @@
 import React from "react";
+import sanitizeHtml from "sanitize-html";
 import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
+import { sanitizeOptions } from "../../styles/sanitize-options";
+import { pillarTheme, PillarType } from "../../styles/pillar-themes";
 import { palette } from "@guardian/src-foundations";
 import { Content, Pillar } from "../../api";
 import { kickerText } from "../../kicker";
@@ -69,6 +72,7 @@ const bylineStyle = (pillarColour: string): FontCSS => {
         fontFamily: "'GH Guardian Headline', Georgia, serif",
         color: pillarColour || palette.culture.main,
         ...fontSizes.small,
+        fontWeight: 700,
         fontStyle: "italic"
     };
 };
@@ -88,39 +92,6 @@ const quoteIconStyle: ImageCSS = {
     height: "0.8em",
     display: "inline-block",
     border: "0"
-};
-
-type PillarTheme = {
-    colour?: string;
-    quote?: string;
-};
-
-const pillarTheme = {
-    News: {
-        colour: palette.news.main,
-        quote:
-            "https://assets.guim.co.uk/images/email/icons/64855e3409f4927c771a5aca921997e4/quote-news.png"
-    },
-    Opinion: {
-        colour: palette.opinion.main,
-        quote:
-            "https://assets.guim.co.uk/images/email/icons/cc614106682d8de187a64eb222116f3a/quote-opinion.png"
-    },
-    Sport: {
-        colour: palette.sport.main,
-        quote:
-            "https://assets.guim.co.uk/images/email/icons/b4b9407f64d0305ff1cc9a9b95524411/quote-sport.png"
-    },
-    Arts: {
-        colour: palette.culture.main,
-        quote:
-            "https://assets.guim.co.uk/images/email/icons/9682728db696148fd5a6b149e556df8c/quote-culture.png"
-    },
-    Lifestyle: {
-        colour: palette.lifestyle.main,
-        quote:
-            "https://assets.guim.co.uk/images/email/icons/88c54a3c173085cf29899be2d60d1480/quote-lifestyle.png"
-    }
 };
 
 interface Props {
@@ -147,7 +118,7 @@ export const HeadlineCard: React.FC<Props> = ({
     const webURL = content.properties.webUrl + brazeParameter;
     const isComment = content.display.showQuotedHeadline;
 
-    let pillar: PillarTheme = {};
+    let pillar: PillarType = {};
     if (showPillarColours && content.properties.maybeContent) {
         const pillarName = content.properties.maybeContent.metadata.pillar.name;
         pillar = pillarTheme[pillarName];
@@ -209,9 +180,15 @@ export const HeadlineCard: React.FC<Props> = ({
                                     className="m-col-pad"
                                     style={metaWrapperStyle}
                                 >
-                                    <span style={trailTextStyle}>
-                                        {trailText}
-                                    </span>
+                                    <span
+                                        style={trailTextStyle}
+                                        dangerouslySetInnerHTML={{
+                                            __html: sanitizeHtml(
+                                                trailText,
+                                                sanitizeOptions
+                                            )
+                                        }}
+                                    />
                                 </td>
                             </tr>
                         )}

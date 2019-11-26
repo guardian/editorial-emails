@@ -25,7 +25,11 @@ export const BriefingA: React.FC<{
 
     return (
         <>
-            <DescriptiveCard content={leadStory} salt={salt} />
+            <DescriptiveCard
+                content={leadStory}
+                salt={salt}
+                showPillarColours
+            />
 
             <TableRowCell tdStyle={{ backgroundColor: containerBackground }}>
                 <Multiline topPadding />
