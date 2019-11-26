@@ -7,6 +7,7 @@ import { Heading } from "../../Heading";
 import { HeadlineCard } from "../../cards/HeadlineCard";
 import { Padding } from "../../../layout/Padding";
 import { TableRowCell } from "../../../layout/Table";
+import { colors } from "@guardian/src-foundations/theme";
 // import { render } from "react-dom";
 
 export const BriefingA: React.FC<{
@@ -22,6 +23,7 @@ export const BriefingA: React.FC<{
 
     const containerBackground = palette.neutral[97];
     const headlineCardBackground = palette.neutral[100];
+    const jobsBackground = "#00A194";
 
     return (
         <>
@@ -56,7 +58,7 @@ export const BriefingA: React.FC<{
                             backgroundColor={headlineCardBackground}
                             showPillarColours
                             borderWidth="thin"
-                            expandedLayout
+                            layout="expanded"
                         />
                     </>
                 ))}
@@ -74,18 +76,31 @@ export const BriefingA: React.FC<{
                         />
                     </>
                 ))}
-
-                <Multiline topPadding />
-                <Heading heading={collections[3].displayName} />
-                {jobsStories.map((story, index) => (
-                    <>
-                        {index > 0 && <Padding px={4} />}
-                        <HeadlineCard
-                            content={story}
-                            backgroundColor={headlineCardBackground}
-                        />
-                    </>
-                ))}
+            </TableRowCell>
+            <Padding px={12} backgroundColor={palette.neutral[97]} />
+            <TableRowCell
+                tdStyle={{
+                    backgroundColor: jobsBackground,
+                    padding: "8px 0 10px 0"
+                }}
+            >
+                <Heading
+                    heading={collections[3].displayName}
+                    color={palette.neutral[100]}
+                />
+                <TableRowCell tdStyle={{ padding: "0 10px" }}>
+                    {jobsStories.map((story, index) => (
+                        <>
+                            <HeadlineCard
+                                content={story}
+                                borderWidth="thin"
+                                color={palette.neutral[100]}
+                                layout="compact"
+                                borderColor="#9fe0c8"
+                            />
+                        </>
+                    ))}
+                </TableRowCell>
             </TableRowCell>
         </>
     );

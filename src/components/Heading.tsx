@@ -8,13 +8,13 @@ const tableStyle: TableCSS = {
     width: "100%"
 };
 
-const headingStyle = (backgroundColor: string): TdCSS => {
+const headingStyle = (backgroundColor: string, color: string): TdCSS => {
     return {
         fontFamily: "'GH Guardian Headline', Georgia, serif",
         fontSize: "22px",
         lineHeight: "26px",
-        color: palette.neutral[7],
-        backgroundColor: backgroundColor,
+        color: color || palette.neutral[7],
+        backgroundColor,
         padding: "0 10px 12px"
     };
 };
@@ -22,10 +22,14 @@ const headingStyle = (backgroundColor: string): TdCSS => {
 export const Heading: React.FC<{
     heading: string;
     backgroundColor?: string;
-}> = ({ heading, backgroundColor }) => (
+    color?: string;
+}> = ({ heading, backgroundColor, color }) => (
     <table style={tableStyle}>
         <tr>
-            <td className="m-heading" style={headingStyle(backgroundColor)}>
+            <td
+                className="m-heading"
+                style={headingStyle(backgroundColor, color)}
+            >
                 {heading}
             </td>
         </tr>

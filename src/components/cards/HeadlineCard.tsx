@@ -29,39 +29,47 @@ const tableStyle: TableCSS = {
 const tdStyle = (
     backgroundColor: string,
     pillarColour: string,
-    borderWidth?: string
+    borderWidth?: string,
+    borderColor?: string
 ): TdCSS => {
     return {
-        backgroundColor: backgroundColor || palette.culture.faded,
+        backgroundColor: backgroundColor || "transparent",
         borderTop: `${
             borderWidth === "thin" ? "1px" : "2px"
-        } solid ${pillarColour || palette.culture.main}`,
+        } solid ${borderColor || pillarColour || palette.culture.main}`,
         padding: "0"
     };
 };
 
-const metaWrapperStyle: TdCSS = {
-    padding: `3px 10px 20px 10px`
+const metaWrapperStyle = (layout: string): TdCSS => {
+    const sidePadding = layout === "compact" ? "0" : "10px";
+    return {
+        padding: `3px ${sidePadding} 20px ${sidePadding}`
+    };
+};
+
+const expandedWrapperStyle: TdCSS = {
+    padding: "3px 10px 20px 10px"
 };
 
 const linkStyle: FontCSS = {
     textDecoration: "none"
 };
 
-const headlineStyle = (expandedLayout: boolean): FontCSS => {
-    const fontSizeProp = expandedLayout ? "large" : "small";
+const headlineStyle = (layout: string, color: string): FontCSS => {
+    const fontSizeProp = layout === "expanded" ? "large" : "small";
     return {
         fontFamily: "'GH Guardian Headline', Georgia, serif",
-        color: palette.neutral[7],
+        color: color || palette.neutral[7],
         ...fontSizes[fontSizeProp],
         fontWeight: 400
     };
 };
 
-const kickerStyle = (pillarColour: string): FontCSS => {
+const kickerStyle = (pillarColour: string, color: string): FontCSS => {
     return {
         fontFamily: "'GH Guardian Headline', Georgia, serif",
-        color: pillarColour || palette.culture.main,
+        color: color || pillarColour || palette.culture.main,
         ...fontSizes.small,
         fontWeight: 700
     };
@@ -100,7 +108,9 @@ interface Props {
     showPillarColours?: boolean;
     showTrailText?: boolean;
     borderWidth?: "thin" | "thick";
-    expandedLayout?: boolean;
+    layout?: "expanded" | "compact";
+    color?: string;
+    borderColor?: string;
 }
 
 const brazeParameter = "?##braze_utm##";
@@ -110,13 +120,18 @@ export const HeadlineCard: React.FC<Props> = ({
     backgroundColor,
     showPillarColours,
     borderWidth,
-    expandedLayout
+    layout,
+    color,
+    borderColor
 }) => {
     const { headline } = content.header;
     const { byline } = content.properties;
     const { trailText } = content.card;
-    const webURL = content.properties.webUrl + brazeParameter;
+    const backfillURL = content.properties.webUrl + brazeParameter;
     const isComment = content.display.showQuotedHeadline;
+    const curatedURL = content.properties.href + brazeParameter;
+
+    const cardLink = content.properties.webUrl ? backfillURL : curatedURL;
 
     let pillar: PillarType = {};
     if (showPillarColours && content.properties.maybeContent) {
@@ -132,20 +147,31 @@ export const HeadlineCard: React.FC<Props> = ({
         <table style={tableStyle}>
             <tr>
                 <td
-                    style={tdStyle(backgroundColor, pillar.colour, borderWidth)}
+                    style={tdStyle(
+                        backgroundColor,
+                        pillar.colour,
+                        borderWidth,
+                        borderColor
+                    )}
                 >
                     <table style={tableStyle}>
                         <tr>
-                            <td className="m-col-pad" style={metaWrapperStyle}>
-                                <a style={linkStyle} href={webURL}>
+                            <td
+                                className="m-col-pad"
+                                style={metaWrapperStyle(layout)}
+                            >
+                                <a style={linkStyle} href={cardLink}>
                                     {kicker && (
                                         <span
-                                            style={kickerStyle(pillar.colour)}
+                                            style={kickerStyle(
+                                                pillar.colour,
+                                                color
+                                            )}
                                         >
                                             {kicker + " / "}
                                         </span>
                                     )}
-                                    <span style={headlineStyle(expandedLayout)}>
+                                    <span style={headlineStyle(layout, color)}>
                                         {isComment && (
                                             <>
                                                 <img
@@ -174,11 +200,11 @@ export const HeadlineCard: React.FC<Props> = ({
                                 </a>
                             </td>
                         </tr>
-                        {expandedLayout && trailText && (
+                        {layout === "expanded" && trailText && (
                             <tr>
                                 <td
                                     className="m-col-pad"
-                                    style={metaWrapperStyle}
+                                    style={expandedWrapperStyle}
                                 >
                                     <span
                                         style={trailTextStyle}
