@@ -1,9 +1,9 @@
 import { palette } from "@guardian/src-foundations";
 
-export type PillarType = {
+export interface PillarType {
     colour?: string;
     quote?: string;
-};
+}
 
 export const pillarTheme = {
     News: {
