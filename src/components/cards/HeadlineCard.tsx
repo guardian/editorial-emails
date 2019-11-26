@@ -4,10 +4,17 @@ import { palette } from "@guardian/src-foundations";
 import { Content, Pillar } from "../../api";
 import { kickerText } from "../../kicker";
 
-const fontStyles: FontCSS = {
-    fontFamily: "'GH Guardian Headline', Georgia, serif",
-    fontSize: "16px",
-    lineHeight: "20px"
+type Size = "small" | "large";
+
+const fontSizes = {
+    large: {
+        fontSize: "22px",
+        lineHeight: "26px"
+    },
+    small: {
+        fontSize: "16px",
+        lineHeight: "20px"
+    }
 };
 
 const tableStyle: TableCSS = {
@@ -38,26 +45,39 @@ const linkStyle: FontCSS = {
     textDecoration: "none"
 };
 
-const headlineStyle: FontCSS = {
-    color: palette.neutral[7],
-    ...fontStyles,
-    fontWeight: 400
+const headlineStyle = (expandedLayout: boolean): FontCSS => {
+    const fontSizeProp = expandedLayout ? "large" : "small";
+    return {
+        fontFamily: "'GH Guardian Headline', Georgia, serif",
+        color: palette.neutral[7],
+        ...fontSizes[fontSizeProp],
+        fontWeight: 400
+    };
 };
 
 const kickerStyle = (pillarColour: string): FontCSS => {
     return {
+        fontFamily: "'GH Guardian Headline', Georgia, serif",
         color: pillarColour || palette.culture.main,
-        ...fontStyles,
+        ...fontSizes.small,
         fontWeight: 700
     };
 };
 
 const bylineStyle = (pillarColour: string): FontCSS => {
     return {
+        fontFamily: "'GH Guardian Headline', Georgia, serif",
         color: pillarColour || palette.culture.main,
-        ...fontStyles,
+        ...fontSizes.small,
         fontStyle: "italic"
     };
+};
+
+const trailTextStyle: FontCSS = {
+    fontFamily: "'GH Guardian Headline', Georgia, serif",
+    fontWeight: 400,
+    color: palette.neutral[7],
+    ...fontSizes.small
 };
 
 const bottomPaddingStyle: TdCSS = {
@@ -69,14 +89,6 @@ const quoteIconStyle: ImageCSS = {
     display: "inline-block",
     border: "0"
 };
-
-interface Props {
-    content: Content;
-    backgroundColor?: string;
-    showPillarColours?: boolean;
-    showTrailText?: boolean;
-    borderWidth?: "thin" | "thick";
-}
 
 type PillarTheme = {
     colour?: string;
@@ -111,17 +123,27 @@ const pillarTheme = {
     }
 };
 
+interface Props {
+    content: Content;
+    backgroundColor?: string;
+    showPillarColours?: boolean;
+    showTrailText?: boolean;
+    borderWidth?: "thin" | "thick";
+    expandedLayout?: boolean;
+}
+
 const brazeParameter = "?##braze_utm##";
 
 export const HeadlineCard: React.FC<Props> = ({
     content,
     backgroundColor,
     showPillarColours,
-    showTrailText,
-    borderWidth
+    borderWidth,
+    expandedLayout
 }) => {
     const { headline } = content.header;
     const { byline } = content.properties;
+    const { trailText } = content.card;
     const webURL = content.properties.webUrl + brazeParameter;
     const isComment = content.display.showQuotedHeadline;
 
@@ -152,7 +174,7 @@ export const HeadlineCard: React.FC<Props> = ({
                                             {kicker + " / "}
                                         </span>
                                     )}
-                                    <span style={headlineStyle}>
+                                    <span style={headlineStyle(expandedLayout)}>
                                         {isComment && (
                                             <>
                                                 <img
@@ -178,12 +200,21 @@ export const HeadlineCard: React.FC<Props> = ({
                                             {byline}
                                         </span>
                                     )}
-                                    {/* {showTrailText && (
-                                        <p>{content.card.trailText}</p>
-                                    )} */}
                                 </a>
                             </td>
                         </tr>
+                        {expandedLayout && trailText && (
+                            <tr>
+                                <td
+                                    className="m-col-pad"
+                                    style={metaWrapperStyle}
+                                >
+                                    <span style={trailTextStyle}>
+                                        {trailText}
+                                    </span>
+                                </td>
+                            </tr>
+                        )}
                     </table>
                 </td>
             </tr>

@@ -51,8 +51,8 @@ export const BriefingA: React.FC<{
                             content={story}
                             backgroundColor={headlineCardBackground}
                             showPillarColours
-                            showTrailText
                             borderWidth="thin"
+                            expandedLayout
                         />
                     </>
                 ))}
