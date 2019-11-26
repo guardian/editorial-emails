@@ -62,6 +62,12 @@ export interface Tag {
         webTitle?: string;
     };
 }
+
+// Pillars are used for styling
+// RealPillars have Pillar palette colours
+// FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
+export type Pillar = "News" | "Opinion" | "Sport" | "Arts" | "Lifestyle";
+
 // e.g. see
 // https://github.com/guardian/frontend/blob/master/common/app/implicits/FaciaContentFrontendHelpers.scala#L19
 // for image
@@ -77,6 +83,11 @@ interface InnerContent {
     fields: {
         standfirst: string;
         body: string;
+    };
+    metadata: {
+        pillar: {
+            name: Pillar;
+        };
     };
 }
 

@@ -36,6 +36,8 @@ export const BriefingA: React.FC<{
                         <HeadlineCard
                             content={story}
                             backgroundColor={headlineCardBackground}
+                            showPillarColours
+                            borderWidth="thin"
                         />
                     </>
                 ))}
@@ -48,6 +50,9 @@ export const BriefingA: React.FC<{
                         <HeadlineCard
                             content={story}
                             backgroundColor={headlineCardBackground}
+                            showPillarColours
+                            showTrailText
+                            borderWidth="thin"
                         />
                     </>
                 ))}
@@ -60,6 +65,8 @@ export const BriefingA: React.FC<{
                         <HeadlineCard
                             content={story}
                             backgroundColor={headlineCardBackground}
+                            showPillarColours
+                            borderWidth="thin"
                         />
                     </>
                 ))}
