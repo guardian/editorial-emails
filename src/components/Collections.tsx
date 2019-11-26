@@ -11,11 +11,7 @@ import {
     EditorialCollection as EditorialCollectionC,
     MediaCollection as MediaCollectionC
 } from "./tests/commentC/Collection";
-
 import { Collection as FilmCollectionB } from "./tests/filmB/Collection";
-
-import { Collection as MediaCollectionA } from "./tests/mediaA/Collection";
-
 import { Content } from "../api";
 import { TableRowCell } from "../layout/Table";
 
@@ -67,8 +63,6 @@ export const Collections: React.FC<{
         let designType;
         if (frontId === "email/film-today") {
             designType = "film";
-        } else if (frontId === "email/media-briefing") {
-            designType = "media-briefing";
         } else {
             designType = getDesignType(content);
         }
@@ -161,24 +155,6 @@ export const Collections: React.FC<{
                         variant={variant}
                     />
                 );
-            case "media-briefing": {
-                if (variant === "a") {
-                    return (
-                        <MediaCollectionA
-                            frontId={frontId}
-                            collection={collection}
-                            salt={salt}
-                        />
-                    );
-                }
-                return (
-                    <DefaultCollection
-                        collection={collection}
-                        salt={salt}
-                        variant={variant}
-                    />
-                );
-            }
             case "default":
                 return (
                     <DefaultCollection

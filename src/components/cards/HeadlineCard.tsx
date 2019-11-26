@@ -16,10 +16,12 @@ const tableStyle: TableCSS = {
     width: "100%"
 };
 
-const tdStyle: TdCSS = {
-    backgroundColor: palette.culture.faded,
-    borderTop: `2px solid ${palette.culture.main}`,
-    padding: "0"
+const tdStyle = (backgroundColor: string): TdCSS => {
+    return {
+        backgroundColor: backgroundColor || palette.culture.faded,
+        borderTop: `2px solid ${palette.culture.main}`,
+        padding: "0"
+    };
 };
 
 const metaWrapperStyle: TdCSS = {
@@ -60,11 +62,12 @@ const quoteIconStyle: ImageCSS = {
 
 interface Props {
     content: Content;
+    backgroundColor?: string;
 }
 
 const brazeParameter = "?##braze_utm##";
 
-export const HeadlineCard: React.FC<Props> = ({ content }) => {
+export const HeadlineCard: React.FC<Props> = ({ content, backgroundColor }) => {
     const { headline } = content.header;
     const { byline } = content.properties;
     const webURL = content.properties.webUrl + brazeParameter;
@@ -77,7 +80,7 @@ export const HeadlineCard: React.FC<Props> = ({ content }) => {
     return (
         <table style={tableStyle}>
             <tr>
-                <td style={tdStyle}>
+                <td style={tdStyle(backgroundColor)}>
                     <table style={tableStyle}>
                         <tr>
                             <td className="m-col-pad" style={metaWrapperStyle}>
