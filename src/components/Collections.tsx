@@ -11,13 +11,28 @@ import {
     EditorialCollection as EditorialCollectionC,
     MediaCollection as MediaCollectionC
 } from "./tests/commentC/Collection";
+
+import { Collection as FilmCollectionC } from "./tests/filmC/Collection";
+
 import { Content } from "../api";
 import { TableRowCell } from "../layout/Table";
 
-type DesignType = "default" | "comment" | "media" | "editorial" | "link";
+type DesignType =
+    | "default"
+    | "comment"
+    | "media"
+    | "editorial"
+    | "link"
+    | "film";
 
-const getDesignType = (content: Content[]): DesignType => {
+const getDesignType = (frontId: string, content: Content[]): DesignType => {
     const designTypes: Set<string> = new Set();
+
+    // Allow certain front IDs to set the sam design type for all collections
+    if (frontId === "email/film-today") {
+        return "film";
+    }
+
     content.forEach(c => {
         if (c.type === "LinkSnap") {
             designTypes.add("LinkSnap");
@@ -52,7 +67,7 @@ export const Collections: React.FC<{
 }> = ({ frontId, collections, salt, variant }) => {
     const res = collections.map(collection => {
         const content = [].concat(collection.backfill, collection.curated); // TODO support curated too
-        const designType = getDesignType(content);
+        const designType = getDesignType(frontId, content);
 
         if (collection.displayName === "Save 50% for three months") {
             return null; // ignore the jobs collection for now
@@ -107,6 +122,23 @@ export const Collections: React.FC<{
                         variant={variant}
                     />
                 );
+            case "film":
+                if (variant === "c") {
+                    return (
+                        <FilmCollectionC
+                            frontId={frontId}
+                            collection={collection}
+                            salt={salt}
+                        />
+                    );
+                }
+                return (
+                    <DefaultCollection
+                        collection={collection}
+                        salt={salt}
+                        variant={variant}
+                    />
+                );
             case "default":
                 return (
                     <DefaultCollection
@@ -118,5 +150,5 @@ export const Collections: React.FC<{
         }
     });
 
-    return <TableRowCell>{res}</TableRowCell>;
+    return <TableRowCell tdStyle={{ padding: "0" }}>{res}</TableRowCell>;
 };

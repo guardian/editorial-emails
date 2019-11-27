@@ -59,7 +59,7 @@ u + .body a,
     src: url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2) format("woff2"),
          url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff) format("woff");
     font-weight: 700;
-    font-style: bold;
+    font-style: normal;
 }
 
 @font-face {
@@ -76,5 +76,21 @@ u + .body a,
          url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff) format("woff");
     font-weight: 400;
     font-style: italic;
+}
+
+@font-face {
+    font-family: "Guardian Text Egyptian";
+    src: url(${CDNFontPath}/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff) format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Guardian Text Sans";
+    src: url(${CDNFontPath}/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff) format("woff");
+    font-weight: 700;
+    font-style: normal;
 }
 `;
