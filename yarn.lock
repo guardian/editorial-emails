@@ -138,6 +138,13 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@guardian/image@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@guardian/image/-/image-1.0.2.tgz#a0782a71cd3ac099091f858e33c20697b4921b7f"
+  integrity sha512-nuNodS/zYT69TPpE7ev9sTV0wAPJXq7RP3xpr9jO/lyn1ksyiPQZv+mzCMjIPi+ir+mCjdD5fU6S424c9WbbSA==
+  dependencies:
+    md5 "^2.2.1"
+
 "@guardian/src-foundations@^0.2.3":
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.2.3.tgz#9b2f0b1a39f606c03ea321938140e58465dafa48"
@@ -422,13 +429,6 @@
   integrity sha512-YYiqfSjocv7lk5H/T+v5MjATYjaTMsUkbDnjGqSMoO88jWdtJXJV4ST/7DKZcoMHMBvB2SeSfyOzZfkxXHR5xg==
   dependencies:
     "@types/jest-diff" "*"
-
-"@types/md5@^2.1.33":
-  version "2.1.33"
-  resolved "https://registry.yarnpkg.com/@types/md5/-/md5-2.1.33.tgz#8c8dba30df4ad0e92296424f08c4898dd808e8df"
-  integrity sha512-8+X960EtKLoSblhauxLKy3zzotagjoj3Jt1Tx9oaxUdZEPIBl+mkrUz6PNKpzJgkrKSN9YgkWTA29c0KnLshmA==
-  dependencies:
-    "@types/node" "*"
 
 "@types/mime@*":
   version "2.0.1"
