@@ -7,8 +7,9 @@ interface Props {
     linkTo: string;
 }
 
-// Standard LinkCSS properties added so they can be type checked
-const standardAnchorStyles: LinkCSS = {
+// Splitting the CSS for the button link into two separate objects;
+// First, all the standard LinkCSS properties we need, so they can be typechecked...
+const anchorStyles: LinkCSS = {
     color: "#ffffff",
     fontFamily: "'Guardian Text Sans',sans-serif",
     fontSize: "17px",
@@ -18,10 +19,10 @@ const standardAnchorStyles: LinkCSS = {
     padding: "0"
 };
 
-// Actual anchorStyles to use typechecked LinkCSS properties from `standardAnchorStyles
-// plus the properties below, which are to specific to be added to LinkCSS.
-const anchorStyles: any = {
-    ...standardAnchorStyles,
+// Then, all the extra CSS properties we need, including vendor prefixes,
+// which are only relevant to this component and should not be added to the LinkCSS type.
+const anchorStylesWithPrefixes: any = {
+    ...anchorStyles,
     backgroundColor: "#a1845c",
     borderRadius: "20px",
     display: "inline-block",
@@ -59,7 +60,11 @@ export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
                                 __html: buttonMSOMarkup
                             }}
                         />
-                        <a href={linkTo} target="_blank" style={anchorStyles}>
+                        <a
+                            href={linkTo}
+                            target="_blank"
+                            style={anchorStylesWithPrefixes}
+                        >
                             {label}&nbsp;&nbsp;
                             <img
                                 style={imgStyles}
