@@ -63,7 +63,7 @@ export const MediaCard: React.FC<Props> = ({ content, salt }) => {
     const formattedImage = formatImage(
         image.url,
         salt,
-        580,
+        579,
         content.card.starRating
     );
 
@@ -80,7 +80,7 @@ export const MediaCard: React.FC<Props> = ({ content, salt }) => {
                         src={imageURL}
                         linkURL={webURL}
                         alt={imageAlt}
-                        width={580}
+                        width={579}
                     />
                 </RowCell>
                 <RowCell tdStyle={tdHeadlineStyle}>{headline}</RowCell>
