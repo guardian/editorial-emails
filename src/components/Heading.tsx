@@ -11,6 +11,7 @@ const tableStyle: TableCSS = {
 const headingStyle = (backgroundColor: string, color: string): TdCSS => {
     return {
         fontFamily: "'GH Guardian Headline', Georgia, serif",
+        // fontWeight: "bold",
         fontSize: "22px",
         lineHeight: "26px",
         color: color || palette.neutral[7],
