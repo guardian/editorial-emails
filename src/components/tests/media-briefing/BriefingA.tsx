@@ -25,16 +25,20 @@ export const BriefingA: React.FC<{
 
     return (
         <>
-            <OverlayCard
-                content={leadStory}
-                salt={salt}
-                backgroundColor={white}
-            />
             <TableRowCell
                 tdStyle={{ backgroundColor: lightGrey, padding: "0" }}
             >
                 <Multiline topPadding />
                 <Heading heading={collections[0].displayName} />
+
+                <OverlayCard
+                    content={leadStory}
+                    salt={salt}
+                    backgroundColor={white}
+                    layout="compact"
+                />
+
+                <Padding px={12} backgroundColor={palette.neutral[97]} />
 
                 {topStories.map((story, index) => (
                     <>

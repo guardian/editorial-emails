@@ -91,6 +91,7 @@ interface Props {
     content: Content;
     salt: string;
     backgroundColor?: string;
+    layout?: "expanded" | "compact";
 }
 
 const brazeParameter = "?##braze_utm##";
@@ -98,7 +99,8 @@ const brazeParameter = "?##braze_utm##";
 export const OverlayCard: React.FC<Props> = ({
     content,
     salt,
-    backgroundColor
+    backgroundColor,
+    layout
 }) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
@@ -128,7 +130,12 @@ export const OverlayCard: React.FC<Props> = ({
                     <table style={tableStyle}>
                         {imageURL && (
                             <tr>
-                                <td style={{ padding: 0 }} colSpan={2}>
+                                {/*
+                    // @ts-ignore as JSX expects 'colSpan' but HTML only validates if used as 'colspan' */}
+                                <td
+                                    colspan={layout === "compact" ? null : 2}
+                                    style={{ padding: 0 }}
+                                >
                                     <a href={webURL}>
                                         <img
                                             width={600}
@@ -164,25 +171,32 @@ export const OverlayCard: React.FC<Props> = ({
                                     </span>
                                 </a>
                             </td>
-                            <td style={blankCellStyle}>&nbsp;</td>
+                            {layout !== "compact" && (
+                                <td style={blankCellStyle}>&nbsp;</td>
+                            )}
                         </tr>
-                        <tr>
-                            <td
-                                className="m-col-pad"
-                                style={trailTextPadding}
-                                colSpan={2}
-                            >
-                                <span
-                                    style={trailTextStyle}
-                                    dangerouslySetInnerHTML={{
-                                        __html: sanitizeHtml(
-                                            trailText,
-                                            sanitizeOptions
-                                        )
-                                    }}
-                                />
-                            </td>
-                        </tr>
+
+                        {layout !== "compact" && (
+                            <tr>
+                                {/*
+                    // @ts-ignore as JSX expects 'colSpan' but HTML only validates if used as 'colspan' */}
+                                <td
+                                    colspan={2}
+                                    className="m-col-pad"
+                                    style={trailTextPadding}
+                                >
+                                    <span
+                                        style={trailTextStyle}
+                                        dangerouslySetInnerHTML={{
+                                            __html: sanitizeHtml(
+                                                trailText,
+                                                sanitizeOptions
+                                            )
+                                        }}
+                                    />
+                                </td>
+                            </tr>
+                        )}
                     </table>
                 </td>
             </tr>
