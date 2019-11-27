@@ -25,8 +25,14 @@ type DesignType =
     | "link"
     | "film";
 
-const getDesignType = (content: Content[]): DesignType => {
+const getDesignType = (frontId: string, content: Content[]): DesignType => {
     const designTypes: Set<string> = new Set();
+
+    // Allow certain front IDs to set the sam design type for all collections
+    if (frontId === "email/film-today") {
+        return "film";
+    }
+
     content.forEach(c => {
         if (c.type === "LinkSnap") {
             designTypes.add("LinkSnap");
@@ -61,13 +67,7 @@ export const Collections: React.FC<{
 }> = ({ frontId, collections, salt, variant }) => {
     const res = collections.map(collection => {
         const content = [].concat(collection.backfill, collection.curated); // TODO support curated too
-
-        let designType;
-        if (frontId === "email/film-today") {
-            designType = "film";
-        } else {
-            designType = getDesignType(content);
-        }
+        const designType = getDesignType(frontId, content);
 
         if (collection.displayName === "Save 50% for three months") {
             return null; // ignore the jobs collection for now
