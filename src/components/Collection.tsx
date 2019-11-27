@@ -18,19 +18,16 @@ export const DefaultCollection: React.FC<{
     }
 
     // TODO handle curated collections
-    const rest = collection.backfill.slice(1);
-
-    const contentOne = collection.backfill[0];
+    const filmCollection = collection.backfill;
 
     return (
         <>
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
 
-            <Card content={contentOne} salt={salt} size={"large"} />
-            <Padding px={12} />
-
-            {rest && <DefaultGrid content={rest} salt={salt} />}
+            {filmCollection && (
+                <DefaultGrid content={filmCollection} salt={salt} />
+            )}
         </>
     );
 };
