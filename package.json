@@ -31,13 +31,12 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
+    "@guardian/image": "^1.0.2",
     "@guardian/src-foundations": "^0.2.3",
-    "@types/md5": "^2.1.33",
     "aws-sdk": "^2.554.0",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
-    "md5": "^2.2.1",
     "minify-css-string": "^1.0.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
