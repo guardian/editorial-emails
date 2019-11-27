@@ -10,7 +10,8 @@ const tableStyle: TableCSS = {
 };
 
 const tdStyle: TdCSS = {
-    width: "100%"
+    width: "100%",
+    padding: "0"
 };
 
 const lineStyle: TdCSS = {
