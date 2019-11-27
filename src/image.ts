@@ -1,22 +1,4 @@
-import md5 from "md5";
-import { URL } from "url";
-
-const fastlyURL = "https://i.guim.co.uk/img/";
-
-export const sign = (s: string, salt: string): string => {
-    return md5(salt + s);
-};
-
-export const source = (guimURL: string): string => {
-    const re = /(media|static|uploads|sport).guim.co.uk/;
-    const found = guimURL.match(re);
-
-    if (found) {
-        return found[1]; // capture group
-    }
-
-    return "media";
-};
+import { format } from "@guardian/image";
 
 export const starImage = (rating: number): string => {
     const raw = `/img/static/overlays/email-star-rating-${rating}.png`;
@@ -45,15 +27,5 @@ export const formatImage = (
         params["overlay-align"] = "bottom,left";
     }
 
-    const qs = Object.entries(params)
-        .map(kv => `${kv[0]}=${kv[1]}`)
-        .join("&");
-
-    const url = new URL(masterURL);
-    const pathQuery = url.pathname + "?" + qs;
-    const src = source(masterURL);
-    const sig = sign(pathQuery, salt);
-    const updatedPathQuery = pathQuery + "&s=" + sig;
-
-    return fastlyURL + src + updatedPathQuery;
+    return format(masterURL, salt, params);
 };
