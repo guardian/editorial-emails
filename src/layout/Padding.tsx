@@ -21,6 +21,7 @@ export const Padding: React.FC<Props> = ({ px, backgroundColor }) => (
                 style={{
                     lineHeight: "0",
                     paddingTop: `${px}px`,
+                    paddingBottom: "0",
                     backgroundColor: backgroundColor || "transparent"
                 }}
             >
