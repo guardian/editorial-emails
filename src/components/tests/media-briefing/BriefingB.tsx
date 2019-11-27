@@ -35,7 +35,7 @@ export const BriefingB: React.FC<{
                     {index > 0 && (
                         <Padding px={12} backgroundColor={lightGrey} />
                     )}
-                    <OverlayCard content={story} salt={salt} size={"large"} />
+                    <OverlayCard content={story} salt={salt} />
                 </>
             ))}
 
@@ -71,7 +71,7 @@ export const BriefingB: React.FC<{
                     {index > 0 && (
                         <Padding px={12} backgroundColor={lightGrey} />
                     )}
-                    <OverlayCard content={story} salt={salt} size={"large"} />
+                    <OverlayCard content={story} salt={salt} />
                 </>
             ))}
 

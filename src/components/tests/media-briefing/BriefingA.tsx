@@ -1,14 +1,12 @@
 import React from "react";
 import { Collection as ICollection } from "../../../api";
 import { palette } from "@guardian/src-foundations";
-import { DescriptiveCard } from "../../cards/DescriptiveCard";
+import { OverlayCard } from "../../cards/OverlayCard";
 import { Multiline } from "../../Multiline";
 import { Heading } from "../../Heading";
 import { HeadlineCard } from "../../cards/HeadlineCard";
 import { Padding } from "../../../layout/Padding";
 import { TableRowCell } from "../../../layout/Table";
-import { colors } from "@guardian/src-foundations/theme";
-// import { render } from "react-dom";
 
 export const BriefingA: React.FC<{
     frontId: string;
@@ -21,27 +19,28 @@ export const BriefingA: React.FC<{
     const tvRadioStories = collections[2].backfill;
     const jobsStories = collections[3].curated;
 
-    const containerBackground = palette.neutral[97];
-    const headlineCardBackground = palette.neutral[100];
+    const lightGrey = palette.neutral[97];
+    const white = palette.neutral[100];
     const jobsBackground = "#00A194";
 
     return (
         <>
-            <DescriptiveCard
-                content={leadStory}
-                salt={salt}
-                showPillarColours
-            />
-
-            <TableRowCell tdStyle={{ backgroundColor: containerBackground }}>
+            <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
                 <Multiline topPadding />
                 <Heading heading={collections[0].displayName} />
+
+                <OverlayCard
+                    content={leadStory}
+                    salt={salt}
+                    backgroundColor={white}
+                />
+
                 {topStories.map((story, index) => (
                     <>
                         {index > 0 && <Padding px={4} />}
                         <HeadlineCard
                             content={story}
-                            backgroundColor={headlineCardBackground}
+                            backgroundColor={white}
                             showPillarColours
                             borderWidth="thin"
                         />
@@ -55,7 +54,7 @@ export const BriefingA: React.FC<{
                         {index > 0 && <Padding px={4} />}
                         <HeadlineCard
                             content={story}
-                            backgroundColor={headlineCardBackground}
+                            backgroundColor={white}
                             showPillarColours
                             borderWidth="thin"
                             layout="expanded"
@@ -70,7 +69,7 @@ export const BriefingA: React.FC<{
                         {index > 0 && <Padding px={4} />}
                         <HeadlineCard
                             content={story}
-                            backgroundColor={headlineCardBackground}
+                            backgroundColor={white}
                             showPillarColours
                             borderWidth="thin"
                         />

@@ -7,8 +7,6 @@ import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 
-type Size = "small" | "large";
-
 const fontSizes = {
     large: {
         fontSize: "22px",
@@ -38,8 +36,11 @@ const tableStyle: TableCSS = {
     width: "100%"
 };
 
-const tdStyle: TdCSS = {
-    padding: "0"
+const tdStyle = (backgroundColor: string): TdCSS => {
+    return {
+        padding: "0",
+        backgroundColor: backgroundColor || "transparent"
+    };
 };
 
 const headlineCellStyle = {
@@ -56,22 +57,18 @@ const linkStyle: FontCSS = {
     textDecoration: "none"
 };
 
-const headlineStyle = (size: Size): FontCSS => {
-    return {
-        color: palette.neutral[100],
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontWeight: 400,
-        ...fontSizes[size]
-    };
+const headlineStyle = {
+    color: palette.neutral[100],
+    fontFamily: "'GH Guardian Headline', Georgia, serif",
+    fontWeight: 400,
+    ...fontSizes.large
 };
 
-const kickerStyle = (size: Size): FontCSS => {
-    return {
-        color: palette.neutral[100],
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontWeight: 700,
-        ...fontSizes[size]
-    };
+const kickerStyle = {
+    color: palette.neutral[100],
+    fontFamily: "'GH Guardian Headline', Georgia, serif",
+    fontWeight: 700,
+    ...fontSizes.large
 };
 
 const trailTextStyle: FontCSS = {
@@ -93,18 +90,22 @@ const quoteIconStyle: ImageCSS = {
 interface Props {
     content: Content;
     salt: string;
-    size: "large" | "small";
+    backgroundColor?: string;
 }
 
 const brazeParameter = "?##braze_utm##";
 
-export const OverlayCard: React.FC<Props> = ({ content, salt, size }) => {
+export const OverlayCard: React.FC<Props> = ({
+    content,
+    salt,
+    backgroundColor
+}) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(
         image.url,
         salt,
-        size === "large" ? 600 : 300,
+        600,
         content.card.starRating
     );
 
@@ -123,16 +124,14 @@ export const OverlayCard: React.FC<Props> = ({ content, salt, size }) => {
     return (
         <table style={tableStyle}>
             <tr>
-                <td style={tdStyle}>
+                <td style={tdStyle(backgroundColor)}>
                     <table style={tableStyle}>
                         {imageURL && (
                             <tr>
                                 <td style={{ padding: 0 }} colSpan={2}>
                                     <a href={webURL}>
                                         <img
-                                            width={
-                                                size === "large" ? "600" : "294"
-                                            }
+                                            width={600}
                                             style={imgStyle}
                                             alt={imageAlt}
                                             src={imageURL}
@@ -146,11 +145,11 @@ export const OverlayCard: React.FC<Props> = ({ content, salt, size }) => {
                             <td className="m-pad" style={headlineCellStyle}>
                                 <a style={linkStyle} href={webURL}>
                                     {kicker && (
-                                        <span style={kickerStyle(size)}>
+                                        <span style={kickerStyle}>
                                             {kicker + " / "}
                                         </span>
                                     )}
-                                    <span style={headlineStyle(size)}>
+                                    <span style={headlineStyle}>
                                         {isComment && (
                                             <>
                                                 <img
