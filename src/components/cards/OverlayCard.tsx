@@ -78,7 +78,7 @@ const trailTextStyle: FontCSS = {
 };
 
 const trailTextPadding: TdCSS = {
-    padding: "10px 10px 20px 10px"
+    padding: "6px 10px 20px 10px"
 };
 
 const quoteIconStyle: ImageCSS = {
