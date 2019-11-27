@@ -37,19 +37,51 @@ const imgStyles: ImageCSS = {
 };
 
 export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
-    const buttonMSOMarkup = `<!--[if mso]>
-    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${linkTo}" style="height:28pt;v-text-anchor:middle;width:150pt;" arcsize="50%" strokecolor="#a1845c" fillcolor="#a1845c">
-    <w:anchorlock></w:anchorlock>
-    <center>
-        <table style="border-spacing:0;border-collapse:collapse;width:100%">
-        <tr>
-            <td style="color:#ffffff;font-family:'Guardian Text Sans',sans-serif;font-size:17px;line-height:17px;">${label}&nbsp;&nbsp;</td>
-            <td><img style="vertical-align: middle !important; vertical-align: middle;" src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264" width="23" height="22" border="0" alt="" /></td>
-        </tr>
-        </table>
-    </center>
-    </v:roundrect>
+    // The MSO (Microsoft Outlook) button uses HTML elements that won't validate against out JSX types.
+    // Work around this by using a combination of JSX and strings (where JSX isn't possible).
+    const outlookButtonMarkup = `
+    <!--[if mso]>
+        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${linkTo}" style="height:28pt;v-text-anchor:middle;width:150pt;" arcsize="50%" strokecolor="#a1845c" fillcolor="#a1845c">
+        <w:anchorlock></w:anchorlock>
+        <center>
+            ${(
+                <table
+                    style={{
+                        borderSpacing: 0,
+                        borderCollapse: "collapse",
+                        width: "100%"
+                    }}
+                >
+                    <tr>
+                        <td
+                            style={{
+                                fontFamily: "'Guardian Text Sans',sans-serif;",
+                                color: "#FFFFFF",
+                                fontSize: "17px",
+                                lineHeight: "17px;"
+                            }}
+                        >
+                            ${label}&nbsp;&nbsp;
+                        </td>
+                        <td>
+                            {/*
+                    // @ts-ignore as verticalAlign isn't valid in type image */}
+                            <img
+                                style={{ verticalAlign: "middle !important" }}
+                                src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264"
+                                width="23"
+                                height="22"
+                                border="0"
+                                alt=""
+                            />
+                        </td>
+                    </tr>
+                </table>
+            )}
+        </center>
+        </v:roundrect>
     <![endif]-->`;
+
     return (
         <table>
             <tr>
@@ -57,7 +89,7 @@ export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
                     <div>
                         <div
                             dangerouslySetInnerHTML={{
-                                __html: buttonMSOMarkup
+                                __html: outlookButtonMarkup
                             }}
                         />
                         <a
