@@ -81,7 +81,7 @@ const kickerStyle = (pillarColour: string): FontCSS => {
     return {
         ...fontFamily.headline,
         ...fontSizes.large,
-        fontWeight: 400,
+        fontWeight: 700,
         color: pillarColour || palette.culture.main
     };
 };
