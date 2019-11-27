@@ -1,10 +1,10 @@
 import React from "react";
 import { Collection as ICollection } from "../../../api";
 import { palette } from "@guardian/src-foundations";
+import { OverlayCard } from "../../cards/OverlayCard";
 import { Multiline } from "../../Multiline";
 import { Heading } from "../../Heading";
 import { HeadlineCard } from "../../cards/HeadlineCard";
-import { OverlayCard } from "../../cards/OverlayCard";
 import { Padding } from "../../../layout/Padding";
 import { TableRowCell } from "../../../layout/Table";
 
@@ -13,7 +13,8 @@ export const BriefingB: React.FC<{
     collections: ICollection[];
     salt: string;
 }> = ({ collections, salt }) => {
-    const topStories = collections[0].backfill;
+    const leadStory = collections[0].backfill[0];
+    const topStories = collections[0].backfill.slice(1);
     const opinionStories = collections[1].backfill;
     const tvRadioStories = collections[2].backfill;
     const jobsStories = collections[3].curated;
@@ -24,59 +25,63 @@ export const BriefingB: React.FC<{
 
     return (
         <>
-            <Padding px={12} backgroundColor={lightGrey} />
-            <Multiline />
-            <Heading
-                heading={collections[0].displayName}
-                backgroundColor={lightGrey}
-            />
-            {topStories.map((story, index) => (
-                <>
-                    {index > 0 && (
-                        <Padding px={12} backgroundColor={lightGrey} />
-                    )}
-                    <OverlayCard content={story} salt={salt} />
-                </>
-            ))}
+            <TableRowCell
+                tdStyle={{ backgroundColor: lightGrey, padding: "0" }}
+            >
+                <Multiline topPadding />
+                <Heading heading={collections[0].displayName} />
 
-            <Padding px={12} backgroundColor={lightGrey} />
-            <Multiline />
-            <Heading
-                heading={collections[1].displayName}
-                backgroundColor={lightGrey}
-            />
-            {opinionStories.map((story, index) => (
-                <>
-                    {index > 0 && (
-                        <Padding px={12} backgroundColor={lightGrey} />
-                    )}
-                    <HeadlineCard
-                        content={story}
-                        backgroundColor={white}
-                        showPillarColours
-                        borderWidth="thin"
-                        layout="expanded"
-                    />
-                </>
-            ))}
+                <OverlayCard
+                    content={leadStory}
+                    salt={salt}
+                    backgroundColor={white}
+                    layout="compact"
+                />
 
-            <Padding px={12} backgroundColor={lightGrey} />
-            <Multiline />
-            <Heading
-                heading={collections[2].displayName}
-                backgroundColor={lightGrey}
-            />
-            {tvRadioStories.map((story, index) => (
-                <>
-                    {index > 0 && (
-                        <Padding px={12} backgroundColor={lightGrey} />
-                    )}
-                    <OverlayCard content={story} salt={salt} />
-                </>
-            ))}
+                <Padding px={12} backgroundColor={palette.neutral[97]} />
 
+                {topStories.map((story, index) => (
+                    <>
+                        {index > 0 && <Padding px={4} />}
+                        <HeadlineCard
+                            content={story}
+                            backgroundColor={white}
+                            showPillarColours
+                            borderWidth="thin"
+                        />
+                    </>
+                ))}
+
+                <Multiline topPadding />
+                <Heading heading={collections[1].displayName} />
+                {opinionStories.map((story, index) => (
+                    <>
+                        {index > 0 && <Padding px={4} />}
+                        <HeadlineCard
+                            content={story}
+                            backgroundColor={white}
+                            showPillarColours
+                            borderWidth="thin"
+                            layout="expanded"
+                        />
+                    </>
+                ))}
+
+                <Multiline topPadding />
+                <Heading heading={collections[2].displayName} />
+                {tvRadioStories.map((story, index) => (
+                    <>
+                        {index > 0 && <Padding px={4} />}
+                        <HeadlineCard
+                            content={story}
+                            backgroundColor={white}
+                            showPillarColours
+                            borderWidth="thin"
+                        />
+                    </>
+                ))}
+            </TableRowCell>
             <Padding px={12} backgroundColor={palette.neutral[97]} />
-
             <TableRowCell
                 tdStyle={{
                     backgroundColor: jobsBackground,
