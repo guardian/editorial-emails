@@ -27,7 +27,8 @@ const colStyle = (styles: RowStyle): TdCSS => ({
     verticalAlign: styles.verticalAlign || "top",
     borderBottom: styles.borderBottom || "none",
     borderLeft: styles.borderLeft || "none",
-    lineHeight: styles.lineHeight || "inherit"
+    lineHeight: styles.lineHeight || "inherit",
+    padding: "0"
 });
 
 const defaultRowStyles: RowStyle = {

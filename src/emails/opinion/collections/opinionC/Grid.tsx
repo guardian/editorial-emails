@@ -41,8 +41,8 @@ export const Grid: React.FC<CommentGridProps> = ({
 
         const contributor = (node: React.ReactNode): React.ReactNode => (
             <TableRow>
-                <td style={{ width: "50%" }}></td>
-                <td style={{ width: "50%" }}>{node}</td>
+                <td style={{ width: "50%", padding: "0" }}></td>
+                <td style={{ width: "50%", padding: "0" }}>{node}</td>
             </TableRow>
         );
 

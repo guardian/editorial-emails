@@ -86,16 +86,6 @@ const spanStyle: FontCSS = {
     lineHeight: "20px"
 };
 
-const kickerStyle = (size: Size): FontCSS => {
-    return {
-        color: palette.culture.main,
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontWeight: 400,
-
-        ...fontSizes[size]
-    };
-};
-
 const bylineStyle = (size: Size): FontCSS => {
     return {
         color: palette.opinion.main,
@@ -119,7 +109,8 @@ const columnStyleLeft: TdCSS = {
 
 const columnStyleRight: TdCSS = {
     width: "30%",
-    verticalAlign: "bottom"
+    verticalAlign: "bottom",
+    padding: "0"
 };
 
 interface Props {
@@ -200,7 +191,7 @@ const SupplementaryMeta: React.FC<{
 
     if (trailText && contributorImageSrc) {
         return (
-            <RowCell>
+            <RowCell tdStyle={{ padding: "0" }}>
                 <TableRow>
                     <TrailText text={trailText} linkURL={linkURL} size={size} />
                     {contributorImage}
@@ -215,7 +206,7 @@ const SupplementaryMeta: React.FC<{
         );
     } else if (contributorImageSrc) {
         return (
-            <RowCell>
+            <RowCell tdStyle={{ padding: "0" }}>
                 <TableRow>
                     <td style={{ width: "50%" }}></td>
                     {contributorImage}
@@ -231,17 +222,13 @@ const Headline: React.FC<{
     size: Size;
     linkURL: string;
     isComment: boolean;
-    kicker: string;
     headline: string;
     byline: string;
-}> = ({ size, linkURL, isComment, kicker, headline, byline }) => {
+}> = ({ size, linkURL, isComment, headline, byline }) => {
     return (
         <tr>
             <td className="m-pad" style={metaWrapperStyle(size)}>
                 <a style={linkStyle} href={linkURL}>
-                    {kicker && (
-                        <span style={kickerStyle(size)}>{kicker + " / "}</span>
-                    )}
                     <span style={headlineStyle(size)}>
                         {isComment && (
                             <>
@@ -337,7 +324,6 @@ export const Card: React.FC<Props> = ({
                     size={size}
                     linkURL={webURL}
                     isComment={isComment}
-                    kicker={kicker}
                     headline={headline}
                     byline={byline}
                 />
