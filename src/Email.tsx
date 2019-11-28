@@ -1,10 +1,11 @@
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { Front } from "./api";
+import { Fronts, Front } from "./api";
 import { Banner } from "./components/Banner";
 import { Collections } from "./components/Collections";
 import { FilmToday } from "./components/tests/film-today/FilmToday";
 import { MediaBriefing } from "./components/tests/media-briefing/MediaBriefing";
+import { Opinion } from "./components/tests/opinion/Opinion";
 import { Footer } from "./components/Footer";
 import { Center } from "./layout/Center";
 import { default as minifyCssString } from "minify-css-string";
@@ -26,17 +27,7 @@ const title = (id: string): string => {
     );
 };
 
-enum Fronts {
-    Opinion = "email/opinion",
-    FilmToday = "email/film-today",
-    MediaBriefing = "email/media-briefing"
-}
-
-const renderCollectionRendered = (
-    front: Front,
-    salt: string,
-    variant?: string
-) => {
+const renderEmail = (front: Front, salt: string, variant?: string) => {
     const { id, collections } = front;
     switch (front.id) {
         case Fronts.FilmToday:
@@ -57,13 +48,21 @@ const renderCollectionRendered = (
                     variant={variant}
                 />
             );
+        case Fronts.Opinion:
+            return (
+                <Opinion
+                    frontId={id}
+                    collections={collections}
+                    salt={salt}
+                    variant={variant}
+                />
+            );
         default:
             return (
                 <Collections
                     frontId={id}
                     collections={collections}
                     salt={salt}
-                    variant={variant}
                 />
             );
     }
@@ -74,7 +73,7 @@ export const Email = (front: Front, salt: string, variant?: string): string => {
         <Center>
             <TableRowCell tdStyle={{ padding: "0" }}>
                 <Banner frontId={front.id} />
-                {renderCollectionRendered(front, salt, variant)}
+                {renderEmail(front, salt, variant)}
                 <Footer frontId={front.id} />
             </TableRowCell>
         </Center>

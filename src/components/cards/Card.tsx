@@ -1,6 +1,5 @@
 import React from "react";
 import { DefaultCard } from "./DefaultCard";
-import { Card as CommentCard } from "../tests/commentB/Card";
 import { Content } from "../../api";
 
 type CardType = "default" | "comment";
@@ -24,14 +23,14 @@ export const Card: React.FC<CardProps> = ({ content, salt, size }) => {
     switch (cardDisplayType(content)) {
         case "default":
             return <DefaultCard content={content} salt={salt} size={size} />;
-        case "comment":
-            return (
-                <CommentCard
-                    content={content}
-                    salt={salt}
-                    size={size}
-                    shouldShowImage={true}
-                />
-            );
+        // case "comment":
+        //     return (
+        //         <CommentCard
+        //             content={content}
+        //             salt={salt}
+        //             size={size}
+        //             shouldShowImage={true}
+        //         />
+        //     );
     }
 };

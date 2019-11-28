@@ -1,11 +1,13 @@
 import React from "react";
-import { Collection as ICollection } from "../../../api";
-import { Card as CommentCard } from "././../commentB/Card";
+import { Collection as ICollection } from "../../../../../api";
+import { Card as CommentCard } from "./Card";
 import { MediaCard } from "./MediaCard";
-import { Padding } from "../../../layout/Padding";
-import { Heading } from "./../../Heading";
-import { Multiline } from "./../../Multiline";
+import { Padding } from "../../../../../layout/Padding";
+import { Heading } from "./../../../../Heading";
+import { Multiline } from "./../../../../Multiline";
 import { Grid as CommentGrid } from "../commentB/Grid";
+import { DefaultGrid } from "../../../../../layout/Grid";
+import { LinkGrid as LinkGridB } from "./Grid";
 
 const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
     if (frontId === "email/opinion") {
@@ -14,7 +16,7 @@ const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
     return true;
 };
 
-export const Collection: React.FC<{
+export const CommentCollection: React.FC<{
     frontId: string;
     collection: ICollection;
     salt: string;
@@ -119,6 +121,47 @@ export const MediaCollection: React.FC<{
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
             {items}
+        </>
+    );
+};
+
+export const DefaultCollection: React.FC<{
+    collection: ICollection;
+    salt: string;
+}> = ({ collection, salt }) => {
+    if (collection.backfill.length < 1) {
+        return null;
+    }
+
+    const filmCollection = collection.backfill;
+
+    return (
+        <>
+            <Multiline topPadding />
+            <Heading heading={collection.displayName} />
+
+            {filmCollection && (
+                <DefaultGrid content={filmCollection} salt={salt} />
+            )}
+        </>
+    );
+};
+
+export const LinkCollection: React.FC<{
+    collection: ICollection;
+    salt: string;
+}> = ({ collection, salt }) => {
+    if (collection.curated.length < 1) {
+        return null;
+    }
+
+    const content = collection.curated;
+
+    return (
+        <>
+            <Multiline topPadding />
+            <Heading heading={collection.displayName} />
+            {content && <LinkGridB content={content} salt={salt} />}
         </>
     );
 };
