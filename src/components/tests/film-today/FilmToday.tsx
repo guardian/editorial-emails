@@ -19,11 +19,5 @@ export const FilmToday: React.FC<{
         );
     }
 
-    return (
-        <DefaultCollection
-            collection={collections[0]}
-            salt={salt}
-            variant={variant}
-        />
-    );
+    return <DefaultCollection collection={collections[0]} salt={salt} />;
 };
