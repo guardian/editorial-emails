@@ -48,10 +48,9 @@ u + .body a,
     color: rgb(5, 86, 137) !important;
 }
 
-@-moz-document url-prefix() {
-    td {
-        -moz-osx-font-smoothing: grayscale;
-    }
+html {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
 }
 
 @font-face {
