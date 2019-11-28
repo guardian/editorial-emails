@@ -114,7 +114,8 @@ const columnStyleLeft: TdCSS = {
 
 const columnStyleRight: TdCSS = {
     width: "30%",
-    verticalAlign: "bottom"
+    verticalAlign: "bottom",
+    padding: "0"
 };
 
 interface Props {
