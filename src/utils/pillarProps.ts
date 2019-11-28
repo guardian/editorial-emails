@@ -5,7 +5,7 @@ export interface PillarType {
     quote?: string;
 }
 
-export const pillarTheme = {
+export const pillarProps = {
     News: {
         colour: palette.news.main,
         quote:

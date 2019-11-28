@@ -2,7 +2,7 @@ import React from "react";
 import sanitizeHtml from "sanitize-html";
 import { palette } from "@guardian/src-foundations";
 import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
-import { sanitizeOptions } from "../../styles/sanitize-options";
+import { sanitizeOptions } from "../../utils/sanitizeOptions";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";

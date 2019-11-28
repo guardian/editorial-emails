@@ -1,8 +1,8 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
 import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
-import { sanitizeOptions } from "../../styles/sanitize-options";
-import { pillarTheme, PillarType } from "../../styles/pillar-themes";
+import { sanitizeOptions } from "../../utils/sanitizeOptions";
+import { pillarProps, PillarType } from "../../utils/pillarProps";
 import { palette } from "@guardian/src-foundations";
 import { Content, Pillar } from "../../api";
 import { kickerText } from "../../kicker";
@@ -136,7 +136,7 @@ export const HeadlineCard: React.FC<Props> = ({
     let pillar: PillarType = {};
     if (showPillarColours && content.properties.maybeContent) {
         const pillarName = content.properties.maybeContent.metadata.pillar.name;
-        pillar = pillarTheme[pillarName];
+        pillar = pillarProps[pillarName];
     }
 
     const kicker = content.header.kicker
@@ -180,7 +180,7 @@ export const HeadlineCard: React.FC<Props> = ({
                                                     src={
                                                         pillar.quote
                                                             ? pillar.quote
-                                                            : pillarTheme.Arts
+                                                            : pillarProps.Arts
                                                                   .quote
                                                     }
                                                     alt="quote icon"

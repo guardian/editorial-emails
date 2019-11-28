@@ -1,8 +1,8 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
 import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
-import { pillarTheme, PillarType } from "../../styles/pillar-themes";
-import { sanitizeOptions } from "../../styles/sanitize-options";
+import { pillarProps, PillarType } from "../../utils/pillarProps";
+import { sanitizeOptions } from "../../utils/sanitizeOptions";
 import { ContinueButton } from "../buttons/ContinueButton";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
@@ -154,7 +154,7 @@ export const DescriptiveCard: React.FC<Props> = ({
     let pillar: PillarType = {};
     if (showPillarColours && content.properties.maybeContent) {
         const pillarName = content.properties.maybeContent.metadata.pillar.name;
-        pillar = pillarTheme[pillarName];
+        pillar = pillarProps[pillarName];
     }
 
     const bodyText = content.properties.maybeContent.fields.body;
