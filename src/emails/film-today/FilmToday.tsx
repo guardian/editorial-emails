@@ -1,9 +1,9 @@
 import React from "react";
-import { Collection as ICollection } from "../../../api";
-import { VariantB } from "./VariantB";
+import { Collection as ICollection } from "../../api";
+import { DefaultCollection } from "../../components/Collection";
 import { VariantC } from "./VariantC";
 
-export const Opinion: React.FC<{
+export const FilmToday: React.FC<{
     frontId: string;
     collections: ICollection[];
     salt: string;
@@ -13,17 +13,11 @@ export const Opinion: React.FC<{
         return (
             <VariantC
                 frontId={frontId}
-                collections={collections}
+                collection={collections[0]}
                 salt={salt}
             ></VariantC>
         );
     }
 
-    return (
-        <VariantB
-            frontId={frontId}
-            collections={collections}
-            salt={salt}
-        ></VariantB>
-    );
+    return <DefaultCollection collection={collections[0]} salt={salt} />;
 };

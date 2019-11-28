@@ -1,11 +1,11 @@
 import React from "react";
 import { ContributorImageWrapper, getContributor } from "./Card";
 import { palette } from "@guardian/src-foundations";
-import { TableRow, TableRowCell } from "../../../../../layout/Table";
-import { Padding } from "../../../../../layout/Padding";
-import { Content } from "../../../../../api";
-import { GridRow, partition } from "../../../../../layout/Grid";
-import { TableCSS } from "../../../../../css";
+import { TableRow, TableRowCell } from "../../../../layout/Table";
+import { Padding } from "../../../../layout/Padding";
+import { Content } from "../../../../api";
+import { GridRow, partition } from "../../../../layout/Grid";
+import { TableCSS } from "../../../../css";
 import { Card as CommentCard } from "./Card";
 import { LinkCard } from "./LinkCard";
 

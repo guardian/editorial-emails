@@ -1,5 +1,5 @@
 import React from "react";
-import { Collection as ICollection } from "../../../api";
+import { Collection as ICollection } from "../../api";
 import { VariantB } from "./VariantB";
 import { VariantC } from "./VariantC";
 

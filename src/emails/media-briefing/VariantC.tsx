@@ -1,12 +1,12 @@
 import React from "react";
-import { Collection as ICollection } from "../../../api";
+import { Collection as ICollection } from "../../api";
 import { palette } from "@guardian/src-foundations";
-import { Multiline } from "../../Multiline";
-import { Heading } from "../../Heading";
-import { HeadlineCard } from "../../cards/HeadlineCard";
-import { OverlayCard } from "../../cards/OverlayCard";
-import { Padding } from "../../../layout/Padding";
-import { TableRowCell } from "../../../layout/Table";
+import { OverlayCard } from "../../components/cards/OverlayCard";
+import { Multiline } from "../../components/Multiline";
+import { Heading } from "../../components/Heading";
+import { HeadlineCard } from "../../components/cards/HeadlineCard";
+import { Padding } from "../../layout/Padding";
+import { TableRowCell } from "../../layout/Table";
 
 export const VariantC: React.FC<{
     frontId: string;

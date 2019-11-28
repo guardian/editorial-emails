@@ -3,7 +3,7 @@ import sanitizeHtml from "sanitize-html";
 import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
 import { pillarTheme, PillarType } from "../../styles/pillar-themes";
 import { sanitizeOptions } from "../../styles/sanitize-options";
-import { ContinueButton } from "../ContinueButton";
+import { ContinueButton } from "../buttons/ContinueButton";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";

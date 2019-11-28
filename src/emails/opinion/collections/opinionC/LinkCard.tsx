@@ -1,8 +1,8 @@
 import React from "react";
-import { Content } from "../../../../../api";
-import { TableRowCell } from "../../../../../layout/Table";
-import { TdCSS, LinkCSS, ImageCSS } from "../../../../../css";
-import { headline } from "../../../../../styles/typography";
+import { Content } from "../../../../api";
+import { TableRowCell } from "../../../../layout/Table";
+import { TdCSS, LinkCSS, ImageCSS } from "../../../../css";
+import { headline } from "../../../../styles/typography";
 import { palette } from "@guardian/src-foundations";
 
 const brazeParameter = "?##braze_utm##"; // TODO solve link generation

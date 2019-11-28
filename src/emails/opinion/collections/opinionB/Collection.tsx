@@ -1,12 +1,12 @@
 import React from "react";
-import { Collection as ICollection } from "../../../../../api";
+import { Collection as ICollection } from "../../../../api";
 import { Card as CommentCard } from "./Card";
 import { MediaCard } from "./MediaCard";
-import { Padding } from "../../../../../layout/Padding";
-import { Heading } from "./../../../../Heading";
-import { Multiline } from "./../../../../Multiline";
-import { Grid as CommentGrid } from "../commentB/Grid";
-import { DefaultGrid } from "../../../../../layout/Grid";
+import { Padding } from "../../../../layout/Padding";
+import { Heading } from "./../../../../components/Heading";
+import { Multiline } from "./../../../../components/Multiline";
+import { Grid as CommentGrid } from "./Grid";
+import { DefaultGrid } from "../../../../layout/Grid";
 import { LinkGrid as LinkGridB } from "./Grid";
 
 const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {

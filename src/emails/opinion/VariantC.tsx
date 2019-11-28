@@ -1,16 +1,16 @@
 import React from "react";
-import { Collection as ICollection } from "../../../api";
-import { TableRowCell } from "../../../layout/Table";
+import { Collection as ICollection } from "../../api";
+import { TableRowCell } from "../../layout/Table";
 import {
     CommentCollection,
     EditorialCollection,
     MediaCollection,
     LinkCollection,
     DefaultCollection
-} from "./collections/commentB/Collection";
-import { getDesignType } from "../../../utils/getDesignType";
+} from "./collections/opinionC/Collection";
+import { getDesignType } from "../../utils/getDesignType";
 
-export const VariantB: React.FC<{
+export const VariantC: React.FC<{
     frontId: string;
     collections: ICollection[];
     salt: string;
@@ -46,6 +46,7 @@ export const VariantB: React.FC<{
                 );
             case "media":
                 return <MediaCollection collection={collection} salt={salt} />;
+
             case "link":
                 return <LinkCollection collection={collection} salt={salt} />;
             case "default":
