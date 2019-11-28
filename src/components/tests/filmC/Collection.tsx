@@ -5,6 +5,7 @@ import { DescriptiveCard } from "./../../cards/DescriptiveCard";
 import { DefaultGrid } from "../../../layout/Grid";
 import { Heading } from "../../Heading";
 import { Multiline } from "../../Multiline";
+import { palette } from "@guardian/src-foundations";
 
 export const Collection: React.FC<{
     frontId: string;
@@ -21,11 +22,18 @@ export const Collection: React.FC<{
 
     return (
         <>
-            <DescriptiveCard content={firstContent} salt={salt} />
+            <DescriptiveCard
+                content={firstContent}
+                salt={salt}
+                showByline={firstContent.properties.showByline}
+            />
             <Multiline />
             <Heading heading="More top stories" />
             {gridContent && <DefaultGrid content={gridContent} salt={salt} />}
-            <HeadlineCard content={lastContent} />
+            <HeadlineCard
+                content={lastContent}
+                backgroundColor={palette.culture.faded}
+            />
         </>
     );
 };

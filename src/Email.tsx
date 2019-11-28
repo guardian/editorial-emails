@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { Front } from "./api";
 import { Banner } from "./components/Banner";
 import { Collections } from "./components/Collections";
+import { MediaBriefing } from "./components/tests/media-briefing/MediaBriefing";
 import { Footer } from "./components/Footer";
 import { Center } from "./layout/Center";
 import { default as minifyCssString } from "minify-css-string";
@@ -29,12 +30,21 @@ export const Email = (front: Front, salt: string, variant?: string): string => {
         <Center>
             <TableRowCell tdStyle={{ padding: "0" }}>
                 <Banner frontID={front.id} />
-                <Collections
-                    frontId={front.id}
-                    collections={front.collections}
-                    salt={salt}
-                    variant={variant}
-                />
+                {front.id === "email/media-briefing" ? (
+                    <MediaBriefing
+                        frontId={front.id}
+                        collections={front.collections}
+                        salt={salt}
+                        variant={variant}
+                    />
+                ) : (
+                    <Collections
+                        frontId={front.id}
+                        collections={front.collections}
+                        salt={salt}
+                        variant={variant}
+                    />
+                )}
                 <Footer id={front.id} />
             </TableRowCell>
         </Center>

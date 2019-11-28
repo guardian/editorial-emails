@@ -8,18 +8,29 @@ const tableStyle: TableCSS = {
     width: "100%"
 };
 
-const headingStyle: TdCSS = {
-    fontFamily: "'GH Guardian Headline', Georgia, serif",
-    fontSize: "22px",
-    lineHeight: "26px",
-    color: palette.neutral[7],
-    padding: "0 10px 12px"
+const headingStyle = (backgroundColor: string, color: string): TdCSS => {
+    return {
+        fontFamily: "'GH Guardian Headline', Georgia, serif",
+        fontWeight: 700,
+        fontSize: "22px",
+        lineHeight: "26px",
+        color: color || palette.neutral[7],
+        backgroundColor,
+        padding: "0 10px 12px"
+    };
 };
 
-export const Heading: React.FC<{ heading: string }> = ({ heading }) => (
+export const Heading: React.FC<{
+    heading: string;
+    backgroundColor?: string;
+    color?: string;
+}> = ({ heading, backgroundColor, color }) => (
     <table style={tableStyle}>
         <tr>
-            <td className="m-heading" style={headingStyle}>
+            <td
+                className="m-heading"
+                style={headingStyle(backgroundColor, color)}
+            >
                 {heading}
             </td>
         </tr>

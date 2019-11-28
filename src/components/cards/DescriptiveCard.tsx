@@ -1,6 +1,8 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
 import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
+import { pillarTheme, PillarType } from "../../styles/pillar-themes";
+import { sanitizeOptions } from "../../styles/sanitize-options";
 import { ContinueButton } from "../ContinueButton";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
@@ -75,14 +77,16 @@ const headlineStyle = {
     color: palette.neutral[7]
 };
 
-const kickerStyle = {
-    ...fontFamily.headline,
-    ...fontSizes.large,
-    fontWeight: 400,
-    color: palette.culture.main
+const kickerStyle = (pillarColour: string): FontCSS => {
+    return {
+        ...fontFamily.headline,
+        ...fontSizes.large,
+        fontWeight: 700,
+        color: pillarColour || palette.culture.main
+    };
 };
 
-const bylineStyle = {
+const bylineStyle: FontCSS = {
     ...fontFamily.headline,
     ...fontSizes.large,
     fontStyle: "italic",
@@ -114,11 +118,18 @@ const quoteIconStyle: ImageCSS = {
 interface Props {
     content: Content;
     salt: string;
+    showByline?: boolean;
+    showPillarColours?: boolean;
 }
 
 const brazeParameter = "?##braze_utm##";
 
-export const DescriptiveCard: React.FC<Props> = ({ content, salt }) => {
+export const DescriptiveCard: React.FC<Props> = ({
+    content,
+    salt,
+    showByline,
+    showPillarColours
+}) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(
@@ -130,6 +141,7 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt }) => {
 
     const { headline } = content.header;
     const { byline } = content.properties;
+    const { trailText } = content.card;
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
     const imageAlt = image.fields.altText;
@@ -139,24 +151,14 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt }) => {
         ? kickerText(content.header.kicker)
         : "";
 
-    const { trailText } = content.card;
+    let pillar: PillarType = {};
+    if (showPillarColours && content.properties.maybeContent) {
+        const pillarName = content.properties.maybeContent.metadata.pillar.name;
+        pillar = pillarTheme[pillarName];
+    }
 
     const bodyText = content.properties.maybeContent.fields.body;
     const bodyParagraphs = bodyText.split("</p>");
-
-    // Strip HTML tags but preserve <a> tags
-    // Transform <a> tags to allow an HREF and a style attrbute
-    const sanitizeOptions = {
-        allowedTags: ["a"],
-        allowedAttributes: {
-            a: ["href", "style"]
-        },
-        transformTags: {
-            a: sanitizeHtml.simpleTransform("a", {
-                style: `color: ${palette.culture.main};`
-            })
-        }
-    };
 
     return (
         <table style={tableStyle}>
@@ -167,7 +169,9 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt }) => {
                             <td className="m-pad" style={metaWrapperStyle}>
                                 <a style={linkStyle} href={webURL}>
                                     {kicker && (
-                                        <span style={kickerStyle}>
+                                        <span
+                                            style={kickerStyle(pillar.colour)}
+                                        >
                                             {kicker + " / "}
                                         </span>
                                     )}
@@ -182,11 +186,16 @@ export const DescriptiveCard: React.FC<Props> = ({ content, salt }) => {
                                                 />{" "}
                                             </>
                                         )}
-
                                         {headline}
                                     </span>
-                                    <br />
-                                    <span style={bylineStyle}> {byline}</span>
+                                    {showByline && (
+                                        <>
+                                            <br />
+                                            <span style={bylineStyle}>
+                                                {byline}
+                                            </span>
+                                        </>
+                                    )}
                                 </a>
                             </td>
                         </tr>
