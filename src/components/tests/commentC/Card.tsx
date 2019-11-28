@@ -319,7 +319,6 @@ export const Card: React.FC<Props> = ({
                     size={size}
                     linkURL={webURL}
                     isComment={isComment}
-                    kicker={kicker}
                     headline={headline}
                     byline={byline}
                 />
