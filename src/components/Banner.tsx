@@ -12,7 +12,7 @@ const imgStyle: ImageCSS = {
     width: "100%"
 };
 
-export const Banner: React.FC<{ frontID: string }> = ({ frontID }) => {
+export const Banner: React.FC<{ frontId: string }> = ({ frontId }) => {
     const banners: { [key in string]: string } = {
         "email/opinion":
             "https://assets.guim.co.uk/images/email/banners/5ddb54b70715242bc85e071bd14f66e8/opinion.png",
@@ -28,8 +28,8 @@ export const Banner: React.FC<{ frontID: string }> = ({ frontID }) => {
         default: "Film Today"
     };
 
-    const bannerSrc = banners[frontID] || banners.default;
-    const bannerAltText = bannersAlt[frontID] || bannersAlt.default;
+    const bannerSrc = banners[frontId] || banners.default;
+    const bannerAltText = bannersAlt[frontId] || bannersAlt.default;
 
     return (
         <TableRowCell tdStyle={{ padding: "0" }}>

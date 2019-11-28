@@ -8,7 +8,7 @@ import { OverlayCard } from "../../cards/OverlayCard";
 import { Padding } from "../../../layout/Padding";
 import { TableRowCell } from "../../../layout/Table";
 
-export const BriefingC: React.FC<{
+export const VariantC: React.FC<{
     frontId: string;
     collections: ICollection[];
     salt: string;

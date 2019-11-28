@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { Front } from "./api";
 import { Banner } from "./components/Banner";
 import { Collections } from "./components/Collections";
+import { FilmToday } from "./components/tests/film-today/FilmToday";
 import { MediaBriefing } from "./components/tests/media-briefing/MediaBriefing";
 import { Footer } from "./components/Footer";
 import { Center } from "./layout/Center";
@@ -25,27 +26,56 @@ const title = (id: string): string => {
     );
 };
 
+enum Fronts {
+    Opinion = "email/opinion",
+    FilmToday = "email/film-today",
+    MediaBriefing = "email/media-briefing"
+}
+
+const renderCollectionRendered = (
+    front: Front,
+    salt: string,
+    variant?: string
+) => {
+    const { id, collections } = front;
+    switch (front.id) {
+        case Fronts.FilmToday:
+            return (
+                <FilmToday
+                    frontId={id}
+                    collections={collections}
+                    salt={salt}
+                    variant={variant}
+                />
+            );
+        case Fronts.MediaBriefing:
+            return (
+                <MediaBriefing
+                    frontId={id}
+                    collections={collections}
+                    salt={salt}
+                    variant={variant}
+                />
+            );
+        default:
+            return (
+                <Collections
+                    frontId={id}
+                    collections={collections}
+                    salt={salt}
+                    variant={variant}
+                />
+            );
+    }
+};
+
 export const Email = (front: Front, salt: string, variant?: string): string => {
     const body = renderToStaticMarkup(
         <Center>
             <TableRowCell tdStyle={{ padding: "0" }}>
-                <Banner frontID={front.id} />
-                {front.id === "email/media-briefing" ? (
-                    <MediaBriefing
-                        frontId={front.id}
-                        collections={front.collections}
-                        salt={salt}
-                        variant={variant}
-                    />
-                ) : (
-                    <Collections
-                        frontId={front.id}
-                        collections={front.collections}
-                        salt={salt}
-                        variant={variant}
-                    />
-                )}
-                <Footer id={front.id} />
+                <Banner frontId={front.id} />
+                {renderCollectionRendered(front, salt, variant)}
+                <Footer frontId={front.id} />
             </TableRowCell>
         </Center>
     );

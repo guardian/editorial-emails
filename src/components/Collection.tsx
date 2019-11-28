@@ -1,8 +1,6 @@
 import React from "react";
 import { Collection as ICollection } from "../api";
-import { Card } from "./cards/Card";
 import { DefaultGrid } from "../layout/Grid";
-import { Padding } from "../layout/Padding";
 import { Heading } from "./Heading";
 import { Multiline } from "./Multiline";
 import { LinkGrid as LinkGridB } from "./tests/commentB/Grid";
@@ -12,12 +10,11 @@ export const DefaultCollection: React.FC<{
     collection: ICollection;
     salt: string;
     variant: string;
-}> = ({ collection, salt, variant }) => {
+}> = ({ collection, salt }) => {
     if (collection.backfill.length < 1) {
         return null;
     }
 
-    // TODO handle curated collections
     const filmCollection = collection.backfill;
 
     return (

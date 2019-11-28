@@ -1,13 +1,13 @@
 import React from "react";
 import { Collection as ICollection } from "../../../api";
+import { palette } from "@guardian/src-foundations";
+import { Multiline } from "../../Multiline";
+import { Heading } from "../../Heading";
 import { HeadlineCard } from "../../cards/HeadlineCard";
 import { DescriptiveCard } from "./../../cards/DescriptiveCard";
 import { DefaultGrid } from "../../../layout/Grid";
-import { Heading } from "../../Heading";
-import { Multiline } from "../../Multiline";
-import { palette } from "@guardian/src-foundations";
 
-export const Collection: React.FC<{
+export const VariantC: React.FC<{
     frontId: string;
     collection: ICollection;
     salt: string;

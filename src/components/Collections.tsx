@@ -12,8 +12,6 @@ import {
     MediaCollection as MediaCollectionC
 } from "./tests/commentC/Collection";
 
-import { Collection as FilmCollectionC } from "./tests/filmC/Collection";
-
 import { Content } from "../api";
 import { TableRowCell } from "../layout/Table";
 
@@ -27,11 +25,6 @@ type DesignType =
 
 const getDesignType = (frontId: string, content: Content[]): DesignType => {
     const designTypes: Set<string> = new Set();
-
-    // Allow certain front IDs to set the sam design type for all collections
-    if (frontId === "email/film-today") {
-        return "film";
-    }
 
     content.forEach(c => {
         if (c.type === "LinkSnap") {
@@ -135,23 +128,6 @@ export const Collections: React.FC<{
             case "link":
                 return (
                     <LinkCollection
-                        collection={collection}
-                        salt={salt}
-                        variant={variant}
-                    />
-                );
-            case "film":
-                if (variant === "c") {
-                    return (
-                        <FilmCollectionC
-                            frontId={frontId}
-                            collection={collection}
-                            salt={salt}
-                        />
-                    );
-                }
-                return (
-                    <DefaultCollection
                         collection={collection}
                         salt={salt}
                         variant={variant}
