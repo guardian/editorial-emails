@@ -81,16 +81,6 @@ const spanStyle: FontCSS = {
     lineHeight: "20px"
 };
 
-const kickerStyle = (size: Size): FontCSS => {
-    return {
-        color: palette.opinion.main,
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontWeight: 400,
-
-        ...fontSizes[size]
-    };
-};
-
 const bylineStyle = (size: Size): FontCSS => {
     return {
         color: palette.opinion.main,
@@ -227,17 +217,13 @@ const Headline: React.FC<{
     size: Size;
     linkURL: string;
     isComment: boolean;
-    kicker: string;
     headline: string;
     byline: string;
-}> = ({ size, linkURL, isComment, kicker, headline, byline }) => {
+}> = ({ size, linkURL, isComment, headline, byline }) => {
     return (
         <tr>
             <td className="m-pad" style={metaWrapperStyle(size)}>
                 <a style={linkStyle} href={linkURL}>
-                    {kicker && (
-                        <span style={kickerStyle(size)}>{kicker + " / "}</span>
-                    )}
                     <span style={headlineStyle(size)}>
                         {isComment && (
                             <>
