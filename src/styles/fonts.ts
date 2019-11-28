@@ -56,6 +56,38 @@ u + .body a,
 
 @font-face {
     font-family: "GH Guardian Headline";
+    src: url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff) format("woff");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GH Guardian Headline";
+    src: url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff) format("woff");
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "GH Guardian Headline";
+    src: url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff) format("woff");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GH Guardian Headline";
+    src: url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff) format("woff");
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "GH Guardian Headline";
     src: url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2) format("woff2"),
          url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff) format("woff");
     font-weight: 700;
@@ -64,17 +96,9 @@ u + .body a,
 
 @font-face {
     font-family: "GH Guardian Headline";
-    src: url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2) format("woff2"),
-         url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff) format("woff");
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "GH Guardian Headline";
-    src: url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2) format("woff2"),
-         url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff) format("woff");
-    font-weight: 400;
+    src: url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BoldItalic.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BoldItalic.woff) format("woff");
+    font-weight: 700;
     font-style: italic;
 }
 
@@ -84,6 +108,38 @@ u + .body a,
          url(${CDNFontPath}/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff) format("woff");
     font-weight: 400;
     font-style: normal;
+}
+
+@font-face {
+    font-family: "Guardian Text Egyptian";
+    src: url(${CDNFontPath}/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff) format("woff");
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Guardian Text Egyptian";
+    src: url(${CDNFontPath}/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularBold.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularBold.woff) format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Guardian Text Sans";
+    src: url(${CDNFontPath}/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff) format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Guardian Text Sans";
+    src: url(${CDNFontPath}/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2) format("woff2"),
+         url(${CDNFontPath}/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff) format("woff");
+    font-weight: 400;
+    font-style: italic;
 }
 
 @font-face {
