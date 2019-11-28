@@ -83,7 +83,7 @@ const spanStyle: FontCSS = {
 
 const kickerStyle = (size: Size): FontCSS => {
     return {
-        color: palette.culture.main,
+        color: palette.opinion.main,
         fontFamily: "'GH Guardian Headline', Georgia, serif",
         fontWeight: 400,
 
@@ -196,7 +196,7 @@ const SupplementaryMeta: React.FC<{
 
     if (trailText && contributorImageSrc) {
         return (
-            <RowCell>
+            <RowCell tdStyle={{ padding: "0" }}>
                 <TableRow>
                     <TrailText text={trailText} linkURL={linkURL} size={size} />
                     {contributorImage}
@@ -211,7 +211,7 @@ const SupplementaryMeta: React.FC<{
         );
     } else if (contributorImageSrc) {
         return (
-            <RowCell>
+            <RowCell tdStyle={{ padding: "0" }}>
                 <Table>
                     <td style={{ width: "50%" }}></td>
                     {contributorImage}
