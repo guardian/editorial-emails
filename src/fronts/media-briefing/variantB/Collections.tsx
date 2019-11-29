@@ -18,6 +18,8 @@ export const Collections: React.FC<{
 
         switch (designType) {
             case "comment":
+                // TODO - this needs refactoring to improve reliability
+                // We need to ignore collections in a more reliable way or otherwise just accept them
                 if (collection.displayName === "Media by sector") {
                     return null;
                 }
