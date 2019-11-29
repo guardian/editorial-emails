@@ -8,14 +8,9 @@ export const Collections: React.FC<{
     collections: ICollection[];
     salt: string;
 }> = ({ collections, salt }) => {
-    const renderedCollections = collections.map(collection => {
-        // Ignore the jobs collection
-        if (collection.displayName === "Save 50% for three months") {
-            return null;
-        }
-
-        return <DefaultCollection collection={collection} salt={salt} />;
-    });
+    const renderedCollections = collections.map(collection => (
+        <DefaultCollection collection={collection} salt={salt} />
+    ));
 
     return (
         <TableRowCell tdStyle={{ padding: "0" }}>

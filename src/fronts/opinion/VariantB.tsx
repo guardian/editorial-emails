@@ -19,8 +19,14 @@ export const VariantB: React.FC<{
         const content = [].concat(collection.backfill, collection.curated); // TODO support curated too
         const designType = getDesignType(content);
 
-        if (collection.displayName === "Save 50% for three months") {
-            return null; // ignore the jobs collection for now
+        // Ignore the jobs/masterclasses collection for now
+        // The collection displayName changes over time and isn't reliable enough for this condition
+        // So intead, we use a different, also unreliable approach of checking for a collection
+        // with one and only one curated item.
+        // TODO: refactor this condition to be more reliable and last long term
+        // Or otherwise remove condition and accept the jobs/masterclasses collection
+        if (collection.curated.length === 1) {
+            return null;
         }
 
         switch (designType) {
