@@ -1,6 +1,6 @@
 import { Content } from "../api";
 
-type DesignType =
+export type DesignType =
     | "default"
     | "comment"
     | "media"

@@ -42,17 +42,8 @@ export const VariantC: React.FC<{
                         salt={salt}
                     />
                 );
-            case "comment":
-                return (
-                    <CommentCollection
-                        frontId={frontId}
-                        collection={collection}
-                        salt={salt}
-                    />
-                );
             case "media":
                 return <MediaCollection collection={collection} salt={salt} />;
-
             case "link":
                 return <LinkCollection collection={collection} salt={salt} />;
             case "default":

@@ -32,31 +32,48 @@ export const VariantB: React.FC<{
         switch (designType) {
             case "editorial":
                 return (
-                    <EditorialCollection collection={collection} salt={salt} />
+                    <>
+                        <p>EDITORIAL</p>
+                        <EditorialCollection
+                            collection={collection}
+                            salt={salt}
+                        />
+                    </>
                 );
             case "comment":
                 return (
-                    <CommentCollection
-                        frontId={frontId}
-                        collection={collection}
-                        salt={salt}
-                    />
-                );
-            case "comment":
-                return (
-                    <CommentCollection
-                        frontId={frontId}
-                        collection={collection}
-                        salt={salt}
-                    />
+                    <>
+                        <p>COMMENT</p>
+                        <CommentCollection
+                            frontId={frontId}
+                            collection={collection}
+                            salt={salt}
+                        />
+                    </>
                 );
             case "media":
-                return <MediaCollection collection={collection} salt={salt} />;
+                return (
+                    <>
+                        <p>MEDIA</p>
+                        <MediaCollection collection={collection} salt={salt} />
+                    </>
+                );
             case "link":
-                return <LinkCollection collection={collection} salt={salt} />;
+                return (
+                    <>
+                        <p>LINK</p>
+                        <LinkCollection collection={collection} salt={salt} />
+                    </>
+                );
             case "default":
                 return (
-                    <DefaultCollection collection={collection} salt={salt} />
+                    <>
+                        <p>DEFAULT</p>
+                        <DefaultCollection
+                            collection={collection}
+                            salt={salt}
+                        />
+                    </>
                 );
         }
     });

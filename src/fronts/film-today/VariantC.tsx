@@ -1,39 +1,29 @@
 import React from "react";
 import { Collection as ICollection } from "../../api";
-import { palette } from "@guardian/src-foundations";
-import { Multiline } from "../../components/Multiline";
-import { Heading } from "../../components/Heading";
-import { HeadlineCard } from "../../components/cards/HeadlineCard";
-import { DescriptiveCard } from "./../../components/cards/DescriptiveCard";
-import { DefaultGrid } from "../../layout/Grid";
+import { TableRowCell } from "../../layout/Table";
+import { getDesignType } from "../../utils/getDesignType";
+import { DefaultCollection } from "./collections/filmC/DefaultCollection";
 
 export const VariantC: React.FC<{
     frontId: string;
-    collection: ICollection;
+    collections: ICollection[];
     salt: string;
-}> = ({ collection, salt }) => {
-    if (collection.backfill.length < 1) {
-        return null;
-    }
+}> = ({ collections, salt }) => {
+    const renderedCollections = collections.map(collection => {
+        const content = [].concat(collection.backfill, collection.curated);
+        const designType = getDesignType(content);
 
-    const firstContent = collection.backfill[0];
-    const gridContent = collection.backfill.slice(1, 5);
-    const lastContent = collection.backfill[5];
+        switch (designType) {
+            case "default":
+                return (
+                    <DefaultCollection collection={collection} salt={salt} />
+                );
+        }
+    });
 
     return (
-        <>
-            <DescriptiveCard
-                content={firstContent}
-                salt={salt}
-                showByline={firstContent.properties.showByline}
-            />
-            <Multiline />
-            <Heading heading="More top stories" />
-            {gridContent && <DefaultGrid content={gridContent} salt={salt} />}
-            <HeadlineCard
-                content={lastContent}
-                backgroundColor={palette.culture.faded}
-            />
-        </>
+        <TableRowCell tdStyle={{ padding: "0" }}>
+            {renderedCollections}
+        </TableRowCell>
     );
 };
