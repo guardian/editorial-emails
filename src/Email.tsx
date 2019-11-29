@@ -1,17 +1,23 @@
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { Fronts, Front } from "./api";
+import { Front } from "./api";
 import { Banner } from "./components/Banner";
 import { Collections } from "./components/Collections";
-import { FilmToday } from "./emails/film-today/FilmToday";
-import { MediaBriefing } from "./emails/media-briefing/MediaBriefing";
-import { Opinion } from "./emails/opinion/Opinion";
+import { FilmToday } from "./fronts/film-today/FilmToday";
+import { MediaBriefing } from "./fronts/media-briefing/MediaBriefing";
+import { Opinion } from "./fronts/opinion/Opinion";
 import { Footer } from "./components/Footer";
 import { Center } from "./layout/Center";
 import { default as minifyCssString } from "minify-css-string";
 import { fontStyles } from "./styles/fonts";
 import { responsiveStyles } from "./styles/responsive-styles";
 import { TableRowCell } from "./layout/Table";
+
+enum Fronts {
+    Opinion = "email/opinion",
+    FilmToday = "email/film-today",
+    MediaBriefing = "email/media-briefing"
+}
 
 const canonicalURL = (path: string): string =>
     `https://www.theguardian.com/${path}`;
@@ -27,7 +33,7 @@ const title = (id: string): string => {
     );
 };
 
-const renderEmail = (front: Front, salt: string, variant?: string) => {
+const renderFront = (front: Front, salt: string, variant?: string) => {
     const { id, collections } = front;
     switch (front.id) {
         case Fronts.FilmToday:
@@ -73,7 +79,7 @@ export const Email = (front: Front, salt: string, variant?: string): string => {
         <Center>
             <TableRowCell tdStyle={{ padding: "0" }}>
                 <Banner frontId={front.id} />
-                {renderEmail(front, salt, variant)}
+                {renderFront(front, salt, variant)}
                 <Footer frontId={front.id} />
             </TableRowCell>
         </Center>

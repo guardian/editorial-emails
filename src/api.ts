@@ -145,12 +145,6 @@ interface SEOData {
     webTitle: string;
 }
 
-export enum Fronts {
-    Opinion = "email/opinion",
-    FilmToday = "email/film-today",
-    MediaBriefing = "email/media-briefing"
-}
-
 export interface Front {
     id: string;
     collections: Collection[];
