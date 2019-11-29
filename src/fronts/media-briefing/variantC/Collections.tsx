@@ -1,13 +1,13 @@
 import React from "react";
-import { Collection as ICollection } from "../../api";
-import { TableRowCell } from "../../layout/Table";
-import { getDesignType } from "../../utils/getDesignType";
-import { TopCollection } from "./collections/mediaC/TopCollection";
-import { CommentCollection } from "./collections/mediaC/CommentCollection";
-import { LinkCollection } from "./collections/mediaC/LinkCollection";
-import { DefaultCollection } from "./collections/mediaC/DefaultCollection";
+import { Collection as ICollection } from "../../../api";
+import { TableRowCell } from "../../../layout/Table";
+import { getDesignType } from "../../../utils/getDesignType";
+import { TopCollection } from "./components/TopCollection";
+import { CommentCollection } from "./components/CommentCollection";
+import { LinkCollection } from "./components/LinkCollection";
+import { DefaultCollection } from "./components/DefaultCollection";
 
-export const VariantC: React.FC<{
+export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
     salt: string;

@@ -1,10 +1,10 @@
 import React from "react";
-import { Collection as ICollection } from "../../api";
-import { TableRowCell } from "../../layout/Table";
-import { getDesignType } from "../../utils/getDesignType";
-import { DefaultCollection } from "./collections/filmC/DefaultCollection";
+import { Collection as ICollection } from "../../../api";
+import { TableRowCell } from "../../../layout/Table";
+import { getDesignType } from "../../../utils/getDesignType";
+import { DefaultCollection } from "./components/DefaultCollection";
 
-export const VariantC: React.FC<{
+export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
     salt: string;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Collection as ICollection } from "../../api";
-import { VariantB } from "./VariantB";
-import { VariantC } from "./VariantC";
+import { Collections as CollectionsVariantB } from "./variantB/Collections";
+import { Collections as CollectionsVariantC } from "./variantC/Collections";
 
 export const Opinion: React.FC<{
     frontId: string;
@@ -11,19 +11,19 @@ export const Opinion: React.FC<{
 }> = ({ frontId, collections, salt, variant }) => {
     if (variant === "c") {
         return (
-            <VariantC
+            <CollectionsVariantC
                 frontId={frontId}
                 collections={collections}
                 salt={salt}
-            ></VariantC>
+            ></CollectionsVariantC>
         );
     }
 
     return (
-        <VariantB
+        <CollectionsVariantB
             frontId={frontId}
             collections={collections}
             salt={salt}
-        ></VariantB>
+        ></CollectionsVariantB>
     );
 };

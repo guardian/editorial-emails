@@ -1,7 +1,7 @@
 import React from "react";
 import { Collection as ICollection } from "../../api";
 import { Collections } from "../../components/Collections";
-import { VariantC } from "./VariantC";
+import { Collections as CollectionsVariantC } from "./variantC/Collections";
 
 export const FilmToday: React.FC<{
     frontId: string;
@@ -11,11 +11,11 @@ export const FilmToday: React.FC<{
 }> = ({ frontId, collections, salt, variant }) => {
     if (variant === "c") {
         return (
-            <VariantC
+            <CollectionsVariantC
                 frontId={frontId}
                 collections={collections}
                 salt={salt}
-            ></VariantC>
+            ></CollectionsVariantC>
         );
     }
 
