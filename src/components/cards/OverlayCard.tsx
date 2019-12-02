@@ -7,6 +7,7 @@ import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import { Kicker } from "../../components/Kicker";
+import { QuotationMark } from "../../components/QuotationMark";
 
 const fontSizes = {
     large: {
@@ -75,11 +76,11 @@ const trailTextPadding: TdCSS = {
     padding: "6px 10px 20px 10px"
 };
 
-const quoteIconStyle: ImageCSS = {
-    height: "0.8em",
-    display: "inline-block",
-    border: "0"
-};
+// const quoteIconStyle: ImageCSS = {
+//     height: "0.8em",
+//     display: "inline-block",
+//     border: "0"
+// };
 
 interface Props {
     content: Content;
@@ -154,7 +155,7 @@ export const OverlayCard: React.FC<Props> = ({
                                     )}
 
                                     <span style={headlineStyle}>
-                                        {isComment && (
+                                        {/* {isComment && (
                                             <>
                                                 <img
                                                     height={"14"}
@@ -163,6 +164,9 @@ export const OverlayCard: React.FC<Props> = ({
                                                     alt="quote icon"
                                                 />{" "}
                                             </>
+                                        )} */}
+                                        {isComment && (
+                                            <QuotationMark colour="white" />
                                         )}
                                         {headline}
                                     </span>

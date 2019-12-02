@@ -7,6 +7,7 @@ import { palette } from "@guardian/src-foundations";
 import { Content, Pillar } from "../../api";
 import { kickerText } from "../../kicker";
 import { Kicker } from "../../components/Kicker";
+import { QuotationMark } from "../../components/QuotationMark";
 
 const fontSizes = {
     large: {
@@ -123,7 +124,7 @@ export const HeadlineCard: React.FC<Props> = ({
         ? content.properties.maybeContent.metadata.pillar.name
         : null;
     const pillarColour = pillar ? pillarProps[pillar].colour : null;
-    const pillarQuote = pillar ? pillarProps[pillar].quote : null;
+    // const pillarQuote = pillar ? pillarProps[pillar].quote : null;
 
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)
@@ -161,7 +162,7 @@ export const HeadlineCard: React.FC<Props> = ({
                                     )}
 
                                     <span style={headlineStyle(layout, colour)}>
-                                        {isComment && (
+                                        {/* {isComment && (
                                             <>
                                                 <img
                                                     height={"14"}
@@ -175,6 +176,9 @@ export const HeadlineCard: React.FC<Props> = ({
                                                     alt="quote icon"
                                                 />{" "}
                                             </>
+                                        )} */}
+                                        {isComment && (
+                                            <QuotationMark pillar={pillar} />
                                         )}
                                         {headline}
                                     </span>

@@ -3,9 +3,9 @@ import { FontCSS, TdCSS, ImageCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Content, Tag } from "../../api";
 import { formatImage } from "../../image";
-import { kickerText } from "../../kicker";
 import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell, TableRow } from "../../layout/Table";
+import { QuotationMark } from "../../components/QuotationMark";
 
 type Size = "small" | "large";
 
@@ -91,16 +91,11 @@ const bylineStyle = (size: Size): FontCSS => {
     };
 };
 
-const quoteIconStyle: ImageCSS = {
-    height: "0.8em",
-    display: "inline-block",
-    border: "0"
-};
-
-const columnStyleLeft: TdCSS = {
-    width: "70%",
-    verticalAlign: "bottom"
-};
+// const quoteIconStyle: ImageCSS = {
+//     height: "0.8em",
+//     display: "inline-block",
+//     border: "0"
+// };
 
 const columnStyleRight: TdCSS = {
     width: "30%",
@@ -225,7 +220,7 @@ const Headline: React.FC<{
             <td className="m-pad" style={metaWrapperStyle(size)}>
                 <a style={linkStyle} href={linkURL}>
                     <span style={headlineStyle(size)}>
-                        {isComment && (
+                        {/* {isComment && (
                             <>
                                 <img
                                     height={"14"}
@@ -234,7 +229,8 @@ const Headline: React.FC<{
                                     alt="quote icon"
                                 />{" "}
                             </>
-                        )}
+                        )} */}
+                        {isComment && <QuotationMark pillar="Opinion" />}
 
                         {headline}
                     </span>
@@ -284,10 +280,6 @@ export const CommentCardC: React.FC<Props> = ({
     const imageURL = formattedImage;
     const imageAlt = image.fields.altText;
     const isComment = content.header.isComment;
-
-    const kicker = content.header.kicker
-        ? kickerText(content.header.kicker)
-        : "";
 
     const contributor = content.properties.maybeContent.tags.tags.find(tag => {
         return tag.properties.tagType === "Contributor";

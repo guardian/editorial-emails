@@ -8,6 +8,7 @@ import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import { Kicker } from "../../components/Kicker";
+import { QuotationMark } from "../../components/QuotationMark";
 
 const fontFamily = {
     headline: {
@@ -145,6 +146,7 @@ export const DescriptiveCard: React.FC<Props> = ({
     const pillar = content.properties.maybeContent
         ? content.properties.maybeContent.metadata.pillar.name
         : null;
+
     const bodyText = content.properties.maybeContent.fields.body;
     const bodyParagraphs = bodyText.split("</p>");
 
@@ -168,7 +170,7 @@ export const DescriptiveCard: React.FC<Props> = ({
                                         />
                                     )}
                                     <span style={headlineStyle}>
-                                        {isComment && (
+                                        {/* {isComment && (
                                             <>
                                                 <img
                                                     height={"14"}
@@ -177,6 +179,9 @@ export const DescriptiveCard: React.FC<Props> = ({
                                                     alt="quote icon"
                                                 />{" "}
                                             </>
+                                        )} */}
+                                        {isComment && (
+                                            <QuotationMark pillar={pillar} />
                                         )}
                                         {headline}
                                     </span>

@@ -5,6 +5,7 @@ import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import { Kicker } from "../../components/Kicker";
+import { QuotationMark } from "../../components/QuotationMark";
 
 type Size = "small" | "large";
 
@@ -109,6 +110,10 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
     const imageAlt = image.fields.altText;
     const isComment = content.display.showQuotedHeadline;
 
+    const pillar = content.properties.maybeContent
+        ? content.properties.maybeContent.metadata.pillar.name
+        : null;
+
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)
         : "";
@@ -145,7 +150,7 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
                                         <Kicker text={kicker} size={size} />
                                     )}
                                     <span style={headlineStyle(size)}>
-                                        {isComment && (
+                                        {/* {isComment && (
                                             <>
                                                 <img
                                                     height={"14"}
@@ -154,6 +159,9 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
                                                     alt="quote icon"
                                                 />{" "}
                                             </>
+                                        )} */}
+                                        {isComment && (
+                                            <QuotationMark pillar={pillar} />
                                         )}
 
                                         {headline}
