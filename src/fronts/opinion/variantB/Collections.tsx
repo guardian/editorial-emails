@@ -32,48 +32,23 @@ export const Collections: React.FC<{
         switch (designType) {
             case "editorial":
                 return (
-                    <>
-                        <p>EDITORIAL</p>
-                        <EditorialCollection
-                            collection={collection}
-                            salt={salt}
-                        />
-                    </>
+                    <EditorialCollection collection={collection} salt={salt} />
                 );
             case "comment":
                 return (
-                    <>
-                        <p>COMMENT</p>
-                        <CommentCollection
-                            frontId={frontId}
-                            collection={collection}
-                            salt={salt}
-                        />
-                    </>
+                    <CommentCollection
+                        frontId={frontId}
+                        collection={collection}
+                        salt={salt}
+                    />
                 );
             case "media":
-                return (
-                    <>
-                        <p>MEDIA</p>
-                        <MediaCollection collection={collection} salt={salt} />
-                    </>
-                );
+                return <MediaCollection collection={collection} salt={salt} />;
             case "link":
-                return (
-                    <>
-                        <p>LINK</p>
-                        <LinkCollection collection={collection} salt={salt} />
-                    </>
-                );
+                return <LinkCollection collection={collection} salt={salt} />;
             case "default":
                 return (
-                    <>
-                        <p>DEFAULT</p>
-                        <DefaultCollection
-                            collection={collection}
-                            salt={salt}
-                        />
-                    </>
+                    <DefaultCollection collection={collection} salt={salt} />
                 );
         }
     });
