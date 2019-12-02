@@ -1,9 +1,8 @@
 import React from "react";
-import { Content } from "../../../../api";
-import { TableRowCell } from "../../../../layout/Table";
-import { TdCSS, LinkCSS, ImageCSS } from "../../../../css";
-import { headline } from "../../../../styles/typography";
-import { palette } from "@guardian/src-foundations";
+import { Content } from "../../api";
+import { TableRowCell } from "../../layout/Table";
+import { TdCSS, LinkCSS, ImageCSS } from "../../css";
+import { headline } from "../../styles/typography";
 
 const brazeParameter = "?##braze_utm##"; // TODO solve link generation
 
@@ -24,7 +23,7 @@ const iconStyle: ImageCSS = {
     border: "0"
 };
 
-export const LinkCard: React.FC<{
+export const LinkCardC: React.FC<{
     content: Content;
 }> = ({ content }) => {
     const webURL =

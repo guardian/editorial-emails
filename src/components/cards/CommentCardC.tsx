@@ -1,16 +1,11 @@
 import React from "react";
-import { FontCSS, TdCSS, ImageCSS } from "../../../../css";
+import { FontCSS, TdCSS, ImageCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content, Tag } from "../../../../api";
-import { formatImage } from "../../../../image";
-import { kickerText } from "../../../../kicker";
+import { Content, Tag } from "../../api";
+import { formatImage } from "../../image";
+import { kickerText } from "../../kicker";
 import sanitizeHtml from "sanitize-html";
-import {
-    Table,
-    RowCell,
-    TableRowCell,
-    TableRow
-} from "../../../../layout/Table";
+import { Table, RowCell, TableRowCell, TableRow } from "../../layout/Table";
 
 type Size = "small" | "large";
 
@@ -46,11 +41,11 @@ const imgProfileStyle: ImageCSS = {
     border: "0"
 };
 
-const tdStyle: TdCSS = {
-    backgroundColor: palette.opinion.faded,
-    borderTop: `2px solid ${palette.opinion.main}`,
-    padding: "0"
-};
+const tdStyle = (isLarge: boolean): TdCSS => ({
+    padding: "0",
+    borderLeft: isLarge ? `1px solid ${palette.opinion.main}` : "none",
+    borderBottom: isLarge ? `1px solid ${palette.opinion.main}` : "none"
+});
 
 const metaWrapperStyle = (size: Size): TdCSS => {
     const rightPad = size === "large" ? "40px" : "10px";
@@ -207,10 +202,10 @@ const SupplementaryMeta: React.FC<{
     } else if (contributorImageSrc) {
         return (
             <RowCell tdStyle={{ padding: "0" }}>
-                <Table>
+                <TableRow>
                     <td style={{ width: "50%" }}></td>
                     {contributorImage}
-                </Table>
+                </TableRow>
             </RowCell>
         );
     }
@@ -268,7 +263,7 @@ const Image: React.FC<{
     );
 };
 
-export const Card: React.FC<Props> = ({
+export const CommentCardC: React.FC<Props> = ({
     content,
     salt,
     size,
@@ -279,7 +274,7 @@ export const Card: React.FC<Props> = ({
     const formattedImage = formatImage(
         image.url,
         salt,
-        size === "large" ? 600 : 300,
+        size === "large" ? 599 : 300,
         content.card.starRating
     );
 
@@ -307,7 +302,7 @@ export const Card: React.FC<Props> = ({
     });
 
     return (
-        <TableRowCell tdStyle={tdStyle}>
+        <TableRowCell tdStyle={tdStyle(size === "large")}>
             <Table>
                 {shouldShowImage && (
                     <RowCell tdStyle={{ padding: "0" }}>
@@ -315,7 +310,7 @@ export const Card: React.FC<Props> = ({
                             src={imageURL}
                             linkURL={webURL}
                             alt={imageAlt}
-                            width={size === "large" ? 600 : 294}
+                            width={size === "large" ? 599 : 294}
                         />
                     </RowCell>
                 )}
@@ -338,7 +333,7 @@ export const Card: React.FC<Props> = ({
                             contributor && contributor.properties.webTitle
                         }
                         size={size}
-                        width={size === "large" ? 180 : 147}
+                        width={size === "large" ? 179 : 146}
                     />
                 )}
             </Table>
@@ -362,7 +357,7 @@ export const ContributorImageWrapper: React.FC<{
     return (
         <ContributorImage
             salt={salt}
-            width={147}
+            width={146}
             src={profilePic}
             alt={contributor.properties.webTitle}
         />

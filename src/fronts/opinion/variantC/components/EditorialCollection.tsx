@@ -2,7 +2,7 @@ import React from "react";
 import { Collection as ICollection } from "../../../../api";
 import { Heading } from "./../../../../components/Heading";
 import { Multiline } from "./../../../../components/Multiline";
-import { Card as CommentCard } from "./Card";
+import { CommentCardC } from "../../../../components/cards/CommentCardC";
 
 export const EditorialCollection: React.FC<{
     collection: ICollection;
@@ -16,7 +16,7 @@ export const EditorialCollection: React.FC<{
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
 
-            <CommentCard
+            <CommentCardC
                 content={contentOne}
                 salt={salt}
                 size={"large"}

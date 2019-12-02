@@ -1,7 +1,7 @@
 import React from "react";
 import { Collection as ICollection } from "../../../../api";
 import { Heading } from "./../../../../components/Heading";
-import { MediaCard } from "./MediaCard";
+import { MediaCardB } from "../../../../components/cards/MediaCardB";
 import { Multiline } from "./../../../../components/Multiline";
 
 export const MediaCollection: React.FC<{
@@ -9,7 +9,7 @@ export const MediaCollection: React.FC<{
     salt: string;
 }> = ({ collection, salt }) => {
     const items = collection.backfill.map(content => (
-        <MediaCard content={content} salt={salt} />
+        <MediaCardB content={content} salt={salt} />
     ));
 
     return (

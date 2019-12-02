@@ -1,12 +1,15 @@
 import React from "react";
-import { ContributorImageWrapper, getContributor } from "./Card";
 import { palette } from "@guardian/src-foundations";
 import { TableRowCell, TableRow } from "../../../../layout/Table";
 import { Padding } from "../../../../layout/Padding";
 import { Content } from "../../../../api";
 import { GridRow, partition } from "../../../../layout/Grid";
-import { Card as CommentCard } from "./Card";
-import { LinkCard } from "./LinkCard";
+import {
+    CommentCardB,
+    ContributorImageWrapper,
+    getContributor
+} from "../../../../components/cards/CommentCardB";
+import { LinkCardB } from "../../../../components/cards/LinkCardB";
 
 interface CommentGridProps {
     content: Content[];
@@ -44,7 +47,7 @@ export const Grid: React.FC<CommentGridProps> = ({
             <React.Fragment key={i}>
                 <GridRow
                     left={
-                        <CommentCard
+                        <CommentCardB
                             content={pair[0]}
                             salt={salt}
                             size={"small"}
@@ -52,7 +55,7 @@ export const Grid: React.FC<CommentGridProps> = ({
                         />
                     }
                     right={
-                        <CommentCard
+                        <CommentCardB
                             content={pair[1]}
                             salt={salt}
                             size={"small"}
@@ -96,10 +99,10 @@ export const LinkGrid: React.FC<LinkGridProps> = ({ content, salt }) => {
     const rows = partition(content, 2).map((pair, i) => (
         <React.Fragment key={i}>
             <GridRow
-                left={<LinkCard content={pair[0]} theme="dark" />}
+                left={<LinkCardB content={pair[0]} theme="dark" />}
                 right={
                     pair[1] ? (
-                        <LinkCard content={pair[1]} theme="light" />
+                        <LinkCardB content={pair[1]} theme="light" />
                     ) : null
                 }
                 leftStyles={{

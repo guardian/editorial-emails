@@ -1,10 +1,10 @@
 import React from "react";
-import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../../../css";
+import { TdCSS, ImageCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content } from "../../../../api";
-import { formatImage } from "../../../../image";
-import { Table, RowCell, TableRowCell } from "../../../../layout/Table";
-import { Padding } from "../../../../layout/Padding";
+import { Content } from "../../api";
+import { formatImage } from "../../image";
+import { Table, RowCell, TableRowCell } from "../../layout/Table";
+import { Padding } from "../../layout/Padding";
 
 const tdStyle: TdCSS = {
     backgroundColor: palette.neutral[20],
@@ -55,7 +55,7 @@ const Image: React.FC<{
     );
 };
 
-export const MediaCard: React.FC<Props> = ({ content, salt }) => {
+export const MediaCardB: React.FC<Props> = ({ content, salt }) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(
