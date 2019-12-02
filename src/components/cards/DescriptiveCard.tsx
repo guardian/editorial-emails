@@ -101,11 +101,11 @@ const bottomPaddingStyle: TdCSS = {
     paddingBottom: "12px"
 };
 
-const quoteIconStyle: ImageCSS = {
-    height: "0.8em",
-    display: "inline-block",
-    border: "0"
-};
+// const quoteIconStyle: ImageCSS = {
+//     height: "0.8em",
+//     display: "inline-block",
+//     border: "0"
+// };
 
 interface Props {
     content: Content;

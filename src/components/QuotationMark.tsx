@@ -1,13 +1,11 @@
 import React from "react";
 import { Pillar } from "../api";
 import { ImageCSS } from "../css";
-// import { pillarProps, PillarType } from "../utils/pillarProps";
-// import { pillarProps } from "../utils/pillarProps";
-// import { palette } from "@guardian/src-foundations";
+import { pillarProps } from "../utils/pillarProps";
 
 interface Props {
     pillar?: Pillar;
-    colour?: string;
+    shouldUseWhite?: boolean;
 }
 
 const quoteIconStyle: ImageCSS = {
@@ -16,12 +14,23 @@ const quoteIconStyle: ImageCSS = {
     border: "0"
 };
 
-// default arts/culture
+// Compute which image source to use;
+// 'shouldUseWhite' takes precedence over pillar
+// With 'culture' (i.e. 'Arts') being the fallback when no pillar available
+const getQuotationImgSrc = (pillar: Pillar, shouldUseWhite: boolean) => {
+    if (shouldUseWhite) {
+        return "https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5de534049ae16859519012fa/original.png?1575302148";
+    }
 
-export const QuotationMark: React.FC<Props> = ({ pillar, colour }) => {
-    const imageSrc =
-        "https://assets.guim.co.uk/images/email/icons/cc614106682d8de187a64eb222116f3a/quote-culture.png";
+    if (pillar && pillarProps[pillar]) {
+        return pillarProps[pillar].quote;
+    }
 
+    return pillarProps.Arts.quote;
+};
+
+export const QuotationMark: React.FC<Props> = ({ pillar, shouldUseWhite }) => {
+    const imageSrc = getQuotationImgSrc(pillar, shouldUseWhite);
     return (
         <>
             <img

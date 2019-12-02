@@ -1,10 +1,10 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
-import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
+import { FontCSS, TdCSS, TableCSS } from "../../css";
 import { sanitizeOptions } from "../../utils/sanitizeOptions";
-import { pillarProps, PillarType } from "../../utils/pillarProps";
+import { pillarProps } from "../../utils/pillarProps";
 import { palette } from "@guardian/src-foundations";
-import { Content, Pillar } from "../../api";
+import { Content } from "../../api";
 import { kickerText } from "../../kicker";
 import { Kicker } from "../../components/Kicker";
 import { QuotationMark } from "../../components/QuotationMark";
@@ -83,11 +83,11 @@ const trailTextStyle: FontCSS = {
     ...fontSizes.small
 };
 
-const quoteIconStyle: ImageCSS = {
-    height: "0.8em",
-    display: "inline-block",
-    border: "0"
-};
+// const quoteIconStyle: ImageCSS = {
+//     height: "0.8em",
+//     display: "inline-block",
+//     border: "0"
+// };
 
 interface Props {
     content: Content;
