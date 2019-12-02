@@ -162,7 +162,7 @@ export const OverlayCard: React.FC<Props> = ({
                                                 <img
                                                     height={"14"}
                                                     style={quoteIconStyle}
-                                                    src="https://assets.guim.co.uk/images/email/icons/9682728db696148fd5a6b149e556df8c/quote-culture.png"
+                                                    src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5de534049ae16859519012fa/original.png?1575302148"
                                                     alt="quote icon"
                                                 />{" "}
                                             </>
