@@ -1,13 +1,10 @@
 import React from "react";
 import { Collection as ICollection } from "../../../../api";
-import { Card as CommentCard } from "./Card";
-import { MediaCard } from "./MediaCard";
-import { Padding } from "../../../../layout/Padding";
 import { Heading } from "./../../../../components/Heading";
 import { Multiline } from "./../../../../components/Multiline";
+import { Card as CommentCard } from "./Card";
+import { Padding } from "../../../../layout/Padding";
 import { Grid as CommentGrid } from "./Grid";
-import { DefaultGrid } from "../../../../layout/Grid";
-import { LinkGrid as LinkGridB } from "./Grid";
 
 const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
     if (frontId === "email/opinion") {
@@ -82,86 +79,6 @@ export const CommentCollection: React.FC<{
                 size={"large"}
                 shouldShowImage={false}
             />
-        </>
-    );
-};
-
-export const EditorialCollection: React.FC<{
-    collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
-    const contentOne = collection.backfill[0];
-
-    // TODO
-    return (
-        <>
-            <Multiline topPadding />
-            <Heading heading={collection.displayName} />
-
-            <CommentCard
-                content={contentOne}
-                salt={salt}
-                size={"large"}
-                shouldShowImage={true}
-            />
-        </>
-    );
-};
-
-export const MediaCollection: React.FC<{
-    collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
-    const items = collection.backfill.map(content => (
-        <MediaCard content={content} salt={salt} />
-    ));
-
-    return (
-        <>
-            <Multiline topPadding />
-            <Heading heading={collection.displayName} />
-            {items}
-        </>
-    );
-};
-
-export const DefaultCollection: React.FC<{
-    collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
-    if (collection.backfill.length < 1) {
-        return null;
-    }
-
-    const filmCollection = collection.backfill;
-
-    return (
-        <>
-            <Multiline topPadding />
-            <Heading heading={collection.displayName} />
-
-            {filmCollection && (
-                <DefaultGrid content={filmCollection} salt={salt} />
-            )}
-        </>
-    );
-};
-
-export const LinkCollection: React.FC<{
-    collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
-    if (collection.curated.length < 1) {
-        return null;
-    }
-
-    const content = collection.curated;
-
-    return (
-        <>
-            <Multiline topPadding />
-            <Heading heading={collection.displayName} />
-            {content && <LinkGridB content={content} salt={salt} />}
         </>
     );
 };

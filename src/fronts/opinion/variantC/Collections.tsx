@@ -1,13 +1,12 @@
 import React from "react";
 import { Collection as ICollection } from "../../../api";
 import { TableRowCell } from "../../../layout/Table";
-import {
-    CommentCollection,
-    EditorialCollection,
-    MediaCollection,
-    LinkCollection,
-    DefaultCollection
-} from "./components/Collection";
+import { CommentCollection } from "./components/CommentCollection";
+import { EditorialCollection } from "./components/EditorialCollection";
+import { MediaCollection } from "./components/MediaCollection";
+import { LinkCollection } from "./components/LinkCollection";
+import { DefaultCollection } from "./components/DefaultCollection";
+
 import { getDesignType } from "../../../utils/getDesignType";
 
 export const Collections: React.FC<{
