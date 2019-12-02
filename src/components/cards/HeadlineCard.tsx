@@ -6,8 +6,7 @@ import { pillarProps, PillarType } from "../../utils/pillarProps";
 import { palette } from "@guardian/src-foundations";
 import { Content, Pillar } from "../../api";
 import { kickerText } from "../../kicker";
-
-type Size = "small" | "large";
+import { Kicker } from "../../components/Kicker";
 
 const fontSizes = {
     large: {
@@ -66,15 +65,6 @@ const headlineStyle = (layout: string, color: string): FontCSS => {
     };
 };
 
-const kickerStyle = (pillarColour: string, color: string): FontCSS => {
-    return {
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        color: color || pillarColour || palette.culture.main,
-        ...fontSizes.small,
-        fontWeight: 700
-    };
-};
-
 const bylineStyle = (pillarColour: string): FontCSS => {
     return {
         fontFamily: "'GH Guardian Headline', Georgia, serif",
@@ -92,10 +82,6 @@ const trailTextStyle: FontCSS = {
     ...fontSizes.small
 };
 
-const bottomPaddingStyle: TdCSS = {
-    paddingBottom: "12px"
-};
-
 const quoteIconStyle: ImageCSS = {
     height: "0.8em",
     display: "inline-block",
@@ -109,7 +95,7 @@ interface Props {
     showTrailText?: boolean;
     borderWidth?: "thin" | "thick";
     layout?: "expanded" | "compact";
-    color?: string;
+    colour?: string;
     borderColor?: string;
 }
 
@@ -121,7 +107,7 @@ export const HeadlineCard: React.FC<Props> = ({
     showPillarColours,
     borderWidth,
     layout,
-    color,
+    colour,
     borderColor
 }) => {
     const { headline } = content.header;
@@ -133,11 +119,11 @@ export const HeadlineCard: React.FC<Props> = ({
 
     const cardLink = content.properties.webUrl ? backfillURL : curatedURL;
 
-    let pillar: PillarType = {};
-    if (showPillarColours && content.properties.maybeContent) {
-        const pillarName = content.properties.maybeContent.metadata.pillar.name;
-        pillar = pillarProps[pillarName];
-    }
+    const pillar = content.properties.maybeContent
+        ? content.properties.maybeContent.metadata.pillar.name
+        : null;
+    const pillarColour = pillar ? pillarProps[pillar].colour : null;
+    const pillarQuote = pillar ? pillarProps[pillar].quote : null;
 
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)
@@ -149,7 +135,7 @@ export const HeadlineCard: React.FC<Props> = ({
                 <td
                     style={tdStyle(
                         backgroundColor,
-                        pillar.colour,
+                        pillarColour,
                         borderWidth,
                         borderColor
                     )}
@@ -162,24 +148,27 @@ export const HeadlineCard: React.FC<Props> = ({
                             >
                                 <a style={linkStyle} href={cardLink}>
                                     {kicker && (
-                                        <span
-                                            style={kickerStyle(
-                                                pillar.colour,
-                                                color
-                                            )}
-                                        >
-                                            {kicker + " / "}
-                                        </span>
+                                        <Kicker
+                                            text={kicker}
+                                            size="small"
+                                            colour={colour}
+                                            pillar={
+                                                showPillarColours
+                                                    ? pillar
+                                                    : null
+                                            }
+                                        />
                                     )}
-                                    <span style={headlineStyle(layout, color)}>
+
+                                    <span style={headlineStyle(layout, colour)}>
                                         {isComment && (
                                             <>
                                                 <img
                                                     height={"14"}
                                                     style={quoteIconStyle}
                                                     src={
-                                                        pillar.quote
-                                                            ? pillar.quote
+                                                        pillarQuote
+                                                            ? pillarQuote
                                                             : pillarProps.Arts
                                                                   .quote
                                                     }
@@ -191,9 +180,7 @@ export const HeadlineCard: React.FC<Props> = ({
                                     </span>
                                     <br />
                                     {content.properties.showByline && (
-                                        <span
-                                            style={bylineStyle(pillar.colour)}
-                                        >
+                                        <span style={bylineStyle(pillarColour)}>
                                             {byline}
                                         </span>
                                     )}

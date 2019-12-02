@@ -1,13 +1,13 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
 import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
-import { pillarProps, PillarType } from "../../utils/pillarProps";
 import { sanitizeOptions } from "../../utils/sanitizeOptions";
 import { ContinueButton } from "../buttons/ContinueButton";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
+import { Kicker } from "../../components/Kicker";
 
 const fontFamily = {
     headline: {
@@ -77,15 +77,6 @@ const headlineStyle = {
     color: palette.neutral[7]
 };
 
-const kickerStyle = (pillarColour: string): FontCSS => {
-    return {
-        ...fontFamily.headline,
-        ...fontSizes.large,
-        fontWeight: 700,
-        color: pillarColour || palette.culture.main
-    };
-};
-
 const bylineStyle: FontCSS = {
     ...fontFamily.headline,
     ...fontSizes.large,
@@ -151,12 +142,9 @@ export const DescriptiveCard: React.FC<Props> = ({
         ? kickerText(content.header.kicker)
         : "";
 
-    let pillar: PillarType = {};
-    if (showPillarColours && content.properties.maybeContent) {
-        const pillarName = content.properties.maybeContent.metadata.pillar.name;
-        pillar = pillarProps[pillarName];
-    }
-
+    const pillar = content.properties.maybeContent
+        ? content.properties.maybeContent.metadata.pillar.name
+        : null;
     const bodyText = content.properties.maybeContent.fields.body;
     const bodyParagraphs = bodyText.split("</p>");
 
@@ -169,11 +157,15 @@ export const DescriptiveCard: React.FC<Props> = ({
                             <td className="m-pad" style={metaWrapperStyle}>
                                 <a style={linkStyle} href={webURL}>
                                     {kicker && (
-                                        <span
-                                            style={kickerStyle(pillar.colour)}
-                                        >
-                                            {kicker + " / "}
-                                        </span>
+                                        <Kicker
+                                            text={kicker}
+                                            size="large"
+                                            pillar={
+                                                showPillarColours
+                                                    ? pillar
+                                                    : null
+                                            }
+                                        />
                                     )}
                                     <span style={headlineStyle}>
                                         {isComment && (

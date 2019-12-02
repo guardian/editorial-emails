@@ -6,6 +6,7 @@ import { sanitizeOptions } from "../../utils/sanitizeOptions";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
+import { Kicker } from "../../components/Kicker";
 
 const fontSizes = {
     large: {
@@ -61,13 +62,6 @@ const headlineStyle = {
     color: palette.neutral[100],
     fontFamily: "'GH Guardian Headline', Georgia, serif",
     fontWeight: 400,
-    ...fontSizes.large
-};
-
-const kickerStyle = {
-    color: palette.neutral[100],
-    fontFamily: "'GH Guardian Headline', Georgia, serif",
-    fontWeight: 700,
     ...fontSizes.large
 };
 
@@ -152,10 +146,13 @@ export const OverlayCard: React.FC<Props> = ({
                             <td className="m-pad" style={headlineCellStyle}>
                                 <a style={linkStyle} href={webURL}>
                                     {kicker && (
-                                        <span style={kickerStyle}>
-                                            {kicker + " / "}
-                                        </span>
+                                        <Kicker
+                                            text={kicker}
+                                            size="large"
+                                            colour={palette.neutral[100]}
+                                        />
                                     )}
+
                                     <span style={headlineStyle}>
                                         {isComment && (
                                             <>

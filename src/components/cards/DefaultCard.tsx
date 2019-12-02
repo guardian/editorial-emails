@@ -4,6 +4,7 @@ import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
+import { Kicker } from "../../components/Kicker";
 
 type Size = "small" | "large";
 
@@ -56,16 +57,6 @@ const linkStyle: FontCSS = {
 const headlineStyle = (size: Size): FontCSS => {
     return {
         color: palette.neutral[7],
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontWeight: 400,
-
-        ...fontSizes[size]
-    };
-};
-
-const kickerStyle = (size: Size): FontCSS => {
-    return {
-        color: palette.culture.main,
         fontFamily: "'GH Guardian Headline', Georgia, serif",
         fontWeight: 400,
 
@@ -151,9 +142,7 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
                             >
                                 <a style={linkStyle} href={webURL}>
                                     {kicker && (
-                                        <span style={kickerStyle(size)}>
-                                            {kicker + " / "}
-                                        </span>
+                                        <Kicker text={kicker} size={size} />
                                     )}
                                     <span style={headlineStyle(size)}>
                                         {isComment && (
