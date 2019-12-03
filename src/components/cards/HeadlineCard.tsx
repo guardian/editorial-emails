@@ -6,8 +6,7 @@ import { pillarProps } from "../../utils/pillarProps";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { kickerText } from "../../kicker";
-import { Kicker } from "../../components/Kicker";
-import { QuotationMark } from "../../components/QuotationMark";
+import { Headline } from "../../components/Headline";
 
 const fontSizes = {
     large: {
@@ -52,30 +51,6 @@ const expandedWrapperStyle: TdCSS = {
     padding: "3px 10px 20px 10px"
 };
 
-const linkStyle: FontCSS = {
-    textDecoration: "none"
-};
-
-const headlineStyle = (layout: string, color: string): FontCSS => {
-    const fontSizeProp = layout === "expanded" ? "large" : "small";
-    return {
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        color: color || palette.neutral[7],
-        ...fontSizes[fontSizeProp],
-        fontWeight: 400
-    };
-};
-
-const bylineStyle = (pillarColour: string): FontCSS => {
-    return {
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        color: pillarColour || palette.culture.main,
-        ...fontSizes.small,
-        fontWeight: 700,
-        fontStyle: "italic"
-    };
-};
-
 const trailTextStyle: FontCSS = {
     fontFamily: "'GH Guardian Headline', Georgia, serif",
     fontWeight: 400,
@@ -90,7 +65,7 @@ interface Props {
     showTrailText?: boolean;
     borderWidth?: "thin" | "thick";
     layout?: "expanded" | "compact";
-    colour?: string;
+    showUseWhite?: boolean;
     borderColor?: string;
 }
 
@@ -102,14 +77,13 @@ export const HeadlineCard: React.FC<Props> = ({
     showPillarColours,
     borderWidth,
     layout,
-    colour,
+    showUseWhite,
     borderColor
 }) => {
     const { headline } = content.header;
-    const { byline } = content.properties;
     const { trailText } = content.card;
     const backfillURL = content.properties.webUrl + brazeParameter;
-    const isComment = content.display.showQuotedHeadline;
+    const showQuotation = content.display.showQuotedHeadline;
     const curatedURL = content.properties.href + brazeParameter;
 
     const cardLink = content.properties.webUrl ? backfillURL : curatedURL;
@@ -119,9 +93,17 @@ export const HeadlineCard: React.FC<Props> = ({
         : null;
     const pillarColour = pillar ? pillarProps[pillar].colour : null;
 
+    const { showByline } = content.properties;
+    const byline =
+        showByline && content.properties.byline
+            ? content.properties.byline
+            : "";
+
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)
         : "";
+
+    const size = layout === "expanded" ? "large" : "small";
 
     return (
         <table style={tableStyle}>
@@ -140,33 +122,16 @@ export const HeadlineCard: React.FC<Props> = ({
                                 className="m-col-pad"
                                 style={metaWrapperStyle(layout)}
                             >
-                                <a style={linkStyle} href={cardLink}>
-                                    {kicker && (
-                                        <Kicker
-                                            text={kicker}
-                                            size="small"
-                                            colour={colour}
-                                            pillar={
-                                                showPillarColours
-                                                    ? pillar
-                                                    : null
-                                            }
-                                        />
-                                    )}
-
-                                    <span style={headlineStyle(layout, colour)}>
-                                        {isComment && (
-                                            <QuotationMark pillar={pillar} />
-                                        )}
-                                        {headline}
-                                    </span>
-                                    <br />
-                                    {content.properties.showByline && (
-                                        <span style={bylineStyle(pillarColour)}>
-                                            {byline}
-                                        </span>
-                                    )}
-                                </a>
+                                <Headline
+                                    text={headline}
+                                    linkTo={cardLink}
+                                    size={size}
+                                    shouldUseWhite={showUseWhite}
+                                    pillar={showPillarColours ? pillar : null}
+                                    kicker={kicker}
+                                    byline={byline}
+                                    showQuotation={showQuotation}
+                                />
                             </td>
                         </tr>
                         {layout === "expanded" && trailText && (

@@ -5,7 +5,7 @@ import { Content, Tag } from "../../api";
 import { formatImage } from "../../image";
 import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell, TableRow } from "../../layout/Table";
-import { QuotationMark } from "../../components/QuotationMark";
+import { Headline } from "../../components/Headline";
 
 type Size = "small" | "large";
 
@@ -61,16 +61,6 @@ const standfirstStyle: TdCSS = {
 
 const linkStyle: FontCSS = {
     textDecoration: "none"
-};
-
-const headlineStyle = (size: Size): FontCSS => {
-    return {
-        color: palette.neutral[7],
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontWeight: 400,
-
-        ...fontSizes[size]
-    };
 };
 
 const spanStyle: FontCSS = {
@@ -202,29 +192,6 @@ const SupplementaryMeta: React.FC<{
     return null;
 };
 
-const Headline: React.FC<{
-    size: Size;
-    linkURL: string;
-    isComment: boolean;
-    headline: string;
-    byline: string;
-}> = ({ size, linkURL, isComment, headline, byline }) => {
-    return (
-        <tr>
-            <td className="m-pad" style={metaWrapperStyle(size)}>
-                <a style={linkStyle} href={linkURL}>
-                    <span style={headlineStyle(size)}>
-                        {isComment && <QuotationMark pillar="Opinion" />}
-                        {headline}
-                    </span>
-                    <br />
-                    <span style={bylineStyle(size)}> {byline}</span>
-                </a>
-            </td>
-        </tr>
-    );
-};
-
 const Image: React.FC<{
     src?: string;
     linkURL: string;
@@ -262,7 +229,7 @@ export const CommentCardC: React.FC<Props> = ({
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
     const imageAlt = image.fields.altText;
-    const isComment = content.header.isComment;
+    const showQuotation = content.header.isComment;
 
     const contributor = content.properties.maybeContent.tags.tags.find(tag => {
         return tag.properties.tagType === "Contributor";
@@ -290,13 +257,18 @@ export const CommentCardC: React.FC<Props> = ({
                     </RowCell>
                 )}
 
-                <Headline
-                    size={size}
-                    linkURL={webURL}
-                    isComment={isComment}
-                    headline={headline}
-                    byline={byline}
-                />
+                <tr>
+                    <td className="m-pad" style={metaWrapperStyle(size)}>
+                        <Headline
+                            text={headline}
+                            linkTo={webURL}
+                            size={size}
+                            pillar="Opinion"
+                            byline={byline}
+                            showQuotation={showQuotation}
+                        />
+                    </td>
+                </tr>
 
                 {size === "large" && (
                     <SupplementaryMeta

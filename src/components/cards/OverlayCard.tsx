@@ -6,8 +6,7 @@ import { sanitizeOptions } from "../../utils/sanitizeOptions";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
-import { Kicker } from "../../components/Kicker";
-import { QuotationMark } from "../../components/QuotationMark";
+import { Headline } from "../../components/Headline";
 
 const fontSizes = {
     large: {
@@ -55,17 +54,6 @@ const blankCellStyle = {
     width: "7%"
 };
 
-const linkStyle: FontCSS = {
-    textDecoration: "none"
-};
-
-const headlineStyle = {
-    color: palette.neutral[100],
-    fontFamily: "'GH Guardian Headline', Georgia, serif",
-    fontWeight: 400,
-    ...fontSizes.large
-};
-
 const trailTextStyle: FontCSS = {
     fontFamily: "'GH Guardian Headline', Georgia, serif",
     ...fontSizes.small,
@@ -106,7 +94,7 @@ export const OverlayCard: React.FC<Props> = ({
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
     const imageAlt = image.fields.altText;
-    const isComment = content.display.showQuotedHeadline;
+    const showQuotation = content.display.showQuotedHeadline;
 
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)
@@ -139,21 +127,14 @@ export const OverlayCard: React.FC<Props> = ({
 
                         <tr>
                             <td className="m-pad" style={headlineCellStyle}>
-                                <a style={linkStyle} href={webURL}>
-                                    {kicker && (
-                                        <Kicker
-                                            text={kicker}
-                                            size="large"
-                                            colour={palette.neutral[100]}
-                                        />
-                                    )}
-                                    <span style={headlineStyle}>
-                                        {isComment && (
-                                            <QuotationMark shouldUseWhite />
-                                        )}
-                                        {headline}
-                                    </span>
-                                </a>
+                                <Headline
+                                    text={headline}
+                                    linkTo={webURL}
+                                    size="large"
+                                    shouldUseWhite
+                                    kicker={kicker}
+                                    showQuotation={showQuotation}
+                                />
                             </td>
                             {layout !== "compact" && (
                                 <td style={blankCellStyle}>&nbsp;</td>

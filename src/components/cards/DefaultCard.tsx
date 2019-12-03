@@ -1,24 +1,12 @@
 import React from "react";
-import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
+import { TdCSS, TableCSS, ImageCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
-import { Kicker } from "../../components/Kicker";
-import { QuotationMark } from "../../components/QuotationMark";
+import { Headline } from "../../components/Headline";
 
 type Size = "small" | "large";
-
-const fontSizes = {
-    large: {
-        fontSize: "22px",
-        lineHeight: "26px"
-    },
-    small: {
-        fontSize: "16px",
-        lineHeight: "20px"
-    }
-};
 
 const imgStyle: ImageCSS = {
     outline: "none",
@@ -51,30 +39,6 @@ const metaWrapperStyle = (size: Size): TdCSS => {
     };
 };
 
-const linkStyle: FontCSS = {
-    textDecoration: "none"
-};
-
-const headlineStyle = (size: Size): FontCSS => {
-    return {
-        color: palette.neutral[7],
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontWeight: 400,
-
-        ...fontSizes[size]
-    };
-};
-
-const bylineStyle = (size: Size): FontCSS => {
-    return {
-        color: palette.culture.main,
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontStyle: "italic",
-
-        ...fontSizes[size]
-    };
-};
-
 const bottomPaddingStyle: TdCSS = {
     paddingBottom: "20px"
 };
@@ -102,7 +66,7 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
     const imageAlt = image.fields.altText;
-    const isComment = content.display.showQuotedHeadline;
+    const showQuotation = content.display.showQuotedHeadline;
 
     const pillar = content.properties.maybeContent
         ? content.properties.maybeContent.metadata.pillar.name
@@ -139,20 +103,15 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
                                 className="m-pad"
                                 style={metaWrapperStyle(size)}
                             >
-                                <a style={linkStyle} href={webURL}>
-                                    {kicker && (
-                                        <Kicker text={kicker} size={size} />
-                                    )}
-                                    <span style={headlineStyle(size)}>
-                                        {isComment && <QuotationMark />}
-                                        {headline}
-                                    </span>
-                                    <br />
-                                    <span style={bylineStyle(size)}>
-                                        {" "}
-                                        {byline}
-                                    </span>
-                                </a>
+                                <Headline
+                                    text={headline}
+                                    linkTo={webURL}
+                                    size={size}
+                                    pillar={pillar}
+                                    kicker={kicker}
+                                    byline={byline}
+                                    showQuotation={showQuotation}
+                                />
                             </td>
                         </tr>
 

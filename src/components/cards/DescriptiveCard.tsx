@@ -7,8 +7,7 @@ import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
-import { Kicker } from "../../components/Kicker";
-import { QuotationMark } from "../../components/QuotationMark";
+import { Headline } from "../../components/Headline";
 
 const fontFamily = {
     headline: {
@@ -67,24 +66,6 @@ const bottomPadding: TdCSS = {
     padding: `6px 10px 20px 10px`
 };
 
-const linkStyle: FontCSS = {
-    textDecoration: "none"
-};
-
-const headlineStyle = {
-    ...fontFamily.headline,
-    ...fontSizes.large,
-    fontWeight: 400,
-    color: palette.neutral[7]
-};
-
-const bylineStyle: FontCSS = {
-    ...fontFamily.headline,
-    ...fontSizes.large,
-    fontStyle: "italic",
-    color: palette.culture.main
-};
-
 const trailTextStyle: FontCSS = {
     ...fontFamily.headline,
     ...fontSizes.small,
@@ -104,7 +85,6 @@ const bottomPaddingStyle: TdCSS = {
 interface Props {
     content: Content;
     salt: string;
-    showByline?: boolean;
     showPillarColours?: boolean;
 }
 
@@ -113,7 +93,6 @@ const brazeParameter = "?##braze_utm##";
 export const DescriptiveCard: React.FC<Props> = ({
     content,
     salt,
-    showByline,
     showPillarColours
 }) => {
     const image =
@@ -126,12 +105,11 @@ export const DescriptiveCard: React.FC<Props> = ({
     );
 
     const { headline } = content.header;
-    const { byline } = content.properties;
     const { trailText } = content.card;
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
     const imageAlt = image.fields.altText;
-    const isComment = content.display.showQuotedHeadline;
+    const showQuotation = content.display.showQuotedHeadline;
 
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)
@@ -140,6 +118,12 @@ export const DescriptiveCard: React.FC<Props> = ({
     const pillar = content.properties.maybeContent
         ? content.properties.maybeContent.metadata.pillar.name
         : null;
+
+    const { showByline } = content.properties;
+    const byline =
+        showByline && content.properties.byline
+            ? content.properties.byline
+            : "";
 
     const bodyText = content.properties.maybeContent.fields.body;
     const bodyParagraphs = bodyText.split("</p>");
@@ -151,31 +135,15 @@ export const DescriptiveCard: React.FC<Props> = ({
                     <table style={tableStyle}>
                         <tr>
                             <td className="m-pad" style={metaWrapperStyle}>
-                                <a style={linkStyle} href={webURL}>
-                                    {kicker && (
-                                        <Kicker
-                                            text={kicker}
-                                            size="large"
-                                            pillar={
-                                                showPillarColours
-                                                    ? pillar
-                                                    : null
-                                            }
-                                        />
-                                    )}
-                                    <span style={headlineStyle}>
-                                        {isComment && <QuotationMark />}
-                                        {headline}
-                                    </span>
-                                    {showByline && (
-                                        <>
-                                            <br />
-                                            <span style={bylineStyle}>
-                                                {byline}
-                                            </span>
-                                        </>
-                                    )}
-                                </a>
+                                <Headline
+                                    text={headline}
+                                    linkTo={webURL}
+                                    size="large"
+                                    pillar={showPillarColours ? pillar : null}
+                                    kicker={kicker}
+                                    byline={byline}
+                                    showQuotation={showQuotation}
+                                />
                             </td>
                         </tr>
                         <tr>
