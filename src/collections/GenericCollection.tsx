@@ -2,6 +2,8 @@ import React from "react";
 import { Collection as ICollection } from "../api";
 import { DefaultGrid } from "../layout/Grid";
 import { Heading } from "../components/Heading";
+import { Padding } from "../layout/Padding";
+import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../components/Multiline";
 
 export const GenericCollection: React.FC<{
@@ -12,10 +14,16 @@ export const GenericCollection: React.FC<{
         return null;
     }
 
+    const lightGrey = palette.neutral[97];
+
     return (
         <>
-            <Multiline topPadding />
-            <Heading heading={collection.displayName} />
+            <Padding px={12} backgroundColor={lightGrey} />
+            <Multiline />
+            <Heading
+                heading={collection.displayName}
+                backgroundColor={lightGrey}
+            />
             <DefaultGrid content={collection.backfill} salt={salt} />
         </>
     );
