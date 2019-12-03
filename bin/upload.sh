@@ -29,6 +29,6 @@ mv ./tmp/opinion-c/opinion.json?variant=c ./tmp/opinion-c/opinion.json
 
 mv ./tmp/media-briefing-b/media-briefing.json?variant=b ./tmp/media-briefing-b/media-briefing.json
 mv ./tmp/media-briefing-c/media-briefing.json?variant=c ./tmp/media-briefing-c/media-briefing.json
-mv ./tmp/media-briefing-c/media-briefing.json?variant=d ./tmp/media-briefing-d/media-briefing.json
+mv ./tmp/media-briefing-d/media-briefing.json?variant=d ./tmp/media-briefing-d/media-briefing.json
 
 aws s3 cp --profile=frontend --acl=public-read --recursive tmp/ s3://aws-frontend-emails-test/
