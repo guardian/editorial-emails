@@ -139,6 +139,7 @@ export interface Collection {
     displayName: string;
     backfill: Content[];
     curated: Content[];
+    collectionType: string;
 }
 
 interface SEOData {
