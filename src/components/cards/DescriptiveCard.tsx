@@ -1,13 +1,13 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
 import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
-import { pillarTheme, PillarType } from "../../styles/pillar-themes";
-import { sanitizeOptions } from "../../styles/sanitize-options";
-import { ContinueButton } from "../ContinueButton";
+import { sanitizeOptions } from "../../utils/sanitizeOptions";
+import { ContinueButton } from "../buttons/ContinueButton";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
+import { Headline } from "../../components/Headline";
 
 const fontFamily = {
     headline: {
@@ -66,33 +66,6 @@ const bottomPadding: TdCSS = {
     padding: `6px 10px 20px 10px`
 };
 
-const linkStyle: FontCSS = {
-    textDecoration: "none"
-};
-
-const headlineStyle = {
-    ...fontFamily.headline,
-    ...fontSizes.large,
-    fontWeight: 400,
-    color: palette.neutral[7]
-};
-
-const kickerStyle = (pillarColour: string): FontCSS => {
-    return {
-        ...fontFamily.headline,
-        ...fontSizes.large,
-        fontWeight: 700,
-        color: pillarColour || palette.culture.main
-    };
-};
-
-const bylineStyle: FontCSS = {
-    ...fontFamily.headline,
-    ...fontSizes.large,
-    fontStyle: "italic",
-    color: palette.culture.main
-};
-
 const trailTextStyle: FontCSS = {
     ...fontFamily.headline,
     ...fontSizes.small,
@@ -109,16 +82,9 @@ const bottomPaddingStyle: TdCSS = {
     paddingBottom: "12px"
 };
 
-const quoteIconStyle: ImageCSS = {
-    height: "0.8em",
-    display: "inline-block",
-    border: "0"
-};
-
 interface Props {
     content: Content;
     salt: string;
-    showByline?: boolean;
     showPillarColours?: boolean;
 }
 
@@ -127,7 +93,6 @@ const brazeParameter = "?##braze_utm##";
 export const DescriptiveCard: React.FC<Props> = ({
     content,
     salt,
-    showByline,
     showPillarColours
 }) => {
     const image =
@@ -140,22 +105,25 @@ export const DescriptiveCard: React.FC<Props> = ({
     );
 
     const { headline } = content.header;
-    const { byline } = content.properties;
     const { trailText } = content.card;
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
     const imageAlt = image.fields.altText;
-    const isComment = content.display.showQuotedHeadline;
+    const showQuotation = content.display.showQuotedHeadline;
 
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)
         : "";
 
-    let pillar: PillarType = {};
-    if (showPillarColours && content.properties.maybeContent) {
-        const pillarName = content.properties.maybeContent.metadata.pillar.name;
-        pillar = pillarTheme[pillarName];
-    }
+    const pillar = content.properties.maybeContent
+        ? content.properties.maybeContent.metadata.pillar.name
+        : null;
+
+    const { showByline } = content.properties;
+    const byline =
+        showByline && content.properties.byline
+            ? content.properties.byline
+            : "";
 
     const bodyText = content.properties.maybeContent.fields.body;
     const bodyParagraphs = bodyText.split("</p>");
@@ -167,36 +135,15 @@ export const DescriptiveCard: React.FC<Props> = ({
                     <table style={tableStyle}>
                         <tr>
                             <td className="m-pad" style={metaWrapperStyle}>
-                                <a style={linkStyle} href={webURL}>
-                                    {kicker && (
-                                        <span
-                                            style={kickerStyle(pillar.colour)}
-                                        >
-                                            {kicker + " / "}
-                                        </span>
-                                    )}
-                                    <span style={headlineStyle}>
-                                        {isComment && (
-                                            <>
-                                                <img
-                                                    height={"14"}
-                                                    style={quoteIconStyle}
-                                                    src="https://assets.guim.co.uk/images/email/icons/9682728db696148fd5a6b149e556df8c/quote-culture.png"
-                                                    alt="quote icon"
-                                                />{" "}
-                                            </>
-                                        )}
-                                        {headline}
-                                    </span>
-                                    {showByline && (
-                                        <>
-                                            <br />
-                                            <span style={bylineStyle}>
-                                                {byline}
-                                            </span>
-                                        </>
-                                    )}
-                                </a>
+                                <Headline
+                                    text={headline}
+                                    linkTo={webURL}
+                                    size="large"
+                                    pillar={showPillarColours ? pillar : null}
+                                    kicker={kicker}
+                                    byline={byline}
+                                    showQuotation={showQuotation}
+                                />
                             </td>
                         </tr>
                         <tr>

@@ -2,10 +2,11 @@ import React from "react";
 import sanitizeHtml from "sanitize-html";
 import { palette } from "@guardian/src-foundations";
 import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
-import { sanitizeOptions } from "../../styles/sanitize-options";
+import { sanitizeOptions } from "../../utils/sanitizeOptions";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
+import { Headline } from "../../components/Headline";
 
 const fontSizes = {
     large: {
@@ -53,24 +54,6 @@ const blankCellStyle = {
     width: "7%"
 };
 
-const linkStyle: FontCSS = {
-    textDecoration: "none"
-};
-
-const headlineStyle = {
-    color: palette.neutral[100],
-    fontFamily: "'GH Guardian Headline', Georgia, serif",
-    fontWeight: 400,
-    ...fontSizes.large
-};
-
-const kickerStyle = {
-    color: palette.neutral[100],
-    fontFamily: "'GH Guardian Headline', Georgia, serif",
-    fontWeight: 700,
-    ...fontSizes.large
-};
-
 const trailTextStyle: FontCSS = {
     fontFamily: "'GH Guardian Headline', Georgia, serif",
     ...fontSizes.small,
@@ -79,12 +62,6 @@ const trailTextStyle: FontCSS = {
 
 const trailTextPadding: TdCSS = {
     padding: "6px 10px 20px 10px"
-};
-
-const quoteIconStyle: ImageCSS = {
-    height: "0.8em",
-    display: "inline-block",
-    border: "0"
 };
 
 interface Props {
@@ -117,7 +94,7 @@ export const OverlayCard: React.FC<Props> = ({
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
     const imageAlt = image.fields.altText;
-    const isComment = content.display.showQuotedHeadline;
+    const showQuotation = content.display.showQuotedHeadline;
 
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)
@@ -150,26 +127,14 @@ export const OverlayCard: React.FC<Props> = ({
 
                         <tr>
                             <td className="m-pad" style={headlineCellStyle}>
-                                <a style={linkStyle} href={webURL}>
-                                    {kicker && (
-                                        <span style={kickerStyle}>
-                                            {kicker + " / "}
-                                        </span>
-                                    )}
-                                    <span style={headlineStyle}>
-                                        {isComment && (
-                                            <>
-                                                <img
-                                                    height={"14"}
-                                                    style={quoteIconStyle}
-                                                    src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5de534049ae16859519012fa/original.png?1575302148"
-                                                    alt="quote icon"
-                                                />{" "}
-                                            </>
-                                        )}
-                                        {headline}
-                                    </span>
-                                </a>
+                                <Headline
+                                    text={headline}
+                                    linkTo={webURL}
+                                    size="large"
+                                    shouldUseWhite
+                                    kicker={kicker}
+                                    showQuotation={showQuotation}
+                                />
                             </td>
                             {layout !== "compact" && (
                                 <td style={blankCellStyle}>&nbsp;</td>

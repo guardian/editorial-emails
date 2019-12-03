@@ -1,8 +1,6 @@
 import React from "react";
 import { Content } from "../api";
-import { Card } from "../components/cards/Card";
-import { LinkCard as LinkCardB } from "../components/tests/commentB/LinkCard";
-import { LinkCard as LinkCardC } from "../components/tests/commentC/LinkCard";
+import { DefaultCard } from "../components/cards/DefaultCard";
 import { TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
 import { TableRow, TableRowCell } from "./Table";
@@ -77,10 +75,16 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
     const rows = partition(content, 2).map((pair, i) => (
         <React.Fragment key={i}>
             <GridRow
-                left={<Card content={pair[0]} salt={salt} size={"small"} />}
+                left={
+                    <DefaultCard content={pair[0]} salt={salt} size={"small"} />
+                }
                 right={
                     pair[1] ? (
-                        <Card content={pair[1]} salt={salt} size={"small"} />
+                        <DefaultCard
+                            content={pair[1]}
+                            salt={salt}
+                            size={"small"}
+                        />
                     ) : null
                 }
                 leftStyles={{

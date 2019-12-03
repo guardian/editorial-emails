@@ -3,13 +3,21 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { Front } from "./api";
 import { Banner } from "./components/Banner";
 import { Collections } from "./components/Collections";
-import { MediaBriefing } from "./components/tests/media-briefing/MediaBriefing";
+import { FilmToday } from "./fronts/film-today/FilmToday";
+import { MediaBriefing } from "./fronts/media-briefing/MediaBriefing";
+import { Opinion } from "./fronts/opinion/Opinion";
 import { Footer } from "./components/Footer";
 import { Center } from "./layout/Center";
 import { default as minifyCssString } from "minify-css-string";
 import { fontStyles } from "./styles/fonts";
 import { responsiveStyles } from "./styles/responsive-styles";
 import { TableRowCell } from "./layout/Table";
+
+enum Fronts {
+    Opinion = "email/opinion",
+    FilmToday = "email/film-today",
+    MediaBriefing = "email/media-briefing"
+}
 
 const canonicalURL = (path: string): string =>
     `https://www.theguardian.com/${path}`;
@@ -25,27 +33,54 @@ const title = (id: string): string => {
     );
 };
 
+const renderFront = (front: Front, salt: string, variant?: string) => {
+    const { id, collections } = front;
+    switch (front.id) {
+        case Fronts.FilmToday:
+            return (
+                <FilmToday
+                    frontId={id}
+                    collections={collections}
+                    salt={salt}
+                    variant={variant}
+                />
+            );
+        case Fronts.MediaBriefing:
+            return (
+                <MediaBriefing
+                    frontId={id}
+                    collections={collections}
+                    salt={salt}
+                    variant={variant}
+                />
+            );
+        case Fronts.Opinion:
+            return (
+                <Opinion
+                    frontId={id}
+                    collections={collections}
+                    salt={salt}
+                    variant={variant}
+                />
+            );
+        default:
+            return (
+                <Collections
+                    frontId={id}
+                    collections={collections}
+                    salt={salt}
+                />
+            );
+    }
+};
+
 export const Email = (front: Front, salt: string, variant?: string): string => {
     const body = renderToStaticMarkup(
         <Center>
             <TableRowCell tdStyle={{ padding: "0" }}>
-                <Banner frontID={front.id} />
-                {front.id === "email/media-briefing" ? (
-                    <MediaBriefing
-                        frontId={front.id}
-                        collections={front.collections}
-                        salt={salt}
-                        variant={variant}
-                    />
-                ) : (
-                    <Collections
-                        frontId={front.id}
-                        collections={front.collections}
-                        salt={salt}
-                        variant={variant}
-                    />
-                )}
-                <Footer id={front.id} />
+                <Banner frontId={front.id} />
+                {renderFront(front, salt, variant)}
+                <Footer frontId={front.id} />
             </TableRowCell>
         </Center>
     );
