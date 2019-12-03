@@ -31,7 +31,7 @@ export const LinkCollection: React.FC<{
                         <HeadlineCard
                             content={story}
                             borderWidth="thin"
-                            colour={palette.neutral[100]}
+                            showUseWhite
                             layout="compact"
                             borderColor="#9fe0c8"
                         />

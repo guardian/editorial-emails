@@ -6,6 +6,7 @@ import { TopCollection } from "./components/TopCollection";
 import { CommentCollection } from "./components/CommentCollection";
 import { LinkCollection } from "./components/LinkCollection";
 import { DefaultCollection } from "./components/DefaultCollection";
+// import { DefaultCollection } from "../../../components/Collection";
 
 export const Collections: React.FC<{
     frontId: string;

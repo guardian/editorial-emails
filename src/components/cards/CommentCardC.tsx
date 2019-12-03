@@ -3,9 +3,9 @@ import { FontCSS, TdCSS, ImageCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Content, Tag } from "../../api";
 import { formatImage } from "../../image";
-import { kickerText } from "../../kicker";
 import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell, TableRow } from "../../layout/Table";
+import { Headline } from "../../components/Headline";
 
 type Size = "small" | "large";
 
@@ -63,16 +63,6 @@ const linkStyle: FontCSS = {
     textDecoration: "none"
 };
 
-const headlineStyle = (size: Size): FontCSS => {
-    return {
-        color: palette.neutral[7],
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontWeight: 400,
-
-        ...fontSizes[size]
-    };
-};
-
 const spanStyle: FontCSS = {
     color: palette.neutral[7],
     fontFamily: "'GH Guardian Headline', Georgia, serif",
@@ -89,17 +79,6 @@ const bylineStyle = (size: Size): FontCSS => {
 
         ...fontSizes[size]
     };
-};
-
-const quoteIconStyle: ImageCSS = {
-    height: "0.8em",
-    display: "inline-block",
-    border: "0"
-};
-
-const columnStyleLeft: TdCSS = {
-    width: "70%",
-    verticalAlign: "bottom"
 };
 
 const columnStyleRight: TdCSS = {
@@ -213,39 +192,6 @@ const SupplementaryMeta: React.FC<{
     return null;
 };
 
-const Headline: React.FC<{
-    size: Size;
-    linkURL: string;
-    isComment: boolean;
-    headline: string;
-    byline: string;
-}> = ({ size, linkURL, isComment, headline, byline }) => {
-    return (
-        <tr>
-            <td className="m-pad" style={metaWrapperStyle(size)}>
-                <a style={linkStyle} href={linkURL}>
-                    <span style={headlineStyle(size)}>
-                        {isComment && (
-                            <>
-                                <img
-                                    height={"14"}
-                                    style={quoteIconStyle}
-                                    src="https://assets.guim.co.uk/images/email/icons/cc614106682d8de187a64eb222116f3a/quote-opinion.png"
-                                    alt="quote icon"
-                                />{" "}
-                            </>
-                        )}
-
-                        {headline}
-                    </span>
-                    <br />
-                    <span style={bylineStyle(size)}> {byline}</span>
-                </a>
-            </td>
-        </tr>
-    );
-};
-
 const Image: React.FC<{
     src?: string;
     linkURL: string;
@@ -283,11 +229,7 @@ export const CommentCardC: React.FC<Props> = ({
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
     const imageAlt = image.fields.altText;
-    const isComment = content.header.isComment;
-
-    const kicker = content.header.kicker
-        ? kickerText(content.header.kicker)
-        : "";
+    const showQuotation = content.header.isComment;
 
     const contributor = content.properties.maybeContent.tags.tags.find(tag => {
         return tag.properties.tagType === "Contributor";
@@ -315,13 +257,18 @@ export const CommentCardC: React.FC<Props> = ({
                     </RowCell>
                 )}
 
-                <Headline
-                    size={size}
-                    linkURL={webURL}
-                    isComment={isComment}
-                    headline={headline}
-                    byline={byline}
-                />
+                <tr>
+                    <td className="m-pad" style={metaWrapperStyle(size)}>
+                        <Headline
+                            text={headline}
+                            linkTo={webURL}
+                            size={size}
+                            pillar="Opinion"
+                            byline={byline}
+                            showQuotation={showQuotation}
+                        />
+                    </td>
+                </tr>
 
                 {size === "large" && (
                     <SupplementaryMeta

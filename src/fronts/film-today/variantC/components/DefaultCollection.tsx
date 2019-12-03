@@ -17,11 +17,7 @@ export const DefaultCollection: React.FC<{
 
     return (
         <>
-            <DescriptiveCard
-                content={firstContent}
-                salt={salt}
-                showByline={firstContent.properties.showByline}
-            />
+            <DescriptiveCard content={firstContent} salt={salt} />
             <Multiline />
             <Heading heading="More top stories" />
             {gridContent && <DefaultGrid content={gridContent} salt={salt} />}

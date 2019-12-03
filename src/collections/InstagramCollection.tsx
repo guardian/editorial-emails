@@ -1,12 +1,12 @@
 import React from "react";
-import { Collection as ICollection } from "../../../../api";
+import { Collection as ICollection } from "../api";
 import { palette } from "@guardian/src-foundations";
-import { Padding } from "../../../../layout/Padding";
-import { OverlayCard } from "../../../../components/cards/OverlayCard";
-import { Multiline } from "../../../../components/Multiline";
-import { Heading } from "../../../../components/Heading";
+import { Padding } from "../layout/Padding";
+import { Multiline } from "../components/Multiline";
+import { Heading } from "../components/Heading";
+import { OverlayCard } from "../components/cards/OverlayCard";
 
-export const TopCollection: React.FC<{
+export const InstagramCollection: React.FC<{
     collection: ICollection;
     salt?: string;
 }> = ({ collection, salt }) => {
