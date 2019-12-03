@@ -1,6 +1,6 @@
 import React from "react";
 import { Collection as ICollection } from "../api";
-import { DefaultCollection } from "./Collection";
+import { GenericCollection } from "../collections/GenericCollection";
 import { TableRowCell } from "../layout/Table";
 
 export const Collections: React.FC<{
@@ -9,7 +9,7 @@ export const Collections: React.FC<{
     salt: string;
 }> = ({ collections, salt }) => {
     const renderedCollections = collections.map(collection => (
-        <DefaultCollection collection={collection} salt={salt} />
+        <GenericCollection collection={collection} salt={salt} />
     ));
 
     return (

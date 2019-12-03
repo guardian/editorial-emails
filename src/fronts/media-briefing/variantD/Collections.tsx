@@ -5,7 +5,7 @@ import { getDesignType } from "../../../utils/getDesignType";
 import { TopCollection } from "./components/TopCollection";
 import { CommentCollection } from "./components/CommentCollection";
 import { LinkCollection } from "./components/LinkCollection";
-import { DefaultCollection } from "./components/DefaultCollection";
+import { GenericCollection } from "../../../collections/GenericCollection";
 
 export const Collections: React.FC<{
     frontId: string;
@@ -37,7 +37,7 @@ export const Collections: React.FC<{
                 }
 
                 return (
-                    <DefaultCollection collection={collection} salt={salt} />
+                    <GenericCollection collection={collection} salt={salt} />
                 );
         }
     });

@@ -1,10 +1,10 @@
 import React from "react";
 import { Collection as ICollection } from "../api";
 import { DefaultGrid } from "../layout/Grid";
-import { Heading } from "./Heading";
-import { Multiline } from "./Multiline";
+import { Heading } from "../components/Heading";
+import { Multiline } from "../components/Multiline";
 
-export const DefaultCollection: React.FC<{
+export const GenericCollection: React.FC<{
     collection: ICollection;
     salt: string;
 }> = ({ collection, salt }) => {
