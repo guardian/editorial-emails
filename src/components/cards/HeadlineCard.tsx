@@ -83,12 +83,6 @@ const trailTextStyle: FontCSS = {
     ...fontSizes.small
 };
 
-// const quoteIconStyle: ImageCSS = {
-//     height: "0.8em",
-//     display: "inline-block",
-//     border: "0"
-// };
-
 interface Props {
     content: Content;
     backgroundColor?: string;
@@ -124,7 +118,6 @@ export const HeadlineCard: React.FC<Props> = ({
         ? content.properties.maybeContent.metadata.pillar.name
         : null;
     const pillarColour = pillar ? pillarProps[pillar].colour : null;
-    // const pillarQuote = pillar ? pillarProps[pillar].quote : null;
 
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)
@@ -162,21 +155,6 @@ export const HeadlineCard: React.FC<Props> = ({
                                     )}
 
                                     <span style={headlineStyle(layout, colour)}>
-                                        {/* {isComment && (
-                                            <>
-                                                <img
-                                                    height={"14"}
-                                                    style={quoteIconStyle}
-                                                    src={
-                                                        pillarQuote
-                                                            ? pillarQuote
-                                                            : pillarProps.Arts
-                                                                  .quote
-                                                    }
-                                                    alt="quote icon"
-                                                />{" "}
-                                            </>
-                                        )} */}
                                         {isComment && (
                                             <QuotationMark pillar={pillar} />
                                         )}

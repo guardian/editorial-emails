@@ -76,12 +76,6 @@ const trailTextPadding: TdCSS = {
     padding: "6px 10px 20px 10px"
 };
 
-// const quoteIconStyle: ImageCSS = {
-//     height: "0.8em",
-//     display: "inline-block",
-//     border: "0"
-// };
-
 interface Props {
     content: Content;
     salt: string;
@@ -153,18 +147,7 @@ export const OverlayCard: React.FC<Props> = ({
                                             colour={palette.neutral[100]}
                                         />
                                     )}
-
                                     <span style={headlineStyle}>
-                                        {/* {isComment && (
-                                            <>
-                                                <img
-                                                    height={"14"}
-                                                    style={quoteIconStyle}
-                                                    src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5de534049ae16859519012fa/original.png?1575302148"
-                                                    alt="quote icon"
-                                                />{" "}
-                                            </>
-                                        )} */}
                                         {isComment && (
                                             <QuotationMark shouldUseWhite />
                                         )}

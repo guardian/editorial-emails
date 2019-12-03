@@ -91,12 +91,6 @@ const bylineStyle = (size: Size): FontCSS => {
     };
 };
 
-// const quoteIconStyle: ImageCSS = {
-//     height: "0.8em",
-//     display: "inline-block",
-//     border: "0"
-// };
-
 const columnStyleRight: TdCSS = {
     width: "30%",
     verticalAlign: "bottom",
@@ -220,18 +214,7 @@ const Headline: React.FC<{
             <td className="m-pad" style={metaWrapperStyle(size)}>
                 <a style={linkStyle} href={linkURL}>
                     <span style={headlineStyle(size)}>
-                        {/* {isComment && (
-                            <>
-                                <img
-                                    height={"14"}
-                                    style={quoteIconStyle}
-                                    src="https://assets.guim.co.uk/images/email/icons/cc614106682d8de187a64eb222116f3a/quote-opinion.png"
-                                    alt="quote icon"
-                                />{" "}
-                            </>
-                        )} */}
                         {isComment && <QuotationMark pillar="Opinion" />}
-
                         {headline}
                     </span>
                     <br />

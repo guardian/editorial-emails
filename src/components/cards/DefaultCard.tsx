@@ -79,12 +79,6 @@ const bottomPaddingStyle: TdCSS = {
     paddingBottom: "20px"
 };
 
-// const quoteIconStyle: ImageCSS = {
-//     height: "0.8em",
-//     display: "inline-block",
-//     border: "0"
-// };
-
 interface Props {
     content: Content;
     salt: string;
@@ -150,20 +144,7 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
                                         <Kicker text={kicker} size={size} />
                                     )}
                                     <span style={headlineStyle(size)}>
-                                        {/* {isComment && (
-                                            <>
-                                                <img
-                                                    height={"14"}
-                                                    style={quoteIconStyle}
-                                                    src="https://assets.guim.co.uk/images/email/icons/9682728db696148fd5a6b149e556df8c/quote-culture.png"
-                                                    alt="quote icon"
-                                                />{" "}
-                                            </>
-                                        )} */}
-                                        {isComment && (
-                                            <QuotationMark pillar={pillar} />
-                                        )}
-
+                                        {isComment && <QuotationMark />}
                                         {headline}
                                     </span>
                                     <br />
