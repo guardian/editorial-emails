@@ -17,9 +17,13 @@ export const Collections: React.FC<{
 
         switch (designType) {
             case "comment":
-                // TODO - this needs refactoring to improve reliability
-                // We need to ignore collections in a more reliable way or otherwise just accept them
-                if (collection.displayName === "Media by sector") {
+                // Ignore 'Media by Sector' collection without using 'display name'
+                // Look at combination of content type (curated/backfill),
+                // content length and collection type
+                if (
+                    collection.curated.length === 1 &&
+                    collection.collectionType === "free-text"
+                ) {
                     return null;
                 }
 

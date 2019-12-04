@@ -18,16 +18,6 @@ export const Collections: React.FC<{
         const content = [].concat(collection.backfill, collection.curated); // TODO support curated too
         const designType = getDesignType(content);
 
-        // Ignore the jobs/masterclasses collection for now
-        // The collection displayName changes over time and isn't reliable enough for this condition
-        // So intead, we use a different, also unreliable approach of checking for a collection
-        // with one and only one curated item.
-        // TODO: refactor this condition to be more reliable and last long term
-        // Or otherwise remove condition and accept the jobs/masterclasses collection
-        if (collection.curated.length === 1) {
-            return null;
-        }
-
         switch (designType) {
             case "editorial":
                 return (
@@ -44,6 +34,16 @@ export const Collections: React.FC<{
             case "media":
                 return <MediaCollection collection={collection} salt={salt} />;
             case "link":
+                // Ignore 'Guardian Subscribe/Masterclasses' collection without using 'display name'
+                // Look at combination of content type (curated/backfill),
+                // content length and collection type
+                if (
+                    collection.curated.length === 1 &&
+                    collection.collectionType === "medium"
+                ) {
+                    return null;
+                }
+
                 return <LinkCollection collection={collection} salt={salt} />;
             case "default":
                 return (
