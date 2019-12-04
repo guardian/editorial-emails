@@ -34,7 +34,6 @@ const defaultImageStyles: ImageCSS = {
     display: "block",
     clear: "both",
     border: "0"
-    // border: "2px solid red"
 };
 
 export const Image: React.FC<Props> = ({
@@ -46,15 +45,18 @@ export const Image: React.FC<Props> = ({
     linkTo,
     pillar
 }) => {
-    // Merge prop styles into default styles
+    // If a pillar has been passed in, add its colour to the image styles
+    // Defaults to dark grey when no pillar available
     const pillarColour =
         pillar && pillarProps[pillar]
-            ? { color: pillarProps[pillar].colour }
-            : { color: palette.neutral[7] };
+            ? pillarProps[pillar].colour
+            : palette.neutral[7];
+    const imagePillarStyles = { color: pillarColour };
 
+    // Combine all image styles allowing styles passed in via props to take precedence over default styles
     const imageStyles = {
         ...defaultImageStyles,
-        ...pillarColour,
+        ...imagePillarStyles,
         ...extraStyles
     };
 
