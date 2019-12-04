@@ -1,24 +1,13 @@
 import React from "react";
-import { TdCSS, TableCSS, ImageCSS } from "../../css";
+import { TdCSS, TableCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import { Headline } from "../../components/Headline";
+import { Image } from "../../components/Image";
 
 type Size = "small" | "large";
-
-const imgStyle: ImageCSS = {
-    outline: "none",
-    textDecoration: "none",
-    maxWidth: "100%",
-    clear: "both",
-    display: "block",
-    border: "0",
-    width: "100%",
-    fontFamily: "Georgia, serif",
-    color: palette.culture.main
-};
 
 const tableStyle: TableCSS = {
     borderSpacing: 0,
@@ -84,16 +73,13 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
                         {imageURL && (
                             <tr>
                                 <td style={{ padding: 0 }}>
-                                    <a href={webURL}>
-                                        <img
-                                            width={
-                                                size === "large" ? "600" : "294"
-                                            }
-                                            style={imgStyle}
-                                            alt={imageAlt}
-                                            src={imageURL}
-                                        />
-                                    </a>
+                                    <Image
+                                        src={imageURL}
+                                        alt={imageAlt}
+                                        width={size === "large" ? 600 : 294}
+                                        pillar={pillar}
+                                        linkTo={webURL}
+                                    />
                                 </td>
                             </tr>
                         )}
