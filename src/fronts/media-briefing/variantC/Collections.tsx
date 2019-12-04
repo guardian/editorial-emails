@@ -2,6 +2,7 @@ import React from "react";
 import { Collection as ICollection } from "../../../api";
 import { TableRowCell } from "../../../layout/Table";
 import { getDesignType } from "../../../utils/getDesignType";
+import { shouldIgnoreCollection } from "../../../utils/shouldIgnoreCollection";
 import { CommentCollection } from "./components/CommentCollection";
 import { LinkCollection } from "./components/LinkCollection";
 import { InstagramCollection } from "../../../collections/InstagramCollection";
