@@ -65,7 +65,7 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
     const byline = content.properties.byline;
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
-    const imageAlt = image.fields.altText;
+    const imageAlt = content.header.headline;
     const showQuotation = content.display.showQuotedHeadline;
 
     const pillar = content.properties.maybeContent

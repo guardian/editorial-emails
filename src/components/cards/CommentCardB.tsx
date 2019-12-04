@@ -207,7 +207,7 @@ export const CommentCardB: React.FC<Props> = ({
     const byline = content.properties.byline;
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
-    const imageAlt = image.fields.altText;
+    const imageAlt = content.header.headline;
     const showQuotation = content.header.isComment;
 
     const contributor = content.properties.maybeContent.tags.tags.find(tag => {

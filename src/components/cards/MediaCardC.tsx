@@ -69,7 +69,7 @@ export const MediaCardC: React.FC<Props> = ({ content, salt }) => {
     const headline = content.header.headline;
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
-    const imageAlt = image.fields.altText;
+    const imageAlt = content.header.headline;
 
     return (
         <TableRowCell tdStyle={tdStyle}>
