@@ -2,6 +2,7 @@ import cdk = require("@aws-cdk/core");
 import apigateway = require("@aws-cdk/aws-apigateway");
 import lambda = require("@aws-cdk/aws-lambda");
 import iam = require("@aws-cdk/aws-iam");
+import certmgr = require("@aws-cdk/aws-certificatemanager");
 
 export class EmailService extends cdk.Stack {
     constructor(scope: cdk.Construct, id: string) {
@@ -39,11 +40,22 @@ export class EmailService extends cdk.Stack {
             role: s3Role
         });
 
+        const emailDomain = "email-newsletters.theguardian.com";
+        const cert = new certmgr.Certificate(this, "Certificate", {
+            domainName: emailDomain,
+            validationMethod: certmgr.ValidationMethod.DNS
+        });
+
         // tslint:disable-next-line: no-unused-expression
         new apigateway.LambdaRestApi(this, "editorial-emails-api", {
             restApiName: "Editorial Emails Service",
             description: "Serves editorial email fronts.",
             proxy: true,
+            domainName: {
+                certificate: cert,
+                domainName: emailDomain,
+                endpointType: apigateway.EndpointType.EDGE
+            },
             handler
         });
     }
