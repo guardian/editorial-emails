@@ -2,7 +2,6 @@ import React from "react";
 import { Collection as ICollection } from "../../../api";
 import { TableRowCell } from "../../../layout/Table";
 import { getDesignType } from "../../../utils/getDesignType";
-import { shouldIgnoreCollection } from "../../../utils/shouldIgnoreCollection";
 import { TopCollection } from "./components/TopCollection";
 import { CommentCollection } from "./components/CommentCollection";
 import { LinkCollection } from "./components/LinkCollection";
@@ -19,9 +18,9 @@ export const Collections: React.FC<{
 
         switch (designType) {
             case "comment":
-                // Ignore 'Media by Sector' collection which has the 'comment' design type.
-                // TODO: refactor this condition to be more reliable and last long term
-                // Or otherwise remove condition and accept the jobs/masterclasses collection
+                // Ignore 'Media by Sector' collection without using 'display name'
+                // Look at combination of content type (curated/backfill),
+                // content length and collection type
                 if (
                     collection.curated.length === 1 &&
                     collection.collectionType === "free-text"
@@ -35,15 +34,21 @@ export const Collections: React.FC<{
             case "link":
                 return <LinkCollection collection={collection} salt={salt} />;
             case "default":
-                if (collection.displayName === "Top stories") {
+                // Render different collection for 'TV & Radio' collection without using 'display name'
+                // Look at 'tv-and-radio' substring in href
+                if (
+                    collection.href &&
+                    collection.href.indexOf("tv-and-radio") > -1
+                ) {
                     return (
-                        <TopCollection collection={collection} salt={salt} />
+                        <GenericCollection
+                            collection={collection}
+                            salt={salt}
+                        />
                     );
                 }
 
-                return (
-                    <GenericCollection collection={collection} salt={salt} />
-                );
+                return <TopCollection collection={collection} salt={salt} />;
         }
     });
 

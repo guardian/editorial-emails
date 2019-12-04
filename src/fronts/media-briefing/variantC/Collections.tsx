@@ -2,7 +2,6 @@ import React from "react";
 import { Collection as ICollection } from "../../../api";
 import { TableRowCell } from "../../../layout/Table";
 import { getDesignType } from "../../../utils/getDesignType";
-import { shouldIgnoreCollection } from "../../../utils/shouldIgnoreCollection";
 import { CommentCollection } from "./components/CommentCollection";
 import { LinkCollection } from "./components/LinkCollection";
 import { InstagramCollection } from "../../../collections/InstagramCollection";
@@ -18,9 +17,9 @@ export const Collections: React.FC<{
 
         switch (designType) {
             case "comment":
-                // Ignore 'Media by Sector' collection which has the 'comment' design type.
-                // TODO: refactor this condition to be more reliable and last long term
-                // Or otherwise remove condition and accept the jobs/masterclasses collection
+                // Ignore 'Media by Sector' collection without using 'display name'
+                // Look at combination of content type (curated/backfill),
+                // content length and collection type
                 if (
                     collection.curated.length === 1 &&
                     collection.collectionType === "free-text"
