@@ -1,5 +1,8 @@
 node_modules/
 yarn-error.log
 tmp/
-
 .DS_Store
+target/
+cdk.out/
+editorial-emails.zip
+>>>>>>> Add CDK to deploy

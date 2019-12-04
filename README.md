@@ -11,16 +11,12 @@ For the MVP, the core tecnologies are: React, Node, Typescript.
     $ yarn dev // run locally
     $ yarn [test|tslint|tsc|..] // see package.json scripts for options here
 
-TODOs:
+## Deploying
 
--   [x] lint against a whitelist of [allowed CSS
-        properties](https://www.campaignmonitor.com/css/style-element/style-in-head/)
--   [x] add test framework
--   [x] integrate with src-foundations, esp typography
--   [ ] provide layout (table) helpers
--   [ ] implement the [film-today](https://www.theguardian.com/email/film-today)
-        front
--   [ ] make deployable as a lambda
+    $ yarn build
+    $ yarn deploy
+
+## Email and CSS limitations
 
 On the CSS side, emails have some significant restrictions, which is it
 important to be aware of:
@@ -59,7 +55,7 @@ Useful snippets with bug fixes for different email clients:
 
 -   https://litmus.com/community/snippets
 
-Special fixes:
+## Special fixes
 
 Fix #1 - Lotus Notes 8.5 - missing background-color in the footer section.
 
@@ -71,4 +67,3 @@ adding styles for 'background-repeat', 'background-position' and 'background-ima
 Because of that, Lotus Notes 8.5 was stripping out all of the inline styles, including 'background-color', which would normally work fine.
 
 More details on the PR can be found here: https://github.com/guardian/editorial-emails/pull/16
-
