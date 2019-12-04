@@ -93,7 +93,7 @@ export const OverlayCard: React.FC<Props> = ({
 
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
-    const imageAlt = image.fields.altText;
+    const imageAlt = content.header.headline;
     const showQuotation = content.display.showQuotedHeadline;
 
     const kicker = content.header.kicker
