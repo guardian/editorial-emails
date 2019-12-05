@@ -23,17 +23,25 @@ interface Props {
     extraStyles?: ImageCSS;
     linkTo?: string;
     pillar?: Pillar;
+    ignoreWidth?: boolean;
 }
 
-const defaultImageStyles: ImageCSS = {
-    fontFamily: "Georgia, serif",
-    textDecoration: "none",
-    width: "100%",
-    maxWidth: "100%",
-    outline: "none",
-    display: "block",
-    clear: "both",
-    border: "0"
+const defaultImageStyles = (ignoreWidth: boolean): ImageCSS => {
+    const sizingStyles: ImageCSS = {};
+    if (!ignoreWidth) {
+        sizingStyles.width = "100%";
+    }
+
+    return {
+        fontFamily: "Georgia, serif",
+        textDecoration: "none",
+        maxWidth: "100%",
+        outline: "none",
+        display: "block",
+        clear: "both",
+        border: "0",
+        ...sizingStyles
+    };
 };
 
 export const Image: React.FC<Props> = ({
@@ -43,7 +51,8 @@ export const Image: React.FC<Props> = ({
     height,
     extraStyles,
     linkTo,
-    pillar
+    pillar,
+    ignoreWidth
 }) => {
     // If a pillar has been passed in, add its colour to the image styles
     // Defaults to dark grey when no pillar available
@@ -55,7 +64,7 @@ export const Image: React.FC<Props> = ({
 
     // Combine all image styles allowing styles passed in via props to take precedence over default styles
     const imageStyles = {
-        ...defaultImageStyles,
+        ...defaultImageStyles(ignoreWidth),
         ...imagePillarStyles,
         ...extraStyles
     };
