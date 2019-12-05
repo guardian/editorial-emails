@@ -1,16 +1,6 @@
 import React from "react";
-import { ImageCSS } from "../css";
 import { TableRowCell } from "../layout/Table";
-
-const imgStyle: ImageCSS = {
-    outline: "none",
-    textDecoration: "none",
-    maxWidth: "100%",
-    clear: "both",
-    display: "block",
-    border: "0",
-    width: "100%"
-};
+import { Image } from "./Image";
 
 export const Banner: React.FC<{ frontId: string }> = ({ frontId }) => {
     const banners: { [key in string]: string } = {
@@ -33,12 +23,7 @@ export const Banner: React.FC<{ frontId: string }> = ({ frontId }) => {
 
     return (
         <TableRowCell tdStyle={{ padding: "0" }}>
-            <img
-                width="600"
-                src={bannerSrc}
-                alt={bannerAltText}
-                style={imgStyle}
-            ></img>
+            <Image width={600} src={bannerSrc} alt={bannerAltText} />
         </TableRowCell>
     );
 };
