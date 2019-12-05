@@ -67,7 +67,7 @@ export function partition<T>(seq: T[], n: number): T[][] {
 interface DefaultGridProps {
     content: Content[];
     salt: string;
-    CardComponent?: any;
+    CardComponent?: React.ElementType;
 }
 
 // TODO really should accept a React element so that it doesn't have to know

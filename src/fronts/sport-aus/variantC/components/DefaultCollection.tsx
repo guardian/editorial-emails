@@ -3,7 +3,7 @@ import { Collection as ICollection } from "../../../../api";
 import { DefaultGrid } from "../../../../layout/Grid";
 import { Multiline } from "../../../../components/Multiline";
 import { Heading } from "../../../../components/Heading";
-import { palette } from "@guardian/src-foundations";
+// import { palette } from "@guardian/src-foundations";
 import { TableRowCell } from "../../../../layout/Table";
 import { OverlayCard } from "../../../../components/cards/OverlayCard";
 
@@ -12,7 +12,6 @@ export const DefaultCollection: React.FC<{
     salt?: string;
 }> = ({ collection, salt }) => {
     const content = collection.backfill;
-    const lightGrey = palette.neutral[97];
 
     return (
         <>
