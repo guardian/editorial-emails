@@ -1,12 +1,13 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
 import { palette } from "@guardian/src-foundations";
-import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
+import { FontCSS, TdCSS, TableCSS } from "../../css";
 import { sanitizeOptions } from "../../utils/sanitizeOptions";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import { Headline } from "../../components/Headline";
+import { Image } from "../../components/Image";
 
 const fontSizes = {
     large: {
@@ -17,18 +18,6 @@ const fontSizes = {
         fontSize: "16px",
         lineHeight: "20px"
     }
-};
-
-const imgStyle: ImageCSS = {
-    outline: "none",
-    textDecoration: "none",
-    maxWidth: "100%",
-    clear: "both",
-    display: "block",
-    border: "0",
-    width: "100%",
-    fontFamily: "Georgia, serif",
-    color: palette.culture.main
 };
 
 const tableStyle: TableCSS = {
@@ -96,6 +85,10 @@ export const OverlayCard: React.FC<Props> = ({
     const imageAlt = content.header.headline;
     const showQuotation = content.display.showQuotedHeadline;
 
+    const pillar = content.properties.maybeContent
+        ? content.properties.maybeContent.metadata.pillar.name
+        : null;
+
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)
         : "";
@@ -113,14 +106,13 @@ export const OverlayCard: React.FC<Props> = ({
                                     colspan={layout === "compact" ? null : 2}
                                     style={{ padding: 0 }}
                                 >
-                                    <a href={webURL}>
-                                        <img
-                                            width={600}
-                                            style={imgStyle}
-                                            alt={imageAlt}
-                                            src={imageURL}
-                                        />
-                                    </a>
+                                    <Image
+                                        src={imageURL}
+                                        alt={imageAlt}
+                                        width={600}
+                                        pillar={pillar}
+                                        linkTo={webURL}
+                                    />
                                 </td>
                             </tr>
                         )}

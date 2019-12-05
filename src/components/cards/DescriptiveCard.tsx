@@ -1,6 +1,6 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
-import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
+import { FontCSS, TdCSS, TableCSS } from "../../css";
 import { sanitizeOptions } from "../../utils/sanitizeOptions";
 import { ContinueButton } from "../buttons/ContinueButton";
 import { palette } from "@guardian/src-foundations";
@@ -8,6 +8,7 @@ import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import { Headline } from "../../components/Headline";
+import { Image } from "../../components/Image";
 
 const fontFamily = {
     headline: {
@@ -27,18 +28,6 @@ const fontSizes = {
         fontSize: "16px",
         lineHeight: "20px"
     }
-};
-
-const imgStyle: ImageCSS = {
-    outline: "none",
-    textDecoration: "none",
-    maxWidth: "100%",
-    clear: "both",
-    display: "block",
-    border: "0",
-    width: "100%",
-    fontFamily: "Georgia, serif",
-    color: palette.culture.main
 };
 
 const tableStyle: TableCSS = {
@@ -155,14 +144,13 @@ export const DescriptiveCard: React.FC<Props> = ({
                         {imageURL && (
                             <tr>
                                 <td style={{ padding: 0 }}>
-                                    <a href={webURL}>
-                                        <img
-                                            width="600"
-                                            style={imgStyle}
-                                            alt={imageAlt}
-                                            src={imageURL}
-                                        />
-                                    </a>
+                                    <Image
+                                        width={600}
+                                        alt={imageAlt}
+                                        src={imageURL}
+                                        linkTo={webURL}
+                                        pillar={pillar}
+                                    />
                                 </td>
                             </tr>
                         )}
