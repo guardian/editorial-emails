@@ -96,8 +96,9 @@ interface LinkGridProps {
 // TODO really should accept a React element so that it doesn't have to know
 // about Card or salt.
 export const LinkGrid: React.FC<LinkGridProps> = ({ content, salt }) => {
-    const rows = partition(content, 2).map((pair, i) => (
-        <React.Fragment key={i}>
+    const rowsArray = partition(content, 2);
+    const rows = rowsArray.map((pair, index) => (
+        <React.Fragment key={index}>
             <GridRow
                 left={<LinkCardB content={pair[0]} theme="dark" />}
                 right={
@@ -112,8 +113,7 @@ export const LinkGrid: React.FC<LinkGridProps> = ({ content, salt }) => {
                     backgroundColor: palette.neutral[86]
                 }}
             />
-
-            <Padding px={12} />
+            {index < rowsArray.length - 1 && <Padding px={12} />}
         </React.Fragment>
     ));
 

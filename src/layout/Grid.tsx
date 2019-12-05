@@ -72,8 +72,9 @@ interface DefaultGridProps {
 // TODO really should accept a React element so that it doesn't have to know
 // about Card or salt.
 export const DefaultGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
-    const rows = partition(content, 2).map((pair, i) => (
-        <React.Fragment key={i}>
+    const rowsArray = partition(content, 2);
+    const rows = rowsArray.map((pair, index) => (
+        <React.Fragment key={index}>
             <GridRow
                 left={
                     <DefaultCard content={pair[0]} salt={salt} size={"small"} />
@@ -94,8 +95,7 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
                     backgroundColor: palette.culture.faded
                 }}
             />
-
-            <Padding px={12} />
+            {index < rowsArray.length - 1 && <Padding px={12} />}
         </React.Fragment>
     ));
 

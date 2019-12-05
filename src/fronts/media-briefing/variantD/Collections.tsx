@@ -6,6 +6,7 @@ import { TopCollection } from "./components/TopCollection";
 import { CommentCollection } from "./components/CommentCollection";
 import { LinkCollection } from "./components/LinkCollection";
 import { GenericCollection } from "../../../collections/GenericCollection";
+import { Padding } from "../../../layout/Padding";
 
 export const Collections: React.FC<{
     frontId: string;
@@ -41,10 +42,13 @@ export const Collections: React.FC<{
                     collection.href.indexOf("tv-and-radio") > -1
                 ) {
                     return (
-                        <GenericCollection
-                            collection={collection}
-                            salt={salt}
-                        />
+                        <>
+                            <GenericCollection
+                                collection={collection}
+                                salt={salt}
+                            />
+                            <Padding px={12} />
+                        </>
                     );
                 }
 
