@@ -87,7 +87,13 @@ const ContributorImage: React.FC<{
 
     const formattedImage = formatImage(src, salt, width);
     return (
-        <Image src={formattedImage} width={width} alt={alt} pillar="Opinion" />
+        <Image
+            src={formattedImage}
+            width={width}
+            alt={alt}
+            pillar="Opinion"
+            ignoreWidth
+        />
     );
 };
 
