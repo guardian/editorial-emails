@@ -2,10 +2,9 @@ import cdk = require("@aws-cdk/core");
 import apigateway = require("@aws-cdk/aws-apigateway");
 import lambda = require("@aws-cdk/aws-lambda");
 import iam = require("@aws-cdk/aws-iam");
-import certmgr = require("@aws-cdk/aws-certificatemanager");
 
 export class EmailService extends cdk.Stack {
-    constructor(scope: cdk.Construct, id: string) {
+    constructor(scope: cdk.Construct, id: string, certARN: string) {
         super(scope, id, { env: { region: "eu-west-1" } });
 
         const frontsBucketARN = "arn:aws:s3:::aws-frontend-store/*";
@@ -41,10 +40,6 @@ export class EmailService extends cdk.Stack {
         });
 
         const emailDomain = "email-newsletters.theguardian.com";
-        const cert = new certmgr.Certificate(this, "Certificate", {
-            domainName: emailDomain,
-            validationMethod: certmgr.ValidationMethod.DNS
-        });
 
         // tslint:disable-next-line: no-unused-expression
         new apigateway.LambdaRestApi(this, "editorial-emails-api", {
@@ -52,7 +47,11 @@ export class EmailService extends cdk.Stack {
             description: "Serves editorial email fronts.",
             proxy: true,
             domainName: {
-                certificate: cert,
+                certificate: {
+                    certificateArn: certARN,
+                    stack: null,
+                    node: null
+                },
                 domainName: emailDomain,
                 endpointType: apigateway.EndpointType.EDGE
             },
@@ -62,5 +61,7 @@ export class EmailService extends cdk.Stack {
 }
 
 const app = new cdk.App();
+const certificate =
+    "arn:aws:acm:us-east-1:642631414762:certificate/e455baf0-3540-41b4-880d-7903ea1c596b";
 // tslint:disable-next-line: no-unused-expression
-new EmailService(app, "EditorialEmails");
+new EmailService(app, "EditorialEmails", certificate);
