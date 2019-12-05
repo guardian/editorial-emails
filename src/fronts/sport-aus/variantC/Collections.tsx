@@ -19,8 +19,8 @@ export const Collections: React.FC<{
 
         switch (designType) {
             case "default":
-                // Render different collection for 'TV & Radio' collection without using 'display name'
-                // Look at 'tv-and-radio' substring in href
+                // Render different collection for 'Top stories' collection without using 'display name'
+                // Look at 'au/sport' value in href, which is not set in the other collection
                 if (collection.href === "au/sport") {
                     return (
                         <>
