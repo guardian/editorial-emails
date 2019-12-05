@@ -15,8 +15,6 @@ export const Collections: React.FC<{
         const content = [].concat(collection.backfill, collection.curated);
         const designType = getDesignType(content);
 
-        console.log("designType: ", designType);
-
         switch (designType) {
             case "default":
                 // Render different collection for 'Top stories' collection without using 'display name'
@@ -28,7 +26,6 @@ export const Collections: React.FC<{
                                 collection={collection}
                                 salt={salt}
                             />
-                            <Padding px={12} />
                         </>
                     );
                 }
