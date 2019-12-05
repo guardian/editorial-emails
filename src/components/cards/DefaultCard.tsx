@@ -51,7 +51,6 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
     );
 
     const headline = content.header.headline;
-    const byline = content.properties.byline;
     const webURL = content.properties.webUrl + brazeParameter;
     const imageURL = formattedImage;
     const imageAlt = content.header.headline;
@@ -60,6 +59,12 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
     const pillar = content.properties.maybeContent
         ? content.properties.maybeContent.metadata.pillar.name
         : null;
+
+    const { showByline } = content.properties;
+    const byline =
+        showByline && content.properties.byline
+            ? content.properties.byline
+            : "";
 
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)

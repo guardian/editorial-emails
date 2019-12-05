@@ -2,7 +2,7 @@ import React from "react";
 import { Collection as ICollection } from "../../../api";
 import { TableRowCell } from "../../../layout/Table";
 import { getDesignType } from "../../../utils/getDesignType";
-import { InstagramCollection } from "../../../collections/InstagramCollection";
+import { DefaultCollection } from "./components/DefaultCollection";
 
 export const Collections: React.FC<{
     frontId: string;
@@ -16,7 +16,7 @@ export const Collections: React.FC<{
         switch (designType) {
             case "default":
                 return (
-                    <InstagramCollection collection={collection} salt={salt} />
+                    <DefaultCollection collection={collection} salt={salt} />
                 );
         }
     });
