@@ -1,6 +1,7 @@
 import React from "react";
 import { TableCSS, TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
+import { headline } from "../styles/typography";
 
 const tableStyle: TableCSS = {
     borderSpacing: 0,
@@ -10,10 +11,11 @@ const tableStyle: TableCSS = {
 
 const headingStyle = (backgroundColor: string, color: string): TdCSS => {
     return {
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontWeight: 700,
-        fontSize: "22px",
-        lineHeight: "26px",
+        // fontFamily: "'GH Guardian Headline', Georgia, serif",
+        // fontWeight: 700,
+        // fontSize: "22px",
+        // lineHeight: "26px",
+        ...headline({ level: 3, fontWeight: "bold" }),
         color: color || palette.neutral[7],
         backgroundColor,
         padding: "0 10px 12px"
