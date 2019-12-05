@@ -5,6 +5,7 @@ import { Multiline } from "../../../../components/Multiline";
 import { Heading } from "../../../../components/Heading";
 import { palette } from "@guardian/src-foundations";
 import { TableRowCell } from "../../../../layout/Table";
+import { OverlayCard } from "../../../../components/cards/OverlayCard";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -15,13 +16,16 @@ export const DefaultCollection: React.FC<{
 
     return (
         <>
-            <TableRowCell
-                tdStyle={{ backgroundColor: lightGrey, padding: "0" }}
-            >
-                <Multiline topPadding />
-                <Heading heading={collection.displayName} />
+            <Multiline topPadding />
+            <Heading heading={collection.displayName} />
+
+            <TableRowCell tdStyle={{ padding: "0 13px" }}>
+                <DefaultGrid
+                    content={content}
+                    salt={salt}
+                    CardComponent={OverlayCard}
+                />
             </TableRowCell>
-            <DefaultGrid content={content} salt={salt} />
         </>
     );
 };
