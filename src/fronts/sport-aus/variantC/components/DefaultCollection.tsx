@@ -18,7 +18,7 @@ export const DefaultCollection: React.FC<{
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
 
-            <TableRowCell tdStyle={{ padding: "0 13px" }}>
+            <TableRowCell tdStyle={{ padding: "0 10px" }}>
                 <DefaultGrid
                     content={content}
                     salt={salt}

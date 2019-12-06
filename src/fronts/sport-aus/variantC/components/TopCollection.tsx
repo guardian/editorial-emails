@@ -4,8 +4,8 @@ import { TableRowCell } from "../../../../layout/Table";
 import { Padding } from "../../../../layout/Padding";
 import { Multiline } from "../../../../components/Multiline";
 import { Heading } from "../../../../components/Heading";
-import { OverlayCard } from "../../../../components/cards/OverlayCard";
 import { DefaultGrid } from "../../../../layout/Grid";
+import { BorderDefaultCard } from "../../../../components/cards/BorderDefaultCard";
 
 export const TopCollection: React.FC<{
     collection: ICollection;
@@ -22,23 +22,31 @@ export const TopCollection: React.FC<{
 
             <TableRowCell tdStyle={{ padding: "0 10px" }}>
                 <>
-                    <OverlayCard content={firstCollection} salt={salt} />
+                    <BorderDefaultCard
+                        content={firstCollection}
+                        salt={salt}
+                        size="large"
+                    />
                     <Padding px={12} />
                     {secondCollection && (
                         <DefaultGrid
                             content={secondCollection}
                             salt={salt}
-                            CardComponent={OverlayCard}
+                            CardComponent={BorderDefaultCard}
                         />
                     )}
                     <Padding px={12} />
-                    <OverlayCard content={thirdCollection} salt={salt} />
+                    <BorderDefaultCard
+                        content={thirdCollection}
+                        salt={salt}
+                        size="large"
+                    />
                     <Padding px={12} />
                     {fourthCollection && (
                         <DefaultGrid
                             content={fourthCollection}
                             salt={salt}
-                            CardComponent={OverlayCard}
+                            CardComponent={BorderDefaultCard}
                         />
                     )}
                 </>

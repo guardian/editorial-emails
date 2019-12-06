@@ -82,18 +82,14 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
         <React.Fragment key={index}>
             <GridRow
                 left={
-                    <CardComponent
-                        content={pair[0]}
-                        salt={salt}
-                        size={"small"}
-                    />
+                    <CardComponent content={pair[0]} salt={salt} size="small" />
                 }
                 right={
                     pair[1] ? (
                         <CardComponent
                             content={pair[1]}
                             salt={salt}
-                            size={"small"}
+                            size="small"
                         />
                     ) : null
                 }
