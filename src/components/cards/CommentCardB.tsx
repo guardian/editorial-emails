@@ -34,10 +34,6 @@ const linkStyle: FontCSS = {
 };
 
 const spanStyle: FontCSS = {
-    // fontFamily: "'GH Guardian Headline', Georgia, serif",
-    // fontWeight: 400,
-    // fontSize: "16px",
-    // lineHeight: "20px",
     ...headline({ level: 1 }),
     color: palette.neutral[7]
 };

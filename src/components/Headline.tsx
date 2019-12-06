@@ -9,28 +9,14 @@ import { headline } from "../styles/typography";
 
 type Size = "small" | "large";
 
-const fontSizes = {
-    large: {
-        // fontSize: "22px",
-        // lineHeight: "26px"
-        ...headline({ level: 3 })
-    },
-    small: {
-        // fontSize: "16px",
-        // lineHeight: "20px"
-        ...headline({ level: 1 })
-    }
-};
-
 const linkStyle: FontCSS = {
     textDecoration: "none"
 };
 
 const headlineStyle = (size: Size, shouldUseWhite: boolean): FontCSS => {
+    const level = size === "large" ? 3 : 1;
     return {
-        // fontFamily: "'GH Guardian Headline', Georgia, serif",
-        ...fontSizes[size],
-        // fontWeight: 500,
+        ...headline({ level }),
         color: shouldUseWhite ? palette.neutral[100] : palette.neutral[7]
     };
 };
@@ -45,9 +31,9 @@ const bylineStyle = (
             ? pillarProps[pillar].colour
             : palette.culture.main;
 
+    const level = size === "large" ? 3 : 1;
     return {
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        ...fontSizes[size],
+        ...headline({ level }),
         fontStyle: "italic",
         color: shouldUseWhite ? palette.neutral[100] : bylineColour
     };

@@ -14,10 +14,6 @@ const tdStyle: TdCSS = {
 };
 
 const tdHeadlineStyle: TdCSS = {
-    // fontFamily: "'GH Guardian Headline', Georgia, serif",
-    // fontSize: "22px",
-    // lineHeight: "26px",
-    // fontWeight: 400,
     ...headline({ level: 2 }),
     color: palette.neutral[100]
 };

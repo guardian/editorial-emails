@@ -11,10 +11,6 @@ import { headline } from "../../styles/typography";
 
 type Size = "small" | "large";
 
-const imgStyle: ImageCSS = {
-    color: palette.opinion.main
-};
-
 const tdStyle = (isLarge: boolean): TdCSS => ({
     padding: "0",
     borderLeft: isLarge ? `1px solid ${palette.opinion.main}` : "none",
@@ -38,10 +34,6 @@ const linkStyle: FontCSS = {
 };
 
 const spanStyle: FontCSS = {
-    // fontFamily: "'GH Guardian Headline', Georgia, serif",
-    // fontWeight: 400,
-    // fontSize: "16px",
-    // lineHeight: "20px",
     ...headline({ level: 1 }),
     color: palette.neutral[7]
 };

@@ -9,10 +9,10 @@ interface Props {
 // Splitting the CSS for the button link into two separate objects;
 // First, all the standard LinkCSS properties we need, so they can be typechecked...
 const anchorStyles: LinkCSS = {
-    color: "#ffffff",
     fontFamily: "'Guardian Text Sans',sans-serif",
     fontSize: "17px",
     lineHeight: "36px",
+    color: "#ffffff",
     textAlign: "center",
     textDecoration: "none",
     padding: "0"

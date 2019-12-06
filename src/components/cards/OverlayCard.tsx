@@ -10,17 +10,6 @@ import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline } from "../../styles/typography";
 
-// const fontSizes = {
-//     large: {
-//         fontSize: "22px",
-//         lineHeight: "26px"
-//     },
-//     small: {
-//         fontSize: "16px",
-//         lineHeight: "20px"
-//     }
-// };
-
 const tableStyle: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
@@ -45,10 +34,6 @@ const blankCellStyle = {
 };
 
 const trailTextStyle: FontCSS = {
-    // fontFamily: "'GH Guardian Headline', Georgia, serif",
-    // fontSize: "16px",
-    // lineHeight: "20px"
-    // fontWeight: 400,
     ...headline({ level: 1 })
 };
 

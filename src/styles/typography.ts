@@ -24,6 +24,14 @@ export const headline = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
     const strProperties = srcHeadline({ level, lineHeight, fontWeight });
     return fontAsObj(strProperties);
 };
+// export const headline = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
+//     return {
+//         fontFamily: "GH Guardian Headline, Georgia, serif",
+//         fontSize: "",
+//         lineHeight: "",
+//         fontWeight: ""
+//     };
+// };
 
 export const textBody = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
     const strProperties = srcTextBody({ level, lineHeight, fontWeight });

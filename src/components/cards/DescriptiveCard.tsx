@@ -11,26 +11,6 @@ import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline, textBody } from "../../styles/typography";
 
-// const fontFamily = {
-//     headline: {
-//         fontFamily: "'GH Guardian Headline', Georgia, serif"
-//     },
-//     body: {
-//         fontFamily: "'Guardian Text Egyptian', Georgia, serif"
-//     }
-// };
-
-// const fontSizes = {
-//     large: {
-//         fontSize: "22px",
-//         lineHeight: "26px"
-//     },
-//     small: {
-//         fontSize: "16px",
-//         lineHeight: "20px"
-//     }
-// };
-
 const tableStyle: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
@@ -57,17 +37,10 @@ const bottomPadding: TdCSS = {
 };
 
 const trailTextStyle: FontCSS = {
-    // ...fontFamily.headline,
-    // ...fontSizes.small,
-    // fontWeight: 700
     ...headline({ level: 1, fontWeight: "bold" })
 };
 
 const bodyTextStyle: FontCSS = {
-    // fontFamily: "'Guardian Text Egyptian', Georgia, serif",
-    // fontSize: "16px",
-    // lineHeight: "20px",
-    // fontWeight: 400
     ...textBody({ level: 2, lineHeight: "regular" })
 };
 
