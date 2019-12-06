@@ -67,7 +67,7 @@ export function partition<T>(seq: T[], n: number): T[][] {
 interface DefaultGridProps {
     content: Content[];
     salt: string;
-    CardComponent?: React.ElementType;
+    component?: React.ElementType;
 }
 
 // TODO really should accept a React element so that it doesn't have to know
@@ -75,22 +75,16 @@ interface DefaultGridProps {
 export const DefaultGrid: React.FC<DefaultGridProps> = ({
     content,
     salt,
-    CardComponent = DefaultCard
+    component: Card = DefaultCard
 }) => {
     const rowsArray = partition(content, 2);
     const rows = rowsArray.map((pair, index) => (
         <React.Fragment key={index}>
             <GridRow
-                left={
-                    <CardComponent content={pair[0]} salt={salt} size="small" />
-                }
+                left={<Card content={pair[0]} salt={salt} size="small" />}
                 right={
                     pair[1] ? (
-                        <CardComponent
-                            content={pair[1]}
-                            salt={salt}
-                            size="small"
-                        />
+                        <Card content={pair[1]} salt={salt} size="small" />
                     ) : null
                 }
                 leftStyles={{

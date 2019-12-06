@@ -18,13 +18,11 @@ export const DefaultCollection: React.FC<{
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
 
-            <TableRowCell tdStyle={{ padding: "0 10px" }}>
-                <DefaultGrid
-                    content={content}
-                    salt={salt}
-                    CardComponent={OverlayCard}
-                />
-            </TableRowCell>
+            <DefaultGrid
+                content={content}
+                salt={salt}
+                component={OverlayCard}
+            />
         </>
     );
 };
