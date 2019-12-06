@@ -5,7 +5,7 @@ import { Padding } from "../../../../layout/Padding";
 import { Multiline } from "../../../../components/Multiline";
 import { Heading } from "../../../../components/Heading";
 import { DefaultGrid } from "../../../../layout/Grid";
-import { BorderDefaultCard } from "../../../../components/cards/BorderDefaultCard";
+import { DefaultCard } from "../../../../components/cards/DefaultCard";
 
 export const TopCollection: React.FC<{
     collection: ICollection;
@@ -19,38 +19,25 @@ export const TopCollection: React.FC<{
         <>
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
-
-            <TableRowCell tdStyle={{ padding: "0 10px" }}>
-                <>
-                    <BorderDefaultCard
-                        content={firstCollection}
-                        salt={salt}
-                        size="large"
-                    />
-                    <Padding px={12} />
-                    {secondCollection && (
-                        <DefaultGrid
-                            content={secondCollection}
-                            salt={salt}
-                            component={BorderDefaultCard}
-                        />
-                    )}
-                    <Padding px={12} />
-                    <BorderDefaultCard
-                        content={thirdCollection}
-                        salt={salt}
-                        size="large"
-                    />
-                    <Padding px={12} />
-                    {fourthCollection && (
-                        <DefaultGrid
-                            content={fourthCollection}
-                            salt={salt}
-                            component={BorderDefaultCard}
-                        />
-                    )}
-                </>
-            </TableRowCell>
+            <DefaultCard content={firstCollection} salt={salt} size="large" />
+            <Padding px={12} />
+            {secondCollection && (
+                <DefaultGrid
+                    content={secondCollection}
+                    salt={salt}
+                    component={DefaultCard}
+                />
+            )}
+            <Padding px={12} />
+            <DefaultCard content={thirdCollection} salt={salt} size="large" />
+            <Padding px={12} />
+            {fourthCollection && (
+                <DefaultGrid
+                    content={fourthCollection}
+                    salt={salt}
+                    component={DefaultCard}
+                />
+            )}
         </>
     );
 };

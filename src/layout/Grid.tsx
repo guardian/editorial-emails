@@ -87,12 +87,6 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
                         <Card content={pair[1]} salt={salt} size="small" />
                     ) : null
                 }
-                leftStyles={{
-                    backgroundColor: palette.culture.faded
-                }}
-                rightStyles={{
-                    backgroundColor: palette.culture.faded
-                }}
             />
             {index < rowsArray.length - 1 && <Padding px={12} />}
         </React.Fragment>

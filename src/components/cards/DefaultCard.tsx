@@ -9,6 +9,8 @@ import { Image } from "../../components/Image";
 
 type Size = "small" | "large";
 
+type DesignName = "background" | "border";
+
 const tableStyle: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
@@ -16,7 +18,6 @@ const tableStyle: TableCSS = {
 };
 
 const tdStyle: TdCSS = {
-    backgroundColor: palette.culture.faded,
     borderTop: `2px solid ${palette.culture.main}`,
     padding: "0"
 };
@@ -35,12 +36,18 @@ const bottomPaddingStyle: TdCSS = {
 interface Props {
     content: Content;
     salt: string;
-    size: "large" | "small";
+    size: Size;
+    designName?: DesignName;
 }
 
 const brazeParameter = "?##braze_utm##";
 
-export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
+export const DefaultCard: React.FC<Props> = ({
+    content,
+    salt,
+    size,
+    designName = "background"
+}) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(
