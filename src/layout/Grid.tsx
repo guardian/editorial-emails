@@ -75,12 +75,17 @@ interface DefaultGridProps {
     card?: GridCard;
 }
 
+const defaultCard = {
+    Component: DefaultCard,
+    props: {}
+};
+
 // TODO really should accept a React element so that it doesn't have to know
 // about Card or salt.
 export const DefaultGrid: React.FC<DefaultGridProps> = ({
     content,
     salt,
-    card = { Component: DefaultCard, props: {} }
+    card = defaultCard
 }) => {
     const rowsArray = partition(content, 2);
     const { Component, props } = card;
