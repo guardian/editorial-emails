@@ -23,7 +23,7 @@ interface RowStyle {
 
 const colStyle = (styles: RowStyle): TdCSS => ({
     width: "49%",
-    backgroundColor: styles.backgroundColor,
+    backgroundColor: styles.backgroundColor || "transparent",
     verticalAlign: styles.verticalAlign || "top",
     borderBottom: styles.borderBottom || "none",
     borderLeft: styles.borderLeft || "none",
@@ -46,11 +46,18 @@ export const GridRow: React.FC<{
     leftStyles = defaultRowStyles,
     rightStyles = defaultRowStyles
 }) => (
-    <TableRow>
+    <table
+        style={{
+            width: "100%",
+            height: "100%",
+            borderSpacing: 0,
+            borderCollapse: "collapse"
+        }}
+    >
         <td style={colStyle(leftStyles)}>{left}</td>
         <td style={gutterStyle}>&nbsp;</td>
         <td style={colStyle(rightStyles)}>{right}</td>
-    </TableRow>
+    </table>
 );
 
 export function partition<T>(seq: T[], n: number): T[][] {

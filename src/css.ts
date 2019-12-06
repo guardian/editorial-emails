@@ -29,6 +29,7 @@ export interface TableCSS {
     backgroundRepeat?: string;
     backgroundPosition?: string;
     backgroundImage?: string;
+    verticalAlign?: string;
 }
 
 export interface TdCSS extends FontCSS {
@@ -42,6 +43,7 @@ export interface TdCSS extends FontCSS {
     backgroundColor?: string;
     width?: string;
     verticalAlign?: "bottom" | "top";
+    height?: string;
 }
 
 export interface TrCSS {

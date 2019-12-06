@@ -14,17 +14,33 @@ type DesignName = "background" | "border";
 const tableStyle: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
-    width: "100%"
+    width: "100%",
+    height: "100%"
 };
 
+// const designStyle = (designName: DesignName): TdCSS => {
+//     const backgroundCol =
+//         designName === "background"
+//             ? `${palette.culture.faded}`
+//             : `${palette.neutral[100]}`;
+//     return {
+//         borderTop: `2px solid ${palette.culture.main}`,
+//         backgroundColor: backgroundCol,
+//         padding: "0"
+//     };
+// };
 const designStyle = (designName: DesignName): TdCSS => {
-    const backgroundCol =
-        designName === "background"
-            ? `${palette.culture.faded}`
-            : `${palette.neutral[100]}`;
+    if (designName === "border") {
+        return {
+            border: `1px solid ${palette.neutral[93]}`,
+            backgroundColor: palette.neutral[100],
+            padding: "0"
+        };
+    }
+
     return {
         borderTop: `2px solid ${palette.culture.main}`,
-        backgroundColor: backgroundCol,
+        backgroundColor: palette.culture.faded,
         padding: "0"
     };
 };
@@ -32,6 +48,7 @@ const designStyle = (designName: DesignName): TdCSS => {
 const metaWrapperStyle = (size: Size): TdCSS => {
     const rightPad = size === "large" ? "40px" : "10px";
     return {
+        height: "100%",
         padding: `3px ${rightPad} 5px 10px`
     };
 };
@@ -91,19 +108,22 @@ export const DefaultCard: React.FC<Props> = ({
                     <table style={tableStyle}>
                         {imageURL && (
                             <tr>
-                                <td style={{ padding: 0 }}>
+                                <td
+                                    style={{
+                                        padding: 0
+                                    }}
+                                >
                                     <Image
                                         src={imageURL}
                                         alt={imageAlt}
                                         width={size === "large" ? 600 : 294}
                                         pillar={pillar}
-                                        linkTo={webURL}
                                     />
                                 </td>
                             </tr>
                         )}
 
-                        <tr>
+                        <tr style={{ verticalAlign: "top" }}>
                             <td
                                 className="m-pad"
                                 style={metaWrapperStyle(size)}
