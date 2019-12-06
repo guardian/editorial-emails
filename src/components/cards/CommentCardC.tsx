@@ -6,39 +6,12 @@ import { formatImage } from "../../image";
 import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell, TableRow } from "../../layout/Table";
 import { Headline } from "../../components/Headline";
+import { Image } from "../../components/Image";
 
 type Size = "small" | "large";
 
-const fontSizes = {
-    large: {
-        fontSize: "22px",
-        lineHeight: "26px"
-    },
-    small: {
-        fontSize: "16px",
-        lineHeight: "20px"
-    }
-};
-
 const imgStyle: ImageCSS = {
-    outline: "none",
-    textDecoration: "none",
-    maxWidth: "100%",
-    clear: "both",
-    display: "block",
-    border: "0",
-    width: "100%",
-    fontFamily: "Georgia, serif",
     color: palette.opinion.main
-};
-
-const imgProfileStyle: ImageCSS = {
-    outline: "none",
-    maxWidth: "100%",
-    fontFamily: "Georgia, serif",
-    color: palette.opinion.main,
-    display: "block",
-    border: "0"
 };
 
 const tdStyle = (isLarge: boolean): TdCSS => ({
@@ -69,16 +42,6 @@ const spanStyle: FontCSS = {
     fontWeight: 400,
     fontSize: "16px",
     lineHeight: "20px"
-};
-
-const bylineStyle = (size: Size): FontCSS => {
-    return {
-        color: palette.opinion.main,
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontStyle: "italic",
-
-        ...fontSizes[size]
-    };
 };
 
 const columnStyleRight: TdCSS = {
@@ -124,11 +87,12 @@ const ContributorImage: React.FC<{
 
     const formattedImage = formatImage(src, salt, width);
     return (
-        <img
-            width={width}
+        <Image
             src={formattedImage}
+            width={width}
             alt={alt}
-            style={imgProfileStyle}
+            pillar="Opinion"
+            ignoreWidth
         />
     );
 };
@@ -192,23 +156,6 @@ const SupplementaryMeta: React.FC<{
     return null;
 };
 
-const Image: React.FC<{
-    src?: string;
-    linkURL: string;
-    alt: string;
-    width: number;
-}> = ({ src, linkURL, alt, width }) => {
-    if (!src) {
-        return null;
-    }
-
-    return (
-        <a href={linkURL}>
-            <img width={width} style={imgStyle} alt={alt} src={src} />
-        </a>
-    );
-};
-
 export const CommentCardC: React.FC<Props> = ({
     content,
     salt,
@@ -250,9 +197,10 @@ export const CommentCardC: React.FC<Props> = ({
                     <RowCell tdStyle={{ padding: "0" }}>
                         <Image
                             src={imageURL}
-                            linkURL={webURL}
+                            linkTo={webURL}
                             alt={imageAlt}
                             width={size === "large" ? 599 : 294}
+                            pillar="Opinion"
                         />
                     </RowCell>
                 )}

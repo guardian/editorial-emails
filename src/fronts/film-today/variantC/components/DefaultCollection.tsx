@@ -6,6 +6,7 @@ import { Multiline } from "../../../../components/Multiline";
 import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import { DescriptiveCard } from "../../../../components/cards/DescriptiveCard";
+import { Padding } from "../../../../layout/Padding";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -21,6 +22,7 @@ export const DefaultCollection: React.FC<{
             <Multiline />
             <Heading heading="More top stories" />
             {gridContent && <DefaultGrid content={gridContent} salt={salt} />}
+            <Padding px={12} />
             <HeadlineCard
                 content={lastContent}
                 backgroundColor={palette.culture.faded}

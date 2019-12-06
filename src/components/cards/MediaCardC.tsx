@@ -1,9 +1,10 @@
 import React from "react";
-import { TdCSS, ImageCSS } from "../../css";
+import { TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
+import { Image } from "../../components/Image";
 
 const tdStyle: TdCSS = {
     backgroundColor: palette.neutral[100],
@@ -20,41 +21,12 @@ const tdHeadlineStyle: TdCSS = {
     fontWeight: 400
 };
 
-const imgStyle: ImageCSS = {
-    outline: "none",
-    textDecoration: "none",
-    maxWidth: "100%",
-    clear: "both",
-    display: "block",
-    border: "0",
-    width: "100%",
-    fontFamily: "Georgia, serif",
-    color: palette.opinion.main
-};
-
 interface Props {
     content: Content;
     salt: string;
 }
 
 const brazeParameter = "?##braze_utm##";
-
-const Image: React.FC<{
-    src?: string;
-    linkURL: string;
-    alt: string;
-    width: number;
-}> = ({ src, linkURL, alt, width }) => {
-    if (!src) {
-        return null;
-    }
-
-    return (
-        <a href={linkURL}>
-            <img width={width} style={imgStyle} alt={alt} src={src} />
-        </a>
-    );
-};
 
 export const MediaCardC: React.FC<Props> = ({ content, salt }) => {
     const image =
@@ -77,9 +49,10 @@ export const MediaCardC: React.FC<Props> = ({ content, salt }) => {
                 <RowCell tdStyle={{ padding: "0" }}>
                     <Image
                         src={imageURL}
-                        linkURL={webURL}
+                        linkTo={webURL}
                         alt={imageAlt}
                         width={579}
+                        pillar="Opinion"
                     />
                 </RowCell>
                 <RowCell tdStyle={tdHeadlineStyle}>{headline}</RowCell>
