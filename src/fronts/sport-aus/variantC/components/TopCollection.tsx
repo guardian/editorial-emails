@@ -19,7 +19,12 @@ export const TopCollection: React.FC<{
         <>
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
-            <DefaultCard content={firstCollection} salt={salt} size="large" />
+            <DefaultCard
+                content={firstCollection}
+                salt={salt}
+                size="large"
+                designName="border"
+            />
             <Padding px={12} />
             {secondCollection && (
                 <DefaultGrid
@@ -32,7 +37,12 @@ export const TopCollection: React.FC<{
                 />
             )}
             <Padding px={12} />
-            <DefaultCard content={thirdCollection} salt={salt} size="large" />
+            <DefaultCard
+                content={thirdCollection}
+                salt={salt}
+                size="large"
+                designName="border"
+            />
             <Padding px={12} />
             {fourthCollection && (
                 <DefaultGrid

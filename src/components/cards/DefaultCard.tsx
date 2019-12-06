@@ -17,9 +17,16 @@ const tableStyle: TableCSS = {
     width: "100%"
 };
 
-const tdStyle: TdCSS = {
-    borderTop: `2px solid ${palette.culture.main}`,
-    padding: "0"
+const designStyle = (designName: DesignName): TdCSS => {
+    const backgroundCol =
+        designName === "background"
+            ? `${palette.culture.faded}`
+            : `${palette.neutral[100]}`;
+    return {
+        borderTop: `2px solid ${palette.culture.main}`,
+        backgroundColor: backgroundCol,
+        padding: "0"
+    };
 };
 
 const metaWrapperStyle = (size: Size): TdCSS => {
@@ -80,7 +87,7 @@ export const DefaultCard: React.FC<Props> = ({
     return (
         <table style={tableStyle}>
             <tr>
-                <td style={tdStyle}>
+                <td style={designStyle(designName)}>
                     <table style={tableStyle}>
                         {imageURL && (
                             <tr>
