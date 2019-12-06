@@ -1,6 +1,5 @@
 import React from "react";
 import { LinkCSS, ImageCSS } from "../../css";
-import { TableRowCell } from "../../layout/Table";
 
 interface Props {
     label: string;

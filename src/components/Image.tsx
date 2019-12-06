@@ -33,7 +33,7 @@ const defaultImageStyles = (ignoreWidth: boolean): ImageCSS => {
     }
 
     return {
-        fontFamily: "Georgia, serif",
+        fontFamily: "'GH Guardian Headline', Georgia, serif",
         textDecoration: "none",
         maxWidth: "100%",
         outline: "none",

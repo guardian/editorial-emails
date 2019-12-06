@@ -7,17 +7,18 @@ import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { kickerText } from "../../kicker";
 import { Headline } from "../../components/Headline";
+import { headline } from "../../styles/typography";
 
-const fontSizes = {
-    large: {
-        fontSize: "22px",
-        lineHeight: "26px"
-    },
-    small: {
-        fontSize: "16px",
-        lineHeight: "20px"
-    }
-};
+// const fontSizes = {
+//     large: {
+//         fontSize: "22px",
+//         lineHeight: "26px"
+//     },
+//     small: {
+//         fontSize: "16px",
+//         lineHeight: "20px"
+//     }
+// };
 
 const tableStyle: TableCSS = {
     borderSpacing: 0,
@@ -52,10 +53,12 @@ const expandedWrapperStyle: TdCSS = {
 };
 
 const trailTextStyle: FontCSS = {
-    fontFamily: "'GH Guardian Headline', Georgia, serif",
-    fontWeight: 400,
-    color: palette.neutral[7],
-    ...fontSizes.small
+    // fontFamily: "'GH Guardian Headline', Georgia, serif",
+    // fontSize: "16px",
+    // lineHeight: "20px",
+    // fontWeight: 400,
+    ...headline({ level: 1 }),
+    color: palette.neutral[7]
 };
 
 interface Props {

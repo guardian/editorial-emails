@@ -7,6 +7,7 @@ import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell, TableRow } from "../../layout/Table";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
+import { headline } from "../../styles/typography";
 
 type Size = "small" | "large";
 
@@ -33,11 +34,12 @@ const linkStyle: FontCSS = {
 };
 
 const spanStyle: FontCSS = {
-    color: palette.neutral[7],
-    fontFamily: "'GH Guardian Headline', Georgia, serif",
-    fontWeight: 400,
-    fontSize: "16px",
-    lineHeight: "20px"
+    // fontFamily: "'GH Guardian Headline', Georgia, serif",
+    // fontWeight: 400,
+    // fontSize: "16px",
+    // lineHeight: "20px",
+    ...headline({ level: 1 }),
+    color: palette.neutral[7]
 };
 
 const columnStyleRight: TdCSS = {

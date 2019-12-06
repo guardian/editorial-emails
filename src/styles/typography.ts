@@ -3,6 +3,7 @@
 
 import {
     headline as srcHeadline,
+    body as srcTextBody,
     textSans as srcTextSans
 } from "@guardian/src-foundations";
 
@@ -19,13 +20,18 @@ interface FontArgs {
     fontWeight?: "light" | "regular" | "medium" | "bold";
 }
 
-export const textSans = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
-    const strProperties = srcTextSans({ level, lineHeight, fontWeight });
+export const headline = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
+    const strProperties = srcHeadline({ level, lineHeight, fontWeight });
     return fontAsObj(strProperties);
 };
 
-export const headline = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
-    const strProperties = srcHeadline({ level, lineHeight, fontWeight });
+export const textBody = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
+    const strProperties = srcTextBody({ level, lineHeight, fontWeight });
+    return fontAsObj(strProperties);
+};
+
+export const textSans = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
+    const strProperties = srcTextSans({ level, lineHeight, fontWeight });
     return fontAsObj(strProperties);
 };
 
