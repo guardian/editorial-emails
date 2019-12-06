@@ -22,6 +22,8 @@ interface FontArgs {
 
 // Export a local replacement for typography helpers in @src-foundations until we've agreed to standardise
 // our font sizes and line heights with theirs.
+// We're keeping all these 3 helpers as separate functions to mirror how @src-foundations exposes them,
+// enventually making it simple to just delete all our helpers and revert back to using the design system's.
 export const headline = ({
     level = 1,
     fontWeight = "regular"

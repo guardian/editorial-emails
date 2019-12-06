@@ -7,17 +7,6 @@ import { headline } from "../styles/typography";
 
 type Size = "small" | "large";
 
-// const fontSizes = {
-//     large: {
-//         fontSize: "22px",
-//         lineHeight: "26px"
-//     },
-//     small: {
-//         fontSize: "16px",
-//         lineHeight: "20px"
-//     }
-// };
-
 const getKickerColour = (pillar: Pillar, colour: string) => {
     // If a colour is directly passed in, use it
     // Otherwise, if a valid pillar is passed in, use its colour
