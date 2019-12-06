@@ -11,7 +11,7 @@ const tableStyle: TableCSS = {
 
 const headingStyle = (backgroundColor: string, color: string): TdCSS => {
     return {
-        ...headline({ level: 3, fontWeight: "bold" }),
+        ...headline({ level: 2, fontWeight: "bold" }),
         color: color || palette.neutral[7],
         backgroundColor,
         padding: "0 10px 12px"

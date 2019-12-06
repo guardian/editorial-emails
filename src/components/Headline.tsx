@@ -14,7 +14,7 @@ const linkStyle: FontCSS = {
 };
 
 const headlineStyle = (size: Size, shouldUseWhite: boolean): FontCSS => {
-    const level = size === "large" ? 3 : 1;
+    const level = size === "large" ? 2 : 1;
     return {
         ...headline({ level }),
         color: shouldUseWhite ? palette.neutral[100] : palette.neutral[7]
@@ -31,7 +31,7 @@ const bylineStyle = (
             ? pillarProps[pillar].colour
             : palette.culture.main;
 
-    const level = size === "large" ? 3 : 1;
+    const level = size === "large" ? 2 : 1;
     return {
         ...headline({ level }),
         fontStyle: "italic",

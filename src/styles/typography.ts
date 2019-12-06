@@ -20,25 +20,98 @@ interface FontArgs {
     fontWeight?: "light" | "regular" | "medium" | "bold";
 }
 
-export const headline = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
+// Export a local replacement for typography helpers in @src-foundations until we've agreed to standardise
+// our font sizes and line heights with theirs.
+export const headline = ({
+    level = 1,
+    fontWeight = "regular"
+}: FontArgs): Font => {
+    return {
+        fontFamily: "GH Guardian Headline, Georgia, serif",
+        ...getLevelStyles({ level }),
+        ...fontWeightStyles[fontWeight]
+    };
+};
+
+export const textBody = ({
+    level = 1,
+    fontWeight = "regular"
+}: FontArgs): Font => {
+    return {
+        fontFamily: "Guardian Text Egyptian, Georgia, serif",
+        ...getLevelStyles({ level }),
+        ...fontWeightStyles[fontWeight]
+    };
+};
+
+export const textSans = ({
+    level = 1,
+    fontWeight = "regular"
+}: FontArgs): Font => {
+    return {
+        fontFamily: "Guardian Text Sans",
+        ...getLevelStyles({ level }),
+        ...fontWeightStyles[fontWeight]
+    };
+};
+
+// Locally map a fontWeight to an actual value
+const fontWeightStyles = {
+    light: {
+        fontWeight: "300"
+    },
+    regular: {
+        fontWeight: "500"
+    },
+    medium: {
+        fontWeight: "500"
+    },
+    bold: {
+        fontWeight: "700"
+    }
+};
+
+// Locally map a fontSize & lineHeight to actual values
+const getLevelStyles = ({ level }: FontArgs): any => {
+    switch (level) {
+        case 2:
+            return {
+                fontSize: "22px",
+                lineHeight: "26px"
+            };
+        default:
+            return {
+                fontSize: "16px",
+                lineHeight: "20px"
+            };
+    }
+};
+
+// Export Design System headline/textBody/textSans under a different name
+// Makes it clear when using a local typography helper or a @src-foundations helper
+export const guHeadline = ({
+    level,
+    lineHeight,
+    fontWeight
+}: FontArgs): Font => {
     const strProperties = srcHeadline({ level, lineHeight, fontWeight });
     return fontAsObj(strProperties);
 };
-// export const headline = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
-//     return {
-//         fontFamily: "GH Guardian Headline, Georgia, serif",
-//         fontSize: "",
-//         lineHeight: "",
-//         fontWeight: ""
-//     };
-// };
 
-export const textBody = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
+export const guTextBody = ({
+    level,
+    lineHeight,
+    fontWeight
+}: FontArgs): Font => {
     const strProperties = srcTextBody({ level, lineHeight, fontWeight });
     return fontAsObj(strProperties);
 };
 
-export const textSans = ({ level, lineHeight, fontWeight }: FontArgs): Font => {
+export const guTextSans = ({
+    level,
+    lineHeight,
+    fontWeight
+}: FontArgs): Font => {
     const strProperties = srcTextSans({ level, lineHeight, fontWeight });
     return fontAsObj(strProperties);
 };

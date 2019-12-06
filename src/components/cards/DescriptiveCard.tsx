@@ -41,7 +41,7 @@ const trailTextStyle: FontCSS = {
 };
 
 const bodyTextStyle: FontCSS = {
-    ...textBody({ level: 2, lineHeight: "regular" })
+    ...textBody({ level: 1, lineHeight: "regular" })
 };
 
 const bottomPaddingStyle: TdCSS = {
