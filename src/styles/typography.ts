@@ -1,6 +1,5 @@
 // Used to convert src-foundation font declarations, which are string-based,
 // into objects we can use for style attributes
-
 import {
     headline as srcHeadline,
     body as srcTextBody,

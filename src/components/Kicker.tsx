@@ -21,7 +21,7 @@ const getKickerColour = (pillar: Pillar, colour: string) => {
 };
 
 const kickerStyle = (size: string, pillar: Pillar, colour: string): FontCSS => {
-    const level = size === "large" ? 3 : 1;
+    const level = size === "large" ? 2 : 1;
 
     return {
         ...headline({ level, fontWeight: "bold" }),
