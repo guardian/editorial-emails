@@ -25,7 +25,10 @@ export const TopCollection: React.FC<{
                 <DefaultGrid
                     content={secondCollection}
                     salt={salt}
-                    component={DefaultCard}
+                    card={{
+                        Component: DefaultCard,
+                        props: { designName: "border" }
+                    }}
                 />
             )}
             <Padding px={12} />
@@ -35,7 +38,10 @@ export const TopCollection: React.FC<{
                 <DefaultGrid
                     content={fourthCollection}
                     salt={salt}
-                    component={DefaultCard}
+                    card={{
+                        Component: DefaultCard,
+                        props: { designName: "border" }
+                    }}
                 />
             )}
         </>

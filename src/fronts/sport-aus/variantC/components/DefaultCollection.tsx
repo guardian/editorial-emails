@@ -3,9 +3,7 @@ import { Collection as ICollection } from "../../../../api";
 import { DefaultGrid } from "../../../../layout/Grid";
 import { Multiline } from "../../../../components/Multiline";
 import { Heading } from "../../../../components/Heading";
-// import { palette } from "@guardian/src-foundations";
-import { TableRowCell } from "../../../../layout/Table";
-import { OverlayCard } from "../../../../components/cards/OverlayCard";
+import { DefaultCard } from "../../../../components/cards/DefaultCard";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -21,7 +19,10 @@ export const DefaultCollection: React.FC<{
             <DefaultGrid
                 content={content}
                 salt={salt}
-                component={OverlayCard}
+                card={{
+                    Component: DefaultCard,
+                    props: { designName: "border" }
+                }}
             />
         </>
     );
