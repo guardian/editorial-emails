@@ -18,23 +18,13 @@ const tableStyle: TableCSS = {
     height: "100%"
 };
 
-// const designStyle = (designName: DesignName): TdCSS => {
-//     const backgroundCol =
-//         designName === "background"
-//             ? `${palette.culture.faded}`
-//             : `${palette.neutral[100]}`;
-//     return {
-//         borderTop: `2px solid ${palette.culture.main}`,
-//         backgroundColor: backgroundCol,
-//         padding: "0"
-//     };
-// };
 const designStyle = (designName: DesignName): TdCSS => {
     if (designName === "border") {
         return {
             border: `1px solid ${palette.neutral[93]}`,
             backgroundColor: palette.neutral[100],
-            padding: "0"
+            padding: "0",
+            verticalAlign: "top"
         };
     }
 
