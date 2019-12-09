@@ -2,7 +2,10 @@ import React from "react";
 import { TableRowCell } from "../layout/Table";
 import { Image } from "./Image";
 
-export const Banner: React.FC<{ frontId: string }> = ({ frontId }) => {
+export const Banner: React.FC<{ title: string; frontId: string }> = ({
+    title,
+    frontId
+}) => {
     const banners: { [key in string]: string } = {
         "email/opinion":
             "https://assets.guim.co.uk/images/email/banners/5ddb54b70715242bc85e071bd14f66e8/opinion.png",
@@ -14,18 +17,11 @@ export const Banner: React.FC<{ frontId: string }> = ({ frontId }) => {
             "https://assets.guim.co.uk/images/email/banners/0dbd7be9345b28a8678baaae474e6548/film-today.png"
     };
 
-    const bannersAlt: { [key in string]: string } = {
-        "email/opinion": "The Best of Guardian Opinion",
-        "email/media-briefing": "Media Briefing",
-        default: "Film Today"
-    };
-
     const bannerSrc = banners[frontId] || banners.default;
-    const bannerAltText = bannersAlt[frontId] || bannersAlt.default;
 
     return (
         <TableRowCell tdStyle={{ padding: "0" }}>
-            <Image width={600} src={bannerSrc} alt={bannerAltText} />
+            <Image width={600} src={bannerSrc} alt={title} />
         </TableRowCell>
     );
 };
