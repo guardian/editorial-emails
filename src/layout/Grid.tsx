@@ -23,7 +23,7 @@ interface RowStyle {
 
 const colStyle = (styles: RowStyle): TdCSS => ({
     width: "49%",
-    backgroundColor: styles.backgroundColor,
+    backgroundColor: styles.backgroundColor || "transparent",
     verticalAlign: styles.verticalAlign || "top",
     borderBottom: styles.borderBottom || "none",
     borderLeft: styles.borderLeft || "none",
@@ -46,11 +46,18 @@ export const GridRow: React.FC<{
     leftStyles = defaultRowStyles,
     rightStyles = defaultRowStyles
 }) => (
-    <TableRow>
+    <table
+        style={{
+            width: "100%",
+            height: "100%",
+            borderSpacing: 0,
+            borderCollapse: "collapse"
+        }}
+    >
         <td style={colStyle(leftStyles)}>{left}</td>
         <td style={gutterStyle}>&nbsp;</td>
         <td style={colStyle(rightStyles)}>{right}</td>
-    </TableRow>
+    </table>
 );
 
 export function partition<T>(seq: T[], n: number): T[][] {
@@ -64,36 +71,52 @@ export function partition<T>(seq: T[], n: number): T[][] {
     return groups;
 }
 
+type GridCard = {
+    Component: React.ElementType;
+    props: any;
+};
+
 interface DefaultGridProps {
     content: Content[];
     salt: string;
+    card?: GridCard;
 }
+
+const defaultCard = {
+    Component: DefaultCard,
+    props: {}
+};
 
 // TODO really should accept a React element so that it doesn't have to know
 // about Card or salt.
-export const DefaultGrid: React.FC<DefaultGridProps> = ({ content, salt }) => {
+export const DefaultGrid: React.FC<DefaultGridProps> = ({
+    content,
+    salt,
+    card = defaultCard
+}) => {
     const rowsArray = partition(content, 2);
+    const { Component, props } = card;
     const rows = rowsArray.map((pair, index) => (
         <React.Fragment key={index}>
             <GridRow
                 left={
-                    <DefaultCard content={pair[0]} salt={salt} size={"small"} />
+                    <Component
+                        content={pair[0]}
+                        salt={salt}
+                        size="small"
+                        {...props}
+                    />
                 }
                 right={
                     pair[1] ? (
-                        <DefaultCard
+                        <Component
                             content={pair[1]}
                             salt={salt}
-                            size={"small"}
+                            size="small"
+                            {...props}
                         />
                     ) : null
                 }
-                leftStyles={{
-                    backgroundColor: palette.culture.faded
-                }}
-                rightStyles={{
-                    backgroundColor: palette.culture.faded
-                }}
             />
             {index < rowsArray.length - 1 && <Padding px={12} />}
         </React.Fragment>

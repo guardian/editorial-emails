@@ -73,12 +73,7 @@ export const Headline: React.FC<Props> = ({
             )}
 
             <span style={headlineStyle(textSize, shouldUseWhite)}>
-                {showQuotation && (
-                    <QuotationMark
-                        pillar={pillar}
-                        shouldUseWhite={shouldUseWhite}
-                    />
-                )}
+                {showQuotation && <QuotationMark pillar={pillar} />}
                 {text}
             </span>
 
