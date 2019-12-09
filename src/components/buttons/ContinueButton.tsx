@@ -1,5 +1,6 @@
 import React from "react";
 import { LinkCSS, ImageCSS } from "../../css";
+import { palette } from "@guardian/src-foundations";
 
 interface Props {
     label: string;
@@ -12,7 +13,7 @@ const anchorStyles: LinkCSS = {
     fontFamily: "'Guardian Text Sans',sans-serif",
     fontSize: "17px",
     lineHeight: "36px",
-    color: "#ffffff",
+    color: palette.neutral[100],
     textAlign: "center",
     textDecoration: "none",
     padding: "0"
@@ -22,7 +23,7 @@ const anchorStyles: LinkCSS = {
 // which are only relevant to this component and should not be added to the LinkCSS type.
 const anchorStylesWithPrefixes: any = {
     ...anchorStyles,
-    backgroundColor: "#a1845c",
+    backgroundColor: palette.culture.main,
     borderRadius: "20px",
     display: "inline-block",
     minWidth: "200px",
