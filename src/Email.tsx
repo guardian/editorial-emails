@@ -24,15 +24,21 @@ enum Fronts {
 const canonicalURL = (path: string): string =>
     `https://www.theguardian.com/${path}`;
 
-const title = (id: string): string => {
+const getTitleFromFrontId = (id: string): string => {
     const tag = id.substring("email/".length);
 
-    return (
-        tag
-            .split("-")
-            .map(s => s[0].toUpperCase() + s.slice(1))
-            .join(" ") + " | The Guardian"
-    );
+    return tag
+        .split("-")
+        .map(s => s[0].toUpperCase() + s.slice(1))
+        .join(" ");
+};
+
+const getPageTitle = (front: Front): string => {
+    if (front.seoData && front.seoData.webTitle) {
+        return front.seoData.webTitle;
+    }
+
+    return getTitleFromFrontId(front.id);
 };
 
 const renderFront = (front: Front, salt: string, variant?: string) => {
@@ -86,12 +92,14 @@ const renderFront = (front: Front, salt: string, variant?: string) => {
 };
 
 export const Email = (front: Front, salt: string, variant?: string): string => {
+    const pageTitle = getPageTitle(front);
+
     const body = renderToStaticMarkup(
         <Center>
             <TableRowCell tdStyle={{ padding: "0" }}>
-                <Banner frontId={front.id} />
+                <Banner title={pageTitle} frontId={front.id} />
                 {renderFront(front, salt, variant)}
-                <Footer frontId={front.id} />
+                <Footer title={pageTitle} frontId={front.id} />
             </TableRowCell>
         </Center>
     );
@@ -120,7 +128,7 @@ export const Email = (front: Front, salt: string, variant?: string): string => {
         <meta name="robots" content="noindex" />
         <link rel="canonical" href="${canonicalURL(front.id)}" />
         <link rel="icon" href="https://static.guim.co.uk/images/${favicon}" />
-        <title>${title(front.id)}</title>
+        <title>${pageTitle} | The Guardian</title>
 
         <!-- Font resets for MS Outlook -->
         <!--[if mso]>
