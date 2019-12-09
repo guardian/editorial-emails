@@ -4,7 +4,7 @@ import { Collections } from "../../components/Collections";
 import { Collections as CollectionsVariantB } from "./variantB/Collections";
 import { Collections as CollectionsVariantC } from "./variantC/Collections";
 
-export const SportAus: React.FC<{
+export const SportAu: React.FC<{
     frontId: string;
     collections: ICollection[];
     salt: string;
