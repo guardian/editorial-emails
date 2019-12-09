@@ -44,7 +44,10 @@ const linkStyle: LinkCSS = {
     textDecoration: "none"
 };
 
-export const Footer: React.FC<{ frontId: string }> = ({ frontId }) => (
+export const Footer: React.FC<{ title: string; frontId: string }> = ({
+    title,
+    frontId
+}) => (
     <>
         {"###MERCHANDISING_PLACEHOLDER###"}
         <table style={tableStyle}>
@@ -86,7 +89,7 @@ export const Footer: React.FC<{ frontId: string }> = ({ frontId }) => (
                                     <tr>
                                         <td style={tdDisclaimer}>
                                             You are receiving this email because
-                                            you are a subscriber to Film Today.
+                                            you are a subscriber to {title}.
                                             Guardian News &amp; Media Limited -
                                             a member of Guardian Media Group
                                             PLC. Registered Office: Kings Place,
