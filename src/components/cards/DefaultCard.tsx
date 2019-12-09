@@ -18,7 +18,7 @@ const tableStyle: TableCSS = {
     height: "100%"
 };
 
-const designStyle = (designName: DesignName): TdCSS => {
+const tdStyle = (designName: DesignName): TdCSS => {
     if (designName === "border") {
         return {
             border: `1px solid ${palette.neutral[93]}`,
@@ -94,7 +94,7 @@ export const DefaultCard: React.FC<Props> = ({
     return (
         <table style={tableStyle}>
             <tr>
-                <td style={designStyle(designName)}>
+                <td style={tdStyle(designName)}>
                     <table style={tableStyle}>
                         {imageURL && (
                             <tr>
@@ -108,6 +108,7 @@ export const DefaultCard: React.FC<Props> = ({
                                         alt={imageAlt}
                                         width={size === "large" ? 600 : 294}
                                         pillar={pillar}
+                                        linkTo={webURL}
                                     />
                                 </td>
                             </tr>

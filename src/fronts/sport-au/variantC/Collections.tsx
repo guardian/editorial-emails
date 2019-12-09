@@ -4,7 +4,6 @@ import { TableRowCell } from "../../../layout/Table";
 import { getDesignType } from "../../../utils/getDesignType";
 import { TopCollection } from "./components/TopCollection";
 import { DefaultCollection } from "./components/DefaultCollection";
-import { Padding } from "../../../layout/Padding";
 
 export const Collections: React.FC<{
     frontId: string;
@@ -21,12 +20,7 @@ export const Collections: React.FC<{
                 // Look at 'au/sport' value in href, which is not set in the other collection
                 if (collection.href === "au/sport") {
                     return (
-                        <>
-                            <TopCollection
-                                collection={collection}
-                                salt={salt}
-                            />
-                        </>
+                        <TopCollection collection={collection} salt={salt} />
                     );
                 }
 
