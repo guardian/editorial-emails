@@ -9,21 +9,36 @@ import { Image } from "../../components/Image";
 
 type Size = "small" | "large";
 
+type DesignName = "background" | "border";
+
 const tableStyle: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
-    width: "100%"
+    width: "100%",
+    height: "100%"
 };
 
-const tdStyle: TdCSS = {
-    backgroundColor: palette.culture.faded,
-    borderTop: `2px solid ${palette.culture.main}`,
-    padding: "0"
+const tdStyle = (designName: DesignName): TdCSS => {
+    if (designName === "border") {
+        return {
+            border: `1px solid ${palette.neutral[93]}`,
+            backgroundColor: palette.neutral[100],
+            padding: "0",
+            verticalAlign: "top"
+        };
+    }
+
+    return {
+        borderTop: `2px solid ${palette.culture.main}`,
+        backgroundColor: palette.culture.faded,
+        padding: "0"
+    };
 };
 
 const metaWrapperStyle = (size: Size): TdCSS => {
     const rightPad = size === "large" ? "40px" : "10px";
     return {
+        height: "100%",
         padding: `3px ${rightPad} 5px 10px`
     };
 };
@@ -35,12 +50,18 @@ const bottomPaddingStyle: TdCSS = {
 interface Props {
     content: Content;
     salt: string;
-    size: "large" | "small";
+    size: Size;
+    designName?: DesignName;
 }
 
 const brazeParameter = "?##braze_utm##";
 
-export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
+export const DefaultCard: React.FC<Props> = ({
+    content,
+    salt,
+    size,
+    designName = "background"
+}) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(
@@ -73,11 +94,15 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
     return (
         <table style={tableStyle}>
             <tr>
-                <td style={tdStyle}>
+                <td style={tdStyle(designName)}>
                     <table style={tableStyle}>
                         {imageURL && (
                             <tr>
-                                <td style={{ padding: 0 }}>
+                                <td
+                                    style={{
+                                        padding: 0
+                                    }}
+                                >
                                     <Image
                                         src={imageURL}
                                         alt={imageAlt}
@@ -89,7 +114,7 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
                             </tr>
                         )}
 
-                        <tr>
+                        <tr style={{ verticalAlign: "top" }}>
                             <td
                                 className="m-pad"
                                 style={metaWrapperStyle(size)}

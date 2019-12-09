@@ -29,18 +29,21 @@ export interface TableCSS {
     backgroundRepeat?: string;
     backgroundPosition?: string;
     backgroundImage?: string;
+    verticalAlign?: string;
 }
 
 export interface TdCSS extends FontCSS {
     padding?: string;
     paddingBottom?: string;
     paddingTop?: string;
+    border?: string;
     borderTop?: string;
     borderLeft?: string;
     borderBottom?: string;
     backgroundColor?: string;
     width?: string;
     verticalAlign?: "bottom" | "top";
+    height?: string;
 }
 
 export interface TrCSS {

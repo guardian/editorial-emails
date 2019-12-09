@@ -123,6 +123,7 @@ export const OverlayCard: React.FC<Props> = ({
                                     text={headline}
                                     linkTo={webURL}
                                     size="large"
+                                    pillar={pillar}
                                     shouldUseWhite
                                     kicker={kicker}
                                     showQuotation={showQuotation}

@@ -5,6 +5,7 @@ import { Banner } from "./components/Banner";
 import { Collections } from "./components/Collections";
 import { FilmToday } from "./fronts/film-today/FilmToday";
 import { MediaBriefing } from "./fronts/media-briefing/MediaBriefing";
+import { SportAu } from "./fronts/sport-au/SportAu";
 import { Opinion } from "./fronts/opinion/Opinion";
 import { Footer } from "./components/Footer";
 import { Center } from "./layout/Center";
@@ -16,7 +17,8 @@ import { TableRowCell } from "./layout/Table";
 enum Fronts {
     Opinion = "email/opinion",
     FilmToday = "email/film-today",
-    MediaBriefing = "email/media-briefing"
+    MediaBriefing = "email/media-briefing",
+    SportAu = "email/sport-au"
 }
 
 const canonicalURL = (path: string): string =>
@@ -63,6 +65,15 @@ const renderFront = (front: Front, salt: string, variant?: string) => {
         case Fronts.Opinion:
             return (
                 <Opinion
+                    frontId={id}
+                    collections={collections}
+                    salt={salt}
+                    variant={variant}
+                />
+            );
+        case Fronts.SportAu:
+            return (
+                <SportAu
                     frontId={id}
                     collections={collections}
                     salt={salt}
