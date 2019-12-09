@@ -18,8 +18,7 @@ export const TopCollection: React.FC<{
     return (
         <TableRowCell
             tdStyle={{
-                backgroundColor: lightGrey,
-                padding: "0"
+                backgroundColor: lightGrey
             }}
         >
             <Multiline topPadding />

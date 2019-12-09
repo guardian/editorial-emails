@@ -18,9 +18,7 @@ export const DefaultCollection: React.FC<{
 
     return (
         <>
-            <TableRowCell
-                tdStyle={{ backgroundColor: lightGrey, padding: "0" }}
-            >
+            <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
                 <Multiline topPadding />
                 <Heading heading={collection.displayName} />
             </TableRowCell>

@@ -44,7 +44,7 @@ export const MediaCardC: React.FC<Props> = ({ content, salt }) => {
     return (
         <TableRowCell tdStyle={tdStyle}>
             <Table>
-                <RowCell tdStyle={{ padding: "0" }}>
+                <RowCell>
                     <Image
                         src={imageURL}
                         linkTo={webURL}

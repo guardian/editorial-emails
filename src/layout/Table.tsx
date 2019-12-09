@@ -9,7 +9,10 @@ const defaultTableStyle: TableCSS = {
 
 const defaultTrStyle: TrCSS = {};
 
-const defaultTdStyle: TdCSS = {};
+const defaultTdStyle: TdCSS = {
+    //  width: "100%",
+    padding: "0"
+};
 
 export const Table: React.FC<{
     children: React.ReactNode;

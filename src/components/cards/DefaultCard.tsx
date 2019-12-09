@@ -1,24 +1,18 @@
 import React from "react";
-import { TdCSS, TableCSS } from "../../css";
+import { TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
+import { Table, TableRowCell, RowCell } from "../../layout/Table";
 
 type Size = "small" | "large";
 
-const tableStyle: TableCSS = {
-    borderSpacing: 0,
-    borderCollapse: "collapse",
-    width: "100%"
-};
-
 const tdStyle: TdCSS = {
     backgroundColor: palette.culture.faded,
-    borderTop: `2px solid ${palette.culture.main}`,
-    padding: "0"
+    borderTop: `2px solid ${palette.culture.main}`
 };
 
 const metaWrapperStyle = (size: Size): TdCSS => {
@@ -71,50 +65,38 @@ export const DefaultCard: React.FC<Props> = ({ content, salt, size }) => {
         : "";
 
     return (
-        <table style={tableStyle}>
-            <tr>
-                <td style={tdStyle}>
-                    <table style={tableStyle}>
-                        {imageURL && (
-                            <tr>
-                                <td style={{ padding: 0 }}>
-                                    <Image
-                                        src={imageURL}
-                                        alt={imageAlt}
-                                        width={size === "large" ? 600 : 294}
-                                        pillar={pillar}
-                                        linkTo={webURL}
-                                    />
-                                </td>
-                            </tr>
-                        )}
+        <TableRowCell tdStyle={tdStyle}>
+            <Table>
+                {imageURL && (
+                    <RowCell>
+                        <Image
+                            src={imageURL}
+                            alt={imageAlt}
+                            width={size === "large" ? 600 : 294}
+                            pillar={pillar}
+                            linkTo={webURL}
+                        />
+                    </RowCell>
+                )}
 
-                        <tr>
-                            <td
-                                className="m-pad"
-                                style={metaWrapperStyle(size)}
-                            >
-                                <Headline
-                                    text={headline}
-                                    linkTo={webURL}
-                                    size={size}
-                                    pillar={pillar}
-                                    kicker={kicker}
-                                    byline={byline}
-                                    showQuotation={showQuotation}
-                                />
-                            </td>
-                        </tr>
+                <tr>
+                    <td className="m-pad" style={metaWrapperStyle(size)}>
+                        <Headline
+                            text={headline}
+                            linkTo={webURL}
+                            size={size}
+                            pillar={pillar}
+                            kicker={kicker}
+                            byline={byline}
+                            showQuotation={showQuotation}
+                        />
+                    </td>
+                </tr>
 
-                        <tr>
-                            <td
-                                className="m-col-pad"
-                                style={bottomPaddingStyle}
-                            ></td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+                <tr>
+                    <td className="m-col-pad" style={bottomPaddingStyle}></td>
+                </tr>
+            </Table>
+        </TableRowCell>
     );
 };

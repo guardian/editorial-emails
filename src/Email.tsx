@@ -77,7 +77,7 @@ const renderFront = (front: Front, salt: string, variant?: string) => {
 export const Email = (front: Front, salt: string, variant?: string): string => {
     const body = renderToStaticMarkup(
         <Center>
-            <TableRowCell tdStyle={{ padding: "0" }}>
+            <TableRowCell>
                 <Banner frontId={front.id} />
                 {renderFront(front, salt, variant)}
                 <Footer frontId={front.id} />

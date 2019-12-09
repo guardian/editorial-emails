@@ -15,7 +15,7 @@ export const DefaultCollection: React.FC<{
     const white = palette.neutral[100];
 
     return (
-        <TableRowCell tdStyle={{ backgroundColor: lightGrey, padding: "0" }}>
+        <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
             {collection.backfill.map((story, index) => (
