@@ -40,7 +40,10 @@ const linkStyle: LinkCSS = {
     textDecoration: "none"
 };
 
-export const Footer: React.FC<{ frontId: string }> = ({ frontId }) => (
+export const Footer: React.FC<{ title: string; frontId: string }> = ({
+    title,
+    frontId
+}) => (
     <>
         {"###MERCHANDISING_PLACEHOLDER###"}
         <TableRowCell tdStyle={{ paddingTop: "12px" }}>
@@ -77,11 +80,11 @@ export const Footer: React.FC<{ frontId: string }> = ({ frontId }) => (
                             <tr>
                                 <td style={tdDisclaimer}>
                                     You are receiving this email because you are
-                                    a subscriber to Film Today. Guardian News
-                                    &amp; Media Limited - a member of Guardian
-                                    Media Group PLC. Registered Office: Kings
-                                    Place, 90 York Way, London, N1 9GU.
-                                    Registered in England No. 908396.
+                                    a subscriber to {title}. Guardian News &amp;
+                                    Media Limited - a member of Guardian Media
+                                    Group PLC. Registered Office: Kings Place,
+                                    90 York Way, London, N1 9GU. Registered in
+                                    England No. 908396.
                                 </td>
                             </tr>
                         </Table>
