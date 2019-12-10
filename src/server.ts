@@ -16,6 +16,8 @@ const imageSalt: Promise<string> = process.env.IMAGE_SALT
     ? Promise.resolve(process.env.IMAGE_SALT)
     : getParam("/frontend/images.signature-salt");
 
+app.get("/healthcheck", (req, res) => res.send({ status: "okay" }));
+
 // HTML version as JSON - for Braze/clients
 app.get(
     "/:path.json",
