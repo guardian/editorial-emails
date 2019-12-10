@@ -16,23 +16,41 @@ type VAlign = "top" | "bottom";
 interface RowStyle {
     backgroundColor: string;
     verticalAlign?: VAlign;
+    border?: string;
     borderBottom?: string;
     borderLeft?: string;
     lineHeight?: string;
 }
 
-const colStyle = (styles: RowStyle): TdCSS => ({
-    width: "49%",
-    backgroundColor: styles.backgroundColor || "transparent",
-    verticalAlign: styles.verticalAlign || "top",
-    borderBottom: styles.borderBottom || "none",
-    borderLeft: styles.borderLeft || "none",
-    lineHeight: styles.lineHeight || "inherit",
-    padding: "0"
-});
+const colStyle = (styles: RowStyle): TdCSS => {
+    // Ensure we only apply the border shorthand property
+    // OR the individual border declarations.
+    const borderStyles: TdCSS = {};
+    if (styles.border) {
+        borderStyles.border = styles.border;
+    } else {
+        borderStyles.borderBottom = styles.borderBottom || "none";
+        borderStyles.borderLeft = styles.borderLeft || "none";
+    }
 
+    return {
+        width: "49%",
+        backgroundColor: styles.backgroundColor || "transparent",
+        verticalAlign: styles.verticalAlign || "top",
+        lineHeight: styles.lineHeight || "inherit",
+        padding: "0",
+        height: "100%",
+        ...borderStyles
+    };
+};
+
+// By default, give the grid cells this background colour,
+// which works well with the Default Card component used by the grid.
+// This background colour can be overriden via props,
+// which is useful behaviour if we choose to use the Grid
+// with a different card component.
 const defaultRowStyles: RowStyle = {
-    backgroundColor: palette.neutral[100]
+    backgroundColor: palette.culture.faded
 };
 
 export const GridRow: React.FC<{
@@ -80,6 +98,8 @@ interface DefaultGridProps {
     content: Content[];
     salt: string;
     card?: GridCard;
+    leftStyles?: RowStyle;
+    rightStyles?: RowStyle;
 }
 
 const defaultCard = {
@@ -92,7 +112,9 @@ const defaultCard = {
 export const DefaultGrid: React.FC<DefaultGridProps> = ({
     content,
     salt,
-    card = defaultCard
+    card = defaultCard,
+    leftStyles,
+    rightStyles
 }) => {
     const rowsArray = partition(content, 2);
     const { Component, props } = card;
@@ -117,6 +139,8 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
                         />
                     ) : null
                 }
+                leftStyles={leftStyles}
+                rightStyles={rightStyles}
             />
             {index < rowsArray.length - 1 && <Padding px={12} />}
         </React.Fragment>
