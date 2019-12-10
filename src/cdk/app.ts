@@ -52,7 +52,7 @@ export class EmailService extends cdk.Stack {
         // tslint:disable-next-line: no-unused-expression
         new route53.CfnHealthCheck(this, "editorial-emails-healthcheck", {
             healthCheckConfig: {
-                type: "HTTPS:",
+                type: "HTTPS",
                 fullyQualifiedDomainName: "email-newsletters.theguardian.com",
                 resourcePath: "/healthcheck",
                 port: 443,
