@@ -1,0 +1,16 @@
+{
+    "projectName": "dotcom:editorial-emails",
+    "vcsURL": "https://github.com/guardian/editorial-emails",
+    "actions": [
+        {
+            "action": "lambda",
+            "path": "target",
+            "compress": "zip"
+        },
+        {
+            "action": "cloudformation",
+            "path": "cloudformation.yaml",
+            "compress": false
+        }
+    ]
+}

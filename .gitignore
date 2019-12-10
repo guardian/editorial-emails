@@ -5,4 +5,4 @@ tmp/
 target/
 cdk.out/
 editorial-emails.zip
->>>>>>> Add CDK to deploy
+cloudformation.yaml
