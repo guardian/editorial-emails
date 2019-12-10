@@ -16,6 +16,17 @@ For the MVP, the core tecnologies are: React, Node, Typescript.
     $ yarn build
     $ yarn deploy
 
+## Logs and troubleshooting
+
+There is a healthcheck in Route53 connected to an alarm that should email the
+team if the service is unavailable.
+
+The lambda has logs in Cloudwatch Logs.
+
+For additional troubleshooting, it is possible to setup access logs in API
+Gateway. See:
+https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html.
+
 ## Email and CSS limitations
 
 On the CSS side, emails have some significant restrictions, which is it
