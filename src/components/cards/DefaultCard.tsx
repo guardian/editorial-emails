@@ -14,7 +14,8 @@ type DesignName = "background" | "border";
 const tableStyle: TableCSS = {
     borderSpacing: 0,
     borderCollapse: "collapse",
-    width: "100%"
+    width: "100%",
+    height: "100%"
 };
 
 const tdStyle = (designName: DesignName, isInsideGrid: boolean): TdCSS => {
