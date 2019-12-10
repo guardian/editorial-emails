@@ -45,6 +45,7 @@ const tdStyle = (designName: DesignName, isInsideGrid: boolean): TdCSS => {
 const metaWrapperStyle = (size: Size): TdCSS => {
     const rightPad = size === "large" ? "40px" : "10px";
     return {
+        height: "100%",
         padding: `3px ${rightPad} 5px 10px`
     };
 };
