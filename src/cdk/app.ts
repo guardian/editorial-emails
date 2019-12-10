@@ -38,7 +38,8 @@ export class EmailService extends cdk.Stack {
                 __dirname + "../../../editorial-emails.zip"
             ),
             handler: "server.handler",
-            role: s3Role
+            role: s3Role,
+            logRetention: 14
         });
 
         // tslint:disable-next-line: no-unused-expression
