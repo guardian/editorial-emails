@@ -16,9 +16,12 @@ ${collection.displayName}
 ${collection.backfill
     .map(
         content =>
-            `${content.properties.webTitle}\n${content.properties.webUrl}`
+            `${content.header.headline}\n${content.properties.webUrl}##braze_utm##`
     )
     .join("\n\n\n")}
+
+
+Read online: https://www.theguardian.com/${front.id}?##braze_utm##.
 
 
 ${disclaimer(pageTitle)}`;
