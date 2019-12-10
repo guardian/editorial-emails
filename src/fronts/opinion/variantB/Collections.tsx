@@ -6,7 +6,6 @@ import { EditorialCollection } from "./components/EditorialCollection";
 import { MediaCollection } from "./components/MediaCollection";
 import { LinkCollection } from "./components/LinkCollection";
 import { DefaultCollection } from "./components/DefaultCollection";
-
 import { getDesignType } from "../../../utils/getDesignType";
 
 export const Collections: React.FC<{

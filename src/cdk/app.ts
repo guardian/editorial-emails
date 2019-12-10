@@ -2,6 +2,8 @@ import cdk = require("@aws-cdk/core");
 import apigateway = require("@aws-cdk/aws-apigateway");
 import lambda = require("@aws-cdk/aws-lambda");
 import iam = require("@aws-cdk/aws-iam");
+import route53 = require("@aws-cdk/aws-route53");
+import cloudwatch = require("@aws-cdk/aws-cloudwatch");
 
 export class EmailService extends cdk.Stack {
     constructor(scope: cdk.Construct, id: string) {
@@ -45,6 +47,17 @@ export class EmailService extends cdk.Stack {
             description: "Serves editorial email fronts.",
             proxy: true,
             handler
+        });
+
+        // tslint:disable-next-line: no-unused-expression
+        new route53.CfnHealthCheck(this, "editorial-emails-healthcheck", {
+            healthCheckConfig: {
+                type: "HTTPS",
+                fullyQualifiedDomainName: "email-newsletters.theguardian.com",
+                resourcePath: "/healthcheck",
+                port: 443,
+                failureThreshold: 3
+            }
         });
     }
 }

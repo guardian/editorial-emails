@@ -10,7 +10,6 @@ const defaultTableStyle: TableCSS = {
 const defaultTrStyle: TrCSS = {};
 
 const defaultTdStyle: TdCSS = {
-    //  width: "100%",
     padding: "0"
 };
 
