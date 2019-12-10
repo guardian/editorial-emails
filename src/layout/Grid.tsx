@@ -29,8 +29,8 @@ const colStyle = (styles: RowStyle): TdCSS => {
     if (styles.border) {
         borderStyles.border = styles.border;
     } else {
-        borderStyles.borderBottom = styles.borderBottom;
-        borderStyles.borderLeft = styles.borderLeft;
+        borderStyles.borderBottom = styles.borderBottom || "none";
+        borderStyles.borderLeft = styles.borderLeft || "none";
     }
 
     return {
