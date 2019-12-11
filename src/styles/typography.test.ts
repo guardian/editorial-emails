@@ -1,7 +1,7 @@
-import { textSans } from "./typography";
+import { guTextSans } from "./typography";
 
 test("typography", () => {
-    const got = textSans({ level: 1 });
+    const got = guTextSans({ level: 1 });
     const want = {
         fontFamily:
             "GuardianTextSans, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif",

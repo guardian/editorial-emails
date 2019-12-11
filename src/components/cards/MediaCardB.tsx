@@ -6,6 +6,7 @@ import { formatImage } from "../../image";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
 import { Padding } from "../../layout/Padding";
 import { Image } from "../../components/Image";
+import { headline } from "../../styles/typography";
 
 const tdStyle: TdCSS = {
     backgroundColor: palette.neutral[20],
@@ -13,11 +14,8 @@ const tdStyle: TdCSS = {
 };
 
 const tdHeadlineStyle: TdCSS = {
-    color: palette.neutral[100],
-    fontSize: "22px",
-    lineHeight: "26px",
-    fontFamily: "'GH Guardian Headline', Georgia, serif",
-    fontWeight: 400
+    ...headline({ level: 2 }),
+    color: palette.neutral[100]
 };
 
 interface Props {

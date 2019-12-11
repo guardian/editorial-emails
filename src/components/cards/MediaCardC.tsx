@@ -5,6 +5,7 @@ import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
 import { Image } from "../../components/Image";
+import { headline } from "../../styles/typography";
 
 const tdStyle: TdCSS = {
     backgroundColor: palette.neutral[100],
@@ -14,11 +15,8 @@ const tdStyle: TdCSS = {
 };
 
 const tdHeadlineStyle: TdCSS = {
-    color: palette.neutral[20],
-    fontSize: "22px",
-    lineHeight: "26px",
-    fontFamily: "'GH Guardian Headline', Georgia, serif",
-    fontWeight: 400
+    ...headline({ level: 2 }),
+    color: palette.neutral[20]
 };
 
 interface Props {
@@ -46,7 +44,7 @@ export const MediaCardC: React.FC<Props> = ({ content, salt }) => {
     return (
         <TableRowCell tdStyle={tdStyle}>
             <Table>
-                <RowCell tdStyle={{ padding: "0" }}>
+                <RowCell>
                     <Image
                         src={imageURL}
                         linkTo={webURL}

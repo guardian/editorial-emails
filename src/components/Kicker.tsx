@@ -3,19 +3,9 @@ import { FontCSS } from "../css";
 import { Pillar } from "../api";
 import { pillarProps } from "../utils/pillarProps";
 import { palette } from "@guardian/src-foundations";
+import { headline } from "../styles/typography";
 
 type Size = "small" | "large";
-
-const fontSizes = {
-    large: {
-        fontSize: "22px",
-        lineHeight: "26px"
-    },
-    small: {
-        fontSize: "16px",
-        lineHeight: "20px"
-    }
-};
 
 const getKickerColour = (pillar: Pillar, colour: string) => {
     // If a colour is directly passed in, use it
@@ -31,13 +21,11 @@ const getKickerColour = (pillar: Pillar, colour: string) => {
 };
 
 const kickerStyle = (size: string, pillar: Pillar, colour: string): FontCSS => {
-    const kickerSize = size === "large" ? size : "small";
+    const level = size === "large" ? 2 : 1;
 
     return {
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontWeight: 700,
-        color: getKickerColour(pillar, colour),
-        ...fontSizes[kickerSize]
+        ...headline({ level, fontWeight: "bold" }),
+        color: getKickerColour(pillar, colour)
     };
 };
 

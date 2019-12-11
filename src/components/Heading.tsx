@@ -1,19 +1,12 @@
 import React from "react";
-import { TableCSS, TdCSS } from "../css";
+import { TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
-
-const tableStyle: TableCSS = {
-    borderSpacing: 0,
-    borderCollapse: "collapse",
-    width: "100%"
-};
+import { headline } from "../styles/typography";
+import { TableRow } from "../layout/Table";
 
 const headingStyle = (backgroundColor: string, color: string): TdCSS => {
     return {
-        fontFamily: "'GH Guardian Headline', Georgia, serif",
-        fontWeight: 700,
-        fontSize: "22px",
-        lineHeight: "26px",
+        ...headline({ level: 2, fontWeight: "bold" }),
         color: color || palette.neutral[7],
         backgroundColor,
         padding: "0 10px 12px"
@@ -25,14 +18,9 @@ export const Heading: React.FC<{
     backgroundColor?: string;
     color?: string;
 }> = ({ heading, backgroundColor, color }) => (
-    <table style={tableStyle}>
-        <tr>
-            <td
-                className="m-heading"
-                style={headingStyle(backgroundColor, color)}
-            >
-                {heading}
-            </td>
-        </tr>
-    </table>
+    <TableRow>
+        <td className="m-heading" style={headingStyle(backgroundColor, color)}>
+            {heading}
+        </td>
+    </TableRow>
 );

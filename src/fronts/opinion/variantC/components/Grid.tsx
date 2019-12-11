@@ -4,7 +4,6 @@ import { TableRow, TableRowCell } from "../../../../layout/Table";
 import { Padding } from "../../../../layout/Padding";
 import { Content } from "../../../../api";
 import { GridRow, partition } from "../../../../layout/Grid";
-import { TableCSS } from "../../../../css";
 import {
     CommentCardC,
     ContributorImageWrapper,
@@ -17,11 +16,6 @@ interface CommentGridProps {
     salt: string;
     shouldShowGridImages: boolean;
 }
-
-const tableStyle: TableCSS = {
-    borderCollapse: "collapse",
-    borderSpacing: 0
-};
 
 export const Grid: React.FC<CommentGridProps> = ({
     content,

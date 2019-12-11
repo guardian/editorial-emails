@@ -1,22 +1,16 @@
 import React from "react";
-import { TdCSS, TableCSS } from "../../css";
+import { TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
+import { Table, TableRowCell, RowCell } from "../../layout/Table";
 
 type Size = "small" | "large";
 
 type DesignName = "background" | "border";
-
-const tableStyle: TableCSS = {
-    borderSpacing: 0,
-    borderCollapse: "collapse",
-    width: "100%",
-    height: "100%"
-};
 
 const tdStyle = (designName: DesignName, isInsideGrid: boolean): TdCSS => {
     if (designName === "border") {
@@ -24,21 +18,18 @@ const tdStyle = (designName: DesignName, isInsideGrid: boolean): TdCSS => {
             return {
                 border: `1px solid ${palette.neutral[93]}`,
                 backgroundColor: palette.neutral[100],
-                padding: "0",
                 verticalAlign: "top"
             };
         }
 
         return {
-            padding: "0",
             verticalAlign: "top"
         };
     }
 
     return {
         borderTop: `2px solid ${palette.culture.main}`,
-        backgroundColor: palette.culture.faded,
-        padding: "0"
+        backgroundColor: palette.culture.faded
     };
 };
 
@@ -101,54 +92,41 @@ export const DefaultCard: React.FC<Props> = ({
         : "";
 
     return (
-        <table style={tableStyle}>
-            <tr>
-                <td style={tdStyle(designName, isInsideGrid)}>
-                    <table style={tableStyle}>
-                        {imageURL && (
-                            <tr>
-                                <td
-                                    style={{
-                                        padding: 0
-                                    }}
-                                >
-                                    <Image
-                                        src={imageURL}
-                                        alt={imageAlt}
-                                        width={size === "large" ? 600 : 294}
-                                        pillar={pillar}
-                                        linkTo={webURL}
-                                    />
-                                </td>
-                            </tr>
-                        )}
+        <TableRowCell
+            tableStyle={{ height: "100%" }}
+            tdStyle={tdStyle(designName, isInsideGrid)}
+        >
+            <Table tableStyle={{ height: "100%" }}>
+                {imageURL && (
+                    <RowCell>
+                        <Image
+                            src={imageURL}
+                            alt={imageAlt}
+                            width={size === "large" ? 600 : 294}
+                            pillar={pillar}
+                            linkTo={webURL}
+                        />
+                    </RowCell>
+                )}
 
-                        <tr style={{ verticalAlign: "top" }}>
-                            <td
-                                className="m-pad"
-                                style={metaWrapperStyle(size)}
-                            >
-                                <Headline
-                                    text={headline}
-                                    linkTo={webURL}
-                                    size={size}
-                                    pillar={pillar}
-                                    kicker={kicker}
-                                    byline={byline}
-                                    showQuotation={showQuotation}
-                                />
-                            </td>
-                        </tr>
+                <tr style={{ verticalAlign: "top" }}>
+                    <td className="m-pad" style={metaWrapperStyle(size)}>
+                        <Headline
+                            text={headline}
+                            linkTo={webURL}
+                            size={size}
+                            pillar={pillar}
+                            kicker={kicker}
+                            byline={byline}
+                            showQuotation={showQuotation}
+                        />
+                    </td>
+                </tr>
 
-                        <tr>
-                            <td
-                                className="m-col-pad"
-                                style={bottomPaddingStyle}
-                            ></td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+                <tr>
+                    <td className="m-col-pad" style={bottomPaddingStyle}></td>
+                </tr>
+            </Table>
+        </TableRowCell>
     );
 };

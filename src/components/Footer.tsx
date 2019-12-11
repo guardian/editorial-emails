@@ -1,11 +1,7 @@
 import React from "react";
 import { TableCSS, TdCSS, LinkCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
-
-const tableStyle: TableCSS = {
-    borderSpacing: 0,
-    borderCollapse: "collapse"
-};
+import { TableRowCell, Table } from "../layout/Table";
 
 const tableWrapper: TableCSS = {
     borderSpacing: 0,
@@ -55,53 +51,46 @@ export const Footer: React.FC<{ title: string; frontId: string }> = ({
 }) => (
     <>
         {"###MERCHANDISING_PLACEHOLDER###"}
-        <table style={tableStyle}>
-            <tr>
-                <td style={{ paddingTop: "12px" }}>
-                    {/*
+        <TableRowCell tdStyle={{ paddingTop: "12px" }}>
+            {/*
                     // @ts-ignore as bgcolor required by some clients */}
-                    <table bgcolor={palette.neutral[20]} style={tableWrapper}>
-                        <tr>
-                            <td style={tdInnerPadding}>
-                                <table style={tableStyle}>
-                                    <tr>
-                                        <td
-                                            className="ft__links"
-                                            style={tdStyle}
-                                        >
-                                            <a
-                                                href="https://profile.theguardian.com/email-prefs?##braze_utm##"
-                                                style={linkStyle}
-                                            >
-                                                Manage your emails
-                                            </a>{" "}
-                                            |{" "}
-                                            <a
-                                                href="%%unsub_center_url%%"
-                                                style={linkStyle}
-                                            >
-                                                Unsubscribe
-                                            </a>{" "}
-                                            |{" "}
-                                            <a
-                                                href={`https://www.theguardian.com/${frontId}?##braze_utm##`}
-                                                style={linkStyle}
-                                            >
-                                                Trouble viewing?
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style={tdDisclaimer}>
-                                            {disclaimer(title)}
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+            <table bgcolor={palette.neutral[20]} style={tableWrapper}>
+                <tr>
+                    <td style={tdInnerPadding}>
+                        <Table>
+                            <tr>
+                                <td className="ft__links" style={tdStyle}>
+                                    <a
+                                        href="https://profile.theguardian.com/email-prefs?##braze_utm##"
+                                        style={linkStyle}
+                                    >
+                                        Manage your emails
+                                    </a>{" "}
+                                    |{" "}
+                                    <a
+                                        href="%%unsub_center_url%%"
+                                        style={linkStyle}
+                                    >
+                                        Unsubscribe
+                                    </a>{" "}
+                                    |{" "}
+                                    <a
+                                        href={`https://www.theguardian.com/${frontId}?##braze_utm##`}
+                                        style={linkStyle}
+                                    >
+                                        Trouble viewing?
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style={tdDisclaimer}>
+                                    {disclaimer(title)}
+                                </td>
+                            </tr>
+                        </Table>
+                    </td>
+                </tr>
+            </table>
+        </TableRowCell>
     </>
 );
