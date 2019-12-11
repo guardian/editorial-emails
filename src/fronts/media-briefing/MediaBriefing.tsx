@@ -12,6 +12,8 @@ export const MediaBriefing: React.FC<{
     variant?: string;
 }> = ({ frontId, collections, salt, variant }) => {
     if (variant === "z") {
+        // NOT IN USE
+        // FKA VARIANT C
         return (
             <CollectionsVariantZ
                 frontId={frontId}
