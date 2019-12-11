@@ -33,7 +33,7 @@ const getTitleFromFrontId = (id: string): string => {
         .join(" ");
 };
 
-const getPageTitle = (front: Front): string => {
+export const getPageTitle = (front: Front): string => {
     if (front.seoData && front.seoData.webTitle) {
         return front.seoData.webTitle;
     }
@@ -96,7 +96,7 @@ export const Email = (front: Front, salt: string, variant?: string): string => {
 
     const body = renderToStaticMarkup(
         <Center>
-            <TableRowCell tdStyle={{ padding: "0" }}>
+            <TableRowCell>
                 <Banner title={pageTitle} frontId={front.id} />
                 {renderFront(front, salt, variant)}
                 <Footer title={pageTitle} frontId={front.id} />

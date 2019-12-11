@@ -51,9 +51,5 @@ export const Collections: React.FC<{
         }
     });
 
-    return (
-        <TableRowCell tdStyle={{ padding: "0" }}>
-            {renderedCollections}
-        </TableRowCell>
-    );
+    return <TableRowCell>{renderedCollections}</TableRowCell>;
 };

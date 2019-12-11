@@ -1,5 +1,6 @@
 import React from "react";
 import { LinkCSS, ImageCSS } from "../../css";
+import { TableRowCell, Table } from "../../layout/Table";
 import { palette } from "@guardian/src-foundations";
 
 interface Props {
@@ -45,13 +46,7 @@ export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
         <w:anchorlock></w:anchorlock>
         <center>
             ${(
-                <table
-                    style={{
-                        borderSpacing: 0,
-                        borderCollapse: "collapse",
-                        width: "100%"
-                    }}
-                >
+                <Table>
                     <tr>
                         <td
                             style={{
@@ -76,39 +71,35 @@ export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
                             />
                         </td>
                     </tr>
-                </table>
+                </Table>
             )}
         </center>
         </v:roundrect>
     <![endif]-->`;
 
     return (
-        <table>
-            <tr>
-                <td>
-                    <div>
-                        <div
-                            dangerouslySetInnerHTML={{
-                                __html: outlookButtonMarkup
-                            }}
-                        />
-                        <a
-                            href={linkTo}
-                            target="_blank"
-                            style={anchorStylesWithPrefixes}
-                        >
-                            {label}&nbsp;&nbsp;
-                            <img
-                                style={imgStyles}
-                                src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264"
-                                width="23"
-                                height="22"
-                                alt=""
-                            />
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <TableRowCell>
+            <div>
+                <div
+                    dangerouslySetInnerHTML={{
+                        __html: outlookButtonMarkup
+                    }}
+                />
+                <a
+                    href={linkTo}
+                    target="_blank"
+                    style={anchorStylesWithPrefixes}
+                >
+                    {label}&nbsp;&nbsp;
+                    <img
+                        style={imgStyles}
+                        src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264"
+                        width="23"
+                        height="22"
+                        alt=""
+                    />
+                </a>
+            </div>
+        </TableRowCell>
     );
 };

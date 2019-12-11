@@ -8,12 +8,7 @@ import { Content } from "../../api";
 import { kickerText } from "../../kicker";
 import { Headline } from "../../components/Headline";
 import { headline } from "../../styles/typography";
-
-const tableStyle: TableCSS = {
-    borderSpacing: 0,
-    borderCollapse: "collapse",
-    width: "100%"
-};
+import { Table, TableRowCell } from "../../layout/Table";
 
 const tdStyle = (
     backgroundColor: string,
@@ -25,8 +20,7 @@ const tdStyle = (
         backgroundColor: backgroundColor || "transparent",
         borderTop: `${
             borderWidth === "thin" ? "1px" : "2px"
-        } solid ${borderColor || pillarColour || palette.culture.main}`,
-        padding: "0"
+        } solid ${borderColor || pillarColour || palette.culture.main}`
     };
 };
 
@@ -94,55 +88,45 @@ export const HeadlineCard: React.FC<Props> = ({
     const size = layout === "expanded" ? "large" : "small";
 
     return (
-        <table style={tableStyle}>
-            <tr>
-                <td
-                    style={tdStyle(
-                        backgroundColor,
-                        pillarColour,
-                        borderWidth,
-                        borderColor
-                    )}
-                >
-                    <table style={tableStyle}>
-                        <tr>
-                            <td
-                                className="m-col-pad"
-                                style={metaWrapperStyle(layout)}
-                            >
-                                <Headline
-                                    text={headline}
-                                    linkTo={cardLink}
-                                    size={size}
-                                    shouldUseWhite={showUseWhite}
-                                    pillar={showPillarColours ? pillar : null}
-                                    kicker={kicker}
-                                    byline={byline}
-                                    showQuotation={showQuotation}
-                                />
-                            </td>
-                        </tr>
-                        {layout === "expanded" && trailText && (
-                            <tr>
-                                <td
-                                    className="m-col-pad"
-                                    style={expandedWrapperStyle}
-                                >
-                                    <span
-                                        style={trailTextStyle}
-                                        dangerouslySetInnerHTML={{
-                                            __html: sanitizeHtml(
-                                                trailText,
-                                                sanitizeOptions
-                                            )
-                                        }}
-                                    />
-                                </td>
-                            </tr>
-                        )}
-                    </table>
-                </td>
-            </tr>
-        </table>
+        <TableRowCell
+            tdStyle={tdStyle(
+                backgroundColor,
+                pillarColour,
+                borderWidth,
+                borderColor
+            )}
+        >
+            <Table>
+                <tr>
+                    <td className="m-col-pad" style={metaWrapperStyle(layout)}>
+                        <Headline
+                            text={headline}
+                            linkTo={cardLink}
+                            size={size}
+                            shouldUseWhite={showUseWhite}
+                            pillar={showPillarColours ? pillar : null}
+                            kicker={kicker}
+                            byline={byline}
+                            showQuotation={showQuotation}
+                        />
+                    </td>
+                </tr>
+                {layout === "expanded" && trailText && (
+                    <tr>
+                        <td className="m-col-pad" style={expandedWrapperStyle}>
+                            <span
+                                style={trailTextStyle}
+                                dangerouslySetInnerHTML={{
+                                    __html: sanitizeHtml(
+                                        trailText,
+                                        sanitizeOptions
+                                    )
+                                }}
+                            />
+                        </td>
+                    </tr>
+                )}
+            </Table>
+        </TableRowCell>
     );
 };

@@ -9,16 +9,10 @@ import { kickerText } from "../../kicker";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline } from "../../styles/typography";
-
-const tableStyle: TableCSS = {
-    borderSpacing: 0,
-    borderCollapse: "collapse",
-    width: "100%"
-};
+import { Table, TableRowCell } from "../../layout/Table";
 
 const tdStyle = (backgroundColor: string): TdCSS => {
     return {
-        padding: "0",
         backgroundColor: backgroundColor || "transparent"
     };
 };
@@ -82,70 +76,66 @@ export const OverlayCard: React.FC<Props> = ({
         : "";
 
     return (
-        <table style={tableStyle}>
-            <tr>
-                <td style={tdStyle(backgroundColor)}>
-                    <table style={tableStyle}>
-                        {imageURL && (
-                            <tr>
-                                {/*
+        <TableRowCell tdStyle={tdStyle(backgroundColor)}>
+            <Table>
+                {imageURL && (
+                    <tr>
+                        {/*
                     // @ts-ignore as JSX expects 'colSpan' but HTML only validates if used as 'colspan' */}
-                                <td
-                                    colspan={layout === "compact" ? null : 2}
-                                    style={{ padding: 0 }}
-                                >
-                                    <Image
-                                        src={imageURL}
-                                        alt={imageAlt}
-                                        width={600}
-                                        pillar={pillar}
-                                        linkTo={webURL}
-                                    />
-                                </td>
-                            </tr>
-                        )}
+                        <td
+                            colspan={layout === "compact" ? null : 2}
+                            style={{ padding: 0 }}
+                        >
+                            <Image
+                                src={imageURL}
+                                alt={imageAlt}
+                                width={600}
+                                pillar={pillar}
+                                linkTo={webURL}
+                            />
+                        </td>
+                    </tr>
+                )}
 
-                        <tr>
-                            <td className="m-pad" style={headlineCellStyle}>
-                                <Headline
-                                    text={headline}
-                                    linkTo={webURL}
-                                    size="large"
-                                    pillar={pillar}
-                                    shouldUseWhite
-                                    kicker={kicker}
-                                    showQuotation={showQuotation}
-                                />
-                            </td>
-                            {layout !== "compact" && (
-                                <td style={blankCellStyle}>&nbsp;</td>
-                            )}
-                        </tr>
+                <tr>
+                    <td className="m-pad" style={headlineCellStyle}>
+                        <Headline
+                            text={headline}
+                            linkTo={webURL}
+                            size="large"
+                            pillar={pillar}
+                            shouldUseWhite
+                            kicker={kicker}
+                            showQuotation={showQuotation}
+                        />
+                    </td>
+                    {layout !== "compact" && (
+                        <td style={blankCellStyle}>&nbsp;</td>
+                    )}
+                </tr>
 
-                        {layout !== "compact" && (
-                            <tr>
-                                {/*
+                {layout !== "compact" && (
+                    <tr>
+                        {/*
                     // @ts-ignore as JSX expects 'colSpan' but HTML only validates if used as 'colspan' */}
-                                <td
-                                    colspan={2}
-                                    className="m-col-pad"
-                                    style={trailTextPadding}
-                                >
-                                    <span
-                                        style={trailTextStyle}
-                                        dangerouslySetInnerHTML={{
-                                            __html: sanitizeHtml(
-                                                trailText,
-                                                sanitizeOptions
-                                            )
-                                        }}
-                                    />
-                                </td>
-                            </tr>
-                        )}
-                    </table>
-                </td>
-            </tr>
-        </table>
+                        <td
+                            colspan={2}
+                            className="m-col-pad"
+                            style={trailTextPadding}
+                        >
+                            <span
+                                style={trailTextStyle}
+                                dangerouslySetInnerHTML={{
+                                    __html: sanitizeHtml(
+                                        trailText,
+                                        sanitizeOptions
+                                    )
+                                }}
+                            />
+                        </td>
+                    </tr>
+                )}
+            </Table>
+        </TableRowCell>
     );
 };
