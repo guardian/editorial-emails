@@ -33,7 +33,7 @@ const getTitleFromFrontId = (id: string): string => {
         .join(" ");
 };
 
-const getPageTitle = (front: Front): string => {
+export const getPageTitle = (front: Front): string => {
     if (front.seoData && front.seoData.webTitle) {
         return front.seoData.webTitle;
     }

@@ -40,6 +40,11 @@ const linkStyle: LinkCSS = {
     textDecoration: "none"
 };
 
+export const disclaimer = (
+    title: string
+): string => `You are receiving this email because you are a subscriber to ${title}. Guardian News & Media Limited - a member of Guardian Media Group PLC. Registered Office: Kings Place, 90 York Way, London, N1 9GU.
+Registered in England No. 908396.`;
+
 export const Footer: React.FC<{ title: string; frontId: string }> = ({
     title,
     frontId
@@ -79,12 +84,7 @@ export const Footer: React.FC<{ title: string; frontId: string }> = ({
                             </tr>
                             <tr>
                                 <td style={tdDisclaimer}>
-                                    You are receiving this email because you are
-                                    a subscriber to {title}. Guardian News &amp;
-                                    Media Limited - a member of Guardian Media
-                                    Group PLC. Registered Office: Kings Place,
-                                    90 York Way, London, N1 9GU. Registered in
-                                    England No. 908396.
+                                    {disclaimer(title)}
                                 </td>
                             </tr>
                         </Table>
