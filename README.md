@@ -16,6 +16,25 @@ For the MVP, the core tecnologies are: React, Node, Typescript.
     $ yarn build
     $ yarn deploy
 
+## Supported Emails & Variants
+
+    Film Today
+        Variant B
+        Variant Z (archived)
+
+    Media Briefing
+        Variant B
+        Variant C
+        Variant Z (archived)
+
+    Opinion
+        Variant B
+        Variant C
+
+    Sport AU
+        Variant B
+        Variant C
+
 ## Email and CSS limitations
 
 On the CSS side, emails have some significant restrictions, which is it
