@@ -33,6 +33,7 @@ export const LinkCollection: React.FC<{
                                 label={story.header.headline}
                                 linkTo={`https://www.theguardian.com${story.properties.href}${brazeParameter}`}
                                 backgroundColor={palette.brand.main}
+                                isFullWidth
                             />
                         </>
                     );

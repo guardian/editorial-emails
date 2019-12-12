@@ -26,7 +26,7 @@ const cellPadding: TdCSS = {
     padding: `6px 10px 10px 10px`
 };
 
-const buttonWrapperStyles: TdCSS = {
+const bottomPadding: TdCSS = {
     padding: `6px 10px 20px 10px`
 };
 
@@ -153,21 +153,11 @@ export const DescriptiveCard: React.FC<Props> = ({
                 })}
 
                 <tr>
-                    <td>
-                        <Table>
-                            <tr>
-                                <td
-                                    className="m-pad"
-                                    style={buttonWrapperStyles}
-                                >
-                                    <ContinueButton
-                                        label="Continue reading"
-                                        linkTo={webURL}
-                                    />
-                                </td>
-                                <td style={{ width: "50%" }}></td>
-                            </tr>
-                        </Table>
+                    <td className="m-pad" style={bottomPadding}>
+                        <ContinueButton
+                            label="Continue reading"
+                            linkTo={webURL}
+                        />
                     </td>
                 </tr>
             </Table>
