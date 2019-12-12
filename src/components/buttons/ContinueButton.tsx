@@ -6,6 +6,7 @@ import { palette } from "@guardian/src-foundations";
 interface Props {
     label: string;
     linkTo: string;
+    backgroundColor?: string;
 }
 
 // Splitting the CSS for the button link into two separate objects;
@@ -22,14 +23,17 @@ const anchorStyles: LinkCSS = {
 
 // Then, all the extra CSS properties we need, including vendor prefixes,
 // which are only relevant to this component and should not be added to the LinkCSS type.
-const anchorStylesWithPrefixes: any = {
-    ...anchorStyles,
-    backgroundColor: palette.culture.main,
-    borderRadius: "20px",
-    display: "inline-block",
-    minWidth: "200px",
-    WebkitTextSizeAdjust: "none",
-    msoHide: "all"
+const anchorStylesWithPrefixes = (buttonColor: string): any => {
+    return {
+        ...anchorStyles,
+        width: "100%",
+        backgroundColor: buttonColor,
+        borderRadius: "20px",
+        display: "inline-block",
+        minWidth: "200px",
+        WebkitTextSizeAdjust: "none",
+        msoHide: "all"
+    };
 };
 
 const imgStyles: ImageCSS = {
@@ -37,12 +41,17 @@ const imgStyles: ImageCSS = {
     border: "0"
 };
 
-export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
+export const ContinueButton: React.FC<Props> = ({
+    label,
+    linkTo,
+    backgroundColor
+}) => {
+    const buttonColor = backgroundColor || palette.culture.main;
     // The MSO (Microsoft Outlook) button uses HTML elements that won't validate against out JSX types.
     // Work around this by using a combination of JSX and strings (where JSX isn't possible).
     const outlookButtonMarkup = `
     <!--[if mso]>
-        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${linkTo}" style="height:28pt;v-text-anchor:middle;width:150pt;" arcsize="50%" strokecolor="#a1845c" fillcolor="#a1845c">
+        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${linkTo}" style="height:28pt;v-text-anchor:middle;width:150pt;" arcsize="50%" strokecolor="${buttonColor}" fillcolor="${buttonColor}">
         <w:anchorlock></w:anchorlock>
         <center>
             ${(
@@ -88,7 +97,7 @@ export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
                 <a
                     href={linkTo}
                     target="_blank"
-                    style={anchorStylesWithPrefixes}
+                    style={anchorStylesWithPrefixes(buttonColor)}
                 >
                     {label}&nbsp;&nbsp;
                     <img

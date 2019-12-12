@@ -1,6 +1,7 @@
 import React from "react";
 import { Collection as ICollection } from "../../../../api";
 import { DefaultGrid } from "../../../../layout/Grid";
+import { TableRowCell } from "../../../../layout/Table";
 import { Heading } from "../../../../components/Heading";
 import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
@@ -12,35 +13,32 @@ export const LinkCollection: React.FC<{
     salt: string;
 }> = ({ collection, salt }) => {
     const lightGrey = palette.neutral[97];
+    const content = collection.curated;
 
     return (
         <>
-            <Padding px={12} backgroundColor={lightGrey} />
+            <Padding px={12} />
+
             <Multiline />
             <Heading
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            {/* <DefaultGrid
-                content={collection.curated}
-                salt={salt}
-                card={{
-                    Component: ContinueButton,
-                    props: {
-                        label: collection.curated[0].header.headline,
-                        linkTo: collection.curated[0].properties.webUrl
-                    }
-                }}
-            /> */}
-            <Padding px={12} />
-            <ContinueButton
-                label={collection.curated[0].header.headline}
-                linkTo={collection.curated[0].properties.webUrl}
-            />
-            <ContinueButton
-                label={collection.curated[1].header.headline}
-                linkTo={collection.curated[1].properties.webUrl}
-            />
+
+            <TableRowCell>
+                {content.map(story => {
+                    return (
+                        <>
+                            <Padding px={12} />
+                            <ContinueButton
+                                label={story.header.headline}
+                                linkTo={story.properties.webUrl}
+                                backgroundColor={palette.brand.main}
+                            />
+                        </>
+                    );
+                })}
+            </TableRowCell>
         </>
     );
 };
