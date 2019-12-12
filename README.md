@@ -13,8 +13,13 @@ For the MVP, the core tecnologies are: React, Node, Typescript.
 
 ## Deploying
 
+We use continuous delivery so merging to master will automatically deploy.
+Behind the scenes (i.e. in TC), we run:
+
     $ yarn build
-    $ yarn deploy
+    $ yarn upload-artifact
+
+You can run the first locally to troubleshoot.
 
 ## Logs and troubleshooting
 
