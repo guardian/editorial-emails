@@ -2,7 +2,6 @@ import React from "react";
 import { Collection as ICollection } from "../../api";
 import { Collections } from "../../components/Collections";
 import { Collections as CollectionsVariantB } from "./variantB/Collections";
-import { Collections as CollectionsVariantC } from "./variantC/Collections";
 import { Collections as CollectionsVariantY } from "./variantY/Collections";
 import { Collections as CollectionsVariantZ } from "./variantZ/Collections";
 
@@ -31,14 +30,6 @@ export const Opinion: React.FC<{
                 collections={collections}
                 salt={salt}
             ></CollectionsVariantY>
-        );
-    } else if (variant === "c") {
-        return (
-            <CollectionsVariantC
-                frontId={frontId}
-                collections={collections}
-                salt={salt}
-            ></CollectionsVariantC>
         );
     } else if (variant === "b") {
         return (
