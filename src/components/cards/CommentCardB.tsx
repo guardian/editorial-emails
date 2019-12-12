@@ -240,19 +240,17 @@ export const ContributorImageWrapper: React.FC<{
     salt: string;
 }> = ({ content, salt }) => {
     const contributor = getContributor(content);
-    if (contributor) {
-        const profilePic =
-            contributor.properties.contributorLargeImagePath || null;
-
-        return (
-            <ContributorImage
-                salt={salt}
-                width={147}
-                src={profilePic}
-                alt={contributor.properties.webTitle}
-            />
-        );
+    if (!contributor) {
+        return null;
     }
 
-    return null;
+    const profilePic = contributor.properties.contributorLargeImagePath || null;
+    return (
+        <ContributorImage
+            salt={salt}
+            width={147}
+            src={profilePic}
+            alt={contributor.properties.webTitle}
+        />
+    );
 };
