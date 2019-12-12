@@ -20,10 +20,10 @@ export const Collections: React.FC<{
         switch (designType) {
             case "comment":
                 return (
-                    // <p>
-                    //     {collection.displayName} ({designType})
-                    // </p>
-                    <GenericCollection collection={collection} salt={salt} />
+                    <p>
+                        {collection.displayName} ({designType})
+                    </p>
+                    // <GenericCollection collection={collection} salt={salt} />
                 );
             case "editorial":
                 return (
