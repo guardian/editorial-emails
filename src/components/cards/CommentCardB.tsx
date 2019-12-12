@@ -156,6 +156,9 @@ export const CommentCardB: React.FC<Props> = ({
     size,
     shouldShowImage
 }) => {
+    // console.log("=== COMMENT CARD: ");
+    // console.log(content.properties.webTitle);
+
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(
@@ -175,6 +178,8 @@ export const CommentCardB: React.FC<Props> = ({
     const contributor = content.properties.maybeContent.tags.tags.find(tag => {
         return tag.properties.tagType === "Contributor";
     });
+
+    // console.log("Contributor: ", contributor);
 
     const profilePic = contributor
         ? contributor.properties.contributorLargeImagePath
@@ -240,14 +245,19 @@ export const ContributorImageWrapper: React.FC<{
     salt: string;
 }> = ({ content, salt }) => {
     const contributor = getContributor(content);
-    const profilePic = contributor.properties.contributorLargeImagePath || null;
+    if (contributor) {
+        const profilePic =
+            contributor.properties.contributorLargeImagePath || null;
 
-    return (
-        <ContributorImage
-            salt={salt}
-            width={147}
-            src={profilePic}
-            alt={contributor.properties.webTitle}
-        />
-    );
+        return (
+            <ContributorImage
+                salt={salt}
+                width={147}
+                src={profilePic}
+                alt={contributor.properties.webTitle}
+            />
+        );
+    }
+
+    return null;
 };

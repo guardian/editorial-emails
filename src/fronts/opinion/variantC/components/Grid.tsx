@@ -23,9 +23,12 @@ export const Grid: React.FC<CommentGridProps> = ({
     shouldShowGridImages
 }) => {
     const rows = partition(content, 2).map((pair, i) => {
-        const hasContributor = pair.find(c => {
-            const tag = getContributor(c);
-            return tag.properties.contributorLargeImagePath;
+        const hasContributor = pair.find(content => {
+            const contributor = getContributor(content);
+            if (contributor) {
+                return contributor.properties.contributorLargeImagePath;
+            }
+            return false;
         });
 
         const contributorLeft = (
