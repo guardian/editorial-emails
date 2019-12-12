@@ -72,6 +72,8 @@ const getTextFront = async (path: string): Promise<string> => {
 };
 
 app.use((err: any, req: any, res: any, next: any) => {
+    // tslint:disable-next-line: no-console
+    console.log(`Error serving response: ${err.stack}`);
     res.status(500).send(`<pre>${err.stack}</pre>`);
 });
 
