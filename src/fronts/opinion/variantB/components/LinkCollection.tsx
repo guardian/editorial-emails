@@ -32,7 +32,7 @@ export const LinkCollection: React.FC<{
                             <Padding px={12} />
                             <ContinueButton
                                 label={story.header.headline}
-                                linkTo={story.properties.webUrl}
+                                linkTo={story.properties.href}
                                 backgroundColor={palette.brand.main}
                             />
                         </>
