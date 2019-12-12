@@ -156,9 +156,6 @@ export const CommentCardB: React.FC<Props> = ({
     size,
     shouldShowImage
 }) => {
-    // console.log("=== COMMENT CARD: ");
-    // console.log(content.properties.webTitle);
-
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
     const formattedImage = formatImage(
@@ -178,8 +175,6 @@ export const CommentCardB: React.FC<Props> = ({
     const contributor = content.properties.maybeContent.tags.tags.find(tag => {
         return tag.properties.tagType === "Contributor";
     });
-
-    // console.log("Contributor: ", contributor);
 
     const profilePic = contributor
         ? contributor.properties.contributorLargeImagePath
