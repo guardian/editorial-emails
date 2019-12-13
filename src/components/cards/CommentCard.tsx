@@ -1,20 +1,22 @@
 import React from "react";
 import { FontCSS, TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content, Tag } from "../../api";
+import { Content, Tag, Pillar } from "../../api";
 import { formatImage } from "../../image";
 import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell, TableRow } from "../../layout/Table";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline } from "../../styles/typography";
+import { pillarProps } from "../../utils/pillarProps";
 
 type Size = "small" | "large";
 
-const tdStyle: TdCSS = {
-    backgroundColor: palette.neutral[100],
-    borderTop: `1px solid ${palette.opinion.main}`,
-    padding: "0"
+const tdStyle = (pillar: Pillar): TdCSS => {
+    return {
+        backgroundColor: palette.neutral[100],
+        borderTop: `1px solid ${pillarProps[pillar].colour}`
+    };
 };
 
 const metaWrapperStyle = (size: Size): TdCSS => {
@@ -63,14 +65,12 @@ const TrailText: React.FC<{
     return (
         <td className="m-pad" style={standfirstStyle}>
             <a style={linkStyle} href={linkURL}>
-                {" "}
                 <span style={spanStyle}>{text}</span>
             </a>
         </td>
     );
 };
 
-// TODO add alt text
 const ContributorImage: React.FC<{
     src: string;
     salt: string;
@@ -82,15 +82,7 @@ const ContributorImage: React.FC<{
     }
 
     const formattedImage = formatImage(src, salt, width);
-    return (
-        <Image
-            src={formattedImage}
-            width={width}
-            alt={alt}
-            pillar="Opinion"
-            ignoreWidth
-        />
-    );
+    return <Image src={formattedImage} width={width} alt={alt} ignoreWidth />;
 };
 
 // TODO make testable, and also separate layout logic from individual components
@@ -125,7 +117,7 @@ const SupplementaryMeta: React.FC<{
 
     if (trailText && contributorImageSrc) {
         return (
-            <RowCell tdStyle={{ padding: "0" }}>
+            <RowCell>
                 <TableRow>
                     <TrailText text={trailText} linkURL={linkURL} size={size} />
                     {contributorImage}
@@ -140,7 +132,7 @@ const SupplementaryMeta: React.FC<{
         );
     } else if (contributorImageSrc) {
         return (
-            <RowCell tdStyle={{ padding: "0" }}>
+            <RowCell>
                 <Table>
                     <td style={{ width: "50%" }}></td>
                     {contributorImage}
@@ -158,17 +150,8 @@ export const CommentCard: React.FC<Props> = ({
     size,
     shouldShowProfileImage = false
 }) => {
-    const image =
-        content.properties.maybeContent.trail.trailPicture.allImages[0];
-    const formattedImage = formatImage(
-        image.url,
-        salt,
-        size === "large" ? 600 : 300,
-        content.card.starRating
-    );
-
-    const headline = content.header.headline;
-    const byline = content.properties.byline;
+    const headerHeadline = content.header.headline;
+    const { byline } = content.properties;
     const webURL = content.properties.webUrl + brazeParameter;
     const showQuotation = content.header.isComment;
 
@@ -184,16 +167,20 @@ export const CommentCard: React.FC<Props> = ({
         allowedTags: []
     });
 
+    const pillar = content.properties.maybeContent
+        ? content.properties.maybeContent.metadata.pillar.name
+        : null;
+
     return (
-        <TableRowCell tdStyle={tdStyle}>
+        <TableRowCell tdStyle={tdStyle(pillar)}>
             <Table>
                 <tr>
                     <td className="m-pad" style={metaWrapperStyle(size)}>
                         <Headline
-                            text={headline}
+                            text={headerHeadline}
                             linkTo={webURL}
                             size={size}
-                            pillar="Opinion"
+                            pillar={pillar}
                             byline={byline}
                             showQuotation={showQuotation}
                         />
