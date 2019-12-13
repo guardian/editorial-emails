@@ -28,13 +28,15 @@ export const LinkCollection: React.FC<{
                 />
                 <TableRowCell tdStyle={{ padding: "0 10px" }}>
                     {collection.curated.map(story => (
-                        <HeadlineCard
-                            content={story}
-                            borderWidth="thin"
-                            showUseWhite
-                            layout="compact"
-                            borderColor="#9fe0c8"
-                        />
+                        <>
+                            <HeadlineCard
+                                content={story}
+                                borderWidth="thin"
+                                showUseWhite
+                                layout="compact"
+                                borderColor="#9fe0c8"
+                            />
+                        </>
                     ))}
                 </TableRowCell>
             </TableRowCell>

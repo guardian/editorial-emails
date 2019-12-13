@@ -1,8 +1,9 @@
 import React from "react";
 import { Collection as ICollection } from "../../api";
-import { Collections as CollectionsVariantB } from "./variantB/Collections";
+import { Collections } from "../../components/Collections";
+import { Collections as CollectionsVariantZ } from "./variantZ/Collections";
 import { Collections as CollectionsVariantC } from "./variantC/Collections";
-import { Collections as CollectionsVariantD } from "./variantD/Collections";
+import { Collections as CollectionsVariantB } from "./variantB/Collections";
 
 export const MediaBriefing: React.FC<{
     frontId: string;
@@ -10,17 +11,17 @@ export const MediaBriefing: React.FC<{
     salt: string;
     variant?: string;
 }> = ({ frontId, collections, salt, variant }) => {
-    if (variant === "d") {
+    if (variant === "z") {
+        // NOT IN USE
+        // FKA VARIANT C
         return (
-            <CollectionsVariantD
+            <CollectionsVariantZ
                 frontId={frontId}
                 collections={collections}
                 salt={salt}
-            ></CollectionsVariantD>
+            ></CollectionsVariantZ>
         );
-    }
-
-    if (variant === "c") {
+    } else if (variant === "c") {
         return (
             <CollectionsVariantC
                 frontId={frontId}
@@ -28,13 +29,21 @@ export const MediaBriefing: React.FC<{
                 salt={salt}
             ></CollectionsVariantC>
         );
+    } else if (variant === "b") {
+        return (
+            <CollectionsVariantB
+                frontId={frontId}
+                collections={collections}
+                salt={salt}
+            ></CollectionsVariantB>
+        );
     }
 
     return (
-        <CollectionsVariantB
+        <Collections
             frontId={frontId}
             collections={collections}
             salt={salt}
-        ></CollectionsVariantB>
+        ></Collections>
     );
 };

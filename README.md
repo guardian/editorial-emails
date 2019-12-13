@@ -21,6 +21,25 @@ Behind the scenes (i.e. in TC), we run:
 
 You can run the first locally to troubleshoot.
 
+## Supported Emails & Variants
+
+    Film Today
+        Variant B
+        Variant Z (archived)
+
+    Media Briefing
+        Variant B
+        Variant C
+        Variant Z (archived)
+
+    Opinion
+        Variant B
+        Variant C
+
+    Sport AU
+        Variant B
+        Variant C
+
 ## Logs and troubleshooting
 
 There is a healthcheck in Route53 connected to an alarm that should email the

@@ -2,11 +2,9 @@ import React from "react";
 import { Collection as ICollection } from "../../../api";
 import { TableRowCell } from "../../../layout/Table";
 import { getDesignType } from "../../../utils/getDesignType";
-import { TopCollection } from "./components/TopCollection";
 import { CommentCollection } from "./components/CommentCollection";
 import { LinkCollection } from "./components/LinkCollection";
-import { GenericCollection } from "../../../collections/GenericCollection";
-import { Padding } from "../../../layout/Padding";
+import { InstagramCollection } from "../../../collections/InstagramCollection";
 
 export const Collections: React.FC<{
     frontId: string;
@@ -35,24 +33,9 @@ export const Collections: React.FC<{
             case "link":
                 return <LinkCollection collection={collection} salt={salt} />;
             case "default":
-                // Render different collection for 'TV & Radio' collection without using 'display name'
-                // Look at 'tv-and-radio' substring in href
-                if (
-                    collection.href &&
-                    collection.href.indexOf("tv-and-radio") > -1
-                ) {
-                    return (
-                        <>
-                            <GenericCollection
-                                collection={collection}
-                                salt={salt}
-                            />
-                            <Padding px={12} />
-                        </>
-                    );
-                }
-
-                return <TopCollection collection={collection} salt={salt} />;
+                return (
+                    <InstagramCollection collection={collection} salt={salt} />
+                );
         }
     });
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Collection as ICollection } from "../../api";
 import { Collections } from "../../components/Collections";
 import { Collections as CollectionsVariantB } from "./variantB/Collections";
-import { Collections as CollectionsVariantC } from "./variantC/Collections";
+import { Collections as CollectionsVariantC } from "./variantZ/Collections";
 
 export const FilmToday: React.FC<{
     frontId: string;
@@ -10,7 +10,9 @@ export const FilmToday: React.FC<{
     salt: string;
     variant?: string;
 }> = ({ frontId, collections, salt, variant }) => {
-    if (variant === "c") {
+    if (variant === "z") {
+        // NOT IN USE
+        // FKA VARIANT C
         return (
             <CollectionsVariantC
                 frontId={frontId}

@@ -1,6 +1,7 @@
 import React from "react";
 import { Collection as ICollection } from "../../../../api";
 import { palette } from "@guardian/src-foundations";
+import { TableRowCell } from "../../../../layout/Table";
 import { Padding } from "../../../../layout/Padding";
 import { Multiline } from "../../../../components/Multiline";
 import { Heading } from "../../../../components/Heading";
@@ -14,18 +15,12 @@ export const CommentCollection: React.FC<{
     const white = palette.neutral[100];
 
     return (
-        <>
-            <Padding px={12} backgroundColor={lightGrey} />
-            <Multiline />
-            <Heading
-                heading={collection.displayName}
-                backgroundColor={lightGrey}
-            />
+        <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
+            <Multiline topPadding />
+            <Heading heading={collection.displayName} />
             {collection.backfill.map((story, index) => (
                 <>
-                    {index > 0 && (
-                        <Padding px={12} backgroundColor={lightGrey} />
-                    )}
+                    {index > 0 && <Padding px={4} />}
                     <HeadlineCard
                         content={story}
                         backgroundColor={white}
@@ -35,6 +30,6 @@ export const CommentCollection: React.FC<{
                     />
                 </>
             ))}
-        </>
+        </TableRowCell>
     );
 };
