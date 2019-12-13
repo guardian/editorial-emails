@@ -12,27 +12,28 @@ export const LinkCollection: React.FC<{
     salt: string;
 }> = ({ collection }) => {
     const lightGrey = palette.neutral[97];
+    const white = palette.neutral[100];
     const content = collection.curated;
     return (
         <>
-            <Padding px={12} backgroundColor={palette.neutral[97]} />
+            <Padding px={12} backgroundColor={lightGrey} />
             <Multiline />
             <Heading
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            <TableRowCell>
-                {content.map(story => (
+            <TableRowCell tableStyle={{ backgroundColor: lightGrey }}>
+                {content.map((story, index) => (
                     <>
-                        <Padding px={12} />
                         <HeadlineCard
                             content={story}
                             borderWidth="thin"
                             borderColor={palette.opinion.main}
-                            backgroundColor={palette.neutral[97]}
+                            backgroundColor={white}
                             layout="expanded"
                             showArrow
                         />
+                        {index < content.length - 1 && <Padding px={12} />}
                     </>
                 ))}
             </TableRowCell>
