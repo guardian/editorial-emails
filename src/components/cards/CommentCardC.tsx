@@ -97,7 +97,7 @@ const SupplementaryMeta: React.FC<{
     trailText: string;
     linkURL: string;
     contributorImageSrc?: string;
-    contributirImageAlt?: string;
+    contributorImageAlt?: string;
     size: Size;
     width: number;
     salt: string;
@@ -107,7 +107,7 @@ const SupplementaryMeta: React.FC<{
     linkURL,
     size,
     width,
-    contributirImageAlt,
+    contributorImageAlt,
     salt
 }) => {
     const contributorImage = (
@@ -116,7 +116,7 @@ const SupplementaryMeta: React.FC<{
                 width={width}
                 salt={salt}
                 src={contributorImageSrc}
-                alt={contributirImageAlt}
+                alt={contributorImageAlt}
             />
         </td>
     );
@@ -218,7 +218,7 @@ export const CommentCardC: React.FC<Props> = ({
                         trailText={trailText}
                         linkURL={webURL}
                         contributorImageSrc={profilePic}
-                        contributirImageAlt={
+                        contributorImageAlt={
                             contributor && contributor.properties.webTitle
                         }
                         size={size}

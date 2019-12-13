@@ -6,6 +6,7 @@ import { InstagramCollection } from "../../../collections/InstagramCollection";
 import { LinkCollection } from "./components/LinkCollection";
 // import { LinkCollection } from "../variantY/components/LinkCollection";
 import { getDesignType } from "../../../utils/getDesignType";
+import { CommentCollection } from "./components/CommentCollection";
 
 export const Collections: React.FC<{
     frontId: string;
@@ -20,10 +21,11 @@ export const Collections: React.FC<{
         switch (designType) {
             case "comment":
                 return (
-                    <p>
-                        {collection.displayName} ({designType})
-                    </p>
-                    // <GenericCollection collection={collection} salt={salt} />
+                    <CommentCollection
+                        frontId={frontId}
+                        collection={collection}
+                        salt={salt}
+                    />
                 );
             case "editorial":
                 return (
