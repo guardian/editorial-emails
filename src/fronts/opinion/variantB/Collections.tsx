@@ -16,7 +16,6 @@ export const Collections: React.FC<{
     const renderedCollections = collections.map(collection => {
         const content = [].concat(collection.backfill, collection.curated); // TODO support curated too
         const designType = getDesignType(content);
-        // console.log("designType: ", designType);
 
         switch (designType) {
             case "comment":

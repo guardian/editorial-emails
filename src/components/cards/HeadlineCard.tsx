@@ -1,6 +1,6 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
-import { FontCSS, TdCSS, TableCSS, ImageCSS } from "../../css";
+import { FontCSS, TdCSS, ImageCSS } from "../../css";
 import { sanitizeOptions } from "../../utils/sanitizeOptions";
 import { pillarProps } from "../../utils/pillarProps";
 import { palette } from "@guardian/src-foundations";

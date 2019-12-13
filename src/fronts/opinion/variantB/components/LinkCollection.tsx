@@ -1,14 +1,11 @@
 import React from "react";
 import { Collection as ICollection } from "../../../../api";
-import { DefaultGrid } from "../../../../layout/Grid";
 import { TableRowCell } from "../../../../layout/Table";
 import { Heading } from "../../../../components/Heading";
 import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
-import { ContinueButton } from "../../../../components/buttons/ContinueButton";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
-import { LinkCardB } from "../../../../components/cards/LinkCardB";
 
 const brazeParameter = "?##braze_utm##"; // TODO solve link generation
 
