@@ -1,6 +1,6 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
-import { FontCSS, TdCSS, TableCSS } from "../../css";
+import { FontCSS, TdCSS, ImageCSS } from "../../css";
 import { sanitizeOptions } from "../../utils/sanitizeOptions";
 import { pillarProps } from "../../utils/pillarProps";
 import { palette } from "@guardian/src-foundations";
@@ -27,6 +27,7 @@ const tdStyle = (
 const metaWrapperStyle = (layout: string): TdCSS => {
     const sidePadding = layout === "compact" ? "0" : "10px";
     return {
+        width: "100%",
         padding: `3px ${sidePadding} 20px ${sidePadding}`
     };
 };
@@ -49,9 +50,21 @@ interface Props {
     layout?: "expanded" | "compact";
     showUseWhite?: boolean;
     borderColor?: string;
+    showArrow?: boolean;
 }
 
 const brazeParameter = "?##braze_utm##";
+
+const imgStyles: ImageCSS = {
+    verticalAlign: "middle",
+    border: "0"
+};
+
+const arrowColStyles = {
+    width: "23px",
+    padding: "0 10px",
+    verticalAlign: "middle"
+};
 
 export const HeadlineCard: React.FC<Props> = ({
     content,
@@ -60,16 +73,17 @@ export const HeadlineCard: React.FC<Props> = ({
     borderWidth,
     layout,
     showUseWhite,
-    borderColor
+    borderColor,
+    showArrow
 }) => {
     const { headline } = content.header;
     const { trailText } = content.card;
     const backfillURL = content.properties.webUrl + brazeParameter;
-    const showQuotation = content.display.showQuotedHeadline;
-    const curatedURL = content.properties.href + brazeParameter;
+    const curatedURL = `https://www.theguardian.com${content.properties.href}${brazeParameter}`;
 
     const cardLink = content.properties.webUrl ? backfillURL : curatedURL;
 
+    const showQuotation = content.display.showQuotedHeadline;
     const pillar = content.properties.maybeContent
         ? content.properties.maybeContent.metadata.pillar.name
         : null;
@@ -110,10 +124,27 @@ export const HeadlineCard: React.FC<Props> = ({
                             showQuotation={showQuotation}
                         />
                     </td>
+                    {showArrow && (
+                        <td style={arrowColStyles}>
+                            <a href={cardLink}>
+                                <img
+                                    style={imgStyles}
+                                    src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5dcebdcb9ae1683cc77465a5/original.png?1573830091"
+                                    width="23"
+                                    height="22"
+                                    alt=""
+                                />
+                            </a>
+                        </td>
+                    )}
                 </tr>
                 {layout === "expanded" && trailText && (
                     <tr>
-                        <td className="m-col-pad" style={expandedWrapperStyle}>
+                        <td
+                            className="m-col-pad"
+                            style={expandedWrapperStyle}
+                            colSpan={showArrow ? 2 : null}
+                        >
                             <span
                                 style={trailTextStyle}
                                 dangerouslySetInnerHTML={{

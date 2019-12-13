@@ -34,7 +34,8 @@ You can run the first locally to troubleshoot.
 
     Opinion
         Variant B
-        Variant C
+        Variant Y (archived)
+        Variant Z (archived)
 
     Sport AU
         Variant B
