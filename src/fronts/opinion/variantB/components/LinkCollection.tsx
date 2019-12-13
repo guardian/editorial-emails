@@ -7,8 +7,6 @@ import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 
-const brazeParameter = "?##braze_utm##"; // TODO solve link generation
-
 export const LinkCollection: React.FC<{
     collection: ICollection;
     salt: string;
