@@ -12,15 +12,16 @@ import { headline } from "../../styles/typography";
 type Size = "small" | "large";
 
 const tdStyle: TdCSS = {
-    backgroundColor: palette.opinion.faded,
-    borderTop: `2px solid ${palette.opinion.main}`,
+    backgroundColor: palette.neutral[100],
+    borderTop: `1px solid ${palette.opinion.main}`,
     padding: "0"
 };
 
 const metaWrapperStyle = (size: Size): TdCSS => {
     const rightPad = size === "large" ? "40px" : "10px";
+    const bottomPad = size === "large" ? "0" : "15px";
     return {
-        padding: `3px ${rightPad} 10px 10px`
+        padding: `3px ${rightPad} ${bottomPad} 10px`
     };
 };
 
@@ -48,7 +49,8 @@ interface Props {
     content: Content;
     salt: string;
     size: "large" | "small";
-    shouldShowImage: boolean;
+    shouldShowImage?: boolean;
+    shouldShowProfileImage?: boolean;
 }
 
 const brazeParameter = "?##braze_utm##";
@@ -57,7 +59,7 @@ const TrailText: React.FC<{
     text: string;
     linkURL: string;
     size: Size;
-}> = ({ text, linkURL, size }) => {
+}> = ({ text, linkURL }) => {
     return (
         <td className="m-pad" style={standfirstStyle}>
             <a style={linkStyle} href={linkURL}>
@@ -150,11 +152,11 @@ const SupplementaryMeta: React.FC<{
     return null;
 };
 
-export const CommentCardB: React.FC<Props> = ({
+export const CommentCard: React.FC<Props> = ({
     content,
     salt,
     size,
-    shouldShowImage
+    shouldShowProfileImage = false
 }) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
@@ -168,8 +170,6 @@ export const CommentCardB: React.FC<Props> = ({
     const headline = content.header.headline;
     const byline = content.properties.byline;
     const webURL = content.properties.webUrl + brazeParameter;
-    const imageURL = formattedImage;
-    const imageAlt = content.header.headline;
     const showQuotation = content.header.isComment;
 
     const contributor = content.properties.maybeContent.tags.tags.find(tag => {
@@ -187,17 +187,6 @@ export const CommentCardB: React.FC<Props> = ({
     return (
         <TableRowCell tdStyle={tdStyle}>
             <Table>
-                {shouldShowImage && (
-                    <RowCell tdStyle={{ padding: "0" }}>
-                        <Image
-                            src={imageURL}
-                            linkTo={webURL}
-                            alt={imageAlt}
-                            width={size === "large" ? 600 : 294}
-                            pillar="Opinion"
-                        />
-                    </RowCell>
-                )}
                 <tr>
                     <td className="m-pad" style={metaWrapperStyle(size)}>
                         <Headline
@@ -211,7 +200,7 @@ export const CommentCardB: React.FC<Props> = ({
                     </td>
                 </tr>
 
-                {size === "large" && (
+                {size === "large" && shouldShowProfileImage && (
                     <SupplementaryMeta
                         salt={salt}
                         trailText={trailText}
