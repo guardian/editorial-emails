@@ -1,8 +1,7 @@
 import React from "react";
 import { Collection as ICollection } from "../../api";
-import { Collections } from "../../components/Collections";
 import { Collections as CollectionsVariantB } from "./variantB/Collections";
-import { Collections as CollectionsVariantY } from "./variantY/Collections";
+import { Collections as CollectionsVariantC } from "./variantC/Collections";
 import { Collections as CollectionsVariantZ } from "./variantZ/Collections";
 
 export const Opinion: React.FC<{
@@ -12,8 +11,6 @@ export const Opinion: React.FC<{
     variant?: string;
 }> = ({ frontId, collections, salt, variant }) => {
     if (variant === "z") {
-        // NOT IN USE
-        // FKA VARIANT C
         return (
             <CollectionsVariantZ
                 frontId={frontId}
@@ -21,15 +18,13 @@ export const Opinion: React.FC<{
                 salt={salt}
             ></CollectionsVariantZ>
         );
-    } else if (variant === "y") {
-        // NOT IN USE
-        // FKA VARIANT B
+    } else if (variant === "c") {
         return (
-            <CollectionsVariantY
+            <CollectionsVariantC
                 frontId={frontId}
                 collections={collections}
                 salt={salt}
-            ></CollectionsVariantY>
+            ></CollectionsVariantC>
         );
     } else if (variant === "b") {
         return (
@@ -42,10 +37,10 @@ export const Opinion: React.FC<{
     }
 
     return (
-        <Collections
+        <CollectionsVariantB
             frontId={frontId}
             collections={collections}
             salt={salt}
-        ></Collections>
+        ></CollectionsVariantB>
     );
 };

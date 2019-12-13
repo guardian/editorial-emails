@@ -1,15 +1,15 @@
 import React from "react";
 import { palette } from "@guardian/src-foundations";
-import { TableRowCell, TableRow } from "../../../../layout/Table";
+import { TableRow, TableRowCell } from "../../../../layout/Table";
 import { Padding } from "../../../../layout/Padding";
 import { Content } from "../../../../api";
 import { GridRow, partition } from "../../../../layout/Grid";
 import {
-    CommentCardB,
+    CommentCardC,
     ContributorImageWrapper,
     getContributor
-} from "../../../../components/cards/CommentCardB";
-import { LinkCardB } from "../../../../components/cards/LinkCardB";
+} from "../../../../components/cards/CommentCardC";
+import { LinkCardC } from "../../../../components/cards/LinkCardC";
 
 interface CommentGridProps {
     content: Content[];
@@ -51,7 +51,7 @@ export const Grid: React.FC<CommentGridProps> = ({
             <React.Fragment key={i}>
                 <GridRow
                     left={
-                        <CommentCardB
+                        <CommentCardC
                             content={pair[0]}
                             salt={salt}
                             size={"small"}
@@ -59,27 +59,56 @@ export const Grid: React.FC<CommentGridProps> = ({
                         />
                     }
                     right={
-                        <CommentCardB
+                        <CommentCardC
                             content={pair[1]}
                             salt={salt}
                             size={"small"}
                             shouldShowImage={shouldShowGridImages}
                         />
                     }
-                    leftStyles={{ backgroundColor: palette.opinion.faded }}
-                    rightStyles={{ backgroundColor: palette.opinion.faded }}
+                    leftStyles={{
+                        backgroundColor: palette.neutral[100],
+                        borderLeft: `1px solid ${palette.opinion.main}`
+                    }}
+                    rightStyles={{
+                        backgroundColor: palette.neutral[100],
+                        borderLeft: `1px solid ${palette.opinion.main}`
+                    }}
                 />
-                {hasContributor && (
+                {hasContributor ? (
                     <GridRow
                         left={contributor(contributorLeft)}
                         right={contributor(contributorRight)}
                         leftStyles={{
-                            backgroundColor: palette.opinion.faded,
-                            verticalAlign: "bottom"
+                            backgroundColor: palette.neutral[100],
+                            verticalAlign: "bottom",
+                            borderLeft: `1px solid ${palette.opinion.main}`,
+                            borderBottom: `1px solid ${palette.opinion.main}`
                         }}
                         rightStyles={{
-                            backgroundColor: palette.opinion.faded,
-                            verticalAlign: "bottom"
+                            backgroundColor: palette.neutral[100],
+                            verticalAlign: "bottom",
+                            borderLeft: `1px solid ${palette.opinion.main}`,
+                            borderBottom: `1px solid ${palette.opinion.main}`
+                        }}
+                    />
+                ) : (
+                    <GridRow
+                        left="&nbsp;"
+                        right="&nbsp;"
+                        leftStyles={{
+                            backgroundColor: palette.neutral[100],
+                            verticalAlign: "bottom",
+                            borderLeft: `1px solid ${palette.opinion.main}`,
+                            borderBottom: `1px solid ${palette.opinion.main}`,
+                            lineHeight: "0"
+                        }}
+                        rightStyles={{
+                            backgroundColor: palette.neutral[100],
+                            verticalAlign: "bottom",
+                            borderLeft: `1px solid ${palette.opinion.main}`,
+                            borderBottom: `1px solid ${palette.opinion.main}`,
+                            lineHeight: "0"
                         }}
                     />
                 )}
@@ -104,17 +133,17 @@ export const LinkGrid: React.FC<LinkGridProps> = ({ content, salt }) => {
     const rows = rowsArray.map((pair, index) => (
         <React.Fragment key={index}>
             <GridRow
-                left={<LinkCardB content={pair[0]} theme="dark" />}
-                right={
-                    pair[1] ? (
-                        <LinkCardB content={pair[1]} theme="light" />
-                    ) : null
-                }
+                left={<LinkCardC content={pair[0]} />}
+                right={pair[1] ? <LinkCardC content={pair[1]} /> : null}
                 leftStyles={{
-                    backgroundColor: palette.neutral[20]
+                    backgroundColor: palette.neutral[100],
+                    borderLeft: `1px solid ${palette.neutral[20]}`,
+                    borderBottom: `1px solid ${palette.neutral[20]}`
                 }}
                 rightStyles={{
-                    backgroundColor: palette.neutral[86]
+                    backgroundColor: palette.neutral[100],
+                    borderLeft: `1px solid ${palette.neutral[20]}`,
+                    borderBottom: `1px solid ${palette.neutral[20]}`
                 }}
             />
             {index < rowsArray.length - 1 && <Padding px={12} />}
