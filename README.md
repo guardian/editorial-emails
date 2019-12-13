@@ -41,6 +41,8 @@ You can run the first locally to troubleshoot.
         Variant B
         Variant C
 
+TODO: update variants.
+
 ## Logs and troubleshooting
 
 There is a healthcheck in Route53 connected to an alarm that should email the
