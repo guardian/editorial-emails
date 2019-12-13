@@ -48,12 +48,6 @@ export const Collections: React.FC<{
                 return <LinkCollection collection={collection} salt={salt} />;
         }
 
-        // comment
-        // editorial
-        // media
-        // link
-        // link
-
         return <GenericCollection collection={collection} salt={salt} />;
     });
 

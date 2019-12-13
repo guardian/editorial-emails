@@ -1,12 +1,14 @@
 import React from "react";
 import { LinkCSS, ImageCSS } from "../../css";
-import { TableRowCell, Table } from "../../layout/Table";
+import { Table, TableRow, TableRowCell } from "../../layout/Table";
 import { palette } from "@guardian/src-foundations";
+import { text } from "express";
 
 interface Props {
     label: string;
     linkTo: string;
     backgroundColor?: string;
+    isFullWidth?: boolean;
 }
 
 // Splitting the CSS for the button link into two separate objects;
@@ -15,6 +17,7 @@ const anchorStyles: LinkCSS = {
     fontFamily: "'Guardian Text Sans',sans-serif",
     fontSize: "17px",
     lineHeight: "36px",
+    fontWeight: 700,
     color: palette.neutral[100],
     textAlign: "center",
     textDecoration: "none",
@@ -23,10 +26,13 @@ const anchorStyles: LinkCSS = {
 
 // Then, all the extra CSS properties we need, including vendor prefixes,
 // which are only relevant to this component and should not be added to the LinkCSS type.
-const anchorStylesWithPrefixes = (buttonColor: string): any => {
+const anchorStylesWithPrefixes = (
+    isFullWidth: boolean,
+    buttonColor: string
+): any => {
     return {
         ...anchorStyles,
-        width: "100%",
+        width: isFullWidth ? "100%" : "auto",
         backgroundColor: buttonColor,
         borderRadius: "20px",
         display: "inline-block",
@@ -41,10 +47,32 @@ const imgStyles: ImageCSS = {
     border: "0"
 };
 
+const labelLeftStyles = (isFullWidth: boolean) => {
+    if (isFullWidth) {
+        return {
+            width: "100%"
+        };
+    }
+
+    return {};
+};
+
+const labelRightStyles = (isFullWidth: boolean) => {
+    if (isFullWidth) {
+        return {
+            width: "23px",
+            paddingRight: "18px"
+        };
+    }
+
+    return {};
+};
+
 export const ContinueButton: React.FC<Props> = ({
     label,
     linkTo,
-    backgroundColor
+    backgroundColor,
+    isFullWidth = false
 }) => {
     const buttonColor = backgroundColor || palette.culture.main;
     // The MSO (Microsoft Outlook) button uses HTML elements that won't validate against out JSX types.
@@ -55,32 +83,30 @@ export const ContinueButton: React.FC<Props> = ({
         <w:anchorlock></w:anchorlock>
         <center>
             ${(
-                <Table>
-                    <tr>
-                        <td
-                            style={{
-                                fontFamily: "'Guardian Text Sans',sans-serif;",
-                                color: "#FFFFFF",
-                                fontSize: "17px",
-                                lineHeight: "17px;"
-                            }}
-                        >
-                            ${label}&nbsp;&nbsp;
-                        </td>
-                        <td>
-                            {/*
+                <TableRow>
+                    <td
+                        style={{
+                            fontFamily: "'Guardian Text Sans',sans-serif;",
+                            color: "#FFFFFF",
+                            fontSize: "17px",
+                            lineHeight: "17px;"
+                        }}
+                    >
+                        ${label}&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        {/*
                     // @ts-ignore as verticalAlign isn't valid in type image */}
-                            <img
-                                style={{ verticalAlign: "middle !important" }}
-                                src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264"
-                                width="23"
-                                height="22"
-                                border="0"
-                                alt=""
-                            />
-                        </td>
-                    </tr>
-                </Table>
+                        <img
+                            style={{ verticalAlign: "middle !important" }}
+                            src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264"
+                            width="23"
+                            height="22"
+                            border="0"
+                            alt=""
+                        />
+                    </td>
+                </TableRow>
             )}
         </center>
         </v:roundrect>
@@ -97,16 +123,35 @@ export const ContinueButton: React.FC<Props> = ({
                 <a
                     href={linkTo}
                     target="_blank"
-                    style={anchorStylesWithPrefixes(buttonColor)}
+                    style={anchorStylesWithPrefixes(isFullWidth, buttonColor)}
                 >
-                    {label}&nbsp;&nbsp;
-                    <img
-                        style={imgStyles}
-                        src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264"
-                        width="23"
-                        height="22"
-                        alt=""
-                    />
+                    {isFullWidth ? (
+                        <TableRow>
+                            <td style={labelLeftStyles(isFullWidth)}>
+                                {label}
+                            </td>
+                            <td style={labelRightStyles(isFullWidth)}>
+                                <img
+                                    style={imgStyles}
+                                    src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264"
+                                    width="23"
+                                    height="22"
+                                    alt=""
+                                />
+                            </td>
+                        </TableRow>
+                    ) : (
+                        <>
+                            {label}&nbsp;&nbsp;
+                            <img
+                                style={imgStyles}
+                                src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264"
+                                width="23"
+                                height="22"
+                                alt=""
+                            />
+                        </>
+                    )}
                 </a>
             </div>
         </TableRowCell>

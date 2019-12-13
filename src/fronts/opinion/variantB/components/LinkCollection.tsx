@@ -8,23 +8,22 @@ import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { ContinueButton } from "../../../../components/buttons/ContinueButton";
 
+const brazeParameter = "?##braze_utm##"; // TODO solve link generation
+
 export const LinkCollection: React.FC<{
     collection: ICollection;
     salt: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     const lightGrey = palette.neutral[97];
     const content = collection.curated;
-
     return (
         <>
             <Padding px={12} />
-
             <Multiline />
             <Heading
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-
             <TableRowCell>
                 {content.map(story => {
                     return (
@@ -32,8 +31,9 @@ export const LinkCollection: React.FC<{
                             <Padding px={12} />
                             <ContinueButton
                                 label={story.header.headline}
-                                linkTo={story.properties.href}
+                                linkTo={`https://www.theguardian.com${story.properties.href}${brazeParameter}`}
                                 backgroundColor={palette.brand.main}
+                                isFullWidth
                             />
                         </>
                     );
