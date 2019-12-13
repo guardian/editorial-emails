@@ -4,7 +4,6 @@ import { TableRowCell } from "../../../layout/Table";
 import { GenericCollection } from "../../../collections/GenericCollection";
 import { InstagramCollection } from "../../../collections/InstagramCollection";
 import { LinkCollection } from "./components/LinkCollection";
-// import { LinkCollection } from "../variantY/components/LinkCollection";
 import { getDesignType } from "../../../utils/getDesignType";
 import { CommentCollection } from "./components/CommentCollection";
 

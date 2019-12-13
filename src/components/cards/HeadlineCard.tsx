@@ -62,8 +62,7 @@ const imgStyles: ImageCSS = {
 
 const arrowColStyles = {
     width: "23px",
-    paddingLeft: "10px",
-    paddingRight: "10px",
+    padding: "0 10px",
     verticalAlign: "middle"
 };
 
