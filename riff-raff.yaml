@@ -1,0 +1,17 @@
+stacks: [frontend]
+regions: [eu-west-1]
+
+deployments:
+    lambda:
+        type: aws-s3
+        parameters:
+            bucket: aws-frontend-editorial-emails
+            cacheControl: private
+    cloudformation:
+        type: cloud-formation
+        dependencies: [lambda]
+        app: editorial-emails
+        parameters:
+            cloudFormationStackName: editorial-emails
+            templatePath: cloudformation.yaml
+            cloudFormationStackByTags: false
