@@ -29,7 +29,8 @@ For the MVP, the core tecnologies are: React, Node, Typescript.
 
     Opinion
         Variant B
-        Variant C
+        Variant Y (archived)
+        Variant Z (archived)
 
     Sport AU
         Variant B
