@@ -20,7 +20,7 @@ export const LinkCollection: React.FC<{
     const content = collection.curated;
     return (
         <>
-            <Padding px={12} />
+            <Padding px={12} backgroundColor={palette.neutral[97]} />
             <Multiline />
             <Heading
                 heading={collection.displayName}

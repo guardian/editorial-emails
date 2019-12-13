@@ -80,11 +80,11 @@ export const HeadlineCard: React.FC<Props> = ({
     const { headline } = content.header;
     const { trailText } = content.card;
     const backfillURL = content.properties.webUrl + brazeParameter;
-    const showQuotation = content.display.showQuotedHeadline;
-    const curatedURL = content.properties.href + brazeParameter;
+    const curatedURL = `https://www.theguardian.com${content.properties.href}${brazeParameter}`;
 
     const cardLink = content.properties.webUrl ? backfillURL : curatedURL;
 
+    const showQuotation = content.display.showQuotedHeadline;
     const pillar = content.properties.maybeContent
         ? content.properties.maybeContent.metadata.pillar.name
         : null;
