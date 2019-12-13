@@ -21,7 +21,7 @@ Behind the scenes (i.e. in TC), we run:
 
 You can run the first locally to troubleshoot.
 
-## Supported Emails & Variants
+## Supported Emails and Variants
 
     Film Today
         Variant B
