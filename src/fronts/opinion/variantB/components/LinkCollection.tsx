@@ -7,6 +7,8 @@ import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { ContinueButton } from "../../../../components/buttons/ContinueButton";
+import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
+import { LinkCardB } from "../../../../components/cards/LinkCardB";
 
 const brazeParameter = "?##braze_utm##"; // TODO solve link generation
 
@@ -25,19 +27,19 @@ export const LinkCollection: React.FC<{
                 backgroundColor={lightGrey}
             />
             <TableRowCell>
-                {content.map(story => {
-                    return (
-                        <>
-                            <Padding px={12} />
-                            <ContinueButton
-                                label={story.header.headline}
-                                linkTo={`https://www.theguardian.com${story.properties.href}${brazeParameter}`}
-                                backgroundColor={palette.brand.main}
-                                isFullWidth
-                            />
-                        </>
-                    );
-                })}
+                {content.map(story => (
+                    <>
+                        <Padding px={12} />
+                        <HeadlineCard
+                            content={story}
+                            borderWidth="thin"
+                            borderColor={palette.opinion.main}
+                            backgroundColor={palette.neutral[97]}
+                            layout="expanded"
+                            showArrow
+                        />
+                    </>
+                ))}
             </TableRowCell>
         </>
     );
