@@ -23,9 +23,9 @@ export const MostViewedCollection: React.FC<{
             <Padding px={12} />
             <Multiline />
             <Heading heading={collection.displayName} />
-            {content.map((story, index) => (
+            {content.slice(0, 10).map((story, index) => (
                 <>
-                    <MostViewedCard content={story} index={index + 1} />
+                    <MostViewedCard content={story} index={index} />
                     {index < content.length - 1 && (
                         <Padding px={12} backgroundColor={lightGrey} />
                     )}

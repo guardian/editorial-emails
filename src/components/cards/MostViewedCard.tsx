@@ -15,8 +15,8 @@ interface Props {
 const brazeParameter = "?##braze_utm##";
 
 const leftColStyles: TdCSS = {
-    width: "45px",
-    padding: "0 10px 20px 10px",
+    width: "40px",
+    padding: "5px 10px 20px 15px",
     verticalAlign: "top",
     textAlign: "left",
     borderTop: `1px solid ${palette.neutral[7]}`,
@@ -32,26 +32,18 @@ const rightColStyles: TdCSS = {
     backgroundColor: palette.neutral[100]
 };
 
-const indexStyles: FontCSS = {
-    fontFamily: "GH Guardian Headline, Georgia, serif",
-    fontSize: "42px",
-    lineHeight: "52px",
-    fontWeight: 700,
-    color: palette.neutral[7]
-};
-
-enum IndexImages {
-    Index1 = "https://i.ibb.co/dg0C1JQ/1.png",
-    Index2 = "https://i.ibb.co/d42w5j5/2.png",
-    Index3 = "https://i.ibb.co/n8B1JkB/3.png",
-    Index4 = "https://i.ibb.co/GnxbChw/4.png",
-    Index5 = "https://i.ibb.co/RpNSNX9/5.png",
-    Index6 = "https://i.ibb.co/kGQ91FD/6.png",
-    Index7 = "https://i.ibb.co/Nx8zpRr/7.png",
-    Index8 = "https://i.ibb.co/tZG2vqg/8.png",
-    Index9 = "https://i.ibb.co/PMh7rm1/9.png",
-    Index10 = "https://i.ibb.co/mtvMrth/10.png"
-}
+const indexImages = [
+    "https://i.ibb.co/dg0C1JQ/1.png",
+    "https://i.ibb.co/d42w5j5/2.png",
+    "https://i.ibb.co/n8B1JkB/3.png",
+    "https://i.ibb.co/GnxbChw/4.png",
+    "https://i.ibb.co/RpNSNX9/5.png",
+    "https://i.ibb.co/kGQ91FD/6.png",
+    "https://i.ibb.co/Nx8zpRr/7.png",
+    "https://i.ibb.co/tZG2vqg/8.png",
+    "https://i.ibb.co/PMh7rm1/9.png",
+    "https://i.ibb.co/mtvMrth/10.png"
+];
 
 export const MostViewedCard: React.FC<Props> = ({ content, index }) => {
     const { headline } = content.header;
@@ -71,15 +63,14 @@ export const MostViewedCard: React.FC<Props> = ({ content, index }) => {
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)
         : "";
-
     return (
         <TableRow>
             <td style={leftColStyles} className="m-col-pad">
-                {/* <span style={indexStyles}>{index}</span> */}
                 <Image
-                    src={IndexImages["Index" + String(index)]}
+                    src={indexImages[index]}
                     alt={String(index)}
                     ignoreWidth
+                    height={30}
                 />
             </td>
             <td style={rightColStyles} className="m-col-pad">
