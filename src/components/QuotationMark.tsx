@@ -19,7 +19,7 @@ const quoteIconStyle: ImageCSS = {
 // With 'culture' (i.e. 'Arts') being the fallback when no pillar available
 const getQuotationImgSrc = (pillar: Pillar, shouldUseWhite: boolean) => {
     if (shouldUseWhite) {
-        return "https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5de534049ae16859519012fa/original.png?1575302148";
+        return "https://static.guim.co.uk/editorial-emails/quotes/white-quote-3x.png";
     }
 
     if (pillar && pillarProps[pillar]) {
