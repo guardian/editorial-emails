@@ -13,28 +13,28 @@ interface Props {
 
 const brazeParameter = "?##braze_utm##";
 
-const tableStyles: TableCSS = {
+const leftColStyles: TdCSS = {
+    width: "45px",
+    padding: "0 10px 20px 10px",
+    verticalAlign: "top",
+    textAlign: "left",
     borderTop: `1px solid ${palette.neutral[7]}`,
     backgroundColor: palette.neutral[100]
 };
 
-const leftColStyles: TdCSS = {
-    width: "40px",
-    padding: "0 10px 20px 20px",
-    verticalAlign: "top",
-    textAlign: "left"
-};
-
 const rightColStyles: TdCSS = {
-    padding: "5px 10px 20px 0",
+    paddingTop: "5px",
+    paddingRight: "10px",
     verticalAlign: "top",
-    textAlign: "left"
+    textAlign: "left",
+    borderTop: `1px solid ${palette.neutral[7]}`,
+    backgroundColor: palette.neutral[100]
 };
 
 const indexStyles: FontCSS = {
     fontFamily: "GH Guardian Headline, Georgia, serif",
     fontSize: "42px",
-    lineHeight: "42px",
+    lineHeight: "52px",
     fontWeight: 700,
     color: palette.neutral[7]
 };
@@ -59,9 +59,9 @@ export const MostViewedCard: React.FC<Props> = ({ content, index }) => {
         : "";
 
     return (
-        <TableRow tableStyle={tableStyles}>
+        <TableRow>
             <td style={leftColStyles} className="m-col-pad">
-                <span style={indexStyles}>{index}</span>
+                <span style={indexStyles}>{index + 4}</span>
             </td>
             <td style={rightColStyles} className="m-col-pad">
                 <Headline
