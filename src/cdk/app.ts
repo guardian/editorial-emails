@@ -47,7 +47,8 @@ export class EmailService extends cdk.Stack {
                 key
             ),
             handler: "server.handler",
-            role: s3Role
+            role: s3Role,
+            functionName: `frontend-editorial-emails-${stage.value}`
         });
 
         // tslint:disable-next-line: no-unused-expression
