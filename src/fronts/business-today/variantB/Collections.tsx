@@ -7,7 +7,7 @@ import { LiveCollection } from "./components/LiveCollection";
 import { CommentCollection } from "./components/CommentCollection";
 import { DefaultCollection } from "./components/DefaultCollection";
 import { FreeTextCollection } from "./components/FreeTextCollection";
-import { MostViewedCollection } from "./components/MostViewedCollection";
+import { MostViewedCollection } from "../../../collections/MostViewedCollection";
 
 export const Collections: React.FC<{
     frontId: string;
@@ -41,7 +41,7 @@ export const Collections: React.FC<{
                 // Flying soon and looking for the perfect gift? (link)
                 if (
                     collection.curated.length === 1 &&
-                    collection.collectionType === "free-text"
+                    collection.collectionType === "medium"
                 ) {
                     return null;
                 }

@@ -13,6 +13,8 @@ export const Banner: React.FC<{ title: string; frontId: string }> = ({
             "https://assets.guim.co.uk/images/email/banners/7c27c2af5c0e7ab17516908fe012bc13/media-briefing.png",
         "email/sport-au":
             "https://assets.guim.co.uk/images/email/banners/907e4c059bce8ffc82260ea5e140759f/australia-sports.png",
+        "email/business-today":
+            "https://assets.guim.co.uk/images/email/banners/f7f612b162f1c96eb8c85245bd8333a3/business-today.png",
         default:
             "https://assets.guim.co.uk/images/email/banners/0dbd7be9345b28a8678baaae474e6548/film-today.png"
     };

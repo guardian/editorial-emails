@@ -5,6 +5,7 @@ import { Heading } from "../../../../components/Heading";
 import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
+import { CommentCard } from "../../../../components/cards/CommentCard";
 
 export const CommentCollection: React.FC<{
     collection: ICollection;
@@ -25,7 +26,16 @@ export const CommentCollection: React.FC<{
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            <DefaultGrid content={content} salt={salt} />
+            {content.map(story => {
+                return (
+                    <CommentCard
+                        content={story}
+                        salt={salt}
+                        shouldShowProfileImage
+                        size="large"
+                    />
+                );
+            })}
         </>
     );
 };

@@ -50,7 +50,7 @@ const columnStyleRight: TdCSS = {
 interface Props {
     content: Content;
     salt: string;
-    size: "large" | "small";
+    size?: "large" | "small";
     shouldShowImage?: boolean;
     shouldShowProfileImage?: boolean;
 }
@@ -147,7 +147,7 @@ const SupplementaryMeta: React.FC<{
 export const CommentCard: React.FC<Props> = ({
     content,
     salt,
-    size,
+    size = "small",
     shouldShowProfileImage = false
 }) => {
     const headerHeadline = content.header.headline;

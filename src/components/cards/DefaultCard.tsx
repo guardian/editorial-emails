@@ -62,19 +62,21 @@ export const DefaultCard: React.FC<Props> = ({
     designName = "background",
     isInsideGrid = false
 }) => {
-    const image =
-        content.properties.maybeContent.trail.trailPicture.allImages[0];
-    const formattedImage = formatImage(
-        image.url,
-        salt,
-        size === "large" ? 600 : 300,
-        content.card.starRating
-    );
+    let imageURL;
+    if (content.properties.maybeContent) {
+        const image =
+            content.properties.maybeContent.trail.trailPicture.allImages[0];
+        imageURL = formatImage(
+            image.url,
+            salt,
+            size === "large" ? 600 : 300,
+            content.card.starRating
+        );
+    }
 
     const headline = content.header.headline;
     const webURL = content.properties.webUrl + brazeParameter;
-    const imageURL = formattedImage;
-    const imageAlt = content.header.headline;
+
     const showQuotation = content.display.showQuotedHeadline;
 
     const pillar = content.properties.maybeContent
@@ -101,7 +103,7 @@ export const DefaultCard: React.FC<Props> = ({
                     <RowCell>
                         <Image
                             src={imageURL}
-                            alt={imageAlt}
+                            alt={headline}
                             width={size === "large" ? 600 : 294}
                             pillar={pillar}
                             linkTo={webURL}

@@ -2,9 +2,10 @@ import React from "react";
 import { Collection as ICollection } from "../../../../api";
 import { DefaultGrid } from "../../../../layout/Grid";
 import { Heading } from "../../../../components/Heading";
-import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
+import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import { Multiline } from "../../../../components/Multiline";
+import { Padding } from "../../../../layout/Padding";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -14,6 +15,9 @@ export const DefaultCollection: React.FC<{
     if (content.length < 1) {
         return null;
     }
+
+    const gridContent = content.slice(0, 2);
+    const listContent = content.slice(2);
 
     const lightGrey = palette.neutral[97];
 
@@ -25,7 +29,20 @@ export const DefaultCollection: React.FC<{
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            <DefaultGrid content={content} salt={salt} />
+            <DefaultGrid content={gridContent} salt={salt} />
+            <Padding px={12} />
+            {listContent.map((story, index) => (
+                <>
+                    <HeadlineCard
+                        content={story}
+                        borderWidth="thin"
+                        showPillarColours
+                    />
+                    {index < listContent.length - 1 && (
+                        <Padding px={12} backgroundColor={lightGrey} />
+                    )}
+                </>
+            ))}
         </>
     );
 };

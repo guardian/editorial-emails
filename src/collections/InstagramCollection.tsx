@@ -10,6 +10,8 @@ export const InstagramCollection: React.FC<{
     collection: ICollection;
     salt?: string;
 }> = ({ collection, salt }) => {
+    const content = collection.curated.concat(collection.backfill);
+
     const lightGrey = palette.neutral[97];
 
     return (
@@ -20,7 +22,7 @@ export const InstagramCollection: React.FC<{
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            {collection.backfill.map((story, index) => (
+            {content.map((story, index) => (
                 <>
                     {index > 0 && (
                         <Padding px={12} backgroundColor={lightGrey} />
