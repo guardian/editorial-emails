@@ -1,7 +1,8 @@
 import React from "react";
 import { Collection as ICollection } from "../../api";
+import { Collections } from "../../components/Collections";
 import { Collections as CollectionsVariantB } from "./variantB/Collections";
-import { Collections as CollectionsVariantC } from "./variantC/Collections";
+import { Collections as CollectionsVariantY } from "./variantY/Collections";
 import { Collections as CollectionsVariantZ } from "./variantZ/Collections";
 
 export const Opinion: React.FC<{
@@ -18,13 +19,13 @@ export const Opinion: React.FC<{
                 salt={salt}
             ></CollectionsVariantZ>
         );
-    } else if (variant === "c") {
+    } else if (variant === "y") {
         return (
-            <CollectionsVariantC
+            <CollectionsVariantY
                 frontId={frontId}
                 collections={collections}
                 salt={salt}
-            ></CollectionsVariantC>
+            ></CollectionsVariantY>
         );
     } else if (variant === "b") {
         return (
@@ -37,10 +38,6 @@ export const Opinion: React.FC<{
     }
 
     return (
-        <CollectionsVariantB
-            frontId={frontId}
-            collections={collections}
-            salt={salt}
-        ></CollectionsVariantB>
+        <Collections frontId={frontId} collections={collections} salt={salt} />
     );
 };
