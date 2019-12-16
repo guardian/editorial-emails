@@ -33,7 +33,7 @@ export const LinkCollection: React.FC<{
                             layout="expanded"
                             showArrow
                         />
-                        {index < content.length - 1 && <Padding px={12} />}
+                        <Padding px={12} />
                     </>
                 ))}
             </TableRowCell>
