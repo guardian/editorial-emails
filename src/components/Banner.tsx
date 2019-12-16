@@ -6,7 +6,7 @@ import { formatImage } from "../image";
 export const Banner: React.FC<{
     title: string;
     frontId: string;
-    imageSalt: string;
+    imageSalt?: string;
 }> = ({ title, frontId, imageSalt }) => {
     const banners: { [key in string]: string } = {
         "email/opinion":
@@ -20,7 +20,9 @@ export const Banner: React.FC<{
     };
 
     const bannerOrigin = banners[frontId] || banners.default;
-    const bannerSrc = formatImage(bannerOrigin, imageSalt, 600);
+    const bannerSrc = imageSalt
+        ? formatImage(bannerOrigin, imageSalt, 600)
+        : bannerOrigin;
 
     return (
         <TableRowCell tdStyle={{ padding: "0" }}>
