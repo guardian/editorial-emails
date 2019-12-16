@@ -2,7 +2,7 @@ import React from "react";
 import { Collection as ICollection } from "../../../../api";
 import { Heading } from "./../../../../components/Heading";
 import { Multiline } from "./../../../../components/Multiline";
-import { LinkGrid as LinkGridC } from "./Grid";
+import { LinkGrid as LinkGridB } from "./Grid";
 
 export const LinkCollection: React.FC<{
     collection: ICollection;
@@ -18,7 +18,7 @@ export const LinkCollection: React.FC<{
         <>
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
-            {content && <LinkGridC content={content} salt={salt} />}
+            {content && <LinkGridB content={content} salt={salt} />}
         </>
     );
 };
