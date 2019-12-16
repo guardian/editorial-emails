@@ -10,27 +10,6 @@ export class EmailService extends cdk.Stack {
         super(scope, id, { env: { region: "eu-west-1" } });
 
         const frontsBucketARN = "arn:aws:s3:::aws-frontend-store/*";
-        const s3Role = new iam.Role(this, "Role", {
-            assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com")
-        });
-
-        s3Role.addToPolicy(
-            new iam.PolicyStatement({
-                effect: iam.Effect.ALLOW,
-                resources: [frontsBucketARN],
-                actions: ["s3:GetObject"]
-            })
-        );
-
-        s3Role.addToPolicy(
-            new iam.PolicyStatement({
-                effect: iam.Effect.ALLOW,
-                resources: [
-                    "arn:aws:ssm:eu-west-1:642631414762:parameter/frontend/*"
-                ],
-                actions: ["ssm:GetParameter"]
-            })
-        );
 
         const stage = new cdk.CfnParameter(this, "Stage", {
             type: "String",
@@ -47,15 +26,37 @@ export class EmailService extends cdk.Stack {
                 key
             ),
             handler: "server.handler",
-            role: s3Role
+            functionName: `frontend-editorial-emails-${stage.value}`
         });
+
+        handler.addToRolePolicy(
+            new iam.PolicyStatement({
+                effect: iam.Effect.ALLOW,
+                resources: [frontsBucketARN],
+                actions: ["s3:GetObject"]
+            })
+        );
+
+        handler.addToRolePolicy(
+            new iam.PolicyStatement({
+                effect: iam.Effect.ALLOW,
+                resources: [
+                    "arn:aws:ssm:eu-west-1:642631414762:parameter/frontend/*"
+                ],
+                actions: ["ssm:GetParameter"]
+            })
+        );
 
         // tslint:disable-next-line: no-unused-expression
         new apigateway.LambdaRestApi(this, "editorial-emails-api", {
             restApiName: `editorial-emails-${stage.value}`,
             description: "Serves editorial email fronts.",
             proxy: true,
-            handler
+            handler,
+            deployOptions: {
+                loggingLevel: apigateway.MethodLoggingLevel.INFO,
+                dataTraceEnabled: true
+            }
         });
 
         // tslint:disable-next-line: no-unused-expression
