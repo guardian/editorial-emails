@@ -52,7 +52,11 @@ export class EmailService extends cdk.Stack {
             restApiName: `editorial-emails-${stage.value}`,
             description: "Serves editorial email fronts.",
             proxy: true,
-            handler
+            handler,
+            deployOptions: {
+                loggingLevel: apigateway.MethodLoggingLevel.INFO,
+                dataTraceEnabled: true
+            }
         });
 
         // tslint:disable-next-line: no-unused-expression
