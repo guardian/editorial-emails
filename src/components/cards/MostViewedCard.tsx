@@ -5,6 +5,7 @@ import { Content } from "../../api";
 import { kickerText } from "../../kicker";
 import { Headline } from "../../components/Headline";
 import { TableRow } from "../../layout/Table";
+import { Image } from "../../components/Image";
 
 interface Props {
     content: Content;
@@ -39,6 +40,19 @@ const indexStyles: FontCSS = {
     color: palette.neutral[7]
 };
 
+enum IndexImages {
+    Index1 = "https://i.ibb.co/dg0C1JQ/1.png",
+    Index2 = "https://i.ibb.co/d42w5j5/2.png",
+    Index3 = "https://i.ibb.co/n8B1JkB/3.png",
+    Index4 = "https://i.ibb.co/GnxbChw/4.png",
+    Index5 = "https://i.ibb.co/RpNSNX9/5.png",
+    Index6 = "https://i.ibb.co/kGQ91FD/6.png",
+    Index7 = "https://i.ibb.co/Nx8zpRr/7.png",
+    Index8 = "https://i.ibb.co/tZG2vqg/8.png",
+    Index9 = "https://i.ibb.co/PMh7rm1/9.png",
+    Index10 = "https://i.ibb.co/mtvMrth/10.png"
+}
+
 export const MostViewedCard: React.FC<Props> = ({ content, index }) => {
     const { headline } = content.header;
     const webURL = content.properties.webUrl + brazeParameter;
@@ -61,7 +75,12 @@ export const MostViewedCard: React.FC<Props> = ({ content, index }) => {
     return (
         <TableRow>
             <td style={leftColStyles} className="m-col-pad">
-                <span style={indexStyles}>{index + 4}</span>
+                {/* <span style={indexStyles}>{index}</span> */}
+                <Image
+                    src={IndexImages["Index" + String(index)]}
+                    alt={String(index)}
+                    ignoreWidth
+                />
             </td>
             <td style={rightColStyles} className="m-col-pad">
                 <Headline
