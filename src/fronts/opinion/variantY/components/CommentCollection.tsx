@@ -1,9 +1,9 @@
 import React from "react";
 import { Collection as ICollection } from "../../../../api";
-import { Padding } from "../../../../layout/Padding";
 import { Heading } from "./../../../../components/Heading";
 import { Multiline } from "./../../../../components/Multiline";
-import { CommentCardC } from "../../../../components/cards/CommentCardC";
+import { CommentCardB } from "../../../../components/cards/CommentCardB";
+import { Padding } from "../../../../layout/Padding";
 import { Grid as CommentGrid } from "./Grid";
 
 const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
@@ -33,7 +33,7 @@ export const CommentCollection: React.FC<{
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
 
-            <CommentCardC
+            <CommentCardB
                 content={c0}
                 salt={salt}
                 size={"large"}
@@ -41,7 +41,7 @@ export const CommentCollection: React.FC<{
             />
             <Padding px={12} />
 
-            <CommentCardC
+            <CommentCardB
                 content={c1}
                 salt={salt}
                 size={"large"}
@@ -57,7 +57,7 @@ export const CommentCollection: React.FC<{
                 )}
             />
 
-            <CommentCardC
+            <CommentCardB
                 content={c6}
                 salt={salt}
                 size={"large"}
@@ -73,7 +73,7 @@ export const CommentCollection: React.FC<{
                 )}
             />
 
-            <CommentCardC
+            <CommentCardB
                 content={c9}
                 salt={salt}
                 size={"large"}
