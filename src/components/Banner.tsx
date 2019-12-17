@@ -14,7 +14,7 @@ export const Banner: React.FC<{
         "email/media-briefing":
             "https://static.guim.co.uk/editorial-emails/banners/media-briefing.png",
         "email/business-today":
-            "https://assets.guim.co.uk/images/email/banners/f7f612b162f1c96eb8c85245bd8333a3/business-today.png",
+            "https://static.guim.co.uk/editorial-emails/banners/business-today.png",
         "email/sport-au":
             "https://static.guim.co.uk/editorial-emails/banners/australia-sports.png",
         default:
