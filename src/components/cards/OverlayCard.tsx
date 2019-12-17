@@ -34,7 +34,7 @@ const trailTextStyle: FontCSS = {
 };
 
 const trailTextPadding = (isLive: boolean): TdCSS => {
-    const padBottom = isLive === isLive ? "4px" : "20px";
+    const padBottom = isLive ? "4px" : "20px";
     return {
         padding: `6px 10px ${padBottom} 10px`
     };
@@ -131,15 +131,17 @@ export const OverlayCard: React.FC<Props> = ({
                             className="m-col-pad"
                             style={trailTextPadding(isLive)}
                         >
-                            <span
-                                style={trailTextStyle}
-                                dangerouslySetInnerHTML={{
-                                    __html: sanitizeHtml(
-                                        trailText,
-                                        sanitizeOptions
-                                    )
-                                }}
-                            />
+                            {!isLive && (
+                                <span
+                                    style={trailTextStyle}
+                                    dangerouslySetInnerHTML={{
+                                        __html: sanitizeHtml(
+                                            trailText,
+                                            sanitizeOptions
+                                        )
+                                    }}
+                                />
+                            )}
                         </td>
                     </tr>
                 )}

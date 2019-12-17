@@ -28,11 +28,7 @@ export const LiveCollection: React.FC<{
             />
             {content.map((story, index) => (
                 <>
-                    <OverlayCard
-                        content={story}
-                        salt={salt}
-                        isLive={!!story.card.isLive}
-                    />
+                    <OverlayCard content={story} salt={salt} isLive />
                     {index < content.length - 1 && (
                         <Padding px={12} backgroundColor={lightGrey} />
                     )}

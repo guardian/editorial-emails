@@ -65,22 +65,28 @@ export const Headline: React.FC<Props> = ({
     const textSize = size === "small" ? "small" : "large";
     return (
         <a style={linkStyle} href={linkTo}>
-            {kicker &&
-                (isLive && (
-                    <Kicker
-                        text={isLive ? " Live" : kicker}
-                        size={textSize}
-                        pillar={pillar}
-                        isLive={isLive}
-                        colour={shouldUseWhite ? palette.neutral[100] : null}
-                    />
-                ))}
-
+            {isLive && (
+                <Kicker
+                    text=" Live"
+                    size={textSize}
+                    pillar={pillar}
+                    isLive={isLive}
+                    colour={shouldUseWhite ? palette.neutral[100] : null}
+                />
+            )}
+            {!isLive && kicker && (
+                <Kicker
+                    text={kicker}
+                    size={textSize}
+                    pillar={pillar}
+                    isLive={isLive}
+                    colour={shouldUseWhite ? palette.neutral[100] : null}
+                />
+            )}
             <span style={headlineStyle(textSize, shouldUseWhite)}>
                 {showQuotation && <QuotationMark pillar={pillar} />}
                 {text}
             </span>
-
             {byline && (
                 <>
                     <br />
