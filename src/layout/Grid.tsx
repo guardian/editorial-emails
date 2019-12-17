@@ -72,9 +72,11 @@ export const GridRow: React.FC<{
             borderCollapse: "collapse"
         }}
     >
-        <td style={colStyle(leftStyles)}>{left}</td>
-        <td style={gutterStyle}>&nbsp;</td>
-        <td style={colStyle(rightStyles)}>{right}</td>
+        <tr>
+            <td style={colStyle(leftStyles)}>{left}</td>
+            <td style={gutterStyle}>&nbsp;</td>
+            <td style={colStyle(rightStyles)}>{right}</td>
+        </tr>
     </table>
 );
 
