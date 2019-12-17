@@ -19,16 +19,14 @@ export const MostViewedCollection: React.FC<{
     const lightGrey = palette.neutral[97];
 
     return (
-        <TableRowCell tableStyle={{ backgroundColor: lightGrey }}>
+        <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
             <Padding px={12} />
             <Multiline />
             <Heading heading={collection.displayName} />
             {content.slice(0, 10).map((story, index) => (
                 <>
                     <MostViewedCard content={story} index={String(index + 1)} />
-                    {index < content.length - 1 && (
-                        <Padding px={12} backgroundColor={lightGrey} />
-                    )}
+                    <Padding px={12} backgroundColor={lightGrey} />
                 </>
             ))}
         </TableRowCell>

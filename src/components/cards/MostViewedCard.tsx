@@ -15,8 +15,8 @@ interface Props {
 const brazeParameter = "?##braze_utm##";
 
 const leftColStyles: TdCSS = {
-    width: "40px",
-    padding: "5px 10px 20px 15px",
+    width: "59px",
+    padding: "0",
     verticalAlign: "top",
     textAlign: "left",
     borderTop: `1px solid ${palette.neutral[7]}`,
@@ -24,8 +24,7 @@ const leftColStyles: TdCSS = {
 };
 
 const rightColStyles: TdCSS = {
-    paddingTop: "5px",
-    paddingRight: "10px",
+    padding: "4px 10px 5px 0",
     verticalAlign: "top",
     textAlign: "left",
     borderTop: `1px solid ${palette.neutral[7]}`,
@@ -33,7 +32,7 @@ const rightColStyles: TdCSS = {
 };
 
 const getIndexImageURL = (index: string) =>
-    `https://static.guim.co.uk/editorial-emails/big-numbers/${index}.png`;
+    `https://image-origin.s3-eu-west-1.amazonaws.com/editorial-emails/big-numbers/${index}.png`;
 
 export const MostViewedCard: React.FC<Props> = ({ content, index }) => {
     const { headline } = content.header;
@@ -55,15 +54,17 @@ export const MostViewedCard: React.FC<Props> = ({ content, index }) => {
         : "";
     return (
         <TableRow>
-            <td style={leftColStyles} className="m-col-pad">
+            <td style={leftColStyles}>
                 <Image
                     src={getIndexImageURL(index)}
                     alt={String(index)}
                     ignoreWidth
-                    height={30}
+                    pillar={pillar}
+                    width={59}
+                    height={59}
                 />
             </td>
-            <td style={rightColStyles} className="m-col-pad">
+            <td style={rightColStyles}>
                 <Headline
                     text={headline}
                     linkTo={webURL}
