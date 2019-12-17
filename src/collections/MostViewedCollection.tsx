@@ -19,7 +19,7 @@ export const MostViewedCollection: React.FC<{
     const lightGrey = palette.neutral[97];
 
     return (
-        <TableRowCell tableStyle={{ backgroundColor: lightGrey }}>
+        <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
             <Padding px={12} />
             <Multiline />
             <Heading heading={collection.displayName} />
