@@ -1,25 +1,30 @@
 import React from "react";
 import { TableRowCell } from "../layout/Table";
 import { Image } from "./Image";
+import { formatImage } from "../image";
 
-export const Banner: React.FC<{ title: string; frontId: string }> = ({
-    title,
-    frontId
-}) => {
+export const Banner: React.FC<{
+    title: string;
+    frontId: string;
+    imageSalt?: string;
+}> = ({ title, frontId, imageSalt }) => {
     const banners: { [key in string]: string } = {
         "email/opinion":
-            "https://assets.guim.co.uk/images/email/banners/5ddb54b70715242bc85e071bd14f66e8/opinion.png",
+            "https://static.guim.co.uk/editorial-emails/banners/opinion.png",
         "email/media-briefing":
-            "https://assets.guim.co.uk/images/email/banners/7c27c2af5c0e7ab17516908fe012bc13/media-briefing.png",
-        "email/sport-au":
-            "https://assets.guim.co.uk/images/email/banners/907e4c059bce8ffc82260ea5e140759f/australia-sports.png",
+            "https://static.guim.co.uk/editorial-emails/banners/media-briefing.png",
         "email/business-today":
             "https://assets.guim.co.uk/images/email/banners/f7f612b162f1c96eb8c85245bd8333a3/business-today.png",
+        "email/sport-au":
+            "https://static.guim.co.uk/editorial-emails/banners/australia-sports.png",
         default:
-            "https://assets.guim.co.uk/images/email/banners/0dbd7be9345b28a8678baaae474e6548/film-today.png"
+            "https://static.guim.co.uk/editorial-emails/banners/film-today.png"
     };
 
-    const bannerSrc = banners[frontId] || banners.default;
+    const bannerOrigin = banners[frontId] || banners.default;
+    const bannerSrc = imageSalt
+        ? formatImage(bannerOrigin, imageSalt, 600)
+        : bannerOrigin;
 
     return (
         <TableRowCell tdStyle={{ padding: "0" }}>

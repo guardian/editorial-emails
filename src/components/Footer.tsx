@@ -9,7 +9,7 @@ const tableWrapper: TableCSS = {
     backgroundRepeat: "no-repeat",
     backgroundPosition: "bottom right",
     backgroundImage:
-        "url(https://assets.guim.co.uk/images/email/f189dff5bfa4dc66d092f57e973a51b9/grey-g.png)"
+        "url(https://static.guim.co.uk/editorial-emails/logos/grey-g.png)"
 };
 
 const tdInnerPadding: TdCSS = {
