@@ -9,7 +9,7 @@ import { Image } from "../../components/Image";
 
 interface Props {
     content: Content;
-    index: number;
+    index: string;
 }
 
 const brazeParameter = "?##braze_utm##";
@@ -32,18 +32,8 @@ const rightColStyles: TdCSS = {
     backgroundColor: palette.neutral[100]
 };
 
-const indexImages = [
-    "https://i.ibb.co/dg0C1JQ/1.png",
-    "https://i.ibb.co/d42w5j5/2.png",
-    "https://i.ibb.co/n8B1JkB/3.png",
-    "https://i.ibb.co/GnxbChw/4.png",
-    "https://i.ibb.co/RpNSNX9/5.png",
-    "https://i.ibb.co/kGQ91FD/6.png",
-    "https://i.ibb.co/Nx8zpRr/7.png",
-    "https://i.ibb.co/tZG2vqg/8.png",
-    "https://i.ibb.co/PMh7rm1/9.png",
-    "https://i.ibb.co/mtvMrth/10.png"
-];
+const getIndexImageURL = (index: string) =>
+    `https://static.guim.co.uk/editorial-emails/big-numbers/${index}.png`;
 
 export const MostViewedCard: React.FC<Props> = ({ content, index }) => {
     const { headline } = content.header;
@@ -67,7 +57,7 @@ export const MostViewedCard: React.FC<Props> = ({ content, index }) => {
         <TableRow>
             <td style={leftColStyles} className="m-col-pad">
                 <Image
-                    src={indexImages[index]}
+                    src={getIndexImageURL(index)}
                     alt={String(index)}
                     ignoreWidth
                     height={30}
