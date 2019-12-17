@@ -9,14 +9,14 @@ import { Image } from "../../components/Image";
 
 interface Props {
     content: Content;
-    index: number;
+    index: string;
 }
 
 const brazeParameter = "?##braze_utm##";
 
 const leftColStyles: TdCSS = {
     width: "40px",
-    padding: "5px 10px 20px 15px",
+    padding: "8px 10px 20px 15px",
     verticalAlign: "top",
     textAlign: "left",
     borderTop: `1px solid ${palette.neutral[7]}`,
@@ -24,26 +24,15 @@ const leftColStyles: TdCSS = {
 };
 
 const rightColStyles: TdCSS = {
-    paddingTop: "5px",
-    paddingRight: "10px",
+    padding: "4px 10px 5px 0",
     verticalAlign: "top",
     textAlign: "left",
     borderTop: `1px solid ${palette.neutral[7]}`,
     backgroundColor: palette.neutral[100]
 };
 
-const indexImages = [
-    "https://i.ibb.co/dg0C1JQ/1.png",
-    "https://i.ibb.co/d42w5j5/2.png",
-    "https://i.ibb.co/n8B1JkB/3.png",
-    "https://i.ibb.co/GnxbChw/4.png",
-    "https://i.ibb.co/RpNSNX9/5.png",
-    "https://i.ibb.co/kGQ91FD/6.png",
-    "https://i.ibb.co/Nx8zpRr/7.png",
-    "https://i.ibb.co/tZG2vqg/8.png",
-    "https://i.ibb.co/PMh7rm1/9.png",
-    "https://i.ibb.co/mtvMrth/10.png"
-];
+const getIndexImageURL = (index: string) =>
+    `https://image-origin.s3-eu-west-1.amazonaws.com/editorial-emails/big-numbers/${index}.png`;
 
 export const MostViewedCard: React.FC<Props> = ({ content, index }) => {
     const { headline } = content.header;
@@ -65,15 +54,15 @@ export const MostViewedCard: React.FC<Props> = ({ content, index }) => {
         : "";
     return (
         <TableRow>
-            <td style={leftColStyles} className="m-col-pad">
+            <td style={leftColStyles}>
                 <Image
-                    src={indexImages[index]}
+                    src={getIndexImageURL(index)}
                     alt={String(index)}
                     ignoreWidth
                     height={30}
                 />
             </td>
-            <td style={rightColStyles} className="m-col-pad">
+            <td style={rightColStyles}>
                 <Headline
                     text={headline}
                     linkTo={webURL}
