@@ -15,8 +15,8 @@ interface Props {
 const brazeParameter = "?##braze_utm##";
 
 const leftColStyles: TdCSS = {
-    width: "40px",
-    padding: "8px 10px 20px 15px",
+    width: "59px",
+    padding: "0",
     verticalAlign: "top",
     textAlign: "left",
     borderTop: `1px solid ${palette.neutral[7]}`,
@@ -59,7 +59,9 @@ export const MostViewedCard: React.FC<Props> = ({ content, index }) => {
                     src={getIndexImageURL(index)}
                     alt={String(index)}
                     ignoreWidth
-                    height={30}
+                    pillar={pillar}
+                    width={59}
+                    height={59}
                 />
             </td>
             <td style={rightColStyles}>
