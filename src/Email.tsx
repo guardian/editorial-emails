@@ -97,7 +97,7 @@ export const Email = (front: Front, salt: string, variant?: string): string => {
     const body = renderToStaticMarkup(
         <Center>
             <TableRowCell>
-                <Banner title={pageTitle} frontId={front.id} />
+                <Banner title={pageTitle} frontId={front.id} imageSalt={salt} />
                 {renderFront(front, salt, variant)}
                 <Footer title={pageTitle} frontId={front.id} />
             </TableRowCell>
