@@ -40,6 +40,7 @@ interface Props {
     salt: string;
     backgroundColor?: string;
     layout?: "expanded" | "compact";
+    isLive?: boolean;
 }
 
 const brazeParameter = "?##braze_utm##";
@@ -48,7 +49,8 @@ export const OverlayCard: React.FC<Props> = ({
     content,
     salt,
     backgroundColor,
-    layout
+    layout,
+    isLive = false
 }) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
@@ -106,6 +108,7 @@ export const OverlayCard: React.FC<Props> = ({
                             pillar={pillar}
                             shouldUseWhite
                             kicker={kicker}
+                            isLive={isLive}
                             showQuotation={showQuotation}
                         />
                     </td>

@@ -5,9 +5,8 @@ import { Heading } from "../../../../components/Heading";
 import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
-import { OverlayCard } from "../../../../components/cards/OverlayCard";
 
-export const LiveCollection: React.FC<{
+export const CommercialCollection: React.FC<{
     collection: ICollection;
     salt: string;
 }> = ({ collection, salt }) => {
@@ -26,18 +25,7 @@ export const LiveCollection: React.FC<{
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            {content.map((story, index) => (
-                <>
-                    <OverlayCard
-                        content={story}
-                        salt={salt}
-                        isLive={!!story.card.isLive}
-                    />
-                    {index < content.length - 1 && (
-                        <Padding px={12} backgroundColor={lightGrey} />
-                    )}
-                </>
-            ))}
+            <DefaultGrid content={content} salt={salt} />
         </>
     );
 };

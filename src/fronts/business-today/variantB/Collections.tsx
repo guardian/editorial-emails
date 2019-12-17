@@ -5,6 +5,7 @@ import { getDesignType } from "../../../utils/getDesignType";
 import { InstagramCollection } from "../../../collections/InstagramCollection";
 import { LiveCollection } from "./components/LiveCollection";
 import { CommentCollection } from "./components/CommentCollection";
+import { CommercialCollection } from "./components/CommercialCollection";
 import { DefaultCollection } from "./components/DefaultCollection";
 import { FreeTextCollection } from "./components/FreeTextCollection";
 import { MostViewedCollection } from "../../../collections/MostViewedCollection";
@@ -43,7 +44,12 @@ export const Collections: React.FC<{
                     collection.curated.length === 1 &&
                     collection.collectionType === "medium"
                 ) {
-                    return null;
+                    return (
+                        <CommercialCollection
+                            collection={collection}
+                            salt={salt}
+                        />
+                    );
                 }
 
                 // Today's agenda (link)

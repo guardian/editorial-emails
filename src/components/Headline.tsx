@@ -48,6 +48,7 @@ interface Props {
     kicker?: string;
     byline?: string;
     showQuotation?: boolean;
+    isLive?: boolean;
 }
 
 export const Headline: React.FC<Props> = ({
@@ -58,7 +59,8 @@ export const Headline: React.FC<Props> = ({
     shouldUseWhite,
     kicker,
     byline,
-    showQuotation
+    showQuotation,
+    isLive
 }) => {
     const textSize = size === "small" ? "small" : "large";
     return (
@@ -68,6 +70,7 @@ export const Headline: React.FC<Props> = ({
                     text={kicker}
                     size={textSize}
                     pillar={pillar}
+                    isLive={isLive}
                     colour={shouldUseWhite ? palette.neutral[100] : null}
                 />
             )}

@@ -7,6 +7,8 @@ export const kickerText = (kicker: Kicker): string => {
     switch (kicker.type) {
         case "FreeHtmlKicker":
             return kicker.item.properties.kickerText || "";
+        case "LiveKicker":
+            return "Live";
         default:
             return "";
     }

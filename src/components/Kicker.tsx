@@ -34,9 +34,16 @@ interface Props {
     pillar?: Pillar;
     size?: Size;
     colour?: string;
+    isLive?: boolean;
 }
 
-export const Kicker: React.FC<Props> = ({ text, pillar, size, colour }) => {
+export const Kicker: React.FC<Props> = ({
+    text,
+    pillar,
+    size,
+    colour,
+    isLive
+}) => {
     return (
         <span style={kickerStyle(size, pillar, colour)}>{`${text} / `}</span>
     );

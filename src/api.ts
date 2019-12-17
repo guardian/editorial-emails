@@ -107,6 +107,7 @@ interface Card {
     cardStyle: {
         type: string;
     };
+    isLive?: boolean;
 }
 
 export interface Kicker {
