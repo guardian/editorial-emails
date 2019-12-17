@@ -3,7 +3,7 @@ import { Collection as ICollection } from "../../../api";
 import { TableRowCell } from "../../../layout/Table";
 import { getDesignType } from "../../../utils/getDesignType";
 import { DefaultCollection } from "./components/DefaultCollection";
-import { MostViewedCollection } from "../../../Collections/MostViewedCollection";
+import { MostViewedCollection } from "../../../collections/MostViewedCollection";
 import { Padding } from "../../../layout/Padding";
 
 export const Collections: React.FC<{
