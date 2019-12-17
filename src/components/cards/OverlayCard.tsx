@@ -1,7 +1,7 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
 import { palette } from "@guardian/src-foundations";
-import { FontCSS, TdCSS, TableCSS } from "../../css";
+import { FontCSS, TdCSS } from "../../css";
 import { sanitizeOptions } from "../../utils/sanitizeOptions";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
@@ -17,10 +17,12 @@ const tdStyle = (backgroundColor: string): TdCSS => {
     };
 };
 
-const headlineCellStyle = {
-    width: "93%",
-    backgroundColor: palette.neutral[7],
-    padding: "3px 40px 20px 10px"
+const headlineCellStyle = (isLive: boolean): TdCSS => {
+    return {
+        width: "93%",
+        backgroundColor: isLive ? palette.news.main : palette.neutral[7],
+        padding: "3px 40px 20px 10px"
+    };
 };
 
 const blankCellStyle = {
@@ -31,8 +33,11 @@ const trailTextStyle: FontCSS = {
     ...headline({ level: 1 })
 };
 
-const trailTextPadding: TdCSS = {
-    padding: "6px 10px 20px 10px"
+const trailTextPadding = (isLive: boolean): TdCSS => {
+    const padBottom = isLive === isLive ? "4px" : "20px";
+    return {
+        padding: `6px 10px ${padBottom} 10px`
+    };
 };
 
 interface Props {
@@ -100,7 +105,7 @@ export const OverlayCard: React.FC<Props> = ({
                 )}
 
                 <tr>
-                    <td className="m-pad" style={headlineCellStyle}>
+                    <td className="m-pad" style={headlineCellStyle(isLive)}>
                         <Headline
                             text={headline}
                             linkTo={webURL}
@@ -124,7 +129,7 @@ export const OverlayCard: React.FC<Props> = ({
                         <td
                             colspan={2}
                             className="m-col-pad"
-                            style={trailTextPadding}
+                            style={trailTextPadding(isLive)}
                         >
                             <span
                                 style={trailTextStyle}
