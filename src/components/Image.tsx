@@ -30,6 +30,7 @@ const defaultImageStyles = (ignoreWidth: boolean): ImageCSS => {
     const sizingStyles: ImageCSS = {};
     if (!ignoreWidth) {
         sizingStyles.width = "100%";
+        sizingStyles.display = "block";
     }
 
     return {
@@ -37,7 +38,7 @@ const defaultImageStyles = (ignoreWidth: boolean): ImageCSS => {
         textDecoration: "none",
         maxWidth: "100%",
         outline: "none",
-        display: "block",
+        display: "inline-block",
         clear: "both",
         border: "0",
         ...sizingStyles

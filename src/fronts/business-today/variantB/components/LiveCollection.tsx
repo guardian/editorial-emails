@@ -31,7 +31,7 @@ export const LiveCollection: React.FC<{
                     <OverlayCard
                         content={story}
                         salt={salt}
-                        isLive={!!story.card.isLive}
+                        isLive={story.card.isLive}
                     />
                     {index < content.length - 1 && (
                         <Padding px={12} backgroundColor={lightGrey} />
