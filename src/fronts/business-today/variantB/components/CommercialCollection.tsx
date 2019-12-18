@@ -5,6 +5,7 @@ import { Heading } from "../../../../components/Heading";
 import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
+import { CommercialCard } from "../../../../components/cards/CommercialCard";
 
 export const CommercialCollection: React.FC<{
     collection: ICollection;
@@ -19,13 +20,23 @@ export const CommercialCollection: React.FC<{
 
     return (
         <>
-            <Padding px={12} backgroundColor={lightGrey} />
-            <Multiline />
             <Heading
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            <DefaultGrid content={content} salt={salt} />
+            {content.map((story, index) => (
+                <>
+                    <CommercialCard
+                        size={}
+                        content={story}
+                        salt={salt}
+                        shouldShowImage
+                    />
+                    {index < content.length - 1 && (
+                        <Padding px={12} backgroundColor={lightGrey} />
+                    )}
+                </>
+            ))}
         </>
     );
 };
