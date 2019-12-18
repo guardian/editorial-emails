@@ -32,7 +32,7 @@ const rightColStyles: TdCSS = {
 };
 
 const getIndexImageURL = (index: string) =>
-    `https://image-origin.s3-eu-west-1.amazonaws.com/editorial-emails/big-numbers/${index}.png`;
+    `https://static.guim.co.uk/editorial-emails/big-numbers/${index}.png`;
 
 export const MostViewedCard: React.FC<Props> = ({ content, index }) => {
     const { headline } = content.header;
