@@ -1,10 +1,10 @@
 import React from "react";
 import { Collection as ICollection } from "../../../../api";
-import { DefaultGrid } from "../../../../layout/Grid";
 import { Heading } from "../../../../components/Heading";
 import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
+import { FreeTextCard } from "../../../../components/cards/FreeTextCard";
 
 export const FreeTextCollection: React.FC<{
     collection: ICollection;
@@ -25,7 +25,14 @@ export const FreeTextCollection: React.FC<{
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            <DefaultGrid content={content} salt={salt} />
+            {content.map((story, index) => (
+                <>
+                    <FreeTextCard content={story} />
+                    {index < content.length - 1 && (
+                        <Padding px={12} backgroundColor={lightGrey} />
+                    )}
+                </>
+            ))}
         </>
     );
 };
