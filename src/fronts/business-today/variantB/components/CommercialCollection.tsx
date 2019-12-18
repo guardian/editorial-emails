@@ -2,7 +2,6 @@ import React from "react";
 import { Collection as ICollection } from "../../../../api";
 import { DefaultGrid } from "../../../../layout/Grid";
 import { Heading } from "../../../../components/Heading";
-import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 
@@ -19,7 +18,6 @@ export const CommercialCollection: React.FC<{
 
     return (
         <>
-            <Padding px={12} backgroundColor={lightGrey} />
             <Multiline />
             <Heading
                 heading={collection.displayName}
