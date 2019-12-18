@@ -19,6 +19,7 @@ export const CommercialCollection: React.FC<{
 
     return (
         <>
+            <Padding px={12} backgroundColor={lightGrey} />
             <Heading
                 heading={collection.displayName}
                 backgroundColor={lightGrey}

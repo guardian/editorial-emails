@@ -5,12 +5,12 @@ import { Content } from "../../api";
 import { TableRow, TableRowCell } from "../../layout/Table";
 import { textBody } from "../../styles/typography";
 import ReactHtmlParser from "react-html-parser";
-import { renderToString } from "react-dom/server";
+import { renderToStaticMarkup } from "react-dom/server";
 
 const outerTdStyle: TdCSS = {
     padding: "0 10px",
     verticalAlign: "top",
-    backgroundColor: palette.neutral[100]
+    backgroundColor: palette.neutral[97]
 };
 
 const innerTdStyle: TdCSS = {
@@ -62,7 +62,7 @@ export const FreeTextCard: React.FC<Props> = ({ content }) => {
 
     const parsedText = ReactHtmlParser(headline, { transform });
     // @ts-ignore as verticalAlign isn't valid in type image */
-    const transformedText = renderToString(parsedText);
+    const transformedText = renderToStaticMarkup(parsedText);
 
     return (
         <TableRowCell tableStyle={{ height: "100%" }} tdStyle={outerTdStyle}>

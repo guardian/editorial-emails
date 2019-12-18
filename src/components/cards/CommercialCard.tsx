@@ -3,40 +3,14 @@ import { FontCSS, TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
-import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
-import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline } from "../../styles/typography";
+import { FreeTextCard } from "./FreeTextCard";
 
 const tdStyle: TdCSS = {
-    backgroundColor: palette.opinion.faded,
-    borderTop: `2px solid ${palette.opinion.main}`,
-    padding: "0"
-};
-
-const metaWrapperStyle = {
-    padding: "3px 10px 10px 10px"
-};
-
-const standfirstStyle: TdCSS = {
-    padding: "20px 10px 10px 10px",
-    verticalAlign: "bottom"
-};
-
-const linkStyle: FontCSS = {
-    textDecoration: "none"
-};
-
-const spanStyle: FontCSS = {
-    ...headline({ level: 1 }),
-    color: palette.neutral[7]
-};
-
-const columnStyleRight: TdCSS = {
-    width: "30%",
-    verticalAlign: "bottom",
-    padding: "0"
+    backgroundColor: palette.neutral[97],
+    paddingBottom: "12px"
 };
 
 interface Props {
@@ -55,7 +29,6 @@ export const CommercialCard: React.FC<Props> = ({ content, salt }) => {
         content.card.starRating
     );
 
-    const headline = content.header.headline;
     const backfillURL = content.properties.webUrl + brazeParameter;
     const curatedURL = content.properties.href;
     const cardLink = content.properties.webUrl ? backfillURL : curatedURL;
@@ -73,17 +46,8 @@ export const CommercialCard: React.FC<Props> = ({ content, salt }) => {
                         width={600}
                     />
                 </RowCell>
-                <tr>
-                    <td className="m-pad" style={metaWrapperStyle}>
-                        <Headline
-                            text={headline}
-                            linkTo={cardLink}
-                            size="large"
-                            pillar="Opinion"
-                        />
-                    </td>
-                </tr>
             </Table>
+            <FreeTextCard content={content} />
         </TableRowCell>
     );
 };
