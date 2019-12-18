@@ -6,6 +6,8 @@ import { palette } from "@guardian/src-foundations";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import { Multiline } from "../../../../components/Multiline";
 import { Padding } from "../../../../layout/Padding";
+import { DefaultCard } from "../../../../components/cards/DefaultCard";
+import { Table, TableRowCell } from "../../../../layout/Table";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -22,27 +24,32 @@ export const DefaultCollection: React.FC<{
     const lightGrey = palette.neutral[97];
 
     return (
-        <>
-            <Padding px={12} backgroundColor={lightGrey} />
-            <Multiline />
-            <Heading
-                heading={collection.displayName}
-                backgroundColor={lightGrey}
-            />
-            <DefaultGrid content={gridContent} salt={salt} />
+        <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
             <Padding px={12} />
+            <Multiline />
+            <Heading heading={collection.displayName} />
+            <DefaultGrid
+                content={gridContent}
+                salt={salt}
+                card={{
+                    Component: DefaultCard,
+                    props: {
+                        backgroundColor: palette.neutral[100]
+                    }
+                }}
+            />
+            <Padding px={6} />
             {listContent.map((story, index) => (
                 <>
                     <HeadlineCard
                         content={story}
                         borderWidth="thin"
                         showPillarColours
+                        backgroundColor={palette.neutral[100]}
                     />
-                    {index < listContent.length - 1 && (
-                        <Padding px={12} backgroundColor={lightGrey} />
-                    )}
+                    {index < listContent.length - 1 && <Padding px={6} />}
                 </>
             ))}
-        </>
+        </TableRowCell>
     );
 };

@@ -26,7 +26,9 @@ export const MostViewedCollection: React.FC<{
             {content.slice(0, 10).map((story, index) => (
                 <>
                     <MostViewedCard content={story} index={String(index + 1)} />
-                    <Padding px={12} backgroundColor={lightGrey} />
+                    {index < content.length - 1 && (
+                        <Padding px={6} backgroundColor={lightGrey} />
+                    )}
                 </>
             ))}
         </TableRowCell>

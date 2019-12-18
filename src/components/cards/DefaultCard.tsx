@@ -16,7 +16,8 @@ type DesignName = "background" | "border";
 const tdStyle = (
     designName: DesignName,
     isInsideGrid: boolean,
-    pillar?: Pillar
+    pillar?: Pillar,
+    backgroundColor?: string
 ): TdCSS => {
     if (designName === "border") {
         if (!isInsideGrid) {
@@ -38,7 +39,7 @@ const tdStyle = (
             : palette.culture.main;
     return {
         borderTop: `2px solid ${borderColour}`,
-        backgroundColor: palette.culture.faded
+        backgroundColor: backgroundColor || palette.culture.faded
     };
 };
 
@@ -60,6 +61,7 @@ interface Props {
     size: Size;
     designName?: DesignName;
     isInsideGrid?: boolean;
+    backgroundColor?: string;
 }
 
 const brazeParameter = "?##braze_utm##";
@@ -69,7 +71,8 @@ export const DefaultCard: React.FC<Props> = ({
     salt,
     size,
     designName = "background",
-    isInsideGrid = false
+    isInsideGrid = false,
+    backgroundColor
 }) => {
     let imageURL;
     if (content.properties.maybeContent) {
@@ -105,7 +108,7 @@ export const DefaultCard: React.FC<Props> = ({
     return (
         <TableRowCell
             tableStyle={{ height: "100%" }}
-            tdStyle={tdStyle(designName, isInsideGrid, pillar)}
+            tdStyle={tdStyle(designName, isInsideGrid, pillar, backgroundColor)}
         >
             <Table tableStyle={{ height: "100%" }}>
                 {imageURL && (
