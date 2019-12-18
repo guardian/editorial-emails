@@ -45,7 +45,11 @@ const LinkTag: React.FC<{
 export const FreeTextCard: React.FC<Props> = ({ content }) => {
     const { headline } = content.header;
 
-    const transform = (node: any, index: any): any => {
+    // WIP
+    // Parse HTML in string to find elements that need to be converted into React components.
+    // Currently we only transform <a> tags as they need custom styling.
+    // So we transform a <a> tag in the text into our LinkTag component, which handles the link styling.
+    const transform = (node: any): React.ReactElement => {
         if (node.type === "tag" && node.name === "a" && node.attribs.href) {
             return (
                 <LinkTag

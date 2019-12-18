@@ -11,7 +11,6 @@ export interface FontCSS {
     fontStyle?: "italic";
     color?: string;
     textAlign?: "center" | "left" | "right";
-    "& a:hover"?: any;
 }
 
 export interface TableCSS {
