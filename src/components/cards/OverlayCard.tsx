@@ -3,13 +3,14 @@ import sanitizeHtml from "sanitize-html";
 import { palette } from "@guardian/src-foundations";
 import { FontCSS, TdCSS } from "../../css";
 import { sanitizeOptions } from "../../utils/sanitizeOptions";
-import { Content } from "../../api";
+import { Content, Pillar } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline } from "../../styles/typography";
 import { Table, TableRowCell } from "../../layout/Table";
+import { pillarProps } from "../../utils/pillarProps";
 
 const tdStyle = (backgroundColor: string): TdCSS => {
     return {
@@ -17,10 +18,12 @@ const tdStyle = (backgroundColor: string): TdCSS => {
     };
 };
 
-const headlineCellStyle = (isLive: boolean): TdCSS => {
+const headlineCellStyle = (isLive: boolean, pillar: Pillar): TdCSS => {
     return {
         width: "93%",
-        backgroundColor: isLive ? palette.news.main : palette.neutral[7],
+        backgroundColor: isLive
+            ? pillarProps[pillar].colour
+            : palette.neutral[7],
         padding: "3px 40px 20px 10px"
     };
 };
@@ -105,7 +108,10 @@ export const OverlayCard: React.FC<Props> = ({
                 )}
 
                 <tr>
-                    <td className="m-pad" style={headlineCellStyle(isLive)}>
+                    <td
+                        className="m-pad"
+                        style={headlineCellStyle(isLive, pillar)}
+                    >
                         <Headline
                             text={headline}
                             linkTo={webURL}
