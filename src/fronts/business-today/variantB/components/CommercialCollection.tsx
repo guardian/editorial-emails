@@ -26,12 +26,7 @@ export const CommercialCollection: React.FC<{
             />
             {content.map((story, index) => (
                 <>
-                    <CommercialCard
-                        size={}
-                        content={story}
-                        salt={salt}
-                        shouldShowImage
-                    />
+                    <CommercialCard content={story} salt={salt} />
                     {index < content.length - 1 && (
                         <Padding px={12} backgroundColor={lightGrey} />
                     )}

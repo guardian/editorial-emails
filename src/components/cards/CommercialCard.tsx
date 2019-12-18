@@ -1,15 +1,13 @@
 import React from "react";
 import { FontCSS, TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content, Tag } from "../../api";
+import { Content } from "../../api";
 import { formatImage } from "../../image";
 import sanitizeHtml from "sanitize-html";
-import { Table, RowCell, TableRowCell, TableRow } from "../../layout/Table";
+import { Table, RowCell, TableRowCell } from "../../layout/Table";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline } from "../../styles/typography";
-
-type Size = "small" | "large";
 
 const tdStyle: TdCSS = {
     backgroundColor: palette.opinion.faded,
@@ -17,11 +15,8 @@ const tdStyle: TdCSS = {
     padding: "0"
 };
 
-const metaWrapperStyle = (size: Size): TdCSS => {
-    const rightPad = size === "large" ? "40px" : "10px";
-    return {
-        padding: `3px ${rightPad} 10px 10px`
-    };
+const metaWrapperStyle = {
+    padding: "3px 10px 10px 10px"
 };
 
 const standfirstStyle: TdCSS = {
@@ -47,201 +42,48 @@ const columnStyleRight: TdCSS = {
 interface Props {
     content: Content;
     salt: string;
-    size: "large" | "small";
-    shouldShowImage: boolean;
 }
 
 const brazeParameter = "?##braze_utm##";
 
-const TrailText: React.FC<{
-    text: string;
-    linkURL: string;
-    size: Size;
-}> = ({ text, linkURL, size }) => {
-    return (
-        <td className="m-pad" style={standfirstStyle}>
-            <a style={linkStyle} href={linkURL}>
-                {" "}
-                <span style={spanStyle}>{text}</span>
-            </a>
-        </td>
-    );
-};
-
-// TODO add alt text
-const ContributorImage: React.FC<{
-    src: string;
-    salt: string;
-    width: number;
-    alt: string;
-}> = ({ src, salt, width, alt }) => {
-    if (!src) {
-        return null;
-    }
-
-    const formattedImage = formatImage(src, salt, width);
-    return (
-        <Image
-            src={formattedImage}
-            width={width}
-            alt={alt}
-            pillar="Opinion"
-            ignoreWidth
-        />
-    );
-};
-
-// TODO make testable, and also separate layout logic from individual components
-// TODO split into SupplementaryMetaLarge and Small
-const SupplementaryMeta: React.FC<{
-    trailText: string;
-    linkURL: string;
-    contributorImageSrc?: string;
-    contributorImageAlt?: string;
-    size: Size;
-    width: number;
-    salt: string;
-}> = ({
-    trailText,
-    contributorImageSrc,
-    linkURL,
-    size,
-    width,
-    contributorImageAlt,
-    salt
-}) => {
-    const contributorImage = (
-        <td style={columnStyleRight}>
-            <ContributorImage
-                width={width}
-                salt={salt}
-                src={contributorImageSrc}
-                alt={contributorImageAlt}
-            />
-        </td>
-    );
-
-    if (trailText && contributorImageSrc) {
-        return (
-            <RowCell tdStyle={{ padding: "0" }}>
-                <TableRow>
-                    <TrailText text={trailText} linkURL={linkURL} size={size} />
-                    {contributorImage}
-                </TableRow>
-            </RowCell>
-        );
-    } else if (trailText) {
-        return (
-            <tr>
-                <TrailText text={trailText} linkURL={linkURL} size={size} />
-            </tr>
-        );
-    } else if (contributorImageSrc) {
-        return (
-            <RowCell tdStyle={{ padding: "0" }}>
-                <Table>
-                    <td style={{ width: "50%" }}></td>
-                    {contributorImage}
-                </Table>
-            </RowCell>
-        );
-    }
-
-    return null;
-};
-
-export const CommercialCard: React.FC<Props> = ({
-    content,
-    salt,
-    size,
-    shouldShowImage
-}) => {
+export const CommercialCard: React.FC<Props> = ({ content, salt }) => {
     const image = content.properties.image.item.imageSrc;
     const formattedImage = formatImage(
         image,
         salt,
-        size === "large" ? 600 : 300,
+        600,
         content.card.starRating
     );
 
     const headline = content.header.headline;
-    const byline = content.properties.byline;
-    const webURL = content.properties.webUrl + brazeParameter;
+    const backfillURL = content.properties.webUrl + brazeParameter;
+    const curatedURL = content.properties.href;
+    const cardLink = content.properties.webUrl ? backfillURL : curatedURL;
     const imageURL = formattedImage;
     const imageAlt = content.header.headline;
-    const showQuotation = content.header.isComment;
-
-    const trailText = sanitizeHtml(content.card.trailText, {
-        allowedTags: []
-    });
 
     return (
         <TableRowCell tdStyle={tdStyle}>
             <Table>
-                {shouldShowImage && (
-                    <RowCell tdStyle={{ padding: "0" }}>
-                        <Image
-                            src={imageURL}
-                            linkTo={webURL}
-                            alt={imageAlt}
-                            width={size === "large" ? 600 : 294}
-                            pillar="Opinion"
-                        />
-                    </RowCell>
-                )}
+                <RowCell tdStyle={{ padding: "0" }}>
+                    <Image
+                        src={imageURL}
+                        linkTo={cardLink}
+                        alt={imageAlt}
+                        width={600}
+                    />
+                </RowCell>
                 <tr>
-                    <td className="m-pad" style={metaWrapperStyle(size)}>
+                    <td className="m-pad" style={metaWrapperStyle}>
                         <Headline
                             text={headline}
-                            linkTo={webURL}
-                            size={size}
+                            linkTo={cardLink}
+                            size="large"
                             pillar="Opinion"
-                            byline={byline}
-                            showQuotation={showQuotation}
                         />
                     </td>
                 </tr>
-
-                {size === "large" && (
-                    <SupplementaryMeta
-                        salt={salt}
-                        trailText={trailText}
-                        linkURL={webURL}
-                        contributorImageSrc={profilePic}
-                        contributorImageAlt={
-                            contributor && contributor.properties.webTitle
-                        }
-                        size={size}
-                        width={size === "large" ? 180 : 147}
-                    />
-                )}
             </Table>
         </TableRowCell>
-    );
-};
-
-export const getContributor = (content: Content): Tag => {
-    return content.properties.maybeContent.tags.tags.find(tag => {
-        return tag.properties.tagType === "Contributor";
-    });
-};
-
-export const ContributorImageWrapper: React.FC<{
-    content: Content;
-    salt: string;
-}> = ({ content, salt }) => {
-    const contributor = getContributor(content);
-    if (!contributor) {
-        return null;
-    }
-
-    const profilePic = contributor.properties.contributorLargeImagePath || null;
-    return (
-        <ContributorImage
-            salt={salt}
-            width={147}
-            src={profilePic}
-            alt={contributor.properties.webTitle}
-        />
     );
 };
