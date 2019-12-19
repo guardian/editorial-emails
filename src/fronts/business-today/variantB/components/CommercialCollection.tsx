@@ -3,7 +3,8 @@ import { Collection as ICollection } from "../../../../api";
 import { DefaultGrid } from "../../../../layout/Grid";
 import { Heading } from "../../../../components/Heading";
 import { palette } from "@guardian/src-foundations";
-import { Multiline } from "../../../../components/Multiline";
+import { CommercialCard } from "../../../../components/cards/CommercialCard";
+import { Padding } from "../../../../layout/Padding";
 
 export const CommercialCollection: React.FC<{
     collection: ICollection;
@@ -18,12 +19,19 @@ export const CommercialCollection: React.FC<{
 
     return (
         <>
-            <Multiline />
+            <Padding px={12} backgroundColor={lightGrey} />
             <Heading
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            <DefaultGrid content={content} salt={salt} />
+            {content.map((story, index) => (
+                <>
+                    <CommercialCard content={story} salt={salt} />
+                    {index < content.length - 1 && (
+                        <Padding px={12} backgroundColor={lightGrey} />
+                    )}
+                </>
+            ))}
         </>
     );
 };

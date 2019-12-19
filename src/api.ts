@@ -98,6 +98,16 @@ interface Properties {
     maybeContent: InnerContent;
     href?: string;
     showByline?: boolean;
+    image?: FreeTextImage;
+}
+
+interface FreeTextImage {
+    type: string;
+    item: {
+        imageSrc: string;
+        imageSrcWidth: string;
+        imageSrcHeight: string;
+    };
 }
 
 interface Card {
