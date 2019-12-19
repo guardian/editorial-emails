@@ -30,6 +30,10 @@ interface Props {
 export const FreeTextCard: React.FC<Props> = ({ content }) => {
     const { headline } = content.header;
 
+    // const testContent =
+    //     headline +
+    //     "<img src='https://i.guim.co.uk/img/media/d573f1050d94b11617204efffa6b0fe64fdf8f63/0_0_3500_2100/master/3500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=34e2c4a165177d981addc68c38485dea' alt='Alt Image' />";
+
     return (
         <TableRowCell tdStyle={outerTdStyle}>
             <TableRow>
@@ -37,7 +41,7 @@ export const FreeTextCard: React.FC<Props> = ({ content }) => {
                     <span
                         style={freeTextStyle}
                         dangerouslySetInnerHTML={{
-                            __html: getTransformedFreeText(headline)
+                            __html: getTransformedFreeText(testContent)
                         }}
                     ></span>
                 </td>

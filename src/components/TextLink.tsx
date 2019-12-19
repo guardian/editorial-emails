@@ -5,7 +5,7 @@ export const TextLink: React.FC<{
     linkTo: string;
     linkText: string;
 }> = ({ linkTo, linkText }) => {
-    const brazeParameter = "?##braze_utm##";
+    // const brazeParameter = "?##braze_utm##";
 
     // Append Braze parameter if it's a Guardian URL
     // const isGuardianLink = linkTo.includes("theguardian.com/");
