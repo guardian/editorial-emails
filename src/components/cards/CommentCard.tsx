@@ -134,7 +134,7 @@ const SupplementaryMeta: React.FC<{
         return (
             <RowCell>
                 <Table>
-                    <td style={{ width: "50%" }}></td>
+                    <td style={{ width: "50%", padding: "0" }}></td>
                     {contributorImage}
                 </Table>
             </RowCell>

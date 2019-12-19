@@ -22,6 +22,7 @@ export const DefaultCollection: React.FC<{
     const listContent = content.slice(2);
 
     const lightGrey = palette.neutral[97];
+    const white = palette.neutral[100];
 
     return (
         <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
@@ -34,9 +35,11 @@ export const DefaultCollection: React.FC<{
                 card={{
                     Component: DefaultCard,
                     props: {
-                        backgroundColor: palette.neutral[100]
+                        backgroundColor: white
                     }
                 }}
+                leftStyles={{ backgroundColor: white }}
+                rightStyles={{ backgroundColor: white }}
             />
             <Padding px={6} />
             {listContent.map((story, index) => (
@@ -45,7 +48,7 @@ export const DefaultCollection: React.FC<{
                         content={story}
                         borderWidth="thin"
                         showPillarColours
-                        backgroundColor={palette.neutral[100]}
+                        backgroundColor={white}
                     />
                     {index < listContent.length - 1 && <Padding px={6} />}
                 </>
