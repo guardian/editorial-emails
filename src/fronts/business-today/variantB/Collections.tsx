@@ -27,10 +27,7 @@ export const Collections: React.FC<{
             }
 
             case "link":
-                if (
-                    collection.curated.length === 1 &&
-                    collection.collectionType === "medium"
-                ) {
+                if (collection.collectionType === "medium") {
                     return (
                         <CommercialCollection
                             collection={collection}
@@ -43,10 +40,7 @@ export const Collections: React.FC<{
                     <FreeTextCollection collection={collection} salt={salt} />
                 );
             case "default":
-                if (
-                    collection.curated.length === 1 &&
-                    collection.collectionType === "slow"
-                ) {
+                if (collection.collectionType === "slow") {
                     return (
                         <InstagramCollection
                             collection={collection}
@@ -67,10 +61,7 @@ export const Collections: React.FC<{
                     );
                 }
 
-                if (
-                    collection.curated.length === 1 &&
-                    collection.collectionType === "medium"
-                ) {
+                if (collection.collectionType === "medium") {
                     return (
                         <LiveCollection collection={collection} salt={salt} />
                     );
