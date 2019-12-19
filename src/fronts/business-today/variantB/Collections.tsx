@@ -19,27 +19,14 @@ export const Collections: React.FC<{
         const content = [].concat(collection.backfill, collection.curated);
         const designType = getDesignType(content);
 
-        console.log(`${collection.displayName} (${designType})`);
-
-        // Business live (default)
-        // Headlines (default)
-        // Today's agenda (link)
-        // Opinion (comment)
-        // Spotlight (default)
-        // Popular on business (default)
-        // Flying soon and looking for the perfect gift? (link)
         switch (designType) {
             case "comment": {
-                // Opinion (comment)
-                // COMMENT COLLECTION
                 return (
                     <CommentCollection collection={collection} salt={salt} />
                 );
             }
 
             case "link":
-                // IGNORE COMMERCIAL CONTAINER
-                // Flying soon and looking for the perfect gift? (link)
                 if (
                     collection.curated.length === 1 &&
                     collection.collectionType === "medium"
@@ -52,8 +39,6 @@ export const Collections: React.FC<{
                     );
                 }
 
-                // Today's agenda (link)
-                // FREE-TEXT COLLECTION
                 return (
                     <FreeTextCollection collection={collection} salt={salt} />
                 );
@@ -62,8 +47,6 @@ export const Collections: React.FC<{
                     collection.curated.length === 1 &&
                     collection.collectionType === "slow"
                 ) {
-                    // Spotlight (default)
-                    // INSTAGRAM
                     return (
                         <InstagramCollection
                             collection={collection}
@@ -76,8 +59,6 @@ export const Collections: React.FC<{
                     collection.backfill.length === 5 &&
                     collection.collectionType === "fast"
                 ) {
-                    // Popular on business (default)
-                    // MOST VIEWED
                     return (
                         <MostViewedCollection
                             collection={collection}
@@ -90,15 +71,11 @@ export const Collections: React.FC<{
                     collection.curated.length === 1 &&
                     collection.collectionType === "medium"
                 ) {
-                    // Business live (default)
-                    // LIVE COLLECTION
                     return (
                         <LiveCollection collection={collection} salt={salt} />
                     );
                 }
 
-                // Headlines (default)
-                // DEFAULT COLLECTION
                 return (
                     <DefaultCollection collection={collection} salt={salt} />
                 );

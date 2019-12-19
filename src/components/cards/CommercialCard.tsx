@@ -1,15 +1,28 @@
 import React from "react";
-import { TdCSS } from "../../css";
+import { TdCSS, FontCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
 import { Image } from "../../components/Image";
-import { FreeTextCard } from "./FreeTextCard";
+import { textBody } from "../../styles/typography";
+import { getTransformedFreeText } from "../../utils/getTransformedFreeText";
 
-const tdStyle: TdCSS = {
-    backgroundColor: palette.neutral[97],
-    paddingBottom: "12px"
+const outerTdStyle: TdCSS = {
+    verticalAlign: "top",
+    padding: "0 10px 12px 10px",
+    backgroundColor: palette.neutral[86]
+};
+
+const textTdStyle: TdCSS = {
+    verticalAlign: "top",
+    padding: "6px 16px 3px 3px"
+};
+
+const freeTextStyle: FontCSS = {
+    ...textBody({ level: 1 }),
+    color: palette.neutral[7],
+    textDecoration: "none"
 };
 
 interface Props {
@@ -28,6 +41,7 @@ export const CommercialCard: React.FC<Props> = ({ content, salt }) => {
         content.card.starRating
     );
 
+    const { headline } = content.header;
     const backfillURL = content.properties.webUrl + brazeParameter;
     const curatedURL = content.properties.href;
     const cardLink = content.properties.webUrl ? backfillURL : curatedURL;
@@ -35,9 +49,9 @@ export const CommercialCard: React.FC<Props> = ({ content, salt }) => {
     const imageAlt = content.header.headline;
 
     return (
-        <TableRowCell tdStyle={tdStyle}>
+        <TableRowCell tdStyle={outerTdStyle}>
             <Table>
-                <RowCell tdStyle={{ padding: "0 10px" }}>
+                <RowCell>
                     <Image
                         src={imageURL}
                         linkTo={cardLink}
@@ -45,8 +59,16 @@ export const CommercialCard: React.FC<Props> = ({ content, salt }) => {
                         width={580}
                     />
                 </RowCell>
+                <RowCell tdStyle={textTdStyle}>
+                    <a
+                        href={cardLink}
+                        style={freeTextStyle}
+                        dangerouslySetInnerHTML={{
+                            __html: getTransformedFreeText(headline)
+                        }}
+                    ></a>
+                </RowCell>
             </Table>
-            <FreeTextCard content={content} />
         </TableRowCell>
     );
 };

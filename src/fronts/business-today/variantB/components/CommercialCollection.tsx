@@ -1,6 +1,5 @@
 import React from "react";
 import { Collection as ICollection } from "../../../../api";
-import { DefaultGrid } from "../../../../layout/Grid";
 import { Heading } from "../../../../components/Heading";
 import { palette } from "@guardian/src-foundations";
 import { CommercialCard } from "../../../../components/cards/CommercialCard";
@@ -15,20 +14,20 @@ export const CommercialCollection: React.FC<{
         return null;
     }
 
-    const lightGrey = palette.neutral[97];
+    const darkGrey = palette.neutral[86];
 
     return (
         <>
-            <Padding px={12} backgroundColor={lightGrey} />
+            <Padding px={12} backgroundColor={darkGrey} />
             <Heading
                 heading={collection.displayName}
-                backgroundColor={lightGrey}
+                backgroundColor={darkGrey}
             />
             {content.map((story, index) => (
                 <>
                     <CommercialCard content={story} salt={salt} />
                     {index < content.length - 1 && (
-                        <Padding px={12} backgroundColor={lightGrey} />
+                        <Padding px={12} backgroundColor={darkGrey} />
                     )}
                 </>
             ))}
