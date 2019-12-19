@@ -1,11 +1,10 @@
 import React from "react";
-import { FontCSS, TdCSS } from "../../css";
+import { TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
 import { Image } from "../../components/Image";
-import { headline } from "../../styles/typography";
 import { FreeTextCard } from "./FreeTextCard";
 
 const tdStyle: TdCSS = {
@@ -38,7 +37,7 @@ export const CommercialCard: React.FC<Props> = ({ content, salt }) => {
     return (
         <TableRowCell tdStyle={tdStyle}>
             <Table>
-                <RowCell tdStyle={{ padding: "0" }}>
+                <RowCell>
                     <Image
                         src={imageURL}
                         linkTo={cardLink}

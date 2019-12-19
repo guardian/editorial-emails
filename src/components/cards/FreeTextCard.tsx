@@ -10,13 +10,13 @@ import { renderToStaticMarkup } from "react-dom/server";
 const outerTdStyle: TdCSS = {
     padding: "0 10px",
     verticalAlign: "top",
-    backgroundColor: palette.neutral[97]
+    backgroundColor: "red"
 };
 
 const innerTdStyle: TdCSS = {
     padding: "6px 12px 12px 6px",
     verticalAlign: "top",
-    backgroundColor: palette.neutral[100]
+    backgroundColor: "blue"
 };
 
 const freeTextStyle: FontCSS = {
@@ -30,7 +30,7 @@ interface Props {
 
 const brazeParameter = "?##braze_utm##";
 
-const LinkTag: React.FC<{
+const CustomATag: React.FC<{
     linkTo: string;
     linkText: string;
 }> = ({ linkTo, linkText }) => {
@@ -52,7 +52,7 @@ export const FreeTextCard: React.FC<Props> = ({ content }) => {
     const transform = (node: any): React.ReactElement => {
         if (node.type === "tag" && node.name === "a" && node.attribs.href) {
             return (
-                <LinkTag
+                <CustomATag
                     linkTo={node.attribs.href}
                     linkText={node.children[0].data}
                 />
@@ -61,7 +61,7 @@ export const FreeTextCard: React.FC<Props> = ({ content }) => {
     };
 
     const parsedText = ReactHtmlParser(headline, { transform });
-    // @ts-ignore as verticalAlign isn't valid in type image */
+    // @ts-ignore as verticalAlign isn't valid in type image
     const transformedText = renderToStaticMarkup(parsedText);
 
     return (
