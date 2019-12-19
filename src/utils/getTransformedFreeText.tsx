@@ -15,8 +15,11 @@ export const getTransformedFreeText = (freeText: string): string => {
 
 const transform = (node: any): React.ReactElement | null => {
     if (node.type === "tag" && node.name === "a" && node.attribs.href) {
+        // Only replace <a> tag with FreeTextLink if we can successfully
+        // read the link text from inside the <a> tag
         const linkTo = node.attribs.href;
-        const linkText = node.children[0].data;
+        const linkText =
+            node.children && node.children[0] ? node.children[0].data : null;
         if (linkText) {
             return <FreeTextLink linkTo={linkTo} linkText={linkText} />;
         }
