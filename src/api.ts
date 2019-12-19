@@ -1,7 +1,6 @@
 import aws from "aws-sdk";
 import { pipeline, Stream } from "stream";
 import zlib from "zlib";
-import { AmazonLinuxImageProps } from "@aws-cdk/aws-ec2";
 
 if (process.env.NODE_ENV === "development") {
     process.env.AWS_PROFILE = "frontend";

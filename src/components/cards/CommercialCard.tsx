@@ -24,7 +24,7 @@ export const CommercialCard: React.FC<Props> = ({ content, salt }) => {
     const formattedImage = formatImage(
         image,
         salt,
-        600,
+        580,
         content.card.starRating
     );
 
@@ -37,12 +37,12 @@ export const CommercialCard: React.FC<Props> = ({ content, salt }) => {
     return (
         <TableRowCell tdStyle={tdStyle}>
             <Table>
-                <RowCell>
+                <RowCell tdStyle={{ padding: "0 10px" }}>
                     <Image
                         src={imageURL}
                         linkTo={cardLink}
                         alt={imageAlt}
-                        width={600}
+                        width={580}
                     />
                 </RowCell>
             </Table>

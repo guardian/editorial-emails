@@ -10,13 +10,13 @@ import { renderToStaticMarkup } from "react-dom/server";
 const outerTdStyle: TdCSS = {
     padding: "0 10px",
     verticalAlign: "top",
-    backgroundColor: "red"
+    backgroundColor: palette.neutral[97]
 };
 
 const innerTdStyle: TdCSS = {
     padding: "6px 12px 12px 6px",
     verticalAlign: "top",
-    backgroundColor: "blue"
+    backgroundColor: palette.neutral[100]
 };
 
 const freeTextStyle: FontCSS = {
