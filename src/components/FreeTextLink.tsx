@@ -6,7 +6,7 @@ const freeTextStyles = {
     textDecoration: "underline"
 };
 
-export const TextLink: React.FC<{
+export const FreeTextLink: React.FC<{
     linkTo: string;
     linkText: string;
 }> = ({ linkTo, linkText }) => {
