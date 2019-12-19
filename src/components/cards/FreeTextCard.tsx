@@ -13,7 +13,7 @@ const outerTdStyle: TdCSS = {
 };
 
 const innerTdStyle: TdCSS = {
-    padding: "6px 16px 12px 6px",
+    padding: "10px",
     verticalAlign: "top",
     backgroundColor: palette.neutral[100]
 };
