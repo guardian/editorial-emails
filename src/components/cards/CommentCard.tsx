@@ -9,6 +9,7 @@ import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline } from "../../styles/typography";
 import { pillarProps } from "../../utils/pillarProps";
+import { fontSizes } from "@guardian/src-foundations/theme";
 
 type Size = "small" | "large";
 
@@ -42,6 +43,7 @@ const spanStyle: FontCSS = {
 };
 
 const columnStyleRight: TdCSS = {
+    fontSize: "0",
     width: "30%",
     verticalAlign: "bottom",
     padding: "0"

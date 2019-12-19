@@ -1,6 +1,11 @@
 import React from "react";
 import { palette } from "@guardian/src-foundations";
 
+const freeTextStyles = {
+    color: palette.neutral[7],
+    textDecoration: "underline"
+};
+
 export const TextLink: React.FC<{
     linkTo: string;
     linkText: string;
@@ -12,7 +17,7 @@ export const TextLink: React.FC<{
     // const linkHref = isGuardianLink ? linkTo + brazeParameter : linkTo;
 
     return (
-        <a href={linkTo} style={{ color: palette.neutral[7] }}>
+        <a href={linkTo} style={freeTextStyles}>
             {linkText}
         </a>
     );
