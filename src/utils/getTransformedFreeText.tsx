@@ -13,6 +13,13 @@ export const getTransformedFreeText = (freeText: string): string => {
     return renderToStaticMarkup(parsedText);
 };
 
+// Styles to apply to every link
+const freeTextLinkStyles = {
+    color: palette.neutral[7],
+    textDecoration: "underline"
+};
+
+// Renders <a> tag and its children
 export const FreeTextLink: React.FC<{
     linkTo: string;
     children: any;
@@ -20,7 +27,7 @@ export const FreeTextLink: React.FC<{
     return (
         <a
             href={linkTo}
-            style={{ color: palette.neutral[7], textDecoration: "underline" }}
+            style={freeTextLinkStyles}
             dangerouslySetInnerHTML={{
                 __html: children
             }}
@@ -28,6 +35,7 @@ export const FreeTextLink: React.FC<{
     );
 };
 
+// Renders <strong> tag and its children
 export const FreeTextBold: React.FC<{
     children: any;
 }> = ({ children }) => (
@@ -38,6 +46,7 @@ export const FreeTextBold: React.FC<{
     />
 );
 
+// Renders <em> tag and its children
 export const FreeTextItalic: React.FC<{
     children: any;
 }> = ({ children }) => (
@@ -48,37 +57,42 @@ export const FreeTextItalic: React.FC<{
     />
 );
 
-const getNodeText = (node: any): any => {
+// Iterate through all children in the node
+// Return a component for every element supported,
+// Or recursively find the node's text
+const getNodeChildren = (node: any): any => {
     const nodeText = node.children.map((child: any) => {
         if (child.type === "text") {
             return child.data;
         } else if (child.type === "tag") {
             if (child.name === "strong") {
                 return renderToStaticMarkup(
-                    <FreeTextBold>{getNodeText(child)}</FreeTextBold>
+                    <FreeTextBold>{getNodeChildren(child)}</FreeTextBold>
                 );
             }
             if (child.name === "em") {
                 return renderToStaticMarkup(
-                    <FreeTextItalic>{getNodeText(child)}</FreeTextItalic>
+                    <FreeTextItalic>{getNodeChildren(child)}</FreeTextItalic>
                 );
             }
         }
 
-        return getNodeText(child);
+        return getNodeChildren(child);
     });
 
+    // Returns a basic string produced by rendering the mapping output as static markup
     return nodeText.join("");
 };
 
-const transform = (node: any, index: number): React.ReactElement | null => {
+const transform = (node: any): React.ReactElement | null => {
+    // Transform an <a> tag into a FreeTextLink component
     if (node.type === "tag" && node.name === "a" && node.attribs.href) {
-        const linkChildren = getNodeText(node);
+        const linkContent = getNodeChildren(node);
 
-        if (linkChildren) {
+        if (linkContent) {
             return (
                 <FreeTextLink linkTo={node.attribs.href}>
-                    {linkChildren}
+                    {linkContent}
                 </FreeTextLink>
             );
         }
