@@ -3,6 +3,8 @@ import { Collection as ICollection } from "../../../api";
 import { TableRowCell } from "../../../layout/Table";
 import { getDesignType } from "../../../utils/getDesignType";
 import { DefaultCollection } from "./components/DefaultCollection";
+import { MostViewedCollection } from "../../../collections/MostViewedCollection";
+import { Padding } from "../../../layout/Padding";
 
 export const Collections: React.FC<{
     frontId: string;
@@ -15,6 +17,17 @@ export const Collections: React.FC<{
 
         switch (designType) {
             case "default":
+                if (collection.collectionType === "fast") {
+                    return (
+                        <>
+                            <Padding px={12} />
+                            <MostViewedCollection
+                                collection={collection}
+                                salt={salt}
+                            />
+                        </>
+                    );
+                }
                 return (
                     <DefaultCollection collection={collection} salt={salt} />
                 );
