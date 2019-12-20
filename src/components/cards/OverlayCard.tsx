@@ -1,15 +1,16 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
 import { palette } from "@guardian/src-foundations";
-import { FontCSS, TdCSS, TableCSS } from "../../css";
+import { FontCSS, TdCSS } from "../../css";
 import { sanitizeOptions } from "../../utils/sanitizeOptions";
-import { Content } from "../../api";
+import { Content, Pillar } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline } from "../../styles/typography";
 import { Table, TableRowCell } from "../../layout/Table";
+import { pillarProps } from "../../utils/pillarProps";
 
 const tdStyle = (backgroundColor: string): TdCSS => {
     return {
@@ -17,10 +18,14 @@ const tdStyle = (backgroundColor: string): TdCSS => {
     };
 };
 
-const headlineCellStyle = {
-    width: "93%",
-    backgroundColor: palette.neutral[7],
-    padding: "3px 40px 20px 10px"
+const headlineCellStyle = (isLive: boolean, pillar: Pillar): TdCSS => {
+    return {
+        width: "93%",
+        backgroundColor: isLive
+            ? pillarProps[pillar].colour
+            : palette.neutral[7],
+        padding: "3px 40px 20px 10px"
+    };
 };
 
 const blankCellStyle = {
@@ -31,8 +36,11 @@ const trailTextStyle: FontCSS = {
     ...headline({ level: 1 })
 };
 
-const trailTextPadding: TdCSS = {
-    padding: "6px 10px 20px 10px"
+const trailTextPadding = (isLive: boolean): TdCSS => {
+    const padBottom = isLive ? "4px" : "20px";
+    return {
+        padding: `6px 10px ${padBottom} 10px`
+    };
 };
 
 interface Props {
@@ -40,6 +48,7 @@ interface Props {
     salt: string;
     backgroundColor?: string;
     layout?: "expanded" | "compact";
+    isLive?: boolean;
 }
 
 const brazeParameter = "?##braze_utm##";
@@ -48,7 +57,8 @@ export const OverlayCard: React.FC<Props> = ({
     content,
     salt,
     backgroundColor,
-    layout
+    layout,
+    isLive = false
 }) => {
     const image =
         content.properties.maybeContent.trail.trailPicture.allImages[0];
@@ -98,7 +108,10 @@ export const OverlayCard: React.FC<Props> = ({
                 )}
 
                 <tr>
-                    <td className="m-pad" style={headlineCellStyle}>
+                    <td
+                        className="m-pad"
+                        style={headlineCellStyle(isLive, pillar)}
+                    >
                         <Headline
                             text={headline}
                             linkTo={webURL}
@@ -106,6 +119,7 @@ export const OverlayCard: React.FC<Props> = ({
                             pillar={pillar}
                             shouldUseWhite
                             kicker={kicker}
+                            isLive={isLive}
                             showQuotation={showQuotation}
                         />
                     </td>
@@ -121,17 +135,19 @@ export const OverlayCard: React.FC<Props> = ({
                         <td
                             colspan={2}
                             className="m-col-pad"
-                            style={trailTextPadding}
+                            style={trailTextPadding(isLive)}
                         >
-                            <span
-                                style={trailTextStyle}
-                                dangerouslySetInnerHTML={{
-                                    __html: sanitizeHtml(
-                                        trailText,
-                                        sanitizeOptions
-                                    )
-                                }}
-                            />
+                            {!isLive && (
+                                <span
+                                    style={trailTextStyle}
+                                    dangerouslySetInnerHTML={{
+                                        __html: sanitizeHtml(
+                                            trailText,
+                                            sanitizeOptions
+                                        )
+                                    }}
+                                />
+                            )}
                         </td>
                     </tr>
                 )}

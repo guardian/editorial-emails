@@ -9,6 +9,7 @@ import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline } from "../../styles/typography";
 import { pillarProps } from "../../utils/pillarProps";
+import { fontSizes } from "@guardian/src-foundations/theme";
 
 type Size = "small" | "large";
 
@@ -42,6 +43,7 @@ const spanStyle: FontCSS = {
 };
 
 const columnStyleRight: TdCSS = {
+    fontSize: "0",
     width: "30%",
     verticalAlign: "bottom",
     padding: "0"
@@ -50,7 +52,7 @@ const columnStyleRight: TdCSS = {
 interface Props {
     content: Content;
     salt: string;
-    size: "large" | "small";
+    size?: "large" | "small";
     shouldShowImage?: boolean;
     shouldShowProfileImage?: boolean;
 }
@@ -134,7 +136,7 @@ const SupplementaryMeta: React.FC<{
         return (
             <RowCell>
                 <Table>
-                    <td style={{ width: "50%" }}></td>
+                    <td style={{ width: "50%", padding: "0" }}></td>
                     {contributorImage}
                 </Table>
             </RowCell>
@@ -147,7 +149,7 @@ const SupplementaryMeta: React.FC<{
 export const CommentCard: React.FC<Props> = ({
     content,
     salt,
-    size,
+    size = "small",
     shouldShowProfileImage = false
 }) => {
     const headerHeadline = content.header.headline;

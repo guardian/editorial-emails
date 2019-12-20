@@ -1,16 +1,19 @@
 import React from "react";
-import { Collection as ICollection } from "../api";
+import { Collection as ICollection } from "../../../../api";
+import { Heading } from "../../../../components/Heading";
+import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
-import { Padding } from "../layout/Padding";
-import { Multiline } from "../components/Multiline";
-import { Heading } from "../components/Heading";
-import { OverlayCard } from "../components/cards/OverlayCard";
+import { Multiline } from "../../../../components/Multiline";
+import { FreeTextCard } from "../../../../components/cards/FreeTextCard";
 
-export const InstagramCollection: React.FC<{
+export const FreeTextCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
+    salt: string;
 }> = ({ collection, salt }) => {
     const content = collection.curated.concat(collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
     const lightGrey = palette.neutral[97];
 
@@ -24,10 +27,10 @@ export const InstagramCollection: React.FC<{
             />
             {content.map((story, index) => (
                 <>
-                    {index > 0 && (
+                    <FreeTextCard content={story} />
+                    {index < content.length - 1 && (
                         <Padding px={12} backgroundColor={lightGrey} />
                     )}
-                    <OverlayCard content={story} salt={salt} />
                 </>
             ))}
         </>

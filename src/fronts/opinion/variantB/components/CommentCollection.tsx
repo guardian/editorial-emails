@@ -41,7 +41,6 @@ export const CommentCollection: React.FC<{
                         <CommentCard
                             content={story}
                             salt={salt}
-                            size="small"
                             shouldShowImage={false}
                         />
                         {index < rest.length - 1 && <Padding px={12} />}

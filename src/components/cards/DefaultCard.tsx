@@ -1,18 +1,24 @@
 import React from "react";
 import { TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content } from "../../api";
+import { Content, Pillar } from "../../api";
 import { formatImage } from "../../image";
 import { kickerText } from "../../kicker";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { Table, TableRowCell, RowCell } from "../../layout/Table";
+import { pillarProps } from "../../utils/pillarProps";
 
 type Size = "small" | "large";
 
 type DesignName = "background" | "border";
 
-const tdStyle = (designName: DesignName, isInsideGrid: boolean): TdCSS => {
+const tdStyle = (
+    designName: DesignName,
+    isInsideGrid: boolean,
+    pillar?: Pillar,
+    backgroundColor?: string
+): TdCSS => {
     if (designName === "border") {
         if (!isInsideGrid) {
             return {
@@ -27,9 +33,13 @@ const tdStyle = (designName: DesignName, isInsideGrid: boolean): TdCSS => {
         };
     }
 
+    const borderColour =
+        pillar && pillarProps[pillar]
+            ? pillarProps[pillar].colour
+            : palette.culture.main;
     return {
-        borderTop: `2px solid ${palette.culture.main}`,
-        backgroundColor: palette.culture.faded
+        borderTop: `2px solid ${borderColour}`,
+        backgroundColor: backgroundColor || palette.culture.faded
     };
 };
 
@@ -51,6 +61,7 @@ interface Props {
     size: Size;
     designName?: DesignName;
     isInsideGrid?: boolean;
+    backgroundColor?: string;
 }
 
 const brazeParameter = "?##braze_utm##";
@@ -60,21 +71,24 @@ export const DefaultCard: React.FC<Props> = ({
     salt,
     size,
     designName = "background",
-    isInsideGrid = false
+    isInsideGrid = false,
+    backgroundColor
 }) => {
-    const image =
-        content.properties.maybeContent.trail.trailPicture.allImages[0];
-    const formattedImage = formatImage(
-        image.url,
-        salt,
-        size === "large" ? 600 : 300,
-        content.card.starRating
-    );
+    let imageURL;
+    if (content.properties.maybeContent) {
+        const image =
+            content.properties.maybeContent.trail.trailPicture.allImages[0];
+        imageURL = formatImage(
+            image.url,
+            salt,
+            size === "large" ? 600 : 300,
+            content.card.starRating
+        );
+    }
 
     const headline = content.header.headline;
     const webURL = content.properties.webUrl + brazeParameter;
-    const imageURL = formattedImage;
-    const imageAlt = content.header.headline;
+
     const showQuotation = content.display.showQuotedHeadline;
 
     const pillar = content.properties.maybeContent
@@ -94,14 +108,14 @@ export const DefaultCard: React.FC<Props> = ({
     return (
         <TableRowCell
             tableStyle={{ height: "100%" }}
-            tdStyle={tdStyle(designName, isInsideGrid)}
+            tdStyle={tdStyle(designName, isInsideGrid, pillar, backgroundColor)}
         >
             <Table tableStyle={{ height: "100%" }}>
                 {imageURL && (
                     <RowCell>
                         <Image
                             src={imageURL}
-                            alt={imageAlt}
+                            alt={headline}
                             width={size === "large" ? 600 : 294}
                             pillar={pillar}
                             linkTo={webURL}
