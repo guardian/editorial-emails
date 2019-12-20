@@ -11,8 +11,12 @@ export const FreeTextLink: React.FC<{
     linkText: string;
 }> = ({ linkTo, linkText }) => {
     return (
-        <a href={linkTo} style={freeTextStyles}>
-            {linkText}
-        </a>
+        <a
+            href={linkTo}
+            style={freeTextStyles}
+            dangerouslySetInnerHTML={{
+                __html: linkText
+            }}
+        ></a>
     );
 };
