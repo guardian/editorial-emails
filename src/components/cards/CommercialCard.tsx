@@ -26,42 +26,45 @@ const freeTextStyle: FontCSS = {
 };
 
 interface Props {
-    content: Content;
-    salt: string;
+    headline: string;
+    cardUrl: string;
+    imageSrc?: string;
+    imageAlt?: string;
+    imageRating?: number;
+    imageSalt: string;
 }
 
-const brazeParameter = "?##braze_utm##";
+export const CommercialCard: React.FC<Props> = ({
+    headline,
+    cardUrl,
+    imageSrc,
+    imageAlt,
+    imageRating = 1,
+    imageSalt
+}) => {
+    var imageSize = 580;
 
-export const CommercialCard: React.FC<Props> = ({ content, salt }) => {
-    const image = content.properties.image.item.imageSrc;
-    const formattedImage = formatImage(
-        image,
-        salt,
-        580,
-        content.card.starRating
-    );
-
-    const { headline } = content.header;
-    const backfillURL = content.properties.webUrl + brazeParameter;
-    const curatedURL = content.properties.href;
-    const cardLink = content.properties.webUrl ? backfillURL : curatedURL;
-    const imageURL = formattedImage;
-    const imageAlt = content.header.headline;
+    let imageUrl = imageSrc
+        ? // ? formatImage(imageSrc, imageSalt, imageSize, imageRating)
+          imageSrc
+        : null;
 
     return (
         <TableRowCell tdStyle={outerTdStyle}>
             <Table>
                 <RowCell>
-                    <Image
-                        src={imageURL}
-                        linkTo={cardLink}
-                        alt={imageAlt}
-                        width={580}
-                    />
+                    {imageUrl && (
+                        <Image
+                            src={imageUrl}
+                            linkTo={`${cardUrl}?##braze_utm##`}
+                            alt={imageAlt}
+                            width={imageSize}
+                        />
+                    )}
                 </RowCell>
                 <RowCell tdStyle={textTdStyle}>
                     <a
-                        href={cardLink}
+                        href={`${cardUrl}?##braze_utm##`}
                         style={freeTextStyle}
                         dangerouslySetInnerHTML={{
                             __html: getTransformedFreeText(headline)

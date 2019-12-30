@@ -78,6 +78,7 @@ export const DefaultCard: React.FC<Props> = ({
     if (content.properties.maybeContent) {
         const image =
             content.properties.maybeContent.trail.trailPicture.allImages[0];
+        console.log("image: ", image ? image.url : null);
         imageURL = formatImage(
             image.url,
             salt,
@@ -104,6 +105,9 @@ export const DefaultCard: React.FC<Props> = ({
     const kicker = content.header.kicker
         ? kickerText(content.header.kicker)
         : "";
+
+    console.log("=========");
+    console.log("imageURL: ", imageURL);
 
     return (
         <TableRowCell
