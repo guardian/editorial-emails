@@ -7,6 +7,7 @@ import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import { DescriptiveCard } from "../../../../components/cards/DescriptiveCard";
 import { Padding } from "../../../../layout/Padding";
+import { kickerText } from "../../../../kicker";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -16,9 +17,39 @@ export const DefaultCollection: React.FC<{
     const gridContent = collection.backfill.slice(1, 5);
     const lastContent = collection.backfill[5];
 
+    const kicker = firstContent.header.kicker
+        ? kickerText(firstContent.header.kicker)
+        : "";
+
     return (
         <>
-            <DescriptiveCard content={firstContent} salt={salt} />
+            <DescriptiveCard
+                headline={firstContent.header.headline}
+                byline={
+                    firstContent.properties.showByline
+                        ? firstContent.header.headline
+                        : null
+                }
+                trailText={firstContent.card.trailText}
+                cardUrl={firstContent.properties.webUrl}
+                kicker={kicker}
+                isComment={firstContent.display.showQuotedHeadline}
+                pillar={
+                    firstContent.properties.maybeContent
+                        ? firstContent.properties.maybeContent.metadata.pillar
+                              .name
+                        : null
+                }
+                imageSrc={
+                    firstContent.properties.maybeContent.trail.trailPicture
+                        .allImages[0].url
+                }
+                imageAlt={firstContent.header.headline}
+                imageSalt={salt}
+                imageRating={firstContent.card.starRating}
+                showPillarColours
+                bodyText={firstContent.properties.maybeContent.fields.body}
+            />
             <Multiline />
             <Heading heading="More top stories" />
             {gridContent && <DefaultGrid content={gridContent} salt={salt} />}
