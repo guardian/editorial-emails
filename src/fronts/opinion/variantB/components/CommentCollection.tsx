@@ -7,21 +7,20 @@ import { Padding } from "../../../../layout/Padding";
 import { TableRowCell } from "../../../../layout/Table";
 import { palette } from "@guardian/src-foundations";
 
-const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
-    if (frontId === "email/opinion") {
-        return false;
-    }
-    return true;
-};
-
 export const CommentCollection: React.FC<{
     frontId: string;
     collection: ICollection;
     salt: string;
 }> = ({ collection, salt }) => {
     const lightGrey = palette.neutral[97];
-    const firstCollection = collection.backfill[0];
-    const rest = collection.backfill.slice(1);
+    const leadStory = collection.backfill[0];
+    const bottomCollection = collection.backfill.slice(1);
+
+    const leadContributor = leadStory.properties.maybeContent.tags.tags.find(
+        tag => {
+            return tag.properties.tagType === "Contributor";
+        }
+    );
 
     return (
         <>
@@ -30,22 +29,47 @@ export const CommentCollection: React.FC<{
                 <Multiline />
                 <Heading heading={collection.displayName} />
                 <CommentCard
-                    content={firstCollection}
-                    salt={salt}
+                    headline={leadStory.header.headline}
+                    byline={leadStory.properties.byline}
+                    cardUrl={leadStory.properties.webUrl}
+                    isComment={leadStory.header.isComment}
+                    trailText={leadStory.card.trailText}
                     size="large"
-                    shouldShowProfileImage
+                    pillar={
+                        leadStory.properties.maybeContent.metadata.pillar.name
+                    }
+                    imageSrc={
+                        leadContributor
+                            ? leadContributor.properties
+                                  .contributorLargeImagePath
+                            : null
+                    }
+                    imageAlt={leadStory.header.headline}
+                    imageSalt={salt}
                 />
                 <Padding px={12} />
-                {rest.map((story, index) => (
-                    <>
-                        <CommentCard
-                            content={story}
-                            salt={salt}
-                            shouldShowImage={false}
-                        />
-                        {index < rest.length - 1 && <Padding px={12} />}
-                    </>
-                ))}
+                {bottomCollection.map((story, index) => {
+                    return (
+                        <>
+                            <CommentCard
+                                headline={story.header.headline}
+                                byline={story.properties.byline}
+                                cardUrl={story.properties.webUrl}
+                                isComment={story.header.isComment}
+                                pillar={
+                                    story.properties.maybeContent
+                                        ? story.properties.maybeContent.metadata
+                                              .pillar.name
+                                        : null
+                                }
+                                imageSalt={salt}
+                            />
+                            {index < bottomCollection.length - 1 && (
+                                <Padding px={12} />
+                            )}
+                        </>
+                    );
+                })}
             </TableRowCell>
         </>
     );

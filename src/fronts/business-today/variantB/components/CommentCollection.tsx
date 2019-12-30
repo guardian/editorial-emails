@@ -26,12 +26,34 @@ export const CommentCollection: React.FC<{
                 backgroundColor={lightGrey}
             />
             {content.map(story => {
+                const storyContributor = story.properties.maybeContent.tags.tags.find(
+                    tag => {
+                        return tag.properties.tagType === "Contributor";
+                    }
+                );
                 return (
                     <CommentCard
-                        content={story}
-                        salt={salt}
+                        headline={story.header.headline}
+                        byline={story.properties.byline}
+                        cardUrl={story.properties.webUrl}
+                        trailText={story.card.trailText}
+                        isComment={story.header.isComment}
                         shouldShowProfileImage
                         size="large"
+                        pillar={
+                            story.properties.maybeContent
+                                ? story.properties.maybeContent.metadata.pillar
+                                      .name
+                                : null
+                        }
+                        imageSrc={
+                            storyContributor
+                                ? storyContributor.properties
+                                      .contributorLargeImagePath
+                                : null
+                        }
+                        imageAlt={story.header.headline}
+                        imageSalt={salt}
                     />
                 );
             })}
