@@ -3,9 +3,7 @@ import sanitizeHtml from "sanitize-html";
 import { palette } from "@guardian/src-foundations";
 import { FontCSS, TdCSS } from "../../css";
 import { sanitizeOptions } from "../../utils/sanitizeOptions";
-import { Content, Pillar } from "../../api";
-import { formatImage } from "../../image";
-import { kickerText } from "../../kicker";
+import { Pillar } from "../../api";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline } from "../../styles/typography";
@@ -44,51 +42,40 @@ const trailTextPadding = (isLive: boolean): TdCSS => {
 };
 
 interface Props {
-    content: Content;
-    salt: string;
+    headline: string;
+    trailText: string;
+    cardUrl: string;
+    isComment?: boolean;
+    pillar?: Pillar;
+    kicker?: string;
+    imageSrc?: string;
+    imageAlt?: string;
+    imageRating?: number;
+    imageSalt?: string;
     backgroundColor?: string;
     layout?: "expanded" | "compact";
     isLive?: boolean;
 }
 
-const brazeParameter = "?##braze_utm##";
-
 export const OverlayCard: React.FC<Props> = ({
-    content,
-    salt,
+    headline,
+    trailText,
+    cardUrl,
+    isComment = false,
+    pillar,
+    kicker,
     backgroundColor,
-    layout,
+    imageSrc,
+    imageAlt,
+    imageRating = 1,
+    imageSalt,
+    layout = "compact",
     isLive = false
 }) => {
-    const image =
-        content.properties.maybeContent.trail.trailPicture.allImages[0];
-    const formattedImage = formatImage(
-        image.url,
-        salt,
-        600,
-        content.card.starRating
-    );
-
-    const { headline } = content.header;
-    const { trailText } = content.card;
-
-    const webURL = content.properties.webUrl + brazeParameter;
-    const imageURL = formattedImage;
-    const imageAlt = content.header.headline;
-    const showQuotation = content.display.showQuotedHeadline;
-
-    const pillar = content.properties.maybeContent
-        ? content.properties.maybeContent.metadata.pillar.name
-        : null;
-
-    const kicker = content.header.kicker
-        ? kickerText(content.header.kicker)
-        : "";
-
     return (
         <TableRowCell tdStyle={tdStyle(backgroundColor)}>
             <Table>
-                {imageURL && (
+                {imageSrc && (
                     <tr>
                         {/*
                     // @ts-ignore as JSX expects 'colSpan' but HTML only validates if used as 'colspan' */}
@@ -97,11 +84,11 @@ export const OverlayCard: React.FC<Props> = ({
                             style={{ padding: 0 }}
                         >
                             <Image
-                                src={imageURL}
+                                src={imageSrc}
                                 alt={imageAlt}
                                 width={600}
                                 pillar={pillar}
-                                linkTo={webURL}
+                                linkTo={`${cardUrl}?##braze_utm##`}
                             />
                         </td>
                     </tr>
@@ -114,13 +101,13 @@ export const OverlayCard: React.FC<Props> = ({
                     >
                         <Headline
                             text={headline}
-                            linkTo={webURL}
+                            linkTo={`${cardUrl}?##braze_utm##`}
                             size="large"
                             pillar={pillar}
                             shouldUseWhite
                             kicker={kicker}
                             isLive={isLive}
-                            showQuotation={showQuotation}
+                            showQuotation={isComment}
                         />
                     </td>
                     {layout !== "compact" && (

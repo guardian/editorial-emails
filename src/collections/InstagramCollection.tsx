@@ -5,6 +5,7 @@ import { Padding } from "../layout/Padding";
 import { Multiline } from "../components/Multiline";
 import { Heading } from "../components/Heading";
 import { OverlayCard } from "../components/cards/OverlayCard";
+import { kickerText } from "../kicker";
 
 export const InstagramCollection: React.FC<{
     collection: ICollection;
@@ -27,7 +28,34 @@ export const InstagramCollection: React.FC<{
                     {index > 0 && (
                         <Padding px={12} backgroundColor={lightGrey} />
                     )}
-                    <OverlayCard content={story} salt={salt} />
+                    <OverlayCard
+                        headline={story.header.headline}
+                        trailText={story.card.trailText}
+                        cardUrl={story.properties.webUrl}
+                        isComment={story.display.showQuotedHeadline}
+                        pillar={
+                            story.properties.maybeContent
+                                ? story.properties.maybeContent.metadata.pillar
+                                      .name
+                                : null
+                        }
+                        imageSrc={
+                            story.properties.maybeContent
+                                ? story.properties.maybeContent.trail
+                                      .trailPicture.allImages[0].url
+                                : null
+                        }
+                        imageAlt={story.header.headline}
+                        imageSalt={salt}
+                        imageRating={story.card.starRating}
+                        kicker={
+                            story.header.kicker
+                                ? kickerText(story.header.kicker)
+                                : ""
+                        }
+                        layout="expanded"
+                        isLive={story.card.isLive}
+                    />
                 </>
             ))}
         </>

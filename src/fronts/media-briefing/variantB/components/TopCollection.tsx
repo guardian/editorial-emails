@@ -16,6 +16,8 @@ export const TopCollection: React.FC<{
     const lightGrey = palette.neutral[97];
     const white = palette.neutral[100];
 
+    const leadStory = collection.backfill[0];
+
     return (
         <TableRowCell
             tdStyle={{
@@ -26,10 +28,32 @@ export const TopCollection: React.FC<{
             <Heading heading={collection.displayName} />
 
             <OverlayCard
-                content={collection.backfill[0]}
-                salt={salt}
+                headline={leadStory.header.headline}
+                trailText={leadStory.card.trailText}
+                cardUrl={leadStory.properties.webUrl}
+                isComment={leadStory.display.showQuotedHeadline}
+                pillar={
+                    leadStory.properties.maybeContent
+                        ? leadStory.properties.maybeContent.metadata.pillar.name
+                        : null
+                }
+                kicker={
+                    leadStory.header.kicker
+                        ? kickerText(leadStory.header.kicker)
+                        : ""
+                }
+                imageSrc={
+                    leadStory.properties.maybeContent
+                        ? leadStory.properties.maybeContent.trail.trailPicture
+                              .allImages[0].url
+                        : null
+                }
+                imageAlt={leadStory.header.headline}
+                imageSalt={salt}
+                imageRating={leadStory.card.starRating}
                 backgroundColor={white}
-                layout="compact"
+                layout="expanded"
+                isLive={leadStory.card.isLive}
             />
 
             <Padding px={12} backgroundColor={lightGrey} />
