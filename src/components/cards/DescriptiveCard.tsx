@@ -7,13 +7,23 @@ import { palette } from "@guardian/src-foundations";
 import { Pillar } from "../../api";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
+import { pillarProps } from "../../utils/pillarProps";
 import { headline, textBody } from "../../styles/typography";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
 
-const tdStyle: TdCSS = {
-    verticalAlign: "top",
-    backgroundColor: palette.culture.faded,
-    borderTop: `2px solid ${palette.culture.main}`
+const tdStyle = (showPillarColours: boolean, pillar: string): TdCSS => {
+    if (showPillarColours && pillar && pillarProps[pillar]) {
+        return {
+            verticalAlign: "top",
+            backgroundColor: pillarProps[pillar].faded,
+            borderTop: `2px solid ${pillarProps[pillar].colour}`
+        };
+    }
+    return {
+        verticalAlign: "top",
+        backgroundColor: palette.culture.faded,
+        borderTop: `2px solid ${palette.culture.main}`
+    };
 };
 
 const metaWrapperStyle = {
@@ -74,7 +84,7 @@ export const DescriptiveCard: React.FC<Props> = ({
     const bodyPars = bodyText.split("</p>");
 
     return (
-        <TableRowCell tdStyle={tdStyle}>
+        <TableRowCell tdStyle={tdStyle(showPillarColours, pillar)}>
             <Table>
                 <tr>
                     <td className="m-pad" style={metaWrapperStyle}>

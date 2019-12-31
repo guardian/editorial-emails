@@ -34,5 +34,5 @@ export const defaultStory = () => {
 };
 
 defaultStory.story = {
-    name: "Small (basic) comment card"
+    name: "Basic descriptive card with Sport pillar"
 };
