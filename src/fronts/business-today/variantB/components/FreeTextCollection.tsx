@@ -27,7 +27,7 @@ export const FreeTextCollection: React.FC<{
             />
             {content.map((story, index) => (
                 <>
-                    <FreeTextCard content={story} />
+                    <FreeTextCard bodyText={story.header.headline} />
                     {index < content.length - 1 && (
                         <Padding px={12} backgroundColor={lightGrey} />
                     )}

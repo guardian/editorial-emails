@@ -24,12 +24,10 @@ const freeTextStyle: FontCSS = {
 };
 
 interface Props {
-    content: Content;
+    bodyText: string;
 }
 
-export const FreeTextCard: React.FC<Props> = ({ content }) => {
-    const { headline } = content.header;
-
+export const FreeTextCard: React.FC<Props> = ({ bodyText }) => {
     return (
         <TableRowCell tdStyle={outerTdStyle}>
             <TableRow>
@@ -37,7 +35,7 @@ export const FreeTextCard: React.FC<Props> = ({ content }) => {
                     <span
                         style={freeTextStyle}
                         dangerouslySetInnerHTML={{
-                            __html: getTransformedFreeText(headline)
+                            __html: getTransformedFreeText(bodyText)
                         }}
                     ></span>
                 </td>
