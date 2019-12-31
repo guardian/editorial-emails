@@ -6,6 +6,7 @@ import { palette } from "@guardian/src-foundations";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import { Multiline } from "../../../../components/Multiline";
 import { Padding } from "../../../../layout/Padding";
+import { kickerText } from "../../../../kicker";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { Table, TableRowCell } from "../../../../layout/Table";
 
@@ -45,7 +46,27 @@ export const DefaultCollection: React.FC<{
             {listContent.map((story, index) => (
                 <>
                     <HeadlineCard
-                        content={story}
+                        headline={story.header.headline}
+                        trailText={story.card.trailText}
+                        isComment={story.display.showQuotedHeadline}
+                        cardUrl={story.properties.webUrl}
+                        pillar={
+                            story.properties.maybeContent
+                                ? story.properties.maybeContent.metadata.pillar
+                                      .name
+                                : null
+                        }
+                        byline={
+                            story.properties.showByline &&
+                            story.properties.byline
+                                ? story.properties.byline
+                                : ""
+                        }
+                        kicker={
+                            story.header.kicker
+                                ? kickerText(story.header.kicker)
+                                : ""
+                        }
                         borderWidth="thin"
                         showPillarColours
                         backgroundColor={white}

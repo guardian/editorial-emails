@@ -3,6 +3,7 @@ import sanitizeHtml from "sanitize-html";
 import { FontCSS, TdCSS, ImageCSS } from "../../css";
 import { sanitizeOptions } from "../../utils/sanitizeOptions";
 import { pillarProps } from "../../utils/pillarProps";
+import { Pillar } from "../../api";
 import { palette } from "@guardian/src-foundations";
 import { Content } from "../../api";
 import { kickerText } from "../../kicker";
@@ -12,10 +13,12 @@ import { Table, TableRowCell } from "../../layout/Table";
 
 const tdStyle = (
     backgroundColor: string,
-    pillarColour: string,
+    pillar: string,
     borderWidth?: string,
     borderColor?: string
 ): TdCSS => {
+    const pillarColour = pillar ? pillarProps[pillar].colour : null;
+
     return {
         backgroundColor: backgroundColor || "transparent",
         borderTop: `${
@@ -41,18 +44,6 @@ const trailTextStyle: FontCSS = {
     color: palette.neutral[7]
 };
 
-interface Props {
-    content: Content;
-    backgroundColor?: string;
-    showPillarColours?: boolean;
-    showTrailText?: boolean;
-    borderWidth?: "thin" | "thick";
-    layout?: "expanded" | "compact";
-    showUseWhite?: boolean;
-    borderColor?: string;
-    showArrow?: boolean;
-}
-
 const brazeParameter = "?##braze_utm##";
 
 const imgStyles: ImageCSS = {
@@ -66,67 +57,87 @@ const arrowColStyles = {
     verticalAlign: "middle"
 };
 
+interface Props {
+    // content: Content;
+    headline: string;
+    trailText: string;
+    cardUrl: string;
+    isComment?: boolean;
+    pillar?: Pillar;
+    byline?: string;
+    kicker?: string;
+    backgroundColor?: string;
+    showPillarColours?: boolean;
+    showTrailText?: boolean;
+    borderWidth?: "thin" | "thick";
+    layout?: "expanded" | "compact";
+    showUseWhite?: boolean;
+    borderColor?: string;
+    showArrow?: boolean;
+}
+
 export const HeadlineCard: React.FC<Props> = ({
-    content,
+    // content,
+    headline,
+    trailText,
+    cardUrl,
+    isComment = false,
+    pillar,
+    byline,
+    kicker,
     backgroundColor,
     showPillarColours,
-    borderWidth,
-    layout,
-    showUseWhite,
+    borderWidth = "thin",
+    layout = "compact",
+    showUseWhite = false,
     borderColor,
-    showArrow
+    showArrow = false
 }) => {
-    const { headline } = content.header;
-    const { trailText } = content.card;
-    const backfillURL = content.properties.webUrl + brazeParameter;
-    const curatedURL = `https://www.theguardian.com${content.properties.href}${brazeParameter}`;
+    // const { headline } = content.header;
+    // const { trailText } = content.card;
+    // const backfillURL = content.properties.webUrl + brazeParameter;
+    // const curatedURL = `https://www.theguardian.com${content.properties.href}${brazeParameter}`;
+    // const cardLink = content.properties.webUrl ? backfillURL : curatedURL;
 
-    const cardLink = content.properties.webUrl ? backfillURL : curatedURL;
+    // const showQuotation = content.display.showQuotedHeadline;
+    // const pillar = content.properties.maybeContent
+    //     ? content.properties.maybeContent.metadata.pillar.name
+    //     : null;
+    // const pillarColour = pillar ? pillarProps[pillar].colour : null;
 
-    const showQuotation = content.display.showQuotedHeadline;
-    const pillar = content.properties.maybeContent
-        ? content.properties.maybeContent.metadata.pillar.name
-        : null;
-    const pillarColour = pillar ? pillarProps[pillar].colour : null;
+    // const { showByline } = content.properties;
+    // const byline =
+    //     showByline && content.properties.byline
+    //         ? content.properties.byline
+    //         : "";
 
-    const { showByline } = content.properties;
-    const byline =
-        showByline && content.properties.byline
-            ? content.properties.byline
-            : "";
-
-    const kicker = content.header.kicker
-        ? kickerText(content.header.kicker)
-        : "";
+    // const kicker = content.header.kicker
+    //     ? kickerText(content.header.kicker)
+    //     : "";
 
     const size = layout === "expanded" ? "large" : "small";
 
     return (
         <TableRowCell
-            tdStyle={tdStyle(
-                backgroundColor,
-                pillarColour,
-                borderWidth,
-                borderColor
-            )}
+            tdStyle={tdStyle(backgroundColor, pillar, borderWidth, borderColor)}
         >
             <Table>
                 <tr>
                     <td className="m-col-pad" style={metaWrapperStyle(layout)}>
                         <Headline
                             text={headline}
-                            linkTo={cardLink}
+                            linkTo={`${cardUrl}?##braze_utm##`}
                             size={size}
                             shouldUseWhite={showUseWhite}
                             pillar={showPillarColours ? pillar : null}
                             kicker={kicker}
                             byline={byline}
-                            showQuotation={showQuotation}
+                            showQuotation={isComment}
                         />
                     </td>
                     {showArrow && (
                         <td style={arrowColStyles}>
-                            <a href={cardLink}>
+                            <a href={`${cardUrl}?##braze_utm##`}>
                                 <img
                                     style={imgStyles}
                                     src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5dcebdcb9ae1683cc77465a5/original.png?1573830091"

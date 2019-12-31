@@ -55,7 +55,27 @@ export const DefaultCollection: React.FC<{
             {gridContent && <DefaultGrid content={gridContent} salt={salt} />}
             <Padding px={12} />
             <HeadlineCard
-                content={lastContent}
+                headline={lastContent.header.headline}
+                trailText={lastContent.card.trailText}
+                isComment={lastContent.display.showQuotedHeadline}
+                cardUrl={lastContent.properties.webUrl}
+                pillar={
+                    lastContent.properties.maybeContent
+                        ? lastContent.properties.maybeContent.metadata.pillar
+                              .name
+                        : null
+                }
+                byline={
+                    lastContent.properties.showByline &&
+                    lastContent.properties.byline
+                        ? lastContent.properties.byline
+                        : ""
+                }
+                kicker={
+                    lastContent.header.kicker
+                        ? kickerText(lastContent.header.kicker)
+                        : ""
+                }
                 backgroundColor={palette.culture.faded}
             />
         </>
