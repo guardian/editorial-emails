@@ -5,8 +5,6 @@ import { sanitizeOptions } from "../../utils/sanitizeOptions";
 import { pillarProps } from "../../utils/pillarProps";
 import { Pillar } from "../../api";
 import { palette } from "@guardian/src-foundations";
-import { Content } from "../../api";
-import { kickerText } from "../../kicker";
 import { Headline } from "../../components/Headline";
 import { headline } from "../../styles/typography";
 import { Table, TableRowCell } from "../../layout/Table";
@@ -44,8 +42,6 @@ const trailTextStyle: FontCSS = {
     color: palette.neutral[7]
 };
 
-const brazeParameter = "?##braze_utm##";
-
 const imgStyles: ImageCSS = {
     verticalAlign: "middle",
     border: "0"
@@ -58,7 +54,6 @@ const arrowColStyles = {
 };
 
 interface Props {
-    // content: Content;
     headline: string;
     trailText: string;
     cardUrl: string;
@@ -77,7 +72,6 @@ interface Props {
 }
 
 export const HeadlineCard: React.FC<Props> = ({
-    // content,
     headline,
     trailText,
     cardUrl,
@@ -93,30 +87,7 @@ export const HeadlineCard: React.FC<Props> = ({
     borderColor,
     showArrow = false
 }) => {
-    // const { headline } = content.header;
-    // const { trailText } = content.card;
-    // const backfillURL = content.properties.webUrl + brazeParameter;
-    // const curatedURL = `https://www.theguardian.com${content.properties.href}${brazeParameter}`;
-    // const cardLink = content.properties.webUrl ? backfillURL : curatedURL;
-
-    // const showQuotation = content.display.showQuotedHeadline;
-    // const pillar = content.properties.maybeContent
-    //     ? content.properties.maybeContent.metadata.pillar.name
-    //     : null;
-    // const pillarColour = pillar ? pillarProps[pillar].colour : null;
-
-    // const { showByline } = content.properties;
-    // const byline =
-    //     showByline && content.properties.byline
-    //         ? content.properties.byline
-    //         : "";
-
-    // const kicker = content.header.kicker
-    //     ? kickerText(content.header.kicker)
-    //     : "";
-
     const size = layout === "expanded" ? "large" : "small";
-
     return (
         <TableRowCell
             tdStyle={tdStyle(backgroundColor, pillar, borderWidth, borderColor)}
