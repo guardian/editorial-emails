@@ -65,6 +65,7 @@ export const liveStory = () => {
                     cardUrl="https://www.theguardian.com/world/2019/dec/31/looking-back-i-realise-i-was-naive-reporting-on-the-refugee-crisis"
                     imageSrc="https://i.guim.co.uk/img/media/b8c2393d1e38ba1859f6fa01996933cc382a6776/0_0_5568_3712/master/5568.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=2222a23bb4ee59b1cf09aec53d8c599b"
                     imageAlt="Vestibulum non orci tortor"
+                    imageSalt="Uz34q0qIkz"
                     pillar="News"
                     kicker="Cinema"
                     isLive

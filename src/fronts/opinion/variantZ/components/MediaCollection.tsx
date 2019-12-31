@@ -9,7 +9,19 @@ export const MediaCollection: React.FC<{
     salt: string;
 }> = ({ collection, salt }) => {
     const items = collection.backfill.map(content => (
-        <MediaCardC content={content} salt={salt} />
+        <MediaCardC
+            headline={content.header.headline}
+            cardUrl={content.properties.webUrl}
+            imageSrc={
+                content.properties.maybeContent
+                    ? content.properties.maybeContent.trail.trailPicture
+                          .allImages[0].url
+                    : null
+            }
+            imageAlt={content.header.headline}
+            imageSalt={salt}
+            imageRating={content.card.starRating}
+        />
     ));
 
     return (
