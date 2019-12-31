@@ -7,6 +7,7 @@ import { Heading } from "../../../../components/Heading";
 import { DefaultGrid } from "../../../../layout/Grid";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { palette } from "@guardian/src-foundations";
+import { kickerText } from "../../../../kicker";
 
 export const TopCollection: React.FC<{
     collection: ICollection;
@@ -32,8 +33,35 @@ export const TopCollection: React.FC<{
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
             <DefaultCard
-                content={firstCollection}
-                salt={salt}
+                headline={firstCollection.header.headline}
+                cardUrl={firstCollection.properties.webUrl}
+                isComment={firstCollection.display.showQuotedHeadline}
+                imageSrc={
+                    firstCollection.properties.maybeContent
+                        ? firstCollection.properties.maybeContent.trail
+                              .trailPicture.allImages[0].url
+                        : null
+                }
+                imageAlt={firstCollection.header.headline}
+                imageSalt={salt}
+                imageRating={firstCollection.card.starRating}
+                byline={
+                    firstCollection.properties.showByline &&
+                    firstCollection.properties.byline
+                        ? firstCollection.properties.byline
+                        : null
+                }
+                kicker={
+                    firstCollection.header.kicker
+                        ? kickerText(firstCollection.header.kicker)
+                        : ""
+                }
+                pillar={
+                    firstCollection.properties.maybeContent
+                        ? firstCollection.properties.maybeContent.metadata
+                              .pillar.name
+                        : null
+                }
                 size="large"
                 designName="border"
             />
@@ -52,8 +80,35 @@ export const TopCollection: React.FC<{
             )}
             <Padding px={12} />
             <DefaultCard
-                content={thirdCollection}
-                salt={salt}
+                headline={thirdCollection.header.headline}
+                cardUrl={thirdCollection.properties.webUrl}
+                isComment={thirdCollection.display.showQuotedHeadline}
+                imageSrc={
+                    thirdCollection.properties.maybeContent
+                        ? thirdCollection.properties.maybeContent.trail
+                              .trailPicture.allImages[0].url
+                        : null
+                }
+                imageAlt={thirdCollection.header.headline}
+                imageSalt={salt}
+                imageRating={thirdCollection.card.starRating}
+                byline={
+                    thirdCollection.properties.showByline &&
+                    thirdCollection.properties.byline
+                        ? thirdCollection.properties.byline
+                        : null
+                }
+                kicker={
+                    thirdCollection.header.kicker
+                        ? kickerText(thirdCollection.header.kicker)
+                        : ""
+                }
+                pillar={
+                    thirdCollection.properties.maybeContent
+                        ? thirdCollection.properties.maybeContent.metadata
+                              .pillar.name
+                        : null
+                }
                 size="large"
                 designName="border"
             />
