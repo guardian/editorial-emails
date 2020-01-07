@@ -1,8 +1,6 @@
 import React from "react";
 import { TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-// import { Content } from "../../api";
-// import { formatImage } from "../../image";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
 import { Padding } from "../../layout/Padding";
 import { Image } from "../../components/Image";
@@ -27,8 +25,6 @@ interface Props {
     imageSalt?: string;
 }
 
-// const brazeParameter = "?##braze_utm##";
-
 export const MediaCardB: React.FC<Props> = ({
     headline,
     cardUrl,
@@ -37,20 +33,6 @@ export const MediaCardB: React.FC<Props> = ({
     imageRating = 1,
     imageSalt
 }) => {
-    // const image =
-    //     content.properties.maybeContent.trail.trailPicture.allImages[0];
-    // const formattedImage = formatImage(
-    //     image.url,
-    //     salt,
-    //     579,
-    //     content.card.starRating
-    // );
-
-    // const headline = content.header.headline;
-    // const webURL = content.properties.webUrl + brazeParameter;
-    // const imageURL = formattedImage;
-    // const imageAlt = content.header.headline;
-
     return (
         <TableRowCell tdStyle={tdStyle}>
             <Table>
