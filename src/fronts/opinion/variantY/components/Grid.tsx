@@ -28,34 +28,27 @@ export const Grid: React.FC<CommentGridProps> = ({
     shouldShowGridImages
 }) => {
     const rows = partition(content, 2).map((pair, i) => {
-        const hasContributor = pair.find(content => {
-            const contributor = getContributor(content);
-            if (!contributor) {
-                return false;
-            }
-
-            return contributor.properties.contributorLargeImagePath;
-        });
-
-        const pair0Contributor = getContributor(pair[0]);
-        const pair0ContributorImg = pair0Contributor
-            ? pair0Contributor.properties.contributorLargeImagePath
+        const leftPair = pair[0];
+        const leftContributor = getContributor(leftPair);
+        const leftContributorImg = leftContributor
+            ? leftContributor.properties.contributorLargeImagePath
             : null;
         const contributorLeftWrapper = (
             <ContributorImageWrapper
-                contributorImageSrc={pair0ContributorImg}
+                contributorImageSrc={leftContributorImg}
                 contributorImageAlt=""
                 imageSalt={salt}
             />
         );
 
-        const pair1Contributor = getContributor(pair[1]);
-        const pair1ContributorImg = pair1Contributor
-            ? pair1Contributor.properties.contributorLargeImagePath
+        const rightPair = pair[1];
+        const rightContributor = getContributor(rightPair);
+        const rightContributorImg = rightContributor
+            ? rightContributor.properties.contributorLargeImagePath
             : null;
         const contributorRightWrapper = (
             <ContributorImageWrapper
-                contributorImageSrc={pair1ContributorImg}
+                contributorImageSrc={rightContributorImg}
                 contributorImageAlt=""
                 imageSalt={salt}
             />
@@ -73,40 +66,40 @@ export const Grid: React.FC<CommentGridProps> = ({
                 <GridRow
                     left={
                         <CommentCardB
-                            headline={pair[0].header.headline}
-                            byline={pair[0].properties.byline}
-                            trailText={pair[0].card.trailText}
-                            cardUrl={pair[0].properties.webUrl}
+                            headline={leftPair.header.headline}
+                            byline={leftPair.properties.byline}
+                            trailText={leftPair.card.trailText}
+                            cardUrl={leftPair.properties.webUrl}
                             imageSrc={
-                                pair[0].properties.maybeContent
-                                    ? pair[0].properties.maybeContent.trail
+                                leftPair.properties.maybeContent
+                                    ? leftPair.properties.maybeContent.trail
                                           .trailPicture.allImages[0].url
                                     : null
                             }
-                            imageAlt={pair[0].header.headline}
-                            imageRating={pair[0].card.starRating}
+                            imageAlt={leftPair.header.headline}
+                            imageRating={leftPair.card.starRating}
                             imageSalt={salt}
-                            isComment={pair[0].header.isComment}
+                            isComment={leftPair.header.isComment}
                             size={"small"}
                             shouldShowImage={shouldShowGridImages}
                         />
                     }
                     right={
                         <CommentCardB
-                            headline={pair[1].header.headline}
-                            byline={pair[1].properties.byline}
-                            trailText={pair[1].card.trailText}
-                            cardUrl={pair[1].properties.webUrl}
+                            headline={rightPair.header.headline}
+                            byline={rightPair.properties.byline}
+                            trailText={rightPair.card.trailText}
+                            cardUrl={rightPair.properties.webUrl}
                             imageSrc={
-                                pair[1].properties.maybeContent
-                                    ? pair[1].properties.maybeContent.trail
+                                rightPair.properties.maybeContent
+                                    ? rightPair.properties.maybeContent.trail
                                           .trailPicture.allImages[0].url
                                     : null
                             }
-                            imageAlt={pair[1].header.headline}
-                            imageRating={pair[1].card.starRating}
+                            imageAlt={rightPair.header.headline}
+                            imageRating={rightPair.card.starRating}
                             imageSalt={salt}
-                            isComment={pair[1].header.isComment}
+                            isComment={rightPair.header.isComment}
                             size={"small"}
                             shouldShowImage={shouldShowGridImages}
                         />
@@ -114,7 +107,7 @@ export const Grid: React.FC<CommentGridProps> = ({
                     leftStyles={{ backgroundColor: palette.opinion.faded }}
                     rightStyles={{ backgroundColor: palette.opinion.faded }}
                 />
-                {hasContributor && (
+                {(leftPair || rightPair) && (
                     <GridRow
                         left={contributor(contributorLeftWrapper)}
                         right={contributor(contributorRightWrapper)}

@@ -4,6 +4,7 @@ import { Padding } from "../../../../layout/Padding";
 import { Heading } from "./../../../../components/Heading";
 import { Multiline } from "./../../../../components/Multiline";
 import { CommentCardC } from "../../../../components/cards/CommentCardC";
+import { Content, Tag } from "../../../../api";
 import { Grid as CommentGrid } from "./Grid";
 
 const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
