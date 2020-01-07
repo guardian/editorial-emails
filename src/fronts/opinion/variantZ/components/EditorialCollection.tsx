@@ -17,10 +17,22 @@ export const EditorialCollection: React.FC<{
             <Heading heading={collection.displayName} />
 
             <CommentCardC
-                content={contentOne}
-                salt={salt}
-                size={"large"}
-                shouldShowImage={true}
+                headline={contentOne.header.headline}
+                byline={contentOne.properties.byline}
+                trailText={contentOne.card.trailText}
+                cardUrl={contentOne.properties.webUrl}
+                imageSrc={
+                    contentOne.properties.maybeContent
+                        ? contentOne.properties.maybeContent.trail.trailPicture
+                              .allImages[0].url
+                        : null
+                }
+                imageAlt={contentOne.header.headline}
+                imageRating={contentOne.card.starRating}
+                imageSalt={salt}
+                isComment={contentOne.header.isComment}
+                size="large"
+                shouldShowImage
             />
         </>
     );

@@ -7,7 +7,6 @@ import { GridRow, partition } from "../../../../layout/Grid";
 import {
     CommentCardC,
     ContributorImageWrapper
-    // getContributor
 } from "../../../../components/cards/CommentCardC";
 import { LinkCardC } from "../../../../components/cards/LinkCardC";
 
@@ -38,25 +37,25 @@ export const Grid: React.FC<CommentGridProps> = ({
             return contributor.properties.contributorLargeImagePath;
         });
 
-        const contributorLeft = getContributor(pair[0]);
-        const contributorLeftImageSrc = contributorLeft
-            ? contributorLeft.properties.contributorLargeImagePath
+        const pair0Contributor = getContributor(pair[0]);
+        const pair0ContributorImg = pair0Contributor
+            ? pair0Contributor.properties.contributorLargeImagePath
             : null;
         const contributorLeftWrapper = (
             <ContributorImageWrapper
-                contributorImageSrc={contributorLeftImageSrc}
+                contributorImageSrc={pair0ContributorImg}
                 contributorImageAlt=""
                 imageSalt={salt}
             />
         );
 
-        const contributorRight = getContributor(pair[0]);
-        const contributorRightImageSrc = contributorRight
-            ? contributorRight.properties.contributorLargeImagePath
+        const pair1Contributor = getContributor(pair[1]);
+        const pair1ContributorImg = pair1Contributor
+            ? pair1Contributor.properties.contributorLargeImagePath
             : null;
         const contributorRightWrapper = (
             <ContributorImageWrapper
-                contributorImageSrc={contributorRightImageSrc}
+                contributorImageSrc={pair1ContributorImg}
                 contributorImageAlt=""
                 imageSalt={salt}
             />
@@ -74,17 +73,41 @@ export const Grid: React.FC<CommentGridProps> = ({
                 <GridRow
                     left={
                         <CommentCardC
-                            content={pair[0]}
-                            salt={salt}
-                            size={"small"}
+                            headline={pair[0].header.headline}
+                            byline={pair[0].properties.byline}
+                            trailText={pair[0].card.trailText}
+                            cardUrl={pair[0].properties.webUrl}
+                            imageSrc={
+                                pair[0].properties.maybeContent
+                                    ? pair[0].properties.maybeContent.trail
+                                          .trailPicture.allImages[0].url
+                                    : null
+                            }
+                            imageAlt={pair[0].header.headline}
+                            imageRating={pair[0].card.starRating}
+                            imageSalt={salt}
+                            isComment={pair[0].header.isComment}
+                            size="small"
                             shouldShowImage={shouldShowGridImages}
                         />
                     }
                     right={
                         <CommentCardC
-                            content={pair[1]}
-                            salt={salt}
-                            size={"small"}
+                            headline={pair[1].header.headline}
+                            byline={pair[1].properties.byline}
+                            trailText={pair[1].card.trailText}
+                            cardUrl={pair[1].properties.webUrl}
+                            imageSrc={
+                                pair[1].properties.maybeContent
+                                    ? pair[1].properties.maybeContent.trail
+                                          .trailPicture.allImages[0].url
+                                    : null
+                            }
+                            imageAlt={pair[1].header.headline}
+                            imageRating={pair[1].card.starRating}
+                            imageSalt={salt}
+                            isComment={pair[1].header.isComment}
+                            size="small"
                             shouldShowImage={shouldShowGridImages}
                         />
                     }

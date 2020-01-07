@@ -1,8 +1,6 @@
 import React from "react";
 import { FontCSS, TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content, Tag } from "../../api";
-import { formatImage } from "../../image";
 import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell, TableRow } from "../../layout/Table";
 import { Headline } from "../../components/Headline";
@@ -44,8 +42,6 @@ const columnStyleRight: TdCSS = {
     padding: "0"
 };
 
-// const brazeParameter = "?##braze_utm##";
-
 const TrailText: React.FC<{
     text: string;
     linkTo: string;
@@ -72,7 +68,6 @@ const ContributorImage: React.FC<{
         return null;
     }
 
-    // const formattedImage = formatImage(src, salt, width);
     return (
         <Image src={src} width={width} alt={alt} pillar="Opinion" ignoreWidth />
     );
@@ -138,8 +133,6 @@ const SupplementaryMeta: React.FC<{
 };
 
 interface Props {
-    // content: Content;
-    // salt: string;
     headline: string;
     byline: string;
     trailText: string;
@@ -156,8 +149,6 @@ interface Props {
 }
 
 export const CommentCardB: React.FC<Props> = ({
-    // content,
-    // salt,
     headline,
     byline,
     trailText,
@@ -172,30 +163,6 @@ export const CommentCardB: React.FC<Props> = ({
     size,
     shouldShowImage
 }) => {
-    // const image =
-    //     content.properties.maybeContent.trail.trailPicture.allImages[0];
-    // const formattedImage = formatImage(
-    //     image.url,
-    //     salt,
-    //     size === "large" ? 600 : 300,
-    //     content.card.starRating
-    // );
-
-    // const headline = content.header.headline;
-    // const byline = content.properties.byline;
-    // const webURL = content.properties.webUrl + brazeParameter;
-    // const imageURL = formattedImage;
-    // const imageAlt = content.header.headline;
-    // const showQuotation = content.header.isComment;
-
-    // const contributor = content.properties.maybeContent.tags.tags.find(tag => {
-    //     return tag.properties.tagType === "Contributor";
-    // });
-
-    // const profilePic = contributor
-    //     ? contributor.properties.contributorLargeImagePath
-    //     : null;
-
     const sanitisedTrailText = sanitizeHtml(trailText, {
         allowedTags: []
     });
@@ -244,17 +211,14 @@ export const CommentCardB: React.FC<Props> = ({
 };
 
 export const ContributorImageWrapper: React.FC<{
-    // content: Content;
     contributorImageSrc: string;
     contributorImageAlt: string;
     imageSalt: string;
 }> = ({ contributorImageSrc, contributorImageAlt, imageSalt }) => {
-    // const contributor = getContributor(content);
-    // if (!contributor) {
-    //     return null;
-    // }
+    if (!contributorImageSrc) {
+        return null;
+    }
 
-    // const profilePic = contributor.properties.contributorLargeImagePath || null;
     return (
         <ContributorImage
             src={contributorImageSrc}

@@ -72,22 +72,52 @@ export const Grid: React.FC<CommentGridProps> = ({
         return (
             <React.Fragment key={i}>
                 <GridRow
-                    left={
-                        <CommentCardB
-                            content={pair[0]}
-                            salt={salt}
-                            size={"small"}
-                            shouldShowImage={shouldShowGridImages}
-                        />
-                    }
-                    right={
-                        <CommentCardB
-                            content={pair[1]}
-                            salt={salt}
-                            size={"small"}
-                            shouldShowImage={shouldShowGridImages}
-                        />
-                    }
+                    left={() => {
+                        const content = pair[0];
+                        return (
+                            <CommentCardB
+                                headline={content.header.headline}
+                                byline={content.properties.byline}
+                                trailText={content.card.trailText}
+                                cardUrl={content.properties.webUrl}
+                                imageSrc={
+                                    content.properties.maybeContent
+                                        ? content.properties.maybeContent.trail
+                                              .trailPicture.allImages[0].url
+                                        : null
+                                }
+                                imageAlt={content.header.headline}
+                                imageRating={content.card.starRating}
+                                imageSalt={salt}
+                                isComment={content.header.isComment}
+                                size="small"
+                                shouldShowImage={shouldShowGridImages}
+                            />
+                        );
+                    }}
+                    right={() => {
+                        const content = pair[1];
+                        return (
+                            <CommentCardB
+                                headline={content.header.headline}
+                                byline={content.properties.byline}
+                                trailText={content.card.trailText}
+                                cardUrl={content.properties.webUrl}
+                                imageSrc={
+                                    content.properties.maybeContent
+                                        ? content.properties.maybeContent.trail
+                                              .trailPicture.allImages[0].url
+                                        : null
+                                }
+                                imageAlt={content.header.headline}
+                                imageRating={content.card.starRating}
+                                imageSalt={salt}
+                                isComment={content.header.isComment}
+                                size="small"
+                                shouldShowImage={shouldShowGridImages}
+                            />
+                        );
+                    }}
                     leftStyles={{ backgroundColor: palette.opinion.faded }}
                     rightStyles={{ backgroundColor: palette.opinion.faded }}
                 />
