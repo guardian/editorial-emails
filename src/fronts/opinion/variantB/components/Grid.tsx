@@ -2,12 +2,12 @@ import React from "react";
 import { palette } from "@guardian/src-foundations";
 import { TableRowCell, TableRow } from "../../../../layout/Table";
 import { Padding } from "../../../../layout/Padding";
-import { Content } from "../../../../api";
+import { Content, Tag } from "../../../../api";
 import { GridRow, partition } from "../../../../layout/Grid";
 import {
     CommentCardB,
-    ContributorImageWrapper,
-    getContributor
+    ContributorImageWrapper
+    // getContributor
 } from "../../../../components/cards/CommentCardB";
 import { LinkCardB } from "../../../../components/cards/LinkCardB";
 
@@ -16,6 +16,12 @@ interface CommentGridProps {
     salt: string;
     shouldShowGridImages: boolean;
 }
+
+const getContributor = (content: Content): Tag => {
+    return content.properties.maybeContent.tags.tags.find(tag => {
+        return tag.properties.tagType === "Contributor";
+    });
+};
 
 export const Grid: React.FC<CommentGridProps> = ({
     content,
@@ -32,12 +38,28 @@ export const Grid: React.FC<CommentGridProps> = ({
             return contributor.properties.contributorLargeImagePath;
         });
 
-        const contributorLeft = (
-            <ContributorImageWrapper content={pair[0]} salt={salt} />
+        const contributorLeft = getContributor(pair[0]);
+        const contributorLeftImageSrc = contributorLeft
+            ? contributorLeft.properties.contributorLargeImagePath
+            : null;
+        const contributorLeftWrapper = (
+            <ContributorImageWrapper
+                contributorImageSrc={contributorLeftImageSrc}
+                contributorImageAlt=""
+                imageSalt={salt}
+            />
         );
 
-        const contributorRight = (
-            <ContributorImageWrapper content={pair[1]} salt={salt} />
+        const contributorRight = getContributor(pair[0]);
+        const contributorRightImageSrc = contributorRight
+            ? contributorRight.properties.contributorLargeImagePath
+            : null;
+        const contributorRightWrapper = (
+            <ContributorImageWrapper
+                contributorImageSrc={contributorRightImageSrc}
+                contributorImageAlt=""
+                imageSalt={salt}
+            />
         );
 
         const contributor = (node: React.ReactNode): React.ReactNode => (
@@ -71,8 +93,8 @@ export const Grid: React.FC<CommentGridProps> = ({
                 />
                 {hasContributor && (
                     <GridRow
-                        left={contributor(contributorLeft)}
-                        right={contributor(contributorRight)}
+                        left={contributor(contributorLeftWrapper)}
+                        right={contributor(contributorRightWrapper)}
                         leftStyles={{
                             backgroundColor: palette.opinion.faded,
                             verticalAlign: "bottom"
@@ -114,8 +136,8 @@ export const LinkGrid: React.FC<LinkGridProps> = ({ content, salt }) => {
                 right={
                     pair[1] ? (
                         <LinkCardB
-                            headline={pair[0].header.headline}
-                            cardUrl={pair[0].properties.webUrl}
+                            headline={pair[1].header.headline}
+                            cardUrl={pair[1].properties.webUrl}
                             theme="light"
                         />
                     ) : null

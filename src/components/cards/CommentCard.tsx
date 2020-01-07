@@ -27,7 +27,7 @@ const metaWrapperStyle = (size: Size): TdCSS => {
     };
 };
 
-const standfirstStyle: TdCSS = {
+const trailTextStyle: TdCSS = {
     padding: "20px 10px 10px 10px",
     verticalAlign: "bottom"
 };
@@ -70,7 +70,7 @@ const TrailText: React.FC<{
     size: Size;
 }> = ({ text, linkURL }) => {
     return (
-        <td className="m-pad" style={standfirstStyle}>
+        <td className="m-pad" style={trailTextStyle}>
             <a style={linkStyle} href={linkURL}>
                 <span style={spanStyle}>{text}</span>
             </a>
