@@ -68,7 +68,6 @@ export const CommentCollection: React.FC<{
                 contributorImageAlt={
                     c0Contributor ? c0Contributor.properties.webTitle : null
                 }
-                shouldShowImage={false}
             />
             <Padding px={12} />
 
@@ -96,7 +95,6 @@ export const CommentCollection: React.FC<{
                 contributorImageAlt={
                     c1Contributor ? c1Contributor.properties.webTitle : null
                 }
-                shouldShowImage={false}
             />
             <Padding px={12} />
 
@@ -132,7 +130,6 @@ export const CommentCollection: React.FC<{
                 contributorImageAlt={
                     c6Contributor ? c6Contributor.properties.webTitle : null
                 }
-                shouldShowImage={false}
             />
             <Padding px={12} />
 
@@ -168,7 +165,6 @@ export const CommentCollection: React.FC<{
                     c9Contributor ? c9Contributor.properties.webTitle : null
                 }
                 size="large"
-                shouldShowImage={false}
             />
         </>
     );

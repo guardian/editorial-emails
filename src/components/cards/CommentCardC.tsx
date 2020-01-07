@@ -145,7 +145,7 @@ interface Props {
     contributorImageSrc?: string;
     contributorImageAlt?: string;
     size: "large" | "small";
-    shouldShowImage: boolean;
+    shouldShowImage?: boolean;
 }
 
 export const CommentCardC: React.FC<Props> = ({
@@ -161,7 +161,7 @@ export const CommentCardC: React.FC<Props> = ({
     contributorImageSrc,
     contributorImageAlt,
     size,
-    shouldShowImage
+    shouldShowImage = false
 }) => {
     const sanitisedTrailText = sanitizeHtml(trailText, {
         allowedTags: []
