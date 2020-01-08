@@ -30,7 +30,6 @@ interface Props {
     imageSrc?: string;
     imageAlt?: string;
     imageRating?: number;
-    imageSalt: string;
 }
 
 export const CommercialCard: React.FC<Props> = ({
@@ -38,14 +37,10 @@ export const CommercialCard: React.FC<Props> = ({
     cardUrl,
     imageSrc,
     imageAlt,
-    imageRating = 1,
-    imageSalt
+    imageRating = 1
 }) => {
     const imageSize = 580;
-    const imageUrl = imageSrc
-        ? // ? formatImage(imageSrc, imageSalt, imageSize, imageRating)
-          imageSrc
-        : null;
+    const imageUrl = imageSrc ? imageSrc : null;
 
     return (
         <TableRowCell tdStyle={outerTdStyle}>

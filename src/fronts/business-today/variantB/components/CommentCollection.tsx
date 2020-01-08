@@ -8,8 +8,7 @@ import { CommentCard } from "../../../../components/cards/CommentCard";
 
 export const CommentCollection: React.FC<{
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     const content = collection.curated.concat(collection.backfill);
     if (content.length < 1) {
         return null;
@@ -53,7 +52,6 @@ export const CommentCollection: React.FC<{
                                 : null
                         }
                         imageAlt={story.header.headline}
-                        imageSalt={salt}
                     />
                 );
             })}

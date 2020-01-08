@@ -21,10 +21,7 @@ export const defaultStory = () => {
                     cardUrl="https://www.theguardian.com/world/2020/jan/07/cyprus-case-british-teenager-given-suspended-sentence"
                     imageSrc="https://media.guim.co.uk/8befa81493c524e24a91b33880bb330d7b50a29b/0_41_5471_3282/master/5471.jpg"
                     imageAlt="Lorem ipsum dolor sit amet"
-                    imageSalt="Uz34q0qIkz"
-                    contributorImageSrc=""
-                    contributorImageAlt=""
-                    isComment={true}
+                    isComment
                     size="large"
                     shouldShowImage
                 />
@@ -48,10 +45,7 @@ export const smallStory = () => {
                     cardUrl="https://www.theguardian.com/world/2020/jan/07/cyprus-case-british-teenager-given-suspended-sentence"
                     imageSrc="https://media.guim.co.uk/8befa81493c524e24a91b33880bb330d7b50a29b/0_41_5471_3282/master/5471.jpg"
                     imageAlt="Lorem ipsum dolor sit amet"
-                    imageSalt="Uz34q0qIkz"
-                    contributorImageSrc=""
-                    contributorImageAlt=""
-                    isComment={true}
+                    isComment
                     size="small"
                     shouldShowImage
                 />
@@ -75,10 +69,7 @@ export const noImageStory = () => {
                     cardUrl="https://www.theguardian.com/world/2020/jan/07/cyprus-case-british-teenager-given-suspended-sentence"
                     imageSrc="https://media.guim.co.uk/8befa81493c524e24a91b33880bb330d7b50a29b/0_41_5471_3282/master/5471.jpg"
                     imageAlt="Lorem ipsum dolor sit amet"
-                    imageSalt="Uz34q0qIkz"
-                    contributorImageSrc=""
-                    contributorImageAlt=""
-                    isComment={true}
+                    isComment
                     size="small"
                 />
             </TableRowCell>

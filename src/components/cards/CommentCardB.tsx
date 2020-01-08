@@ -138,7 +138,6 @@ interface Props {
     imageSrc?: string;
     imageAlt?: string;
     imageRating?: number;
-    imageSalt?: string;
     contributorImageSrc?: string;
     contributorImageAlt?: string;
     size: "large" | "small";
@@ -154,7 +153,6 @@ export const CommentCardB: React.FC<Props> = ({
     imageSrc,
     imageAlt,
     imageRating = 1,
-    imageSalt,
     contributorImageSrc,
     contributorImageAlt,
     size,
@@ -193,7 +191,6 @@ export const CommentCardB: React.FC<Props> = ({
 
                 {size === "large" && (
                     <SupplementaryMeta
-                        salt={imageSalt}
                         trailText={sanitisedTrailText}
                         linkTo={`${cardUrl}?##braze_utm##`}
                         contributorImageSrc={contributorImageSrc}
@@ -210,8 +207,7 @@ export const CommentCardB: React.FC<Props> = ({
 export const ContributorImageWrapper: React.FC<{
     contributorImageSrc: string;
     contributorImageAlt: string;
-    imageSalt: string;
-}> = ({ contributorImageSrc, contributorImageAlt, imageSalt }) => {
+}> = ({ contributorImageSrc, contributorImageAlt }) => {
     if (!contributorImageSrc) {
         return null;
     }
@@ -219,7 +215,6 @@ export const ContributorImageWrapper: React.FC<{
         <ContributorImage
             src={contributorImageSrc}
             alt={contributorImageAlt}
-            salt={imageSalt}
             width={147}
         />
     );

@@ -46,7 +46,6 @@ export const InstagramCollection: React.FC<{
                                 : null
                         }
                         imageAlt={story.header.headline}
-                        imageSalt={salt}
                         imageRating={story.card.starRating}
                         kicker={
                             story.header.kicker

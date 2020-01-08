@@ -6,8 +6,7 @@ import { CommentCardB } from "../../../../components/cards/CommentCardB";
 
 export const EditorialCollection: React.FC<{
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     const contentOne = collection.backfill[0];
 
     // TODO
@@ -29,7 +28,6 @@ export const EditorialCollection: React.FC<{
                 }
                 imageAlt={contentOne.header.headline}
                 imageRating={contentOne.card.starRating}
-                imageSalt={salt}
                 isComment={contentOne.header.isComment}
                 size="large"
                 shouldShowImage

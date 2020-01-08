@@ -19,7 +19,6 @@ export const defaultStory = () => {
                     cardUrl="https://www.theguardian.com/uk-news/2019/dec/30/briton-found-guilty-over-ayia-napa-false-claim-cyprus"
                     imageSrc="https://media.guim.co.uk/8befa81493c524e24a91b33880bb330d7b50a29b/0_41_5471_3282/master/5471.jpg"
                     imageAlt="Lorem ipsum dolor sit amet"
-                    imageSalt="Uz34q0qIkz"
                 />
             </TableRowCell>
         </Center>

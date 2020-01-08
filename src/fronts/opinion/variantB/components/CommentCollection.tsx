@@ -10,8 +10,7 @@ import { palette } from "@guardian/src-foundations";
 export const CommentCollection: React.FC<{
     frontId: string;
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     const lightGrey = palette.neutral[97];
     const leadStory = collection.backfill[0];
     const bottomCollection = collection.backfill.slice(1);
@@ -46,7 +45,6 @@ export const CommentCollection: React.FC<{
                             : null
                     }
                     imageAlt={leadStory.header.headline}
-                    imageSalt={salt}
                 />
                 <Padding px={12} />
                 {bottomCollection.map((story, index) => {
@@ -63,7 +61,6 @@ export const CommentCollection: React.FC<{
                                               .pillar.name
                                         : null
                                 }
-                                imageSalt={salt}
                             />
                             {index < bottomCollection.length - 1 && (
                                 <Padding px={12} />

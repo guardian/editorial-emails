@@ -14,6 +14,7 @@ import { default as minifyCssString } from "minify-css-string";
 import { fontStyles } from "./styles/fonts";
 import { responsiveStyles } from "./styles/responsive-styles";
 import { TableRowCell } from "./layout/Table";
+import { ImageProvider } from "./ImageContext";
 
 enum Fronts {
     Opinion = "email/opinion",
@@ -106,13 +107,15 @@ export const Email = (front: Front, salt: string, variant?: string): string => {
     const pageTitle = getPageTitle(front);
 
     const body = renderToStaticMarkup(
-        <Center>
-            <TableRowCell>
-                <Banner title={pageTitle} frontId={front.id} imageSalt={salt} />
-                {renderFront(front, salt, variant)}
-                <Footer title={pageTitle} frontId={front.id} />
-            </TableRowCell>
-        </Center>
+        <ImageProvider value={{ imageSalt: salt }}>
+            <Center>
+                <TableRowCell>
+                    <Banner title={pageTitle} frontId={front.id} />
+                    {renderFront(front, salt, variant)}
+                    <Footer title={pageTitle} frontId={front.id} />
+                </TableRowCell>
+            </Center>
+        </ImageProvider>
     );
 
     const favicon =

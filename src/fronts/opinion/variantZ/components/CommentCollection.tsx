@@ -23,8 +23,7 @@ const getContributor = (content: Content): Tag => {
 export const CommentCollection: React.FC<{
     frontId: string;
     collection: ICollection;
-    salt: string;
-}> = ({ frontId, collection, salt }) => {
+}> = ({ frontId, collection }) => {
     // TODO handle curated collections
 
     const c0 = collection.backfill[0];
@@ -57,7 +56,6 @@ export const CommentCollection: React.FC<{
                 }
                 imageAlt={c0.header.headline}
                 imageRating={c0.card.starRating}
-                imageSalt={salt}
                 isComment={c0.header.isComment}
                 size="large"
                 contributorImageSrc={
@@ -84,7 +82,6 @@ export const CommentCollection: React.FC<{
                 }
                 imageAlt={c1.header.headline}
                 imageRating={c1.card.starRating}
-                imageSalt={salt}
                 isComment={c1.header.isComment}
                 size="large"
                 contributorImageSrc={
@@ -100,7 +97,6 @@ export const CommentCollection: React.FC<{
 
             <CommentGrid
                 content={grid_2_5}
-                salt={salt}
                 shouldShowGridImages={frontIdShouldShowCommentGridImages(
                     frontId
                 )}
@@ -119,7 +115,6 @@ export const CommentCollection: React.FC<{
                 }
                 imageAlt={c6.header.headline}
                 imageRating={c6.card.starRating}
-                imageSalt={salt}
                 isComment={c6.header.isComment}
                 size="large"
                 contributorImageSrc={
@@ -135,7 +130,6 @@ export const CommentCollection: React.FC<{
 
             <CommentGrid
                 content={grid_7_8}
-                salt={salt}
                 shouldShowGridImages={frontIdShouldShowCommentGridImages(
                     frontId
                 )}
@@ -154,7 +148,6 @@ export const CommentCollection: React.FC<{
                 }
                 imageAlt={c9.header.headline}
                 imageRating={c9.card.starRating}
-                imageSalt={salt}
                 isComment={c9.header.isComment}
                 contributorImageSrc={
                     c9Contributor

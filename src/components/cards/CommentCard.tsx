@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FontCSS, TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Pillar } from "../../api";
@@ -9,6 +9,7 @@ import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline } from "../../styles/typography";
 import { pillarProps } from "../../utils/pillarProps";
+import ImageContext from "../../ImageContext";
 
 type Size = "small" | "large";
 
@@ -59,7 +60,6 @@ interface Props {
     pillar?: Pillar;
     imageSrc?: string;
     imageAlt?: string;
-    imageSalt?: string;
 }
 
 const TrailText: React.FC<{
@@ -76,14 +76,21 @@ const TrailText: React.FC<{
 
 const ContributorImage: React.FC<{
     src: string;
-    salt: string;
     width: number;
     alt: string;
-}> = ({ src, salt, width, alt }) => {
+}> = ({ src, width, alt }) => {
     if (!src) {
         return null;
     }
-    return <Image src={src} width={width} alt={alt} ignoreWidth />;
+
+    const { imageSalt } = useContext(ImageContext);
+    const formattedImageSrc = imageSalt
+        ? formatImage(src, imageSalt, width)
+        : src;
+
+    return (
+        <Image src={formattedImageSrc} width={width} alt={alt} ignoreWidth />
+    );
 };
 
 // TODO make testable, and also separate layout logic from individual components
@@ -95,21 +102,18 @@ const SupplementaryMeta: React.FC<{
     contributorImageAlt?: string;
     size: Size;
     width: number;
-    salt: string;
 }> = ({
     trailText,
     linkURL,
     contributorImageSrc,
     contributorImageAlt,
     size,
-    width,
-    salt
+    width
 }) => {
     const contributorImage = (
         <td style={columnStyleRight}>
             <ContributorImage
                 width={width}
-                salt={salt}
                 src={contributorImageSrc}
                 alt={contributorImageAlt}
             />
@@ -155,12 +159,12 @@ export const CommentCard: React.FC<Props> = ({
     shouldShowProfileImage = false,
     pillar,
     imageSrc,
-    imageAlt,
-    imageSalt
+    imageAlt
 }) => {
     const sanitisedTrailText = sanitizeHtml(trailText, {
         allowedTags: []
     });
+
     return (
         <TableRowCell tdStyle={tdStyle(pillar)}>
             <Table>
@@ -179,7 +183,6 @@ export const CommentCard: React.FC<Props> = ({
 
                 {size === "large" && shouldShowProfileImage && (
                     <SupplementaryMeta
-                        salt={imageSalt}
                         trailText={sanitisedTrailText}
                         linkURL={`${cardUrl}?##braze_utm##`}
                         contributorImageSrc={imageSrc}

@@ -13,7 +13,6 @@ import { LinkCardB } from "../../../../components/cards/LinkCardB";
 
 interface CommentGridProps {
     content: Content[];
-    salt: string;
     shouldShowGridImages: boolean;
 }
 
@@ -25,7 +24,6 @@ const getContributor = (content: Content): Tag => {
 
 export const Grid: React.FC<CommentGridProps> = ({
     content,
-    salt,
     shouldShowGridImages
 }) => {
     const rows = partition(content, 2).map((pair, i) => {
@@ -46,7 +44,6 @@ export const Grid: React.FC<CommentGridProps> = ({
             <ContributorImageWrapper
                 contributorImageSrc={contributorLeftImageSrc}
                 contributorImageAlt=""
-                imageSalt={salt}
             />
         );
 
@@ -58,7 +55,6 @@ export const Grid: React.FC<CommentGridProps> = ({
             <ContributorImageWrapper
                 contributorImageSrc={contributorRightImageSrc}
                 contributorImageAlt=""
-                imageSalt={salt}
             />
         );
 
@@ -88,7 +84,6 @@ export const Grid: React.FC<CommentGridProps> = ({
                                 }
                                 imageAlt={content.header.headline}
                                 imageRating={content.card.starRating}
-                                imageSalt={salt}
                                 isComment={content.header.isComment}
                                 size="small"
                                 shouldShowImage={shouldShowGridImages}
@@ -111,7 +106,6 @@ export const Grid: React.FC<CommentGridProps> = ({
                                 }
                                 imageAlt={content.header.headline}
                                 imageRating={content.card.starRating}
-                                imageSalt={salt}
                                 isComment={content.header.isComment}
                                 size="small"
                                 shouldShowImage={shouldShowGridImages}
@@ -146,12 +140,9 @@ export const Grid: React.FC<CommentGridProps> = ({
 
 interface LinkGridProps {
     content: Content[];
-    salt: string;
 }
 
-// TODO really should accept a React element so that it doesn't have to know
-// about Card or salt.
-export const LinkGrid: React.FC<LinkGridProps> = ({ content, salt }) => {
+export const LinkGrid: React.FC<LinkGridProps> = ({ content }) => {
     const rowsArray = partition(content, 2);
     const rows = rowsArray.map((pair, index) => (
         <React.Fragment key={index}>

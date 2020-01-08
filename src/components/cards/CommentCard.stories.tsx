@@ -45,7 +45,6 @@ export const largeCardImageStory = () => {
                     pillar="News"
                     imageSrc="https://i.guim.co.uk/img/uploads/2017/10/06/Larry-Elliott,-R.png?quality=45&sharpen=a0.8,r1,t1&width=180&dpr=2&fit=max&s=0adc71804ca8c83699337f365917aaae"
                     imageAlt="Lorem ipsum dolor sit amet"
-                    imageSalt="Uz34q0qIkz"
                 />
             </TableRowCell>
         </Center>
