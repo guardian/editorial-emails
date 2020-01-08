@@ -52,7 +52,6 @@ export const TopCollection: React.FC<{
                 imageSalt={salt}
                 imageRating={leadStory.card.starRating}
                 backgroundColor={white}
-                layout="expanded"
                 isLive={leadStory.card.isLive}
             />
 

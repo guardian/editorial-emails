@@ -76,6 +76,7 @@ export const DefaultCollection: React.FC<{
                         ? kickerText(lastContent.header.kicker)
                         : ""
                 }
+                borderWidth="thick"
                 backgroundColor={palette.culture.faded}
             />
         </>

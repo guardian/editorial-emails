@@ -31,10 +31,11 @@ export const CommentCollection: React.FC<{
                 <CommentCard
                     headline={leadStory.header.headline}
                     byline={leadStory.properties.byline}
+                    trailText={leadStory.card.trailText}
                     cardUrl={leadStory.properties.webUrl}
                     isComment={leadStory.header.isComment}
-                    trailText={leadStory.card.trailText}
                     size="large"
+                    shouldShowProfileImage
                     pillar={
                         leadStory.properties.maybeContent.metadata.pillar.name
                     }
