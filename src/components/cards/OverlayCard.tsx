@@ -71,74 +71,67 @@ export const OverlayCard: React.FC<Props> = ({
     imageSalt,
     layout = "compact",
     isLive = false
-}) => {
-    return (
-        <TableRowCell tdStyle={tdStyle(backgroundColor)}>
-            <Table>
-                {imageSrc && (
-                    <tr>
-                        {/*
-                    // @ts-ignore as JSX expects 'colSpan' but HTML only validates if used as 'colspan' */}
-                        <td
-                            colspan={layout === "compact" ? null : 2}
-                            style={{ padding: 0 }}
-                        >
-                            <Image
-                                src={imageSrc}
-                                alt={imageAlt}
-                                width={600}
-                                pillar={pillar}
-                                linkTo={`${cardUrl}?##braze_utm##`}
-                            />
-                        </td>
-                    </tr>
-                )}
-
+}) => (
+    <TableRowCell tdStyle={tdStyle(backgroundColor)}>
+        <Table>
+            {imageSrc && (
                 <tr>
+                    {/*
+                    // @ts-ignore as JSX expects 'colSpan' but HTML only validates if used as 'colspan' */}
                     <td
-                        className="m-pad"
-                        style={headlineCellStyle(isLive, pillar)}
+                        colspan={layout === "compact" ? null : 2}
+                        style={{ padding: 0 }}
                     >
-                        <Headline
-                            text={headline}
-                            linkTo={`${cardUrl}?##braze_utm##`}
-                            size="large"
+                        <Image
+                            src={imageSrc}
+                            alt={imageAlt}
+                            width={600}
                             pillar={pillar}
-                            shouldUseWhite
-                            kicker={kicker}
-                            isLive={isLive}
-                            showQuotation={isComment}
+                            linkTo={`${cardUrl}?##braze_utm##`}
                         />
                     </td>
-                    {layout !== "compact" && (
-                        <td style={blankCellStyle}>&nbsp;</td>
-                    )}
                 </tr>
+            )}
 
-                {layout !== "compact" && (
-                    <tr>
-                        {/*
+            <tr>
+                <td className="m-pad" style={headlineCellStyle(isLive, pillar)}>
+                    <Headline
+                        text={headline}
+                        linkTo={`${cardUrl}?##braze_utm##`}
+                        size="large"
+                        pillar={pillar}
+                        shouldUseWhite
+                        kicker={kicker}
+                        isLive={isLive}
+                        showQuotation={isComment}
+                    />
+                </td>
+                {layout !== "compact" && <td style={blankCellStyle}>&nbsp;</td>}
+            </tr>
+
+            {layout !== "compact" && (
+                <tr>
+                    {/*
                     // @ts-ignore as JSX expects 'colSpan' but HTML only validates if used as 'colspan' */}
-                        <td
-                            colspan={2}
-                            className="m-col-pad"
-                            style={trailTextPadding(isLive)}
-                        >
-                            {!isLive && (
-                                <span
-                                    style={trailTextStyle}
-                                    dangerouslySetInnerHTML={{
-                                        __html: sanitizeHtml(
-                                            trailText,
-                                            sanitizeOptions
-                                        )
-                                    }}
-                                />
-                            )}
-                        </td>
-                    </tr>
-                )}
-            </Table>
-        </TableRowCell>
-    );
-};
+                    <td
+                        colspan={2}
+                        className="m-col-pad"
+                        style={trailTextPadding(isLive)}
+                    >
+                        {!isLive && (
+                            <span
+                                style={trailTextStyle}
+                                dangerouslySetInnerHTML={{
+                                    __html: sanitizeHtml(
+                                        trailText,
+                                        sanitizeOptions
+                                    )
+                                }}
+                            />
+                        )}
+                    </td>
+                </tr>
+            )}
+        </Table>
+    </TableRowCell>
+);

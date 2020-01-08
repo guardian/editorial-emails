@@ -32,24 +32,22 @@ export const MediaCardB: React.FC<Props> = ({
     imageAlt,
     imageRating = 1,
     imageSalt
-}) => {
-    return (
-        <TableRowCell tdStyle={tdStyle}>
-            <Table>
-                <RowCell tdStyle={tdHeadlineStyle}>{headline}</RowCell>
-                <RowCell>
-                    <Padding px={20} />
-                </RowCell>
-                <RowCell tdStyle={{ padding: "0" }}>
-                    <Image
-                        src={imageSrc}
-                        linkTo={`${cardUrl}?##braze_utm##`}
-                        alt={imageAlt}
-                        width={580}
-                        pillar="Opinion"
-                    />
-                </RowCell>
-            </Table>
-        </TableRowCell>
-    );
-};
+}) => (
+    <TableRowCell tdStyle={tdStyle}>
+        <Table>
+            <RowCell tdStyle={tdHeadlineStyle}>{headline}</RowCell>
+            <RowCell>
+                <Padding px={20} />
+            </RowCell>
+            <RowCell tdStyle={{ padding: "0" }}>
+                <Image
+                    src={imageSrc}
+                    linkTo={`${cardUrl}?##braze_utm##`}
+                    alt={imageAlt}
+                    width={580}
+                    pillar="Opinion"
+                />
+            </RowCell>
+        </Table>
+    </TableRowCell>
+);

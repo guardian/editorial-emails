@@ -85,43 +85,41 @@ export const DefaultCard: React.FC<Props> = ({
     designName = "background",
     isInsideGrid = false,
     backgroundColor
-}) => {
-    return (
-        <TableRowCell
-            tableStyle={{ height: "100%" }}
-            tdStyle={tdStyle(designName, isInsideGrid, pillar, backgroundColor)}
-        >
-            <Table tableStyle={{ height: "100%" }}>
-                {imageSrc && (
-                    <RowCell>
-                        <Image
-                            src={imageSrc}
-                            alt={imageAlt}
-                            width={size === "large" ? 600 : 294}
-                            pillar={pillar}
-                            linkTo={`${cardUrl}?##braze_utm##`}
-                        />
-                    </RowCell>
-                )}
+}) => (
+    <TableRowCell
+        tableStyle={{ height: "100%" }}
+        tdStyle={tdStyle(designName, isInsideGrid, pillar, backgroundColor)}
+    >
+        <Table tableStyle={{ height: "100%" }}>
+            {imageSrc && (
+                <RowCell>
+                    <Image
+                        src={imageSrc}
+                        alt={imageAlt}
+                        width={size === "large" ? 600 : 294}
+                        pillar={pillar}
+                        linkTo={`${cardUrl}?##braze_utm##`}
+                    />
+                </RowCell>
+            )}
 
-                <tr style={{ verticalAlign: "top" }}>
-                    <td className="m-pad" style={metaWrapperStyle(size)}>
-                        <Headline
-                            text={headline}
-                            linkTo={`${cardUrl}?##braze_utm##`}
-                            size={size}
-                            pillar={pillar}
-                            kicker={kicker}
-                            byline={byline}
-                            showQuotation={isComment}
-                        />
-                    </td>
-                </tr>
+            <tr style={{ verticalAlign: "top" }}>
+                <td className="m-pad" style={metaWrapperStyle(size)}>
+                    <Headline
+                        text={headline}
+                        linkTo={`${cardUrl}?##braze_utm##`}
+                        size={size}
+                        pillar={pillar}
+                        kicker={kicker}
+                        byline={byline}
+                        showQuotation={isComment}
+                    />
+                </td>
+            </tr>
 
-                <tr>
-                    <td className="m-col-pad" style={bottomPaddingStyle}></td>
-                </tr>
-            </Table>
-        </TableRowCell>
-    );
-};
+            <tr>
+                <td className="m-col-pad" style={bottomPaddingStyle}></td>
+            </tr>
+        </Table>
+    </TableRowCell>
+);

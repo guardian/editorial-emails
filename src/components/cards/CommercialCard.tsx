@@ -1,7 +1,6 @@
 import React from "react";
 import { TdCSS, FontCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content } from "../../api";
 import { formatImage } from "../../image";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
 import { Image } from "../../components/Image";
@@ -42,9 +41,8 @@ export const CommercialCard: React.FC<Props> = ({
     imageRating = 1,
     imageSalt
 }) => {
-    var imageSize = 580;
-
-    let imageUrl = imageSrc
+    const imageSize = 580;
+    const imageUrl = imageSrc
         ? // ? formatImage(imageSrc, imageSalt, imageSize, imageRating)
           imageSrc
         : null;

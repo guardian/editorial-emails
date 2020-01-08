@@ -46,16 +46,14 @@ const TrailText: React.FC<{
     text: string;
     linkTo: string;
     size: Size;
-}> = ({ text, linkTo, size }) => {
-    return (
-        <td className="m-pad" style={trailTextStyle}>
-            <a style={linkStyle} href={linkTo}>
-                {" "}
-                <span style={spanStyle}>{text}</span>
-            </a>
-        </td>
-    );
-};
+}> = ({ text, linkTo, size }) => (
+    <td className="m-pad" style={trailTextStyle}>
+        <a style={linkStyle} href={linkTo}>
+            {" "}
+            <span style={spanStyle}>{text}</span>
+        </a>
+    </td>
+);
 
 // TODO add alt text
 const ContributorImage: React.FC<{
@@ -67,7 +65,6 @@ const ContributorImage: React.FC<{
     if (!src) {
         return null;
     }
-
     return (
         <Image src={src} width={width} alt={alt} pillar="Opinion" ignoreWidth />
     );
@@ -217,7 +214,6 @@ export const ContributorImageWrapper: React.FC<{
     if (!contributorImageSrc) {
         return null;
     }
-
     return (
         <ContributorImage
             src={contributorImageSrc}

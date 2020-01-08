@@ -1,7 +1,7 @@
 import React from "react";
 import { FontCSS, TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content, Tag, Pillar } from "../../api";
+import { Pillar } from "../../api";
 import { formatImage } from "../../image";
 import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell, TableRow } from "../../layout/Table";
@@ -62,21 +62,17 @@ interface Props {
     imageSalt?: string;
 }
 
-// const brazeParameter = "?##braze_utm##";
-
 const TrailText: React.FC<{
     text: string;
     linkURL: string;
     size: Size;
-}> = ({ text, linkURL }) => {
-    return (
-        <td className="m-pad" style={trailTextStyle}>
-            <a style={linkStyle} href={linkURL}>
-                <span style={spanStyle}>{text}</span>
-            </a>
-        </td>
-    );
-};
+}> = ({ text, linkURL }) => (
+    <td className="m-pad" style={trailTextStyle}>
+        <a style={linkStyle} href={linkURL}>
+            <span style={spanStyle}>{text}</span>
+        </a>
+    </td>
+);
 
 const ContributorImage: React.FC<{
     src: string;
@@ -87,8 +83,6 @@ const ContributorImage: React.FC<{
     if (!src) {
         return null;
     }
-
-    // const formattedImage = formatImage(src, salt, width);
     return <Image src={src} width={width} alt={alt} ignoreWidth />;
 };
 
@@ -167,7 +161,6 @@ export const CommentCard: React.FC<Props> = ({
     const sanitisedTrailText = sanitizeHtml(trailText, {
         allowedTags: []
     });
-
     return (
         <TableRowCell tdStyle={tdStyle(pillar)}>
             <Table>

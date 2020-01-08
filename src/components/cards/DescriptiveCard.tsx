@@ -82,7 +82,6 @@ export const DescriptiveCard: React.FC<Props> = ({
     showPillarColours
 }) => {
     const bodyPars = bodyText.split("</p>");
-
     return (
         <TableRowCell tdStyle={tdStyle(showPillarColours, pillar)}>
             <Table>

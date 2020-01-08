@@ -12,7 +12,6 @@ const containerStyle: TdCSS = {
 const fontStyle = (theme: Theme): LinkCSS => ({
     color: theme === "dark" ? "#dcdcdc" : "#121212",
     textDecoration: "none",
-
     ...headline({ level: 2 })
 });
 

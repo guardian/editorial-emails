@@ -44,30 +44,28 @@ export const MostViewedCard: React.FC<Props> = ({
     byline,
     kicker,
     index
-}) => {
-    return (
-        <TableRow>
-            <td style={leftColStyles}>
-                <Image
-                    src={getIndexImageURL(index)}
-                    alt={String(index)}
-                    ignoreWidth
-                    pillar={pillar}
-                    width={59}
-                    height={59}
-                />
-            </td>
-            <td style={rightColStyles}>
-                <Headline
-                    text={headline}
-                    linkTo={`${cardUrl}?##braze_utm##`}
-                    kicker={kicker}
-                    byline={byline}
-                    pillar={pillar}
-                    size="small"
-                    showQuotation={isComment}
-                ></Headline>
-            </td>
-        </TableRow>
-    );
-};
+}) => (
+    <TableRow>
+        <td style={leftColStyles}>
+            <Image
+                src={getIndexImageURL(index)}
+                alt={String(index)}
+                ignoreWidth
+                pillar={pillar}
+                width={59}
+                height={59}
+            />
+        </td>
+        <td style={rightColStyles}>
+            <Headline
+                text={headline}
+                linkTo={`${cardUrl}?##braze_utm##`}
+                kicker={kicker}
+                byline={byline}
+                pillar={pillar}
+                size="small"
+                showQuotation={isComment}
+            ></Headline>
+        </td>
+    </TableRow>
+);
