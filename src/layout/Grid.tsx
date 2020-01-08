@@ -5,6 +5,7 @@ import { TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
 import { TableRow, TableRowCell } from "./Table";
 import { Padding } from "./Padding";
+import { kickerText } from "../kicker";
 
 const gutterStyle: TdCSS = {
     width: "2%",
@@ -120,33 +121,91 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
 }) => {
     const rowsArray = partition(content, 2);
     const { Component, props } = card;
-    const rows = rowsArray.map((pair, index) => (
-        <React.Fragment key={index}>
-            <GridRow
-                left={
-                    <Component
-                        content={pair[0]}
-                        salt={salt}
-                        size="small"
-                        {...props}
-                    />
-                }
-                right={
-                    pair[1] ? (
+    const rows = rowsArray.map((pair, index) => {
+        const leftPair = pair[0];
+        const rightPair = pair[1];
+        return (
+            <React.Fragment key={index}>
+                <GridRow
+                    left={
                         <Component
-                            content={pair[1]}
-                            salt={salt}
+                            headline={leftPair.header.headline}
+                            byline={
+                                leftPair.properties.showByline &&
+                                leftPair.properties.byline
+                                    ? leftPair.properties.byline
+                                    : null
+                            }
+                            kicker={
+                                leftPair.header.kicker
+                                    ? kickerText(leftPair.header.kicker)
+                                    : ""
+                            }
+                            isComment={leftPair.display.showQuotedHeadline}
+                            cardUrl={leftPair.properties.webUrl}
+                            pillar={
+                                leftPair.properties.maybeContent
+                                    ? leftPair.properties.maybeContent.metadata
+                                          .pillar.name
+                                    : null
+                            }
+                            imageSrc={
+                                leftPair.properties.maybeContent
+                                    ? leftPair.properties.maybeContent.trail
+                                          .trailPicture.allImages[0].url
+                                    : null
+                            }
+                            imageAlt={leftPair.header.headline}
+                            imageSalt={salt}
+                            imageRating={leftPair.card.starRating}
                             size="small"
                             {...props}
                         />
-                    ) : null
-                }
-                leftStyles={leftStyles}
-                rightStyles={rightStyles}
-            />
-            {index < rowsArray.length - 1 && <Padding px={12} />}
-        </React.Fragment>
-    ));
+                    }
+                    right={
+                        rightPair ? (
+                            <Component
+                                headline={rightPair.header.headline}
+                                byline={
+                                    rightPair.properties.showByline &&
+                                    rightPair.properties.byline
+                                        ? rightPair.properties.byline
+                                        : null
+                                }
+                                kicker={
+                                    rightPair.header.kicker
+                                        ? kickerText(rightPair.header.kicker)
+                                        : ""
+                                }
+                                isComment={rightPair.display.showQuotedHeadline}
+                                cardUrl={rightPair.properties.webUrl}
+                                pillar={
+                                    rightPair.properties.maybeContent
+                                        ? rightPair.properties.maybeContent
+                                              .metadata.pillar.name
+                                        : null
+                                }
+                                imageSrc={
+                                    rightPair.properties.maybeContent
+                                        ? rightPair.properties.maybeContent
+                                              .trail.trailPicture.allImages[0]
+                                              .url
+                                        : null
+                                }
+                                imageAlt={rightPair.header.headline}
+                                imageSalt={salt}
+                                imageRating={rightPair.card.starRating}
+                                {...props}
+                            />
+                        ) : null
+                    }
+                    leftStyles={leftStyles}
+                    rightStyles={rightStyles}
+                />
+                {index < rowsArray.length - 1 && <Padding px={12} />}
+            </React.Fragment>
+        );
+    });
 
     return <TableRowCell>{rows}</TableRowCell>;
 };

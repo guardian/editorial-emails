@@ -81,7 +81,7 @@ export const DefaultCard: React.FC<Props> = ({
     imageAlt,
     imageSalt,
     imageRating,
-    size,
+    size = "small",
     designName = "background",
     isInsideGrid = false,
     backgroundColor
