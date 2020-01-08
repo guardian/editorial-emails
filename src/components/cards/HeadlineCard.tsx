@@ -82,7 +82,7 @@ export const HeadlineCard: React.FC<Props> = ({
     backgroundColor,
     showPillarColours,
     borderWidth = "thin",
-    layout = "compact",
+    layout,
     showUseWhite = false,
     borderColor,
     showArrow = false

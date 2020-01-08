@@ -67,7 +67,6 @@ export const DefaultCollection: React.FC<{
                                 ? kickerText(story.header.kicker)
                                 : ""
                         }
-                        borderWidth="thin"
                         showPillarColours
                         backgroundColor={white}
                     />
