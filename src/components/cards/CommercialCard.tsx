@@ -1,7 +1,6 @@
 import React from "react";
 import { TdCSS, FontCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { formatImage } from "../../image";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
 import { Image } from "../../components/Image";
 import { textBody } from "../../styles/typography";
