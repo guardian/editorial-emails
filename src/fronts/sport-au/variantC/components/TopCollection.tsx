@@ -7,7 +7,7 @@ import { Heading } from "../../../../components/Heading";
 import { DefaultGrid } from "../../../../layout/Grid";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { palette } from "@guardian/src-foundations";
-import { kickerText } from "../../../../kicker";
+import { kickerText } from "../../../../dataHelpers";
 
 export const TopCollection: React.FC<{
     collection: ICollection;

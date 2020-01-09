@@ -7,7 +7,7 @@ import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import { DescriptiveCard } from "../../../../components/cards/DescriptiveCard";
 import { Padding } from "../../../../layout/Padding";
-import { kickerText } from "../../../../kicker";
+import { kickerText } from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;

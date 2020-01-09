@@ -5,7 +5,7 @@ import { TableRowCell } from "../../../../layout/Table";
 import { Padding } from "../../../../layout/Padding";
 import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
-import { kickerText } from "../../../../kicker";
+import { kickerText } from "../../../../dataHelpers";
 
 export const LinkCollection: React.FC<{
     collection: ICollection;

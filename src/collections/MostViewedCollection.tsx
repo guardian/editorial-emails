@@ -6,7 +6,7 @@ import { Padding } from "../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../components/Multiline";
 import { MostViewedCard } from "../components/cards/MostViewedCard";
-import { kickerText } from "../kicker";
+import { kickerText } from "../dataHelpers";
 
 export const MostViewedCollection: React.FC<{
     collection: ICollection;

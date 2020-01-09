@@ -6,7 +6,7 @@ import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { OverlayCard } from "../../../../components/cards/OverlayCard";
-import { kickerText } from "../../../../kicker";
+import { kickerText } from "../../../../dataHelpers";
 
 export const LiveCollection: React.FC<{
     collection: ICollection;

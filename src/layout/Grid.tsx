@@ -5,7 +5,7 @@ import { TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
 import { TableRow, TableRowCell } from "./Table";
 import { Padding } from "./Padding";
-import { kickerText } from "../kicker";
+import { kickerText } from "../dataHelpers";
 
 const gutterStyle: TdCSS = {
     width: "2%",

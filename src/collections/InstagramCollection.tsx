@@ -5,7 +5,7 @@ import { Padding } from "../layout/Padding";
 import { Multiline } from "../components/Multiline";
 import { Heading } from "../components/Heading";
 import { OverlayCard } from "../components/cards/OverlayCard";
-import { kickerText } from "../kicker";
+import { kickerText } from "../dataHelpers";
 
 export const InstagramCollection: React.FC<{
     collection: ICollection;
