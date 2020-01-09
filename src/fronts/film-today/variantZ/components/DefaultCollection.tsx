@@ -11,8 +11,7 @@ import { kickerText } from "../../../../kicker";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     const firstContent = collection.backfill[0];
     const gridContent = collection.backfill.slice(1, 5);
     const lastContent = collection.backfill[5];
@@ -45,14 +44,13 @@ export const DefaultCollection: React.FC<{
                         .allImages[0].url
                 }
                 imageAlt={firstContent.header.headline}
-                imageSalt={salt}
                 imageRating={firstContent.card.starRating}
                 showPillarColours
                 bodyText={firstContent.properties.maybeContent.fields.body}
             />
             <Multiline />
             <Heading heading="More top stories" />
-            {gridContent && <DefaultGrid content={gridContent} salt={salt} />}
+            {gridContent && <DefaultGrid content={gridContent} />}
             <Padding px={12} />
             <HeadlineCard
                 headline={lastContent.header.headline}

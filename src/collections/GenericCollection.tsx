@@ -8,14 +8,12 @@ import { Multiline } from "../components/Multiline";
 
 export const GenericCollection: React.FC<{
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     if (collection.backfill.length < 1) {
         return null;
     }
 
     const lightGrey = palette.neutral[97];
-
     return (
         <>
             <Padding px={12} backgroundColor={lightGrey} />
@@ -24,7 +22,7 @@ export const GenericCollection: React.FC<{
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            <DefaultGrid content={collection.backfill} salt={salt} />
+            <DefaultGrid content={collection.backfill} />
         </>
     );
 };

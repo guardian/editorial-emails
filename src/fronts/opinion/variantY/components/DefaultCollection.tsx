@@ -6,8 +6,7 @@ import { DefaultGrid } from "../../../../layout/Grid";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     if (collection.backfill.length < 1) {
         return null;
     }
@@ -19,9 +18,7 @@ export const DefaultCollection: React.FC<{
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
 
-            {filmCollection && (
-                <DefaultGrid content={filmCollection} salt={salt} />
-            )}
+            {filmCollection && <DefaultGrid content={filmCollection} />}
         </>
     );
 };

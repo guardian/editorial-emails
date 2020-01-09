@@ -99,7 +99,6 @@ type GridCard = {
 
 interface DefaultGridProps {
     content: Content[];
-    salt: string;
     card?: GridCard;
     leftStyles?: RowStyle;
     rightStyles?: RowStyle;
@@ -110,11 +109,8 @@ const defaultCard = {
     props: {}
 };
 
-// TODO really should accept a React element so that it doesn't have to know
-// about Card or salt.
 export const DefaultGrid: React.FC<DefaultGridProps> = ({
     content,
-    salt,
     card = defaultCard,
     leftStyles,
     rightStyles
@@ -156,7 +152,6 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
                                     : null
                             }
                             imageAlt={leftPair.header.headline}
-                            imageSalt={salt}
                             imageRating={leftPair.card.starRating}
                             size="small"
                             {...props}
@@ -193,7 +188,6 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
                                         : null
                                 }
                                 imageAlt={rightPair.header.headline}
-                                imageSalt={salt}
                                 imageRating={rightPair.card.starRating}
                                 {...props}
                             />

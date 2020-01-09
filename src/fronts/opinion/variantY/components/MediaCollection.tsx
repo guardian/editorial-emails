@@ -6,8 +6,7 @@ import { Multiline } from "./../../../../components/Multiline";
 
 export const MediaCollection: React.FC<{
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     const items = collection.backfill.map(content => (
         <MediaCardB
             headline={content.header.headline}
@@ -19,7 +18,6 @@ export const MediaCollection: React.FC<{
                     : null
             }
             imageAlt={content.header.headline}
-            imageSalt={salt}
             imageRating={content.card.starRating}
         />
     ));

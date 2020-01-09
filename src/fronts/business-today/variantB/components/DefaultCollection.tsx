@@ -12,8 +12,7 @@ import { Table, TableRowCell } from "../../../../layout/Table";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     const content = collection.curated.concat(collection.backfill);
     if (content.length < 1) {
         return null;
@@ -32,7 +31,6 @@ export const DefaultCollection: React.FC<{
             <Heading heading={collection.displayName} />
             <DefaultGrid
                 content={gridContent}
-                salt={salt}
                 card={{
                     Component: DefaultCard,
                     props: {

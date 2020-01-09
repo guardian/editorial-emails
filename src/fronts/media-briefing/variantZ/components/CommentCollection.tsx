@@ -9,7 +9,6 @@ import { kickerText } from "../../../../kicker";
 
 export const CommentCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
 }> = ({ collection }) => {
     const lightGrey = palette.neutral[97];
     const white = palette.neutral[100];

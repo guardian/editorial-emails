@@ -9,8 +9,7 @@ import { InstagramCollection } from "../../../collections/InstagramCollection";
 export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
-}> = ({ collections, salt }) => {
+}> = ({ collections }) => {
     const renderedCollections = collections.map(collection => {
         const content = [].concat(collection.backfill, collection.curated);
         const designType = getDesignType(content);
@@ -27,15 +26,11 @@ export const Collections: React.FC<{
                     return null;
                 }
 
-                return (
-                    <CommentCollection collection={collection} salt={salt} />
-                );
+                return <CommentCollection collection={collection} />;
             case "link":
-                return <LinkCollection collection={collection} salt={salt} />;
+                return <LinkCollection collection={collection} />;
             case "default":
-                return (
-                    <InstagramCollection collection={collection} salt={salt} />
-                );
+                return <InstagramCollection collection={collection} />;
         }
     });
 

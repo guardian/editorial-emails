@@ -11,8 +11,7 @@ import { Padding } from "../../../layout/Padding";
 export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
-}> = ({ collections, salt }) => {
+}> = ({ collections }) => {
     const renderedCollections = collections.map(collection => {
         const content = [].concat(collection.backfill, collection.curated);
         const designType = getDesignType(content);
@@ -29,11 +28,9 @@ export const Collections: React.FC<{
                     return null;
                 }
 
-                return (
-                    <CommentCollection collection={collection} salt={salt} />
-                );
+                return <CommentCollection collection={collection} />;
             case "link":
-                return <LinkCollection collection={collection} salt={salt} />;
+                return <LinkCollection collection={collection} />;
             case "default":
                 // Render different collection for 'TV & Radio' collection without using 'display name'
                 // Look at 'tv-and-radio' substring in href
@@ -43,16 +40,13 @@ export const Collections: React.FC<{
                 ) {
                     return (
                         <>
-                            <GenericCollection
-                                collection={collection}
-                                salt={salt}
-                            />
+                            <GenericCollection collection={collection} />
                             <Padding px={12} />
                         </>
                     );
                 }
 
-                return <TopCollection collection={collection} salt={salt} />;
+                return <TopCollection collection={collection} />;
         }
     });
 

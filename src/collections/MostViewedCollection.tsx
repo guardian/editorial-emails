@@ -10,7 +10,6 @@ import { kickerText } from "../kicker";
 
 export const MostViewedCollection: React.FC<{
     collection: ICollection;
-    salt: string;
 }> = ({ collection }) => {
     const content = collection.backfill.concat(collection.curated);
     if (content.length < 1) {

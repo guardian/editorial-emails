@@ -51,7 +51,6 @@ interface Props {
     imageSrc?: string;
     imageAlt?: string;
     imageRating?: number;
-    imageSalt?: string;
     backgroundColor?: string;
     layout?: "expanded" | "compact";
     isLive?: boolean;
@@ -68,7 +67,6 @@ export const OverlayCard: React.FC<Props> = ({
     imageSrc,
     imageAlt,
     imageRating = 1,
-    imageSalt,
     layout = "compact",
     isLive = false
 }) => (

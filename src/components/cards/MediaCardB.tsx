@@ -22,7 +22,6 @@ interface Props {
     imageSrc?: string;
     imageAlt?: string;
     imageRating?: number;
-    imageSalt?: string;
 }
 
 export const MediaCardB: React.FC<Props> = ({
@@ -30,8 +29,7 @@ export const MediaCardB: React.FC<Props> = ({
     cardUrl,
     imageSrc,
     imageAlt,
-    imageRating = 1,
-    imageSalt
+    imageRating = 1
 }) => (
     <TableRowCell tdStyle={tdStyle}>
         <Table>

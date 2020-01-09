@@ -9,8 +9,7 @@ import { Padding } from "../../../layout/Padding";
 export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
-}> = ({ collections, salt }) => {
+}> = ({ collections }) => {
     const renderedCollections = collections.map(collection => {
         const content = [].concat(collection.backfill, collection.curated);
         const designType = getDesignType(content);
@@ -21,17 +20,12 @@ export const Collections: React.FC<{
                     return (
                         <>
                             <Padding px={12} />
-                            <MostViewedCollection
-                                collection={collection}
-                                salt={salt}
-                            />
+                            <MostViewedCollection collection={collection} />
                         </>
                     );
                 }
 
-                return (
-                    <DefaultCollection collection={collection} salt={salt} />
-                );
+                return <DefaultCollection collection={collection} />;
         }
     });
 

@@ -2,14 +2,12 @@ import React, { useContext } from "react";
 import { FontCSS, TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Pillar } from "../../api";
-import { formatImage } from "../../image";
 import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell, TableRow } from "../../layout/Table";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline } from "../../styles/typography";
 import { pillarProps } from "../../utils/pillarProps";
-import ImageContext from "../../ImageContext";
 
 type Size = "small" | "large";
 
@@ -83,14 +81,7 @@ const ContributorImage: React.FC<{
         return null;
     }
 
-    const { imageSalt } = useContext(ImageContext);
-    const formattedImageSrc = imageSalt
-        ? formatImage(src, imageSalt, width)
-        : src;
-
-    return (
-        <Image src={formattedImageSrc} width={width} alt={alt} ignoreWidth />
-    );
+    return <Image src={src} width={width} alt={alt} ignoreWidth />;
 };
 
 // TODO make testable, and also separate layout logic from individual components

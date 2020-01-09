@@ -7,17 +7,14 @@ import { InstagramCollection } from "../../../collections/InstagramCollection";
 export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
-}> = ({ collections, salt }) => {
+}> = ({ collections }) => {
     const renderedCollections = collections.map(collection => {
         const content = [].concat(collection.backfill, collection.curated);
         const designType = getDesignType(content);
 
         switch (designType) {
             case "default":
-                return (
-                    <InstagramCollection collection={collection} salt={salt} />
-                );
+                return <InstagramCollection collection={collection} />;
         }
     });
 

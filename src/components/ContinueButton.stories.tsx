@@ -1,8 +1,8 @@
 import React from "react";
 import { ContinueButton } from "./ContinueButton";
 import { withKnobs, text } from "@storybook/addon-knobs";
-import { Center } from "../../layout/Center";
-import { TableRowCell } from "../../layout/Table";
+import { Center } from "../layout/Center";
+import { TableRowCell } from "../layout/Table";
 
 export default {
     component: ContinueButton,

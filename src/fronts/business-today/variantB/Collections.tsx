@@ -13,63 +13,39 @@ import { MostViewedCollection } from "../../../collections/MostViewedCollection"
 export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
-}> = ({ collections, salt }) => {
+}> = ({ collections }) => {
     const renderedCollections = collections.map(collection => {
         const content = [].concat(collection.backfill, collection.curated);
         const designType = getDesignType(content);
 
         switch (designType) {
             case "comment": {
-                return (
-                    <CommentCollection collection={collection} salt={salt} />
-                );
+                return <CommentCollection collection={collection} />;
             }
 
             case "link":
                 if (collection.collectionType === "medium") {
-                    return (
-                        <CommercialCollection
-                            collection={collection}
-                            salt={salt}
-                        />
-                    );
+                    return <CommercialCollection collection={collection} />;
                 }
 
-                return (
-                    <FreeTextCollection collection={collection} salt={salt} />
-                );
+                return <FreeTextCollection collection={collection} />;
             case "default":
                 if (collection.collectionType === "slow") {
-                    return (
-                        <InstagramCollection
-                            collection={collection}
-                            salt={salt}
-                        />
-                    );
+                    return <InstagramCollection collection={collection} />;
                 }
 
                 if (
                     collection.backfill.length === 5 &&
                     collection.collectionType === "fast"
                 ) {
-                    return (
-                        <MostViewedCollection
-                            collection={collection}
-                            salt={salt}
-                        />
-                    );
+                    return <MostViewedCollection collection={collection} />;
                 }
 
                 if (collection.collectionType === "medium") {
-                    return (
-                        <LiveCollection collection={collection} salt={salt} />
-                    );
+                    return <LiveCollection collection={collection} />;
                 }
 
-                return (
-                    <DefaultCollection collection={collection} salt={salt} />
-                );
+                return <DefaultCollection collection={collection} />;
         }
     });
 

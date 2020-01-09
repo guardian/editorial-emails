@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { TableRowCell } from "../layout/Table";
 import { Image } from "./Image";
-import { formatImage } from "../image";
-import ImageContext from "../ImageContext";
 
 export const Banner: React.FC<{
     title: string;
@@ -22,14 +20,9 @@ export const Banner: React.FC<{
     };
 
     const bannerOrigin = banners[frontId] || banners.default;
-    const { imageSalt } = useContext(ImageContext);
-    const formattedImageSrc = imageSalt
-        ? formatImage(bannerOrigin, imageSalt, 600)
-        : bannerOrigin;
-
     return (
         <TableRowCell tdStyle={{ padding: "0" }}>
-            <Image width={600} src={formattedImageSrc} alt={title} />
+            <Image src={bannerOrigin} alt={title} width={600} />
         </TableRowCell>
     );
 };

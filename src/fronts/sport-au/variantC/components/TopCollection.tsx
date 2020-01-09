@@ -11,8 +11,7 @@ import { kickerText } from "../../../../kicker";
 
 export const TopCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     const firstCollection = collection.backfill[0];
     const secondCollection = collection.backfill.slice(1, 3);
     const thirdCollection = collection.backfill[3];
@@ -43,7 +42,6 @@ export const TopCollection: React.FC<{
                         : null
                 }
                 imageAlt={firstCollection.header.headline}
-                imageSalt={salt}
                 imageRating={firstCollection.card.starRating}
                 byline={
                     firstCollection.properties.showByline &&
@@ -69,7 +67,6 @@ export const TopCollection: React.FC<{
             {secondCollection && (
                 <DefaultGrid
                     content={secondCollection}
-                    salt={salt}
                     card={{
                         Component: DefaultCard,
                         props: { designName: "border", isInsideGrid: true }
@@ -90,7 +87,6 @@ export const TopCollection: React.FC<{
                         : null
                 }
                 imageAlt={thirdCollection.header.headline}
-                imageSalt={salt}
                 imageRating={thirdCollection.card.starRating}
                 byline={
                     thirdCollection.properties.showByline &&
@@ -116,7 +112,6 @@ export const TopCollection: React.FC<{
             {fourthCollection && (
                 <DefaultGrid
                     content={fourthCollection}
-                    salt={salt}
                     card={{
                         Component: DefaultCard,
                         props: { designName: "border", isInsideGrid: true }

@@ -7,8 +7,7 @@ import { Padding } from "../../../../layout/Padding";
 
 export const CommercialCollection: React.FC<{
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     const content = collection.curated.concat(collection.backfill);
     if (content.length < 1) {
         return null;
@@ -31,7 +30,6 @@ export const CommercialCollection: React.FC<{
                         imageSrc={story.properties.image.item.imageSrc}
                         imageAlt={story.header.headline}
                         imageRating={4}
-                        imageSalt={salt}
                     />
                     {index < content.length - 1 && (
                         <Padding px={12} backgroundColor={darkGrey} />

@@ -23,7 +23,6 @@ export const defaultStory = () => {
                     bodyText="<p>In libero sem, auctor ultricies elit eu, ultrices bibendum libero. Duis non nunc eros.</p><p>Maecenas non sagittis turpis. Sed semper sit amet sapien semper sollicitudin. Vivamus non purus risus.</p>"
                     isComment
                     imageSrc="https://media.guim.co.uk/9f937dd8dc5603f28f9a65b458c53ac5b2379c74/0_342_5250_3151/master/5250.jpg"
-                    imageSalt="Uz34q0qIkz"
                     imageRating={4}
                     pillar="Sport"
                     showPillarColours
@@ -50,7 +49,6 @@ export const newsPillarStory = () => {
                     bodyText="<p>In libero sem, auctor ultricies elit eu, ultrices bibendum libero. Duis non nunc eros.</p><p>Maecenas non sagittis turpis. Sed semper sit amet sapien semper sollicitudin. Vivamus non purus risus.</p>"
                     isComment
                     imageSrc="https://media.guim.co.uk/9f937dd8dc5603f28f9a65b458c53ac5b2379c74/0_342_5250_3151/master/5250.jpg"
-                    imageSalt="Uz34q0qIkz"
                     imageRating={4}
                     pillar="News"
                     showPillarColours

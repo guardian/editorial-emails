@@ -62,7 +62,6 @@ interface Props {
     kicker?: string;
     imageSrc?: string;
     imageAlt?: string;
-    imageSalt?: string;
     imageRating?: number;
     size: Size;
     designName?: DesignName;
@@ -79,7 +78,6 @@ export const DefaultCard: React.FC<Props> = ({
     pillar,
     imageSrc,
     imageAlt,
-    imageSalt,
     imageRating,
     size = "small",
     designName = "background",

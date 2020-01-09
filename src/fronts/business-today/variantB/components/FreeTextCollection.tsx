@@ -8,8 +8,7 @@ import { FreeTextCard } from "../../../../components/cards/FreeTextCard";
 
 export const FreeTextCollection: React.FC<{
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     const content = collection.curated.concat(collection.backfill);
     if (content.length < 1) {
         return null;

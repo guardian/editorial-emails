@@ -11,8 +11,7 @@ import { kickerText } from "../../../../kicker";
 
 export const TopCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     const lightGrey = palette.neutral[97];
     const white = palette.neutral[100];
 
@@ -49,7 +48,6 @@ export const TopCollection: React.FC<{
                         : null
                 }
                 imageAlt={leadStory.header.headline}
-                imageSalt={salt}
                 imageRating={leadStory.card.starRating}
                 backgroundColor={white}
                 isLive={leadStory.card.isLive}

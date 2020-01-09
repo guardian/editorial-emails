@@ -58,10 +58,9 @@ const TrailText: React.FC<{
 // TODO add alt text
 const ContributorImage: React.FC<{
     src: string;
-    salt: string;
     width: number;
     alt: string;
-}> = ({ src, salt, width, alt }) => {
+}> = ({ src, width, alt }) => {
     if (!src) {
         return null;
     }
@@ -79,21 +78,18 @@ const SupplementaryMeta: React.FC<{
     contributorImageAlt?: string;
     size: Size;
     width: number;
-    salt: string;
 }> = ({
     trailText,
     contributorImageSrc,
     contributorImageAlt,
     linkTo,
     size,
-    width,
-    salt
+    width
 }) => {
     const contributorImage = (
         <td style={columnStyleRight}>
             <ContributorImage
                 width={width}
-                salt={salt}
                 src={contributorImageSrc}
                 alt={contributorImageAlt}
             />

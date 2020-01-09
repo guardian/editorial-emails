@@ -11,8 +11,7 @@ import { kickerText } from "../../../../kicker";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     const topCollection = collection.backfill.slice(0, 2);
     const gridContent = collection.backfill.slice(2, 6);
     const lightGrey = palette.neutral[97];
@@ -37,7 +36,6 @@ export const DefaultCollection: React.FC<{
                                     : null
                             }
                             imageAlt={content.header.headline}
-                            imageSalt={salt}
                             imageRating={content.card.starRating}
                             byline={
                                 content.properties.showByline &&
@@ -62,7 +60,7 @@ export const DefaultCollection: React.FC<{
                     </>
                 );
             })}
-            {gridContent && <DefaultGrid content={gridContent} salt={salt} />}
+            {gridContent && <DefaultGrid content={gridContent} />}
         </>
     );
 };

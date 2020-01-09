@@ -9,7 +9,6 @@ import { kickerText } from "../../../../kicker";
 
 export const LinkCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
 }> = ({ collection }) => {
     const lightGrey = palette.neutral[97];
     const marineBlue = "#00A194";

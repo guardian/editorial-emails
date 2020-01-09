@@ -7,9 +7,8 @@ import { Collections as CollectionsVariantC } from "./variantZ/Collections";
 export const FilmToday: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
     variant?: string;
-}> = ({ frontId, collections, salt, variant }) => {
+}> = ({ frontId, collections, variant }) => {
     if (variant === "z") {
         // NOT IN USE
         // FKA VARIANT C
@@ -17,7 +16,6 @@ export const FilmToday: React.FC<{
             <CollectionsVariantC
                 frontId={frontId}
                 collections={collections}
-                salt={salt}
             ></CollectionsVariantC>
         );
     }
@@ -27,12 +25,9 @@ export const FilmToday: React.FC<{
             <CollectionsVariantB
                 frontId={frontId}
                 collections={collections}
-                salt={salt}
             ></CollectionsVariantB>
         );
     }
 
-    return (
-        <Collections frontId={frontId} collections={collections} salt={salt} />
-    );
+    return <Collections frontId={frontId} collections={collections} />;
 };

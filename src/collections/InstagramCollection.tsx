@@ -9,8 +9,7 @@ import { kickerText } from "../kicker";
 
 export const InstagramCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
     const content = collection.curated.concat(collection.backfill);
 
     const lightGrey = palette.neutral[97];
