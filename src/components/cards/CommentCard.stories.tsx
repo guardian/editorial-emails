@@ -43,7 +43,7 @@ export const largeCardImageStory = () => {
                     size="large"
                     shouldShowProfileImage
                     pillar="News"
-                    imageSrc="https://i.guim.co.uk/img/uploads/2017/10/06/Larry-Elliott,-R.png?quality=45&sharpen=a0.8,r1,t1&width=180&dpr=2&fit=max&s=0adc71804ca8c83699337f365917aaae"
+                    imageSrc="https://images.unsplash.com/photo-1506102383123-c8ef1e872756?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80"
                     imageAlt="Lorem ipsum dolor sit amet"
                 />
             </TableRowCell>

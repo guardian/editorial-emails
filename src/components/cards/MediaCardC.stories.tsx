@@ -17,7 +17,7 @@ export const defaultStory = () => {
                 <MediaCardC
                     headline="Maecenas quis tellus accumsan ornare diam egestas"
                     cardUrl="https://www.theguardian.com/us-news/2019/dec/31/chelsea-manning-us-torture-un-official-wikileaks"
-                    imageSrc="https://i.guim.co.uk/img/media/b8c2393d1e38ba1859f6fa01996933cc382a6776/0_0_5568_3712/master/5568.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=2222a23bb4ee59b1cf09aec53d8c599b"
+                    imageSrc="https://images.unsplash.com/photo-1506102383123-c8ef1e872756?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80"
                     imageAlt="Vestibulum non orci tortor"
                 />
             </TableRowCell>

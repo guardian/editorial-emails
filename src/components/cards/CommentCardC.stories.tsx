@@ -19,7 +19,7 @@ export const defaultStory = () => {
                     byline="Jonathan Freedland"
                     trailText="Aliquam sed est suscipit, congue diam sit amet, tincidunt nibh. Suspendisse potenti. Aenean nibh ligula, ultricies id lorem sit amet, bibendum laoreet ante. Morbi porta nisl non sem commodo tincidunt. Proin nisl massa, sagittis eu vulputate vitae, tristique eget tellus. Donec eu nisi eget dolor cursus vulputate."
                     cardUrl="https://www.theguardian.com/world/2020/jan/07/cyprus-case-british-teenager-given-suspended-sentence"
-                    imageSrc="https://media.guim.co.uk/8befa81493c524e24a91b33880bb330d7b50a29b/0_41_5471_3282/master/5471.jpg"
+                    imageSrc="https://images.unsplash.com/photo-1506102383123-c8ef1e872756?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80"
                     imageAlt="Lorem ipsum dolor sit amet"
                     isComment
                     size="large"
@@ -43,7 +43,7 @@ export const smallStory = () => {
                     byline="Jonathan Freedland"
                     trailText="Aliquam sed est suscipit, congue diam sit amet, tincidunt nibh. Suspendisse potenti. Aenean nibh ligula, ultricies id lorem sit amet, bibendum laoreet ante. Morbi porta nisl non sem commodo tincidunt. Proin nisl massa, sagittis eu vulputate vitae, tristique eget tellus. Donec eu nisi eget dolor cursus vulputate."
                     cardUrl="https://www.theguardian.com/world/2020/jan/07/cyprus-case-british-teenager-given-suspended-sentence"
-                    imageSrc="https://media.guim.co.uk/8befa81493c524e24a91b33880bb330d7b50a29b/0_41_5471_3282/master/5471.jpg"
+                    imageSrc="https://images.unsplash.com/photo-1506102383123-c8ef1e872756?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80"
                     imageAlt="Lorem ipsum dolor sit amet"
                     isComment
                     size="small"
@@ -67,7 +67,7 @@ export const noImageStory = () => {
                     byline="Jonathan Freedland"
                     trailText="Aliquam sed est suscipit, congue diam sit amet, tincidunt nibh. Suspendisse potenti. Aenean nibh ligula, ultricies id lorem sit amet, bibendum laoreet ante. Morbi porta nisl non sem commodo tincidunt. Proin nisl massa, sagittis eu vulputate vitae, tristique eget tellus. Donec eu nisi eget dolor cursus vulputate."
                     cardUrl="https://www.theguardian.com/world/2020/jan/07/cyprus-case-british-teenager-given-suspended-sentence"
-                    imageSrc="https://media.guim.co.uk/8befa81493c524e24a91b33880bb330d7b50a29b/0_41_5471_3282/master/5471.jpg"
+                    imageSrc="https://images.unsplash.com/photo-1506102383123-c8ef1e872756?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80"
                     imageAlt="Lorem ipsum dolor sit amet"
                     isComment
                     size="small"

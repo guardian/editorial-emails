@@ -5,7 +5,6 @@ interface ImageContext {
 }
 
 const initialValues: ImageContext = { imageSalt: "" };
-
 const ImageContext = React.createContext(initialValues);
 
 export const ImageProvider = ImageContext.Provider;
