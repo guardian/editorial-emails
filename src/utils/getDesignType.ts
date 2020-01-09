@@ -1,4 +1,4 @@
-import { Content } from "../api";
+import { Collection as ICollection } from "../api";
 
 export type DesignType =
     | "default"
@@ -8,9 +8,10 @@ export type DesignType =
     | "link"
     | "film";
 
-export const getDesignType = (content: Content[]): DesignType => {
+export const getDesignType = (collection: ICollection): DesignType => {
     const designTypes: Set<string> = new Set();
 
+    const content = [].concat(collection.curated).concat(collection.backfill);
     content.forEach(c => {
         if (c.type === "LinkSnap") {
             designTypes.add("LinkSnap");

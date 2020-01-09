@@ -12,10 +12,15 @@ import { kickerText } from "../../../../kicker";
 export const TopCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    const firstCollection = collection.backfill[0];
-    const secondCollection = collection.backfill.slice(1, 3);
-    const thirdCollection = collection.backfill[3];
-    const fourthCollection = collection.backfill.slice(4, 6);
+    const content = [].concat(collection.curated).concat(collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
+
+    const firstCollection = content[0];
+    const secondCollection = content.slice(1, 3);
+    const thirdCollection = content[3];
+    const fourthCollection = content.slice(4, 6);
 
     // Pass a background color and border styles to be used by the grid cell.
     // This ensures all cells in a row will have the same background and border,

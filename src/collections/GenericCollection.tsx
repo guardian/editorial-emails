@@ -9,7 +9,8 @@ import { Multiline } from "../components/Multiline";
 export const GenericCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    if (collection.backfill.length < 1) {
+    const content = [].concat(collection.curated).concat(collection.backfill);
+    if (content.length < 1) {
         return null;
     }
 
@@ -22,7 +23,7 @@ export const GenericCollection: React.FC<{
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            <DefaultGrid content={collection.backfill} />
+            <DefaultGrid content={content} />
         </>
     );
 };

@@ -13,7 +13,7 @@ import { Table, TableRowCell } from "../../../../layout/Table";
 export const DefaultCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    const content = collection.curated.concat(collection.backfill);
+    const content = [].concat(collection.curated).concat(collection.backfill);
     if (content.length < 1) {
         return null;
     }
@@ -23,7 +23,6 @@ export const DefaultCollection: React.FC<{
 
     const lightGrey = palette.neutral[97];
     const white = palette.neutral[100];
-
     return (
         <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
             <Padding px={12} />

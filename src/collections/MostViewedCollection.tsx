@@ -11,13 +11,12 @@ import { kickerText } from "../kicker";
 export const MostViewedCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    const content = collection.backfill.concat(collection.curated);
+    const content = [].concat(collection.curated).concat(collection.backfill);
     if (content.length < 1) {
         return null;
     }
 
     const lightGrey = palette.neutral[97];
-
     return (
         <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
             <Padding px={12} />

@@ -7,9 +7,12 @@ import { CommentCardC } from "../../../../components/cards/CommentCardC";
 export const EditorialCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    const contentOne = collection.backfill[0];
+    const content = [].concat(collection.curated).concat(collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
-    // TODO
+    const contentOne = content[0];
     return (
         <>
             <Multiline topPadding />

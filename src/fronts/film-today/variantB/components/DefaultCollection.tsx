@@ -12,10 +12,15 @@ import { kickerText } from "../../../../kicker";
 export const DefaultCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    const topCollection = collection.backfill.slice(0, 2);
-    const gridContent = collection.backfill.slice(2, 6);
-    const lightGrey = palette.neutral[97];
+    const content = [].concat(collection.curated).concat(collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
+    const topCollection = content.slice(0, 2);
+    const gridContent = content.slice(2, 6);
+
+    const lightGrey = palette.neutral[97];
     return (
         <>
             <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>

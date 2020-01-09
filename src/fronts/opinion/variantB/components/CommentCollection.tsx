@@ -11,16 +11,20 @@ export const CommentCollection: React.FC<{
     frontId: string;
     collection: ICollection;
 }> = ({ collection }) => {
-    const lightGrey = palette.neutral[97];
-    const leadStory = collection.backfill[0];
-    const bottomCollection = collection.backfill.slice(1);
+    const content = [].concat(collection.curated).concat(collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
+    const leadStory = content[0];
+    const bottomCollection = content.slice(1);
     const leadContributor = leadStory.properties.maybeContent.tags.tags.find(
         tag => {
             return tag.properties.tagType === "Contributor";
         }
     );
 
+    const lightGrey = palette.neutral[97];
     return (
         <>
             <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>

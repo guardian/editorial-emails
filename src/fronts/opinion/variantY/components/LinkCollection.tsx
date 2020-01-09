@@ -7,17 +7,16 @@ import { LinkGrid as LinkGridB } from "./Grid";
 export const LinkCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    if (collection.curated.length < 1) {
+    const content = [].concat(collection.curated).concat(collection.backfill);
+    if (content.length < 1) {
         return null;
     }
-
-    const content = collection.curated;
 
     return (
         <>
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
-            {content && <LinkGridB content={content} />}
+            <LinkGridB content={content} />
         </>
     );
 };

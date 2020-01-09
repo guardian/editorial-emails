@@ -12,11 +12,16 @@ import { kickerText } from "../../../../kicker";
 export const TopCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
+    const content = [].concat(collection.curated).concat(collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
+
+    const leadStory = content[0];
+    const restStories = content.slice(1);
+
     const lightGrey = palette.neutral[97];
     const white = palette.neutral[100];
-
-    const leadStory = collection.backfill[0];
-
     return (
         <TableRowCell
             tdStyle={{
@@ -55,7 +60,7 @@ export const TopCollection: React.FC<{
 
             <Padding px={12} backgroundColor={lightGrey} />
 
-            {collection.backfill.slice(1).map((story, index) => (
+            {restStories.map((story, index) => (
                 <>
                     {index > 0 && <Padding px={4} />}
                     <HeadlineCard

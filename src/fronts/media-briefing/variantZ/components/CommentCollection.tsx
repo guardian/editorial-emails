@@ -10,9 +10,13 @@ import { kickerText } from "../../../../kicker";
 export const CommentCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
+    const content = [].concat(collection.curated).concat(collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
+
     const lightGrey = palette.neutral[97];
     const white = palette.neutral[100];
-
     return (
         <>
             <Padding px={12} backgroundColor={lightGrey} />
@@ -21,7 +25,7 @@ export const CommentCollection: React.FC<{
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            {collection.backfill.map((story, index) => (
+            {content.map((story, index) => (
                 <>
                     {index > 0 && (
                         <Padding px={12} backgroundColor={lightGrey} />

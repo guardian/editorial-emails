@@ -24,14 +24,17 @@ export const CommentCollection: React.FC<{
     frontId: string;
     collection: ICollection;
 }> = ({ frontId, collection }) => {
-    // TODO handle curated collections
+    const content = [].concat(collection.curated).concat(collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
-    const c0 = collection.backfill[0];
-    const c1 = collection.backfill[1];
-    const grid_2_5 = collection.backfill.slice(2, 6);
-    const c6 = collection.backfill[6];
-    const grid_7_8 = collection.backfill.slice(7, 9);
-    const c9 = collection.backfill[9];
+    const c0 = content[0];
+    const c1 = content[1];
+    const grid_2_5 = content.slice(2, 6);
+    const c6 = content[6];
+    const grid_7_8 = content.slice(7, 9);
+    const c9 = content[9];
 
     const c0Contributor = getContributor(c0);
     const c1Contributor = getContributor(c1);

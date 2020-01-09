@@ -12,14 +12,14 @@ import { kickerText } from "../../../../kicker";
 export const DefaultCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    const firstContent = collection.backfill[0];
-    const gridContent = collection.backfill.slice(1, 5);
-    const lastContent = collection.backfill[5];
+    const content = [].concat(collection.curated).concat(collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
-    const kicker = firstContent.header.kicker
-        ? kickerText(firstContent.header.kicker)
-        : "";
-
+    const firstContent = content[0];
+    const gridContent = content.slice(1, 5);
+    const lastContent = content[5];
     return (
         <>
             <DescriptiveCard
@@ -31,7 +31,11 @@ export const DefaultCollection: React.FC<{
                 }
                 trailText={firstContent.card.trailText}
                 cardUrl={firstContent.properties.webUrl}
-                kicker={kicker}
+                kicker={
+                    firstContent.header.kicker
+                        ? kickerText(firstContent.header.kicker)
+                        : ""
+                }
                 isComment={firstContent.display.showQuotedHeadline}
                 pillar={
                     firstContent.properties.maybeContent

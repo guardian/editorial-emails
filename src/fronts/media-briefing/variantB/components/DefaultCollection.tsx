@@ -11,14 +11,18 @@ import { kickerText } from "../../../../kicker";
 export const DefaultCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
+    const content = [].concat(collection.curated).concat(collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
+
     const lightGrey = palette.neutral[97];
     const white = palette.neutral[100];
-
     return (
         <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
-            {collection.backfill.map((story, index) => (
+            {content.map((story, index) => (
                 <>
                     {index > 0 && <Padding px={4} />}
                     <HeadlineCard

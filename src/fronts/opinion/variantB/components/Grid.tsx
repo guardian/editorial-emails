@@ -7,7 +7,6 @@ import { GridRow, partition } from "../../../../layout/Grid";
 import {
     CommentCardB,
     ContributorImageWrapper
-    // getContributor
 } from "../../../../components/cards/CommentCardB";
 import { LinkCardB } from "../../../../components/cards/LinkCardB";
 

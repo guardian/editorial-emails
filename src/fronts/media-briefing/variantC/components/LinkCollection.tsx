@@ -10,9 +10,13 @@ import { kickerText } from "../../../../kicker";
 export const LinkCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
+    const content = [].concat(collection.curated).concat(collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
+
     const lightGrey = palette.neutral[97];
     const marineBlue = "#00A194";
-
     return (
         <>
             <Padding px={12} backgroundColor={lightGrey} />
@@ -27,7 +31,7 @@ export const LinkCollection: React.FC<{
                     color={palette.neutral[100]}
                 />
                 <TableRowCell tdStyle={{ padding: "0 10px" }}>
-                    {collection.curated.map(story => (
+                    {content.map(story => (
                         <HeadlineCard
                             headline={story.header.headline}
                             trailText={story.card.trailText}

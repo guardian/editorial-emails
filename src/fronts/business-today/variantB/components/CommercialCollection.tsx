@@ -8,13 +8,12 @@ import { Padding } from "../../../../layout/Padding";
 export const CommercialCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    const content = collection.curated.concat(collection.backfill);
+    const content = [].concat(collection.curated).concat(collection.backfill);
     if (content.length < 1) {
         return null;
     }
 
     const darkGrey = palette.neutral[86];
-
     return (
         <>
             <Padding px={12} backgroundColor={darkGrey} />

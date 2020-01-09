@@ -9,13 +9,12 @@ import { CommentCard } from "../../../../components/cards/CommentCard";
 export const CommentCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    const content = collection.curated.concat(collection.backfill);
+    const content = [].concat(collection.curated).concat(collection.backfill);
     if (content.length < 1) {
         return null;
     }
 
     const lightGrey = palette.neutral[97];
-
     return (
         <>
             <Padding px={12} backgroundColor={lightGrey} />
