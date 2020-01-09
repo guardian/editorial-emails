@@ -96,6 +96,7 @@ export const DefaultCard: React.FC<Props> = ({
                         alt={imageAlt}
                         width={size === "large" ? 600 : 294}
                         pillar={pillar}
+                        rating={imageRating}
                         linkTo={`${cardUrl}?##braze_utm##`}
                     />
                 </RowCell>

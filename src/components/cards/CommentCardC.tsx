@@ -166,6 +166,7 @@ export const CommentCardC: React.FC<Props> = ({
                         <Image
                             src={imageSrc}
                             alt={imageAlt}
+                            rating={imageRating}
                             linkTo={`${cardUrl}?##braze_utm##`}
                             width={size === "large" ? 599 : 294}
                             pillar="Opinion"

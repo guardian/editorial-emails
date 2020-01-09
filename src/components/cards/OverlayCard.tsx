@@ -84,6 +84,7 @@ export const OverlayCard: React.FC<Props> = ({
                             src={imageSrc}
                             alt={imageAlt}
                             width={600}
+                            rating={imageRating}
                             pillar={pillar}
                             linkTo={`${cardUrl}?##braze_utm##`}
                         />

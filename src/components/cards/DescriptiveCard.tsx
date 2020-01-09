@@ -105,6 +105,7 @@ export const DescriptiveCard: React.FC<Props> = ({
                             width={600}
                             alt={imageAlt}
                             src={imageSrc}
+                            rating={imageRating}
                             linkTo={`${cardUrl}?##braze_utm##`}
                             pillar={pillar}
                         />

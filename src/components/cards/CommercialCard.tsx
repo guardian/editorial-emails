@@ -50,6 +50,7 @@ export const CommercialCard: React.FC<Props> = ({
                             src={imageUrl}
                             linkTo={`${cardUrl}?##braze_utm##`}
                             alt={imageAlt}
+                            rating={imageRating}
                             width={imageSize}
                         />
                     )}

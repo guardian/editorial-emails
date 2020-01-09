@@ -40,6 +40,7 @@ export const MediaCardC: React.FC<Props> = ({
                     linkTo={`${cardUrl}?##braze_utm##`}
                     alt={imageAlt}
                     width={579}
+                    rating={imageRating}
                     pillar="Opinion"
                 />
             </RowCell>
