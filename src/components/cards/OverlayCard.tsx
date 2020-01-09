@@ -66,7 +66,7 @@ export const OverlayCard: React.FC<Props> = ({
     backgroundColor,
     imageSrc,
     imageAlt,
-    imageRating = 1,
+    imageRating,
     layout = "compact",
     isLive = false
 }) => (

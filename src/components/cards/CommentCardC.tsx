@@ -148,7 +148,7 @@ export const CommentCardC: React.FC<Props> = ({
     isComment = false,
     imageSrc,
     imageAlt,
-    imageRating = 1,
+    imageRating,
     contributorImageSrc,
     contributorImageAlt,
     size,

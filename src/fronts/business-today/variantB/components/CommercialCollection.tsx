@@ -29,7 +29,7 @@ export const CommercialCollection: React.FC<{
                         cardUrl={story.properties.href}
                         imageSrc={story.properties.image.item.imageSrc}
                         imageAlt={story.header.headline}
-                        imageRating={4}
+                        imageRating={story.card.starRating}
                     />
                     {index < content.length - 1 && (
                         <Padding px={12} backgroundColor={darkGrey} />

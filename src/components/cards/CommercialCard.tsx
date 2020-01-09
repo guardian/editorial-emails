@@ -37,7 +37,7 @@ export const CommercialCard: React.FC<Props> = ({
     cardUrl,
     imageSrc,
     imageAlt,
-    imageRating = 1
+    imageRating
 }) => {
     const imageSize = 580;
     const imageUrl = imageSrc ? imageSrc : null;

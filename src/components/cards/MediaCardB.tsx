@@ -29,7 +29,7 @@ export const MediaCardB: React.FC<Props> = ({
     cardUrl,
     imageSrc,
     imageAlt,
-    imageRating = 1
+    imageRating
 }) => (
     <TableRowCell tdStyle={tdStyle}>
         <Table>
