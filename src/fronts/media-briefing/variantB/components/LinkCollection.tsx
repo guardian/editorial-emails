@@ -5,7 +5,7 @@ import { TableRowCell } from "../../../../layout/Table";
 import { Padding } from "../../../../layout/Padding";
 import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
-import { kickerText } from "../../../../dataHelpers";
+import { getKickerText } from "../../../../dataHelpers";
 
 export const LinkCollection: React.FC<{
     collection: ICollection;
@@ -49,11 +49,7 @@ export const LinkCollection: React.FC<{
                                     ? story.properties.byline
                                     : ""
                             }
-                            kicker={
-                                story.header.kicker
-                                    ? kickerText(story.header.kicker)
-                                    : ""
-                            }
+                            kicker={getKickerText(story)}
                             borderWidth="thin"
                             showUseWhite
                             layout="compact"

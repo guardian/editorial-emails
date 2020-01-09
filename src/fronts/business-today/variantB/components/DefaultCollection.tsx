@@ -6,7 +6,7 @@ import { palette } from "@guardian/src-foundations";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import { Multiline } from "../../../../components/Multiline";
 import { Padding } from "../../../../layout/Padding";
-import { kickerText } from "../../../../dataHelpers";
+import { getKickerText } from "../../../../dataHelpers";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { Table, TableRowCell } from "../../../../layout/Table";
 
@@ -59,11 +59,7 @@ export const DefaultCollection: React.FC<{
                                 ? story.properties.byline
                                 : ""
                         }
-                        kicker={
-                            story.header.kicker
-                                ? kickerText(story.header.kicker)
-                                : ""
-                        }
+                        kicker={getKickerText(story)}
                         showPillarColours
                         backgroundColor={white}
                     />

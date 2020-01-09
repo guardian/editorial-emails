@@ -6,7 +6,7 @@ import { Padding } from "../../../../layout/Padding";
 import { Multiline } from "../../../../components/Multiline";
 import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
-import { kickerText } from "../../../../dataHelpers";
+import { getKickerText } from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
     collection: ICollection;
@@ -43,11 +43,7 @@ export const CommentCollection: React.FC<{
                                 ? story.properties.byline
                                 : ""
                         }
-                        kicker={
-                            story.header.kicker
-                                ? kickerText(story.header.kicker)
-                                : ""
-                        }
+                        kicker={getKickerText(story)}
                         backgroundColor={white}
                         showPillarColours
                         borderWidth="thin"

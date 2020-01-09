@@ -7,7 +7,7 @@ import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import { DescriptiveCard } from "../../../../components/cards/DescriptiveCard";
 import { Padding } from "../../../../layout/Padding";
-import { kickerText } from "../../../../dataHelpers";
+import { getKickerText } from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -31,11 +31,7 @@ export const DefaultCollection: React.FC<{
                 }
                 trailText={firstContent.card.trailText}
                 cardUrl={firstContent.properties.webUrl}
-                kicker={
-                    firstContent.header.kicker
-                        ? kickerText(firstContent.header.kicker)
-                        : ""
-                }
+                kicker={getKickerText(firstContent)}
                 isComment={firstContent.display.showQuotedHeadline}
                 pillar={
                     firstContent.properties.maybeContent
@@ -73,11 +69,7 @@ export const DefaultCollection: React.FC<{
                         ? lastContent.properties.byline
                         : ""
                 }
-                kicker={
-                    lastContent.header.kicker
-                        ? kickerText(lastContent.header.kicker)
-                        : ""
-                }
+                kicker={getKickerText(lastContent)}
                 borderWidth="thick"
                 backgroundColor={palette.culture.faded}
             />

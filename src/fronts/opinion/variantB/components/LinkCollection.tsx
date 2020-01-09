@@ -6,7 +6,7 @@ import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
-import { kickerText } from "../../../../dataHelpers";
+import { getKickerText } from "../../../../dataHelpers";
 
 export const LinkCollection: React.FC<{
     collection: ICollection;
@@ -46,11 +46,7 @@ export const LinkCollection: React.FC<{
                                     ? story.properties.byline
                                     : ""
                             }
-                            kicker={
-                                story.header.kicker
-                                    ? kickerText(story.header.kicker)
-                                    : ""
-                            }
+                            kicker={getKickerText(story)}
                             borderWidth="thin"
                             borderColor={palette.opinion.main}
                             backgroundColor={white}

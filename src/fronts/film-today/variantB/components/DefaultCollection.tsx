@@ -7,7 +7,7 @@ import { Heading } from "../../../../components/Heading";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { palette } from "@guardian/src-foundations";
 import { TableRowCell } from "../../../../layout/Table";
-import { kickerText } from "../../../../dataHelpers";
+import { getKickerText } from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -48,11 +48,7 @@ export const DefaultCollection: React.FC<{
                                     ? content.properties.byline
                                     : null
                             }
-                            kicker={
-                                content.header.kicker
-                                    ? kickerText(content.header.kicker)
-                                    : ""
-                            }
+                            kicker={getKickerText(content)}
                             size="large"
                             pillar={
                                 content.properties.maybeContent

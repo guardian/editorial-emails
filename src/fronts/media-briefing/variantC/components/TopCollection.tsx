@@ -7,7 +7,7 @@ import { OverlayCard } from "../../../../components/cards/OverlayCard";
 import { Multiline } from "../../../../components/Multiline";
 import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
-import { kickerText } from "../../../../dataHelpers";
+import { getKickerText } from "../../../../dataHelpers";
 
 export const TopCollection: React.FC<{
     collection: ICollection;
@@ -41,11 +41,7 @@ export const TopCollection: React.FC<{
                         ? leadStory.properties.maybeContent.metadata.pillar.name
                         : null
                 }
-                kicker={
-                    leadStory.header.kicker
-                        ? kickerText(leadStory.header.kicker)
-                        : ""
-                }
+                kicker={getKickerText(leadStory)}
                 imageSrc={
                     leadStory.properties.maybeContent
                         ? leadStory.properties.maybeContent.trail.trailPicture
@@ -80,11 +76,7 @@ export const TopCollection: React.FC<{
                                 ? story.properties.byline
                                 : ""
                         }
-                        kicker={
-                            story.header.kicker
-                                ? kickerText(story.header.kicker)
-                                : ""
-                        }
+                        kicker={getKickerText(story)}
                         backgroundColor={white}
                         showPillarColours
                         borderWidth="thin"

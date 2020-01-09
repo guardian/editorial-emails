@@ -5,7 +5,7 @@ import { Padding } from "../layout/Padding";
 import { Multiline } from "../components/Multiline";
 import { Heading } from "../components/Heading";
 import { OverlayCard } from "../components/cards/OverlayCard";
-import { kickerText } from "../dataHelpers";
+import { getKickerText } from "../dataHelpers";
 
 export const InstagramCollection: React.FC<{
     collection: ICollection;
@@ -48,11 +48,7 @@ export const InstagramCollection: React.FC<{
                         }
                         imageAlt={story.header.headline}
                         imageRating={story.card.starRating}
-                        kicker={
-                            story.header.kicker
-                                ? kickerText(story.header.kicker)
-                                : ""
-                        }
+                        kicker={getKickerText(story)}
                         layout="expanded"
                         isLive={story.card.isLive}
                     />

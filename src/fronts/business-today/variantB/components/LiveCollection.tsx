@@ -6,7 +6,7 @@ import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { OverlayCard } from "../../../../components/cards/OverlayCard";
-import { kickerText } from "../../../../dataHelpers";
+import { getKickerText } from "../../../../dataHelpers";
 
 export const LiveCollection: React.FC<{
     collection: ICollection;
@@ -38,11 +38,7 @@ export const LiveCollection: React.FC<{
                                       .name
                                 : null
                         }
-                        kicker={
-                            story.header.kicker
-                                ? kickerText(story.header.kicker)
-                                : ""
-                        }
+                        kicker={getKickerText(story)}
                         imageSrc={
                             story.properties.maybeContent
                                 ? story.properties.maybeContent.trail

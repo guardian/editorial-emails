@@ -7,7 +7,7 @@ import { Heading } from "../../../../components/Heading";
 import { DefaultGrid } from "../../../../layout/Grid";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { palette } from "@guardian/src-foundations";
-import { kickerText } from "../../../../dataHelpers";
+import { getKickerText } from "../../../../dataHelpers";
 
 export const TopCollection: React.FC<{
     collection: ICollection;
@@ -54,11 +54,7 @@ export const TopCollection: React.FC<{
                         ? firstCollection.properties.byline
                         : null
                 }
-                kicker={
-                    firstCollection.header.kicker
-                        ? kickerText(firstCollection.header.kicker)
-                        : ""
-                }
+                kicker={getKickerText(firstCollection)}
                 pillar={
                     firstCollection.properties.maybeContent
                         ? firstCollection.properties.maybeContent.metadata
@@ -99,11 +95,7 @@ export const TopCollection: React.FC<{
                         ? thirdCollection.properties.byline
                         : null
                 }
-                kicker={
-                    thirdCollection.header.kicker
-                        ? kickerText(thirdCollection.header.kicker)
-                        : ""
-                }
+                kicker={getKickerText(thirdCollection)}
                 pillar={
                     thirdCollection.properties.maybeContent
                         ? thirdCollection.properties.maybeContent.metadata
