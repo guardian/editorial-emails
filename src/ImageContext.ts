@@ -1,8 +1,8 @@
 import React from "react";
 
-type ImageContext = {
+interface ImageContext {
     imageSalt: string;
-};
+}
 
 const initialValues: ImageContext = { imageSalt: "" };
 
