@@ -8,7 +8,8 @@ import { CommentCard } from "../../../../components/cards/CommentCard";
 import {
     getPillarName,
     getImageSrc,
-    getCardUrl
+    getCardUrl,
+    getByline
 } from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
@@ -28,27 +29,20 @@ export const CommentCollection: React.FC<{
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            {content.map(story => {
-                const storyContributor = story.properties.maybeContent.tags.tags.find(
-                    (tag: any) => {
-                        return tag.properties.tagType === "Contributor";
-                    }
-                );
-                return (
-                    <CommentCard
-                        headline={story.header.headline}
-                        byline={story.properties.byline}
-                        cardUrl={getCardUrl(story)}
-                        trailText={story.card.trailText}
-                        isComment={story.header.isComment}
-                        shouldShowProfileImage
-                        size="large"
-                        pillar={getPillarName(story)}
-                        imageSrc={getImageSrc(storyContributor)}
-                        imageAlt={story.header.headline}
-                    />
-                );
-            })}
+            {content.map(story => (
+                <CommentCard
+                    headline={story.header.headline}
+                    byline={getByline(story)}
+                    cardUrl={getCardUrl(story)}
+                    trailText={story.card.trailText}
+                    isComment={story.header.isComment}
+                    shouldShowProfileImage
+                    size="large"
+                    pillar={getPillarName(story)}
+                    imageSrc={getImageSrc(story, { isContributor: true })}
+                    imageAlt={story.header.headline}
+                />
+            ))}
         </>
     );
 };

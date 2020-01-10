@@ -6,7 +6,12 @@ import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
-import { getKickerText, getPillarName } from "../../../../dataHelpers";
+import {
+    getKickerText,
+    getPillarName,
+    getCardUrl,
+    getByline
+} from "../../../../dataHelpers";
 
 export const LinkCollection: React.FC<{
     collection: ICollection;
@@ -33,14 +38,9 @@ export const LinkCollection: React.FC<{
                             headline={story.header.headline}
                             trailText={story.card.trailText}
                             isComment={story.display.showQuotedHeadline}
-                            cardUrl={story.properties.webUrl}
+                            cardUrl={getCardUrl(story)}
                             pillar={getPillarName(story)}
-                            byline={
-                                story.properties.showByline &&
-                                story.properties.byline
-                                    ? story.properties.byline
-                                    : ""
-                            }
+                            byline={getByline(story)}
                             kicker={getKickerText(story)}
                             borderWidth="thin"
                             borderColor={palette.opinion.main}

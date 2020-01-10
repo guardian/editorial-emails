@@ -11,7 +11,8 @@ import {
     getKickerText,
     getPillarName,
     getImageSrc,
-    getCardUrl
+    getCardUrl,
+    getByline
 } from "../../../../dataHelpers";
 
 export const TopCollection: React.FC<{
@@ -48,12 +49,7 @@ export const TopCollection: React.FC<{
                 imageSrc={getImageSrc(firstCollection)}
                 imageAlt={firstCollection.header.headline}
                 imageRating={firstCollection.card.starRating}
-                byline={
-                    firstCollection.properties.showByline &&
-                    firstCollection.properties.byline
-                        ? firstCollection.properties.byline
-                        : null
-                }
+                byline={getByline(firstCollection)}
                 kicker={getKickerText(firstCollection)}
                 pillar={getPillarName(firstCollection)}
                 size="large"
@@ -79,12 +75,7 @@ export const TopCollection: React.FC<{
                 imageSrc={getImageSrc(thirdCollection)}
                 imageAlt={thirdCollection.header.headline}
                 imageRating={thirdCollection.card.starRating}
-                byline={
-                    thirdCollection.properties.showByline &&
-                    thirdCollection.properties.byline
-                        ? thirdCollection.properties.byline
-                        : null
-                }
+                byline={getByline(thirdCollection)}
                 kicker={getKickerText(thirdCollection)}
                 pillar={getPillarName(thirdCollection)}
                 size="large"

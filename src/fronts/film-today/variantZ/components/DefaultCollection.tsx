@@ -11,7 +11,8 @@ import {
     getKickerText,
     getPillarName,
     getImageSrc,
-    getCardUrl
+    getCardUrl,
+    getByline
 } from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
@@ -29,11 +30,7 @@ export const DefaultCollection: React.FC<{
         <>
             <DescriptiveCard
                 headline={firstContent.header.headline}
-                byline={
-                    firstContent.properties.showByline
-                        ? firstContent.header.headline
-                        : null
-                }
+                byline={getByline(firstContent)}
                 trailText={firstContent.card.trailText}
                 cardUrl={getCardUrl(firstContent)}
                 kicker={getKickerText(firstContent)}
@@ -54,12 +51,7 @@ export const DefaultCollection: React.FC<{
                 trailText={lastContent.card.trailText}
                 isComment={lastContent.display.showQuotedHeadline}
                 cardUrl={getCardUrl(lastContent)}
-                byline={
-                    lastContent.properties.showByline &&
-                    lastContent.properties.byline
-                        ? lastContent.properties.byline
-                        : ""
-                }
+                byline={getByline(lastContent)}
                 pillar={getPillarName(lastContent)}
                 kicker={getKickerText(lastContent)}
                 borderWidth="thick"

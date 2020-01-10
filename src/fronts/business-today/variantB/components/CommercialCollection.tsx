@@ -27,7 +27,7 @@ export const CommercialCollection: React.FC<{
                     <CommercialCard
                         headline={story.header.headline}
                         cardUrl={getCardUrl(story)}
-                        imageSrc={getImageSrc(story)}
+                        imageSrc={getImageSrc(story, { isCommercial: true })}
                         imageAlt={story.header.headline}
                         imageRating={story.card.starRating}
                     />

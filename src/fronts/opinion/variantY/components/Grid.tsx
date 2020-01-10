@@ -2,25 +2,19 @@ import React from "react";
 import { palette } from "@guardian/src-foundations";
 import { TableRowCell, TableRow } from "../../../../layout/Table";
 import { Padding } from "../../../../layout/Padding";
-import { Content, Tag } from "../../../../api";
+import { Content } from "../../../../api";
 import { GridRow, partition } from "../../../../layout/Grid";
 import {
     CommentCardB,
     ContributorImageWrapper
 } from "../../../../components/cards/CommentCardB";
 import { LinkCardB } from "../../../../components/cards/LinkCardB";
-import { getImageSrc, getCardUrl } from "../../../../dataHelpers";
+import { getImageSrc, getCardUrl, getByline } from "../../../../dataHelpers";
 
 interface CommentGridProps {
     content: Content[];
     shouldShowGridImages: boolean;
 }
-
-const getContributor = (content: Content): Tag => {
-    return content.properties.maybeContent.tags.tags.find(tag => {
-        return tag.properties.tagType === "Contributor";
-    });
-};
 
 export const Grid: React.FC<CommentGridProps> = ({
     content,
@@ -28,25 +22,21 @@ export const Grid: React.FC<CommentGridProps> = ({
 }) => {
     const rows = partition(content, 2).map((pair, i) => {
         const leftPair = pair[0];
-        const leftContributor = getContributor(leftPair);
-        const leftContributorImg = leftContributor
-            ? leftContributor.properties.contributorLargeImagePath
-            : null;
         const contributorLeftWrapper = (
             <ContributorImageWrapper
-                contributorImageSrc={leftContributorImg}
+                contributorImageSrc={getImageSrc(leftPair, {
+                    isContributor: true
+                })}
                 contributorImageAlt=""
             />
         );
 
         const rightPair = pair[1];
-        const rightContributor = getContributor(rightPair);
-        const rightContributorImg = rightContributor
-            ? rightContributor.properties.contributorLargeImagePath
-            : null;
         const contributorRightWrapper = (
             <ContributorImageWrapper
-                contributorImageSrc={rightContributorImg}
+                contributorImageSrc={getImageSrc(rightPair, {
+                    isContributor: true
+                })}
                 contributorImageAlt=""
             />
         );
@@ -64,7 +54,7 @@ export const Grid: React.FC<CommentGridProps> = ({
                     left={
                         <CommentCardB
                             headline={leftPair.header.headline}
-                            byline={leftPair.properties.byline}
+                            byline={getByline(leftPair)}
                             trailText={leftPair.card.trailText}
                             cardUrl={getCardUrl(leftPair)}
                             imageSrc={getImageSrc(leftPair)}
@@ -78,7 +68,7 @@ export const Grid: React.FC<CommentGridProps> = ({
                     right={
                         <CommentCardB
                             headline={rightPair.header.headline}
-                            byline={rightPair.properties.byline}
+                            byline={getByline(rightPair)}
                             trailText={rightPair.card.trailText}
                             cardUrl={getCardUrl(rightPair)}
                             imageSrc={getImageSrc(rightPair)}

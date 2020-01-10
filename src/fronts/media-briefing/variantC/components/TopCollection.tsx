@@ -11,7 +11,8 @@ import {
     getKickerText,
     getPillarName,
     getImageSrc,
-    getCardUrl
+    getCardUrl,
+    getByline
 } from "../../../../dataHelpers";
 
 export const TopCollection: React.FC<{
@@ -61,12 +62,7 @@ export const TopCollection: React.FC<{
                         isComment={story.display.showQuotedHeadline}
                         cardUrl={getCardUrl(story)}
                         pillar={getPillarName(story)}
-                        byline={
-                            story.properties.showByline &&
-                            story.properties.byline
-                                ? story.properties.byline
-                                : ""
-                        }
+                        byline={getByline(story)}
                         kicker={getKickerText(story)}
                         backgroundColor={white}
                         showPillarColours

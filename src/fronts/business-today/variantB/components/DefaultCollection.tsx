@@ -9,7 +9,8 @@ import { Padding } from "../../../../layout/Padding";
 import {
     getKickerText,
     getPillarName,
-    getCardUrl
+    getCardUrl,
+    getByline
 } from "../../../../dataHelpers";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { TableRowCell } from "../../../../layout/Table";
@@ -52,12 +53,7 @@ export const DefaultCollection: React.FC<{
                         isComment={story.display.showQuotedHeadline}
                         cardUrl={getCardUrl(story)}
                         pillar={getPillarName(story)}
-                        byline={
-                            story.properties.showByline &&
-                            story.properties.byline
-                                ? story.properties.byline
-                                : ""
-                        }
+                        byline={getByline(story)}
                         kicker={getKickerText(story)}
                         showPillarColours
                         backgroundColor={white}

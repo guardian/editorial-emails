@@ -11,7 +11,8 @@ import {
     getKickerText,
     getPillarName,
     getImageSrc,
-    getCardUrl
+    getCardUrl,
+    getByline
 } from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
@@ -42,12 +43,7 @@ export const DefaultCollection: React.FC<{
                             imageSrc={getImageSrc(content)}
                             imageAlt={content.header.headline}
                             imageRating={content.card.starRating}
-                            byline={
-                                content.properties.showByline &&
-                                content.properties.byline
-                                    ? content.properties.byline
-                                    : null
-                            }
+                            byline={getByline(content)}
                             kicker={getKickerText(content)}
                             pillar={getPillarName(content)}
                             size="large"

@@ -6,7 +6,12 @@ import { Padding } from "../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../components/Multiline";
 import { MostViewedCard } from "../components/cards/MostViewedCard";
-import { getKickerText, getPillarName, getCardUrl } from "../dataHelpers";
+import {
+    getKickerText,
+    getPillarName,
+    getCardUrl,
+    getByline
+} from "../dataHelpers";
 
 export const MostViewedCollection: React.FC<{
     collection: ICollection;
@@ -29,12 +34,7 @@ export const MostViewedCollection: React.FC<{
                         cardUrl={getCardUrl(story)}
                         isComment={story.display.showQuotedHeadline}
                         pillar={getPillarName(story)}
-                        byline={
-                            story.properties.showByline &&
-                            story.properties.byline
-                                ? story.properties.byline
-                                : ""
-                        }
+                        byline={getByline(story)}
                         kicker={getKickerText(story)}
                         index={String(index + 1)}
                     />

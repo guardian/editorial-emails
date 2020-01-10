@@ -8,7 +8,8 @@ import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import {
     getKickerText,
     getPillarName,
-    getCardUrl
+    getCardUrl,
+    getByline
 } from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
@@ -40,12 +41,7 @@ export const CommentCollection: React.FC<{
                         isComment={story.display.showQuotedHeadline}
                         cardUrl={getCardUrl(story)}
                         pillar={getPillarName(story)}
-                        byline={
-                            story.properties.showByline &&
-                            story.properties.byline
-                                ? story.properties.byline
-                                : ""
-                        }
+                        byline={getByline(story)}
                         kicker={getKickerText(story)}
                         backgroundColor={white}
                         showPillarColours

@@ -4,21 +4,14 @@ import { Padding } from "../../../../layout/Padding";
 import { Heading } from "./../../../../components/Heading";
 import { Multiline } from "./../../../../components/Multiline";
 import { CommentCardC } from "../../../../components/cards/CommentCardC";
-import { Content, Tag } from "../../../../api";
 import { Grid as CommentGrid } from "./Grid";
-import { getImageSrc, getCardUrl } from "../../../../dataHelpers";
+import { getImageSrc, getCardUrl, getByline } from "../../../../dataHelpers";
 
 const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
     if (frontId === "email/opinion") {
         return false;
     }
     return true;
-};
-
-const getContributor = (content: Content): Tag => {
-    return content.properties.maybeContent.tags.tags.find(tag => {
-        return tag.properties.tagType === "Contributor";
-    });
 };
 
 export const CommentCollection: React.FC<{
@@ -37,11 +30,6 @@ export const CommentCollection: React.FC<{
     const grid_7_8 = content.slice(7, 9);
     const c9 = content[9];
 
-    const c0Contributor = getContributor(c0);
-    const c1Contributor = getContributor(c1);
-    const c6Contributor = getContributor(c6);
-    const c9Contributor = getContributor(c9);
-
     return (
         <>
             <Multiline topPadding />
@@ -49,7 +37,7 @@ export const CommentCollection: React.FC<{
 
             <CommentCardC
                 headline={c0.header.headline}
-                byline={c0.properties.byline}
+                byline={getByline(c0)}
                 trailText={c0.card.trailText}
                 cardUrl={getCardUrl(c0)}
                 imageSrc={getImageSrc(c0)}
@@ -57,16 +45,14 @@ export const CommentCollection: React.FC<{
                 imageRating={c0.card.starRating}
                 isComment={c0.header.isComment}
                 size="large"
-                contributorImageSrc={getImageSrc(c0)}
-                contributorImageAlt={
-                    c0Contributor ? c0Contributor.properties.webTitle : null
-                }
+                contributorImageSrc={getImageSrc(c0, { isContributor: true })}
+                contributorImageAlt=""
             />
             <Padding px={12} />
 
             <CommentCardC
                 headline={c1.header.headline}
-                byline={c1.properties.byline}
+                byline={getByline(c1)}
                 trailText={c1.card.trailText}
                 cardUrl={getCardUrl(c1)}
                 imageSrc={getImageSrc(c1)}
@@ -74,10 +60,8 @@ export const CommentCollection: React.FC<{
                 imageRating={c1.card.starRating}
                 isComment={c1.header.isComment}
                 size="large"
-                contributorImageSrc={getImageSrc(c1)}
-                contributorImageAlt={
-                    c1Contributor ? c1Contributor.properties.webTitle : null
-                }
+                contributorImageSrc={getImageSrc(c1, { isContributor: true })}
+                contributorImageAlt=""
             />
             <Padding px={12} />
 
@@ -90,7 +74,7 @@ export const CommentCollection: React.FC<{
 
             <CommentCardC
                 headline={c6.header.headline}
-                byline={c6.properties.byline}
+                byline={getByline(c6)}
                 trailText={c6.card.trailText}
                 cardUrl={getCardUrl(c6)}
                 imageSrc={getImageSrc(c6)}
@@ -98,10 +82,8 @@ export const CommentCollection: React.FC<{
                 imageRating={c6.card.starRating}
                 isComment={c6.header.isComment}
                 size="large"
-                contributorImageSrc={getImageSrc(c6)}
-                contributorImageAlt={
-                    c6Contributor ? c6Contributor.properties.webTitle : null
-                }
+                contributorImageSrc={getImageSrc(c6, { isContributor: true })}
+                contributorImageAlt=""
             />
             <Padding px={12} />
 
@@ -114,17 +96,15 @@ export const CommentCollection: React.FC<{
 
             <CommentCardC
                 headline={c9.header.headline}
-                byline={c9.properties.byline}
+                byline={getByline(c9)}
                 trailText={c9.card.trailText}
                 cardUrl={getCardUrl(c9)}
                 imageSrc={getImageSrc(c9)}
                 imageAlt={c9.header.headline}
                 imageRating={c9.card.starRating}
                 isComment={c9.header.isComment}
-                contributorImageSrc={getImageSrc(c9)}
-                contributorImageAlt={
-                    c9Contributor ? c9Contributor.properties.webTitle : null
-                }
+                contributorImageSrc={getImageSrc(c9, { isContributor: true })}
+                contributorImageAlt=""
                 size="large"
             />
         </>

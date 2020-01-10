@@ -9,7 +9,8 @@ import { palette } from "@guardian/src-foundations";
 import {
     getPillarName,
     getImageSrc,
-    getCardUrl
+    getCardUrl,
+    getByline
 } from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
@@ -23,12 +24,6 @@ export const CommentCollection: React.FC<{
 
     const leadStory = content[0];
     const bottomCollection = content.slice(1);
-    const leadContributor = leadStory.properties.maybeContent.tags.tags.find(
-        (tag: any) => {
-            return tag.properties.tagType === "Contributor";
-        }
-    );
-
     const lightGrey = palette.neutral[97];
     return (
         <>
@@ -38,14 +33,14 @@ export const CommentCollection: React.FC<{
                 <Heading heading={collection.displayName} />
                 <CommentCard
                     headline={leadStory.header.headline}
-                    byline={leadStory.properties.byline}
+                    byline={getByline(leadStory)}
                     trailText={leadStory.card.trailText}
                     cardUrl={getCardUrl(leadStory)}
                     isComment={leadStory.header.isComment}
                     size="large"
                     shouldShowProfileImage
                     pillar={getPillarName(leadStory)}
-                    imageSrc={getImageSrc(leadContributor)}
+                    imageSrc={getImageSrc(leadStory, { isContributor: true })}
                     imageAlt={leadStory.header.headline}
                 />
                 <Padding px={12} />
@@ -54,7 +49,7 @@ export const CommentCollection: React.FC<{
                         <>
                             <CommentCard
                                 headline={story.header.headline}
-                                byline={story.properties.byline}
+                                byline={getByline(story)}
                                 cardUrl={getCardUrl(story)}
                                 isComment={story.header.isComment}
                                 pillar={getPillarName(story)}
