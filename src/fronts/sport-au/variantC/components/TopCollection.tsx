@@ -7,7 +7,11 @@ import { Heading } from "../../../../components/Heading";
 import { DefaultGrid } from "../../../../layout/Grid";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { palette } from "@guardian/src-foundations";
-import { getKickerText, getPillarName } from "../../../../dataHelpers";
+import {
+    getKickerText,
+    getPillarName,
+    getImageSrc
+} from "../../../../dataHelpers";
 
 export const TopCollection: React.FC<{
     collection: ICollection;
@@ -40,12 +44,7 @@ export const TopCollection: React.FC<{
                 headline={firstCollection.header.headline}
                 cardUrl={firstCollection.properties.webUrl}
                 isComment={firstCollection.display.showQuotedHeadline}
-                imageSrc={
-                    firstCollection.properties.maybeContent
-                        ? firstCollection.properties.maybeContent.trail
-                              .trailPicture.allImages[0].url
-                        : null
-                }
+                imageSrc={getImageSrc(firstCollection)}
                 imageAlt={firstCollection.header.headline}
                 imageRating={firstCollection.card.starRating}
                 byline={
@@ -76,12 +75,7 @@ export const TopCollection: React.FC<{
                 headline={thirdCollection.header.headline}
                 cardUrl={thirdCollection.properties.webUrl}
                 isComment={thirdCollection.display.showQuotedHeadline}
-                imageSrc={
-                    thirdCollection.properties.maybeContent
-                        ? thirdCollection.properties.maybeContent.trail
-                              .trailPicture.allImages[0].url
-                        : null
-                }
+                imageSrc={getImageSrc(thirdCollection)}
                 imageAlt={thirdCollection.header.headline}
                 imageRating={thirdCollection.card.starRating}
                 byline={

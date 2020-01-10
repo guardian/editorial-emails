@@ -7,7 +7,11 @@ import { OverlayCard } from "../../../../components/cards/OverlayCard";
 import { Multiline } from "../../../../components/Multiline";
 import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
-import { getKickerText, getPillarName } from "../../../../dataHelpers";
+import {
+    getKickerText,
+    getPillarName,
+    getImageSrc
+} from "../../../../dataHelpers";
 
 export const TopCollection: React.FC<{
     collection: ICollection;
@@ -38,12 +42,7 @@ export const TopCollection: React.FC<{
                 isComment={leadStory.display.showQuotedHeadline}
                 pillar={getPillarName(leadStory)}
                 kicker={getKickerText(leadStory)}
-                imageSrc={
-                    leadStory.properties.maybeContent
-                        ? leadStory.properties.maybeContent.trail.trailPicture
-                              .allImages[0].url
-                        : null
-                }
+                imageSrc={getImageSrc(leadStory)}
                 imageAlt={leadStory.header.headline}
                 imageRating={leadStory.card.starRating}
                 backgroundColor={white}

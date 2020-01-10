@@ -6,6 +6,7 @@ import { palette } from "@guardian/src-foundations";
 import { TableRowCell } from "./Table";
 import { Padding } from "./Padding";
 import { getKickerText, getPillarName } from "../dataHelpers";
+import { getImageSrc } from "../dataHelpers";
 
 const gutterStyle: TdCSS = {
     width: "2%",
@@ -136,12 +137,7 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
                             isComment={leftPair.display.showQuotedHeadline}
                             cardUrl={leftPair.properties.webUrl}
                             pillar={getPillarName(leftPair)}
-                            imageSrc={
-                                leftPair.properties.maybeContent
-                                    ? leftPair.properties.maybeContent.trail
-                                          .trailPicture.allImages[0].url
-                                    : null
-                            }
+                            imageSrc={getImageSrc(leftPair)}
                             imageAlt={leftPair.header.headline}
                             imageRating={leftPair.card.starRating}
                             size="small"
@@ -162,13 +158,7 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
                                 isComment={rightPair.display.showQuotedHeadline}
                                 cardUrl={rightPair.properties.webUrl}
                                 pillar={getPillarName(rightPair)}
-                                imageSrc={
-                                    rightPair.properties.maybeContent
-                                        ? rightPair.properties.maybeContent
-                                              .trail.trailPicture.allImages[0]
-                                              .url
-                                        : null
-                                }
+                                imageSrc={getImageSrc(rightPair)}
                                 imageAlt={rightPair.header.headline}
                                 imageRating={rightPair.card.starRating}
                                 {...props}

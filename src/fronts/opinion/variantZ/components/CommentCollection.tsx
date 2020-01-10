@@ -6,6 +6,7 @@ import { Multiline } from "./../../../../components/Multiline";
 import { CommentCardC } from "../../../../components/cards/CommentCardC";
 import { Content, Tag } from "../../../../api";
 import { Grid as CommentGrid } from "./Grid";
+import { getImageSrc } from "../../../../dataHelpers";
 
 const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
     if (frontId === "email/opinion") {
@@ -51,21 +52,12 @@ export const CommentCollection: React.FC<{
                 byline={c0.properties.byline}
                 trailText={c0.card.trailText}
                 cardUrl={c0.properties.webUrl}
-                imageSrc={
-                    c0.properties.maybeContent
-                        ? c0.properties.maybeContent.trail.trailPicture
-                              .allImages[0].url
-                        : null
-                }
+                imageSrc={getImageSrc(c0)}
                 imageAlt={c0.header.headline}
                 imageRating={c0.card.starRating}
                 isComment={c0.header.isComment}
                 size="large"
-                contributorImageSrc={
-                    c0Contributor
-                        ? c0Contributor.properties.contributorLargeImagePath
-                        : null
-                }
+                contributorImageSrc={getImageSrc(c0)}
                 contributorImageAlt={
                     c0Contributor ? c0Contributor.properties.webTitle : null
                 }
@@ -77,21 +69,12 @@ export const CommentCollection: React.FC<{
                 byline={c1.properties.byline}
                 trailText={c1.card.trailText}
                 cardUrl={c1.properties.webUrl}
-                imageSrc={
-                    c1.properties.maybeContent
-                        ? c1.properties.maybeContent.trail.trailPicture
-                              .allImages[0].url
-                        : null
-                }
+                imageSrc={getImageSrc(c1)}
                 imageAlt={c1.header.headline}
                 imageRating={c1.card.starRating}
                 isComment={c1.header.isComment}
                 size="large"
-                contributorImageSrc={
-                    c1Contributor
-                        ? c1Contributor.properties.contributorLargeImagePath
-                        : null
-                }
+                contributorImageSrc={getImageSrc(c1)}
                 contributorImageAlt={
                     c1Contributor ? c1Contributor.properties.webTitle : null
                 }
@@ -110,21 +93,12 @@ export const CommentCollection: React.FC<{
                 byline={c6.properties.byline}
                 trailText={c6.card.trailText}
                 cardUrl={c6.properties.webUrl}
-                imageSrc={
-                    c6.properties.maybeContent
-                        ? c6.properties.maybeContent.trail.trailPicture
-                              .allImages[0].url
-                        : null
-                }
+                imageSrc={getImageSrc(c6)}
                 imageAlt={c6.header.headline}
                 imageRating={c6.card.starRating}
                 isComment={c6.header.isComment}
                 size="large"
-                contributorImageSrc={
-                    c6Contributor
-                        ? c6Contributor.properties.contributorLargeImagePath
-                        : null
-                }
+                contributorImageSrc={getImageSrc(c6)}
                 contributorImageAlt={
                     c6Contributor ? c6Contributor.properties.webTitle : null
                 }
@@ -143,20 +117,11 @@ export const CommentCollection: React.FC<{
                 byline={c9.properties.byline}
                 trailText={c9.card.trailText}
                 cardUrl={c9.properties.webUrl}
-                imageSrc={
-                    c9.properties.maybeContent
-                        ? c9.properties.maybeContent.trail.trailPicture
-                              .allImages[0].url
-                        : null
-                }
+                imageSrc={getImageSrc(c9)}
                 imageAlt={c9.header.headline}
                 imageRating={c9.card.starRating}
                 isComment={c9.header.isComment}
-                contributorImageSrc={
-                    c9Contributor
-                        ? c9Contributor.properties.contributorLargeImagePath
-                        : null
-                }
+                contributorImageSrc={getImageSrc(c9)}
                 contributorImageAlt={
                     c9Contributor ? c9Contributor.properties.webTitle : null
                 }

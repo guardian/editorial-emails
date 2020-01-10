@@ -9,6 +9,7 @@ import {
     ContributorImageWrapper
 } from "../../../../components/cards/CommentCardC";
 import { LinkCardC } from "../../../../components/cards/LinkCardC";
+import { getImageSrc } from "../../../../dataHelpers";
 
 interface CommentGridProps {
     content: Content[];
@@ -66,12 +67,7 @@ export const Grid: React.FC<CommentGridProps> = ({
                             byline={leftPair.properties.byline}
                             trailText={leftPair.card.trailText}
                             cardUrl={leftPair.properties.webUrl}
-                            imageSrc={
-                                leftPair.properties.maybeContent
-                                    ? leftPair.properties.maybeContent.trail
-                                          .trailPicture.allImages[0].url
-                                    : null
-                            }
+                            imageSrc={getImageSrc(leftPair)}
                             imageAlt={leftPair.header.headline}
                             imageRating={leftPair.card.starRating}
                             isComment={leftPair.header.isComment}
@@ -85,12 +81,7 @@ export const Grid: React.FC<CommentGridProps> = ({
                             byline={rightPair.properties.byline}
                             trailText={rightPair.card.trailText}
                             cardUrl={rightPair.properties.webUrl}
-                            imageSrc={
-                                rightPair.properties.maybeContent
-                                    ? rightPair.properties.maybeContent.trail
-                                          .trailPicture.allImages[0].url
-                                    : null
-                            }
+                            imageSrc={getImageSrc(rightPair)}
                             imageAlt={rightPair.header.headline}
                             imageRating={rightPair.card.starRating}
                             isComment={rightPair.header.isComment}

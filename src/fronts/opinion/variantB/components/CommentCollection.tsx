@@ -6,7 +6,7 @@ import { CommentCard } from "./../../../../components/cards/CommentCard";
 import { Padding } from "../../../../layout/Padding";
 import { TableRowCell } from "../../../../layout/Table";
 import { palette } from "@guardian/src-foundations";
-import { getPillarName } from "../../../../dataHelpers";
+import { getPillarName, getImageSrc } from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
     frontId: string;
@@ -41,12 +41,7 @@ export const CommentCollection: React.FC<{
                     size="large"
                     shouldShowProfileImage
                     pillar={getPillarName(leadStory)}
-                    imageSrc={
-                        leadContributor
-                            ? leadContributor.properties
-                                  .contributorLargeImagePath
-                            : null
-                    }
+                    imageSrc={getImageSrc(leadContributor)}
                     imageAlt={leadStory.header.headline}
                 />
                 <Padding px={12} />

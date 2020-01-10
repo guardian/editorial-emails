@@ -1,12 +1,15 @@
 import React from "react";
 import { Collection as ICollection } from "../../../../api";
-import { DefaultGrid } from "../../../../layout/Grid";
 import { Heading } from "../../../../components/Heading";
 import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { OverlayCard } from "../../../../components/cards/OverlayCard";
-import { getKickerText, getPillarName } from "../../../../dataHelpers";
+import {
+    getKickerText,
+    getPillarName,
+    getImageSrc
+} from "../../../../dataHelpers";
 
 export const LiveCollection: React.FC<{
     collection: ICollection;
@@ -34,12 +37,7 @@ export const LiveCollection: React.FC<{
                         isComment={story.display.showQuotedHeadline}
                         pillar={getPillarName(story)}
                         kicker={getKickerText(story)}
-                        imageSrc={
-                            story.properties.maybeContent
-                                ? story.properties.maybeContent.trail
-                                      .trailPicture.allImages[0].url
-                                : null
-                        }
+                        imageSrc={getImageSrc(story)}
                         imageAlt={story.header.headline}
                         imageRating={story.card.starRating}
                         layout="expanded"

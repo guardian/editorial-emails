@@ -9,6 +9,7 @@ import {
     ContributorImageWrapper
 } from "../../../../components/cards/CommentCardB";
 import { LinkCardB } from "../../../../components/cards/LinkCardB";
+import { getImageSrc } from "../../../../dataHelpers";
 
 interface CommentGridProps {
     content: Content[];
@@ -75,12 +76,7 @@ export const Grid: React.FC<CommentGridProps> = ({
                                 byline={content.properties.byline}
                                 trailText={content.card.trailText}
                                 cardUrl={content.properties.webUrl}
-                                imageSrc={
-                                    content.properties.maybeContent
-                                        ? content.properties.maybeContent.trail
-                                              .trailPicture.allImages[0].url
-                                        : null
-                                }
+                                imageSrc={getImageSrc(content)}
                                 imageAlt={content.header.headline}
                                 imageRating={content.card.starRating}
                                 isComment={content.header.isComment}
@@ -97,12 +93,7 @@ export const Grid: React.FC<CommentGridProps> = ({
                                 byline={content.properties.byline}
                                 trailText={content.card.trailText}
                                 cardUrl={content.properties.webUrl}
-                                imageSrc={
-                                    content.properties.maybeContent
-                                        ? content.properties.maybeContent.trail
-                                              .trailPicture.allImages[0].url
-                                        : null
-                                }
+                                imageSrc={getImageSrc(content)}
                                 imageAlt={content.header.headline}
                                 imageRating={content.card.starRating}
                                 isComment={content.header.isComment}

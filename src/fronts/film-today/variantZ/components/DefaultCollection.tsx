@@ -7,7 +7,11 @@ import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import { DescriptiveCard } from "../../../../components/cards/DescriptiveCard";
 import { Padding } from "../../../../layout/Padding";
-import { getKickerText, getPillarName } from "../../../../dataHelpers";
+import {
+    getKickerText,
+    getPillarName,
+    getImageSrc
+} from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -34,10 +38,7 @@ export const DefaultCollection: React.FC<{
                 kicker={getKickerText(firstContent)}
                 isComment={firstContent.display.showQuotedHeadline}
                 pillar={getPillarName(firstContent)}
-                imageSrc={
-                    firstContent.properties.maybeContent.trail.trailPicture
-                        .allImages[0].url
-                }
+                imageSrc={getImageSrc(firstContent)}
                 imageAlt={firstContent.header.headline}
                 imageRating={firstContent.card.starRating}
                 showPillarColours

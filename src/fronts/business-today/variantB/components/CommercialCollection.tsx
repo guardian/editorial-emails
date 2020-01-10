@@ -4,6 +4,7 @@ import { Heading } from "../../../../components/Heading";
 import { palette } from "@guardian/src-foundations";
 import { CommercialCard } from "../../../../components/cards/CommercialCard";
 import { Padding } from "../../../../layout/Padding";
+import { getImageSrc } from "../../../../dataHelpers";
 
 export const CommercialCollection: React.FC<{
     collection: ICollection;
@@ -26,7 +27,7 @@ export const CommercialCollection: React.FC<{
                     <CommercialCard
                         headline={story.header.headline}
                         cardUrl={story.properties.href}
-                        imageSrc={story.properties.image.item.imageSrc}
+                        imageSrc={getImageSrc(story)}
                         imageAlt={story.header.headline}
                         imageRating={story.card.starRating}
                     />

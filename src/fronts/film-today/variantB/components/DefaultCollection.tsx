@@ -7,7 +7,11 @@ import { Heading } from "../../../../components/Heading";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { palette } from "@guardian/src-foundations";
 import { TableRowCell } from "../../../../layout/Table";
-import { getKickerText, getPillarName } from "../../../../dataHelpers";
+import {
+    getKickerText,
+    getPillarName,
+    getImageSrc
+} from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -34,12 +38,7 @@ export const DefaultCollection: React.FC<{
                             headline={content.header.headline}
                             cardUrl={content.properties.webUrl}
                             isComment={content.display.showQuotedHeadline}
-                            imageSrc={
-                                content.properties.maybeContent
-                                    ? content.properties.maybeContent.trail
-                                          .trailPicture.allImages[0].url
-                                    : null
-                            }
+                            imageSrc={getImageSrc(content)}
                             imageAlt={content.header.headline}
                             imageRating={content.card.starRating}
                             byline={

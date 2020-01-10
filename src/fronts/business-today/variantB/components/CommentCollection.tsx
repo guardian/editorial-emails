@@ -5,7 +5,7 @@ import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { CommentCard } from "../../../../components/cards/CommentCard";
-import { getPillarName } from "../../../../dataHelpers";
+import { getPillarName, getImageSrc } from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
     collection: ICollection;
@@ -40,12 +40,7 @@ export const CommentCollection: React.FC<{
                         shouldShowProfileImage
                         size="large"
                         pillar={getPillarName(story)}
-                        imageSrc={
-                            storyContributor
-                                ? storyContributor.properties
-                                      .contributorLargeImagePath
-                                : null
-                        }
+                        imageSrc={getImageSrc(storyContributor)}
                         imageAlt={story.header.headline}
                     />
                 );

@@ -3,6 +3,7 @@ import { Collection as ICollection } from "../../../../api";
 import { Heading } from "./../../../../components/Heading";
 import { Multiline } from "./../../../../components/Multiline";
 import { CommentCardC } from "../../../../components/cards/CommentCardC";
+import { getImageSrc } from "../../../../dataHelpers";
 
 export const EditorialCollection: React.FC<{
     collection: ICollection;
@@ -23,12 +24,7 @@ export const EditorialCollection: React.FC<{
                 byline={contentOne.properties.byline}
                 trailText={contentOne.card.trailText}
                 cardUrl={contentOne.properties.webUrl}
-                imageSrc={
-                    contentOne.properties.maybeContent
-                        ? contentOne.properties.maybeContent.trail.trailPicture
-                              .allImages[0].url
-                        : null
-                }
+                imageSrc={getImageSrc(contentOne)}
                 imageAlt={contentOne.header.headline}
                 imageRating={contentOne.card.starRating}
                 isComment={contentOne.header.isComment}

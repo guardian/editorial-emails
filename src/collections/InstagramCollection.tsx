@@ -5,7 +5,7 @@ import { Padding } from "../layout/Padding";
 import { Multiline } from "../components/Multiline";
 import { Heading } from "../components/Heading";
 import { OverlayCard } from "../components/cards/OverlayCard";
-import { getKickerText, getPillarName } from "../dataHelpers";
+import { getKickerText, getPillarName, getImageSrc } from "../dataHelpers";
 
 export const InstagramCollection: React.FC<{
     collection: ICollection;
@@ -35,12 +35,7 @@ export const InstagramCollection: React.FC<{
                         cardUrl={story.properties.webUrl}
                         isComment={story.display.showQuotedHeadline}
                         pillar={getPillarName(story)}
-                        imageSrc={
-                            story.properties.maybeContent
-                                ? story.properties.maybeContent.trail
-                                      .trailPicture.allImages[0].url
-                                : null
-                        }
+                        imageSrc={getImageSrc(story)}
                         imageAlt={story.header.headline}
                         imageRating={story.card.starRating}
                         kicker={getKickerText(story)}
