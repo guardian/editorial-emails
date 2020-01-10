@@ -1,6 +1,6 @@
 import { Content, Pillar } from "./api";
 
-interface getImageSrcParams {
+interface ImageSrcParams {
     isCommercial?: boolean;
     isContributor?: boolean;
 }
@@ -32,7 +32,7 @@ export const getPillarName = (story: Content): Pillar => {
 
 export const getImageSrc = (
     story: Content,
-    options: getImageSrcParams = {}
+    options: ImageSrcParams = {}
 ): string => {
     if (options.isCommercial) {
         return story.properties.image.item.imageSrc || null;
