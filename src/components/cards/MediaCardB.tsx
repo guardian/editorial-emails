@@ -40,7 +40,7 @@ export const MediaCardB: React.FC<Props> = ({
             <RowCell tdStyle={{ padding: "0" }}>
                 <Image
                     src={imageSrc}
-                    linkTo={`${cardUrl}?##braze_utm##`}
+                    linkTo={cardUrl}
                     alt={imageAlt}
                     rating={imageRating}
                     width={580}

@@ -6,7 +6,11 @@ import { CommentCard } from "./../../../../components/cards/CommentCard";
 import { Padding } from "../../../../layout/Padding";
 import { TableRowCell } from "../../../../layout/Table";
 import { palette } from "@guardian/src-foundations";
-import { getPillarName, getImageSrc } from "../../../../dataHelpers";
+import {
+    getPillarName,
+    getImageSrc,
+    getCardUrl
+} from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
     frontId: string;
@@ -36,7 +40,7 @@ export const CommentCollection: React.FC<{
                     headline={leadStory.header.headline}
                     byline={leadStory.properties.byline}
                     trailText={leadStory.card.trailText}
-                    cardUrl={leadStory.properties.webUrl}
+                    cardUrl={getCardUrl(leadStory)}
                     isComment={leadStory.header.isComment}
                     size="large"
                     shouldShowProfileImage
@@ -51,7 +55,7 @@ export const CommentCollection: React.FC<{
                             <CommentCard
                                 headline={story.header.headline}
                                 byline={story.properties.byline}
-                                cardUrl={story.properties.webUrl}
+                                cardUrl={getCardUrl(story)}
                                 isComment={story.header.isComment}
                                 pillar={getPillarName(story)}
                             />

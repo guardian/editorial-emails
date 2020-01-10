@@ -10,7 +10,8 @@ import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import {
     getKickerText,
     getPillarName,
-    getImageSrc
+    getImageSrc,
+    getCardUrl
 } from "../../../../dataHelpers";
 
 export const TopCollection: React.FC<{
@@ -38,7 +39,7 @@ export const TopCollection: React.FC<{
             <OverlayCard
                 headline={leadStory.header.headline}
                 trailText={leadStory.card.trailText}
-                cardUrl={leadStory.properties.webUrl}
+                cardUrl={getCardUrl(leadStory)}
                 isComment={leadStory.display.showQuotedHeadline}
                 pillar={getPillarName(leadStory)}
                 kicker={getKickerText(leadStory)}
@@ -58,7 +59,7 @@ export const TopCollection: React.FC<{
                         headline={story.header.headline}
                         trailText={story.card.trailText}
                         isComment={story.display.showQuotedHeadline}
-                        cardUrl={story.properties.webUrl}
+                        cardUrl={getCardUrl(story)}
                         pillar={getPillarName(story)}
                         byline={
                             story.properties.showByline &&

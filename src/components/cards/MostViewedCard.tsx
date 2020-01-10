@@ -59,7 +59,7 @@ export const MostViewedCard: React.FC<Props> = ({
         <td style={rightColStyles}>
             <Headline
                 text={headline}
-                linkTo={`${cardUrl}?##braze_utm##`}
+                linkTo={cardUrl}
                 kicker={kicker}
                 byline={byline}
                 pillar={pillar}

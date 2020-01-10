@@ -6,7 +6,7 @@ import { palette } from "@guardian/src-foundations";
 import { TableRowCell } from "./Table";
 import { Padding } from "./Padding";
 import { getKickerText, getPillarName } from "../dataHelpers";
-import { getImageSrc } from "../dataHelpers";
+import { getImageSrc, getCardUrl } from "../dataHelpers";
 
 const gutterStyle: TdCSS = {
     width: "2%",
@@ -135,7 +135,7 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
                             }
                             kicker={getKickerText(leftPair)}
                             isComment={leftPair.display.showQuotedHeadline}
-                            cardUrl={leftPair.properties.webUrl}
+                            cardUrl={getCardUrl(leftPair)}
                             pillar={getPillarName(leftPair)}
                             imageSrc={getImageSrc(leftPair)}
                             imageAlt={leftPair.header.headline}
@@ -156,7 +156,7 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
                                 }
                                 kicker={getKickerText(rightPair)}
                                 isComment={rightPair.display.showQuotedHeadline}
-                                cardUrl={rightPair.properties.webUrl}
+                                cardUrl={getCardUrl(rightPair)}
                                 pillar={getPillarName(rightPair)}
                                 imageSrc={getImageSrc(rightPair)}
                                 imageAlt={rightPair.header.headline}

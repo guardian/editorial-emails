@@ -87,7 +87,7 @@ export const DescriptiveCard: React.FC<Props> = ({
                     <td className="m-pad" style={metaWrapperStyle}>
                         <Headline
                             text={headline}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                             size="large"
                             pillar={showPillarColours ? pillar : null}
                             kicker={kicker}
@@ -106,7 +106,7 @@ export const DescriptiveCard: React.FC<Props> = ({
                             alt={imageAlt}
                             src={imageSrc}
                             rating={imageRating}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                             pillar={pillar}
                         />
                     </RowCell>
@@ -149,7 +149,7 @@ export const DescriptiveCard: React.FC<Props> = ({
                     <td className="m-pad" style={bottomPadding}>
                         <ContinueButton
                             label="Continue reading"
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                         />
                     </td>
                 </tr>

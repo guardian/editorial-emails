@@ -16,6 +16,7 @@ export const getKickerText = (story: Content): string => {
 };
 
 export const getPillarName = (story: Content): Pillar => {
+    // All cards
     try {
         const pillarName = story.properties.maybeContent.metadata.pillar.name;
         return pillarName;
@@ -25,6 +26,17 @@ export const getPillarName = (story: Content): Pillar => {
 };
 
 export const getImageSrc = (story: Content): string => {
+    // Commercial card: story.properties.image.item.imageSrc
+
+    // Comment cards (contributor images)
+    // const leadContributor = leadStory.properties.maybeContent.tags.tags.find(
+    //     (tag: any) => {
+    //         return tag.properties.tagType === "Contributor";
+    //     }
+    // );
+    // leadContributor.properties.contributorLargeImagePath
+
+    // All other cards
     try {
         const imageSrc =
             story.properties.maybeContent.trail.trailPicture.allImages[0].url;
@@ -32,4 +44,13 @@ export const getImageSrc = (story: Content): string => {
     } catch (e) {
         return null;
     }
+};
+
+export const getCardUrl = (story: Content): string => {
+    const baseUrl = story.properties.webUrl
+        ? story.properties.webUrl
+        : `https://www.theguardian.com/${story.properties.href}`;
+
+    const brazeParam = "?##braze_utm##";
+    return baseUrl + brazeParam;
 };

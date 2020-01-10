@@ -3,7 +3,7 @@ import { Collection as ICollection } from "../../../../api";
 import { Heading } from "./../../../../components/Heading";
 import { MediaCardB } from "../../../../components/cards/MediaCardB";
 import { Multiline } from "./../../../../components/Multiline";
-import { getImageSrc } from "../../../../dataHelpers";
+import { getImageSrc, getCardUrl } from "../../../../dataHelpers";
 
 export const MediaCollection: React.FC<{
     collection: ICollection;
@@ -20,7 +20,7 @@ export const MediaCollection: React.FC<{
             {content.map(story => (
                 <MediaCardB
                     headline={story.header.headline}
-                    cardUrl={story.properties.webUrl}
+                    cardUrl={getCardUrl(story)}
                     imageSrc={getImageSrc(story)}
                     imageAlt={story.header.headline}
                     imageRating={story.card.starRating}

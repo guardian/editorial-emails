@@ -5,7 +5,11 @@ import { Padding } from "../../../../layout/Padding";
 import { Multiline } from "../../../../components/Multiline";
 import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
-import { getKickerText, getPillarName } from "../../../../dataHelpers";
+import {
+    getKickerText,
+    getPillarName,
+    getCardUrl
+} from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
     collection: ICollection;
@@ -34,7 +38,7 @@ export const CommentCollection: React.FC<{
                         headline={story.header.headline}
                         trailText={story.card.trailText}
                         isComment={story.display.showQuotedHeadline}
-                        cardUrl={story.properties.webUrl}
+                        cardUrl={getCardUrl(story)}
                         pillar={getPillarName(story)}
                         byline={
                             story.properties.showByline &&

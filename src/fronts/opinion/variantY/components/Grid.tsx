@@ -9,7 +9,7 @@ import {
     ContributorImageWrapper
 } from "../../../../components/cards/CommentCardB";
 import { LinkCardB } from "../../../../components/cards/LinkCardB";
-import { getImageSrc } from "../../../../dataHelpers";
+import { getImageSrc, getCardUrl } from "../../../../dataHelpers";
 
 interface CommentGridProps {
     content: Content[];
@@ -66,7 +66,7 @@ export const Grid: React.FC<CommentGridProps> = ({
                             headline={leftPair.header.headline}
                             byline={leftPair.properties.byline}
                             trailText={leftPair.card.trailText}
-                            cardUrl={leftPair.properties.webUrl}
+                            cardUrl={getCardUrl(leftPair)}
                             imageSrc={getImageSrc(leftPair)}
                             imageAlt={leftPair.header.headline}
                             imageRating={leftPair.card.starRating}
@@ -80,7 +80,7 @@ export const Grid: React.FC<CommentGridProps> = ({
                             headline={rightPair.header.headline}
                             byline={rightPair.properties.byline}
                             trailText={rightPair.card.trailText}
-                            cardUrl={rightPair.properties.webUrl}
+                            cardUrl={getCardUrl(rightPair)}
                             imageSrc={getImageSrc(rightPair)}
                             imageAlt={rightPair.header.headline}
                             imageRating={rightPair.card.starRating}
@@ -127,7 +127,7 @@ export const LinkGrid: React.FC<LinkGridProps> = ({ content }) => {
                 left={
                     <LinkCardB
                         headline={pair[0].header.headline}
-                        cardUrl={pair[0].properties.href}
+                        cardUrl={getCardUrl(pair[0])}
                         theme="dark"
                     />
                 }
@@ -135,7 +135,7 @@ export const LinkGrid: React.FC<LinkGridProps> = ({ content }) => {
                     pair[1] ? (
                         <LinkCardB
                             headline={pair[1].header.headline}
-                            cardUrl={pair[1].properties.href}
+                            cardUrl={getCardUrl(pair[1])}
                             theme="light"
                         />
                     ) : null

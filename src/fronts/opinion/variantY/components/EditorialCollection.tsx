@@ -3,7 +3,7 @@ import { Collection as ICollection } from "../../../../api";
 import { Heading } from "./../../../../components/Heading";
 import { Multiline } from "./../../../../components/Multiline";
 import { CommentCardB } from "../../../../components/cards/CommentCardB";
-import { getImageSrc } from "../../../../dataHelpers";
+import { getImageSrc, getCardUrl } from "../../../../dataHelpers";
 
 export const EditorialCollection: React.FC<{
     collection: ICollection;
@@ -23,7 +23,7 @@ export const EditorialCollection: React.FC<{
                 headline={contentOne.header.headline}
                 byline={contentOne.properties.byline}
                 trailText={contentOne.card.trailText}
-                cardUrl={contentOne.properties.webUrl}
+                cardUrl={getCardUrl(contentOne)}
                 imageSrc={getImageSrc(contentOne)}
                 imageAlt={contentOne.header.headline}
                 imageRating={contentOne.card.starRating}

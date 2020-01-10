@@ -10,7 +10,8 @@ import { Padding } from "../../../../layout/Padding";
 import {
     getKickerText,
     getPillarName,
-    getImageSrc
+    getImageSrc,
+    getCardUrl
 } from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
@@ -34,7 +35,7 @@ export const DefaultCollection: React.FC<{
                         : null
                 }
                 trailText={firstContent.card.trailText}
-                cardUrl={firstContent.properties.webUrl}
+                cardUrl={getCardUrl(firstContent)}
                 kicker={getKickerText(firstContent)}
                 isComment={firstContent.display.showQuotedHeadline}
                 pillar={getPillarName(firstContent)}
@@ -52,7 +53,7 @@ export const DefaultCollection: React.FC<{
                 headline={lastContent.header.headline}
                 trailText={lastContent.card.trailText}
                 isComment={lastContent.display.showQuotedHeadline}
-                cardUrl={lastContent.properties.webUrl}
+                cardUrl={getCardUrl(lastContent)}
                 byline={
                     lastContent.properties.showByline &&
                     lastContent.properties.byline

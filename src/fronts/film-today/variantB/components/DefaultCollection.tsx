@@ -10,7 +10,8 @@ import { TableRowCell } from "../../../../layout/Table";
 import {
     getKickerText,
     getPillarName,
-    getImageSrc
+    getImageSrc,
+    getCardUrl
 } from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
@@ -36,7 +37,7 @@ export const DefaultCollection: React.FC<{
                     <>
                         <DefaultCard
                             headline={content.header.headline}
-                            cardUrl={content.properties.webUrl}
+                            cardUrl={getCardUrl(content)}
                             isComment={content.display.showQuotedHeadline}
                             imageSrc={getImageSrc(content)}
                             imageAlt={content.header.headline}

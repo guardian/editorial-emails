@@ -6,7 +6,7 @@ import { Padding } from "../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../components/Multiline";
 import { MostViewedCard } from "../components/cards/MostViewedCard";
-import { getKickerText, getPillarName } from "../dataHelpers";
+import { getKickerText, getPillarName, getCardUrl } from "../dataHelpers";
 
 export const MostViewedCollection: React.FC<{
     collection: ICollection;
@@ -26,7 +26,7 @@ export const MostViewedCollection: React.FC<{
                 <>
                     <MostViewedCard
                         headline={story.header.headline}
-                        cardUrl={story.properties.webUrl}
+                        cardUrl={getCardUrl(story)}
                         isComment={story.display.showQuotedHeadline}
                         pillar={getPillarName(story)}
                         byline={

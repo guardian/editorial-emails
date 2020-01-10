@@ -97,7 +97,7 @@ export const HeadlineCard: React.FC<Props> = ({
                     <td className="m-col-pad" style={metaWrapperStyle(layout)}>
                         <Headline
                             text={headline}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                             size={size}
                             shouldUseWhite={showUseWhite}
                             pillar={showPillarColours ? pillar : null}
@@ -108,7 +108,7 @@ export const HeadlineCard: React.FC<Props> = ({
                     </td>
                     {showArrow && (
                         <td style={arrowColStyles}>
-                            <a href={`${cardUrl}?##braze_utm##`}>
+                            <a href={cardUrl}>
                                 <img
                                     style={imgStyles}
                                     src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5dcebdcb9ae1683cc77465a5/original.png?1573830091"

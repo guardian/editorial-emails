@@ -6,7 +6,7 @@ import { Multiline } from "./../../../../components/Multiline";
 import { CommentCardC } from "../../../../components/cards/CommentCardC";
 import { Content, Tag } from "../../../../api";
 import { Grid as CommentGrid } from "./Grid";
-import { getImageSrc } from "../../../../dataHelpers";
+import { getImageSrc, getCardUrl } from "../../../../dataHelpers";
 
 const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
     if (frontId === "email/opinion") {
@@ -51,7 +51,7 @@ export const CommentCollection: React.FC<{
                 headline={c0.header.headline}
                 byline={c0.properties.byline}
                 trailText={c0.card.trailText}
-                cardUrl={c0.properties.webUrl}
+                cardUrl={getCardUrl(c0)}
                 imageSrc={getImageSrc(c0)}
                 imageAlt={c0.header.headline}
                 imageRating={c0.card.starRating}
@@ -68,7 +68,7 @@ export const CommentCollection: React.FC<{
                 headline={c1.header.headline}
                 byline={c1.properties.byline}
                 trailText={c1.card.trailText}
-                cardUrl={c1.properties.webUrl}
+                cardUrl={getCardUrl(c1)}
                 imageSrc={getImageSrc(c1)}
                 imageAlt={c1.header.headline}
                 imageRating={c1.card.starRating}
@@ -92,7 +92,7 @@ export const CommentCollection: React.FC<{
                 headline={c6.header.headline}
                 byline={c6.properties.byline}
                 trailText={c6.card.trailText}
-                cardUrl={c6.properties.webUrl}
+                cardUrl={getCardUrl(c6)}
                 imageSrc={getImageSrc(c6)}
                 imageAlt={c6.header.headline}
                 imageRating={c6.card.starRating}
@@ -116,7 +116,7 @@ export const CommentCollection: React.FC<{
                 headline={c9.header.headline}
                 byline={c9.properties.byline}
                 trailText={c9.card.trailText}
-                cardUrl={c9.properties.webUrl}
+                cardUrl={getCardUrl(c9)}
                 imageSrc={getImageSrc(c9)}
                 imageAlt={c9.header.headline}
                 imageRating={c9.card.starRating}

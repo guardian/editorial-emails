@@ -5,7 +5,11 @@ import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { CommentCard } from "../../../../components/cards/CommentCard";
-import { getPillarName, getImageSrc } from "../../../../dataHelpers";
+import {
+    getPillarName,
+    getImageSrc,
+    getCardUrl
+} from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
     collection: ICollection;
@@ -34,7 +38,7 @@ export const CommentCollection: React.FC<{
                     <CommentCard
                         headline={story.header.headline}
                         byline={story.properties.byline}
-                        cardUrl={story.properties.webUrl}
+                        cardUrl={getCardUrl(story)}
                         trailText={story.card.trailText}
                         isComment={story.header.isComment}
                         shouldShowProfileImage

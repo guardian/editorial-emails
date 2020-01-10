@@ -86,7 +86,7 @@ export const OverlayCard: React.FC<Props> = ({
                             width={600}
                             rating={imageRating}
                             pillar={pillar}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                         />
                     </td>
                 </tr>
@@ -96,7 +96,7 @@ export const OverlayCard: React.FC<Props> = ({
                 <td className="m-pad" style={headlineCellStyle(isLive, pillar)}>
                     <Headline
                         text={headline}
-                        linkTo={`${cardUrl}?##braze_utm##`}
+                        linkTo={cardUrl}
                         size="large"
                         pillar={pillar}
                         shouldUseWhite

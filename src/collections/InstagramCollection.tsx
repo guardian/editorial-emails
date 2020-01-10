@@ -5,7 +5,12 @@ import { Padding } from "../layout/Padding";
 import { Multiline } from "../components/Multiline";
 import { Heading } from "../components/Heading";
 import { OverlayCard } from "../components/cards/OverlayCard";
-import { getKickerText, getPillarName, getImageSrc } from "../dataHelpers";
+import {
+    getKickerText,
+    getPillarName,
+    getImageSrc,
+    getCardUrl
+} from "../dataHelpers";
 
 export const InstagramCollection: React.FC<{
     collection: ICollection;
@@ -32,7 +37,7 @@ export const InstagramCollection: React.FC<{
                     <OverlayCard
                         headline={story.header.headline}
                         trailText={story.card.trailText}
-                        cardUrl={story.properties.webUrl}
+                        cardUrl={getCardUrl(story)}
                         isComment={story.display.showQuotedHeadline}
                         pillar={getPillarName(story)}
                         imageSrc={getImageSrc(story)}

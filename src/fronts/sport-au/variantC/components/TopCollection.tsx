@@ -10,7 +10,8 @@ import { palette } from "@guardian/src-foundations";
 import {
     getKickerText,
     getPillarName,
-    getImageSrc
+    getImageSrc,
+    getCardUrl
 } from "../../../../dataHelpers";
 
 export const TopCollection: React.FC<{
@@ -42,7 +43,7 @@ export const TopCollection: React.FC<{
             <Heading heading={collection.displayName} />
             <DefaultCard
                 headline={firstCollection.header.headline}
-                cardUrl={firstCollection.properties.webUrl}
+                cardUrl={getCardUrl(firstCollection)}
                 isComment={firstCollection.display.showQuotedHeadline}
                 imageSrc={getImageSrc(firstCollection)}
                 imageAlt={firstCollection.header.headline}
@@ -73,7 +74,7 @@ export const TopCollection: React.FC<{
             <Padding px={12} />
             <DefaultCard
                 headline={thirdCollection.header.headline}
-                cardUrl={thirdCollection.properties.webUrl}
+                cardUrl={getCardUrl(thirdCollection)}
                 isComment={thirdCollection.display.showQuotedHeadline}
                 imageSrc={getImageSrc(thirdCollection)}
                 imageAlt={thirdCollection.header.headline}

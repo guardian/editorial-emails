@@ -163,7 +163,7 @@ export const CommentCard: React.FC<Props> = ({
                     <td className="m-pad" style={metaWrapperStyle(size)}>
                         <Headline
                             text={headline}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                             size={size}
                             pillar={pillar}
                             byline={byline}
@@ -175,7 +175,7 @@ export const CommentCard: React.FC<Props> = ({
                 {size === "large" && shouldShowProfileImage && (
                     <SupplementaryMeta
                         trailText={sanitisedTrailText}
-                        linkURL={`${cardUrl}?##braze_utm##`}
+                        linkURL={cardUrl}
                         contributorImageSrc={imageSrc}
                         contributorImageAlt={imageAlt}
                         size={size}

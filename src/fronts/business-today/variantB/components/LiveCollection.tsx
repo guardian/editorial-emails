@@ -8,7 +8,8 @@ import { OverlayCard } from "../../../../components/cards/OverlayCard";
 import {
     getKickerText,
     getPillarName,
-    getImageSrc
+    getImageSrc,
+    getCardUrl
 } from "../../../../dataHelpers";
 
 export const LiveCollection: React.FC<{
@@ -33,7 +34,7 @@ export const LiveCollection: React.FC<{
                     <OverlayCard
                         headline={story.header.headline}
                         trailText={story.card.trailText}
-                        cardUrl={story.properties.webUrl}
+                        cardUrl={getCardUrl(story)}
                         isComment={story.display.showQuotedHeadline}
                         pillar={getPillarName(story)}
                         kicker={getKickerText(story)}
