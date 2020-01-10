@@ -1,4 +1,4 @@
-import { Content } from "./api";
+import { Content, Pillar } from "./api";
 
 export const getKickerText = (story: Content): string => {
     if (!story.header.kicker) {
@@ -15,5 +15,14 @@ export const getKickerText = (story: Content): string => {
             return "Live";
         default:
             return "";
+    }
+};
+
+export const getPillarName = (story: Content): Pillar => {
+    try {
+        const pillarName = story.properties.maybeContent.metadata.pillar.name;
+        return pillarName;
+    } catch (e) {
+        return null;
     }
 };

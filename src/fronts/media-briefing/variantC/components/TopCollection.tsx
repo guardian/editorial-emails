@@ -7,7 +7,7 @@ import { OverlayCard } from "../../../../components/cards/OverlayCard";
 import { Multiline } from "../../../../components/Multiline";
 import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
-import { getKickerText } from "../../../../dataHelpers";
+import { getKickerText, getPillarName } from "../../../../dataHelpers";
 
 export const TopCollection: React.FC<{
     collection: ICollection;
@@ -36,11 +36,7 @@ export const TopCollection: React.FC<{
                 trailText={leadStory.card.trailText}
                 cardUrl={leadStory.properties.webUrl}
                 isComment={leadStory.display.showQuotedHeadline}
-                pillar={
-                    leadStory.properties.maybeContent
-                        ? leadStory.properties.maybeContent.metadata.pillar.name
-                        : null
-                }
+                pillar={getPillarName(leadStory)}
                 kicker={getKickerText(leadStory)}
                 imageSrc={
                     leadStory.properties.maybeContent
@@ -64,12 +60,7 @@ export const TopCollection: React.FC<{
                         trailText={story.card.trailText}
                         isComment={story.display.showQuotedHeadline}
                         cardUrl={story.properties.webUrl}
-                        pillar={
-                            story.properties.maybeContent
-                                ? story.properties.maybeContent.metadata.pillar
-                                      .name
-                                : null
-                        }
+                        pillar={getPillarName(story)}
                         byline={
                             story.properties.showByline &&
                             story.properties.byline

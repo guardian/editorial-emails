@@ -5,6 +5,7 @@ import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { CommentCard } from "../../../../components/cards/CommentCard";
+import { getPillarName } from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
     collection: ICollection;
@@ -25,7 +26,7 @@ export const CommentCollection: React.FC<{
             />
             {content.map(story => {
                 const storyContributor = story.properties.maybeContent.tags.tags.find(
-                    tag => {
+                    (tag: any) => {
                         return tag.properties.tagType === "Contributor";
                     }
                 );
@@ -38,12 +39,7 @@ export const CommentCollection: React.FC<{
                         isComment={story.header.isComment}
                         shouldShowProfileImage
                         size="large"
-                        pillar={
-                            story.properties.maybeContent
-                                ? story.properties.maybeContent.metadata.pillar
-                                      .name
-                                : null
-                        }
+                        pillar={getPillarName(story)}
                         imageSrc={
                             storyContributor
                                 ? storyContributor.properties

@@ -3,9 +3,9 @@ import { Content } from "../api";
 import { DefaultCard } from "../components/cards/DefaultCard";
 import { TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
-import { TableRow, TableRowCell } from "./Table";
+import { TableRowCell } from "./Table";
 import { Padding } from "./Padding";
-import { getKickerText } from "../dataHelpers";
+import { getKickerText, getPillarName } from "../dataHelpers";
 
 const gutterStyle: TdCSS = {
     width: "2%",
@@ -135,12 +135,7 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
                             kicker={getKickerText(leftPair)}
                             isComment={leftPair.display.showQuotedHeadline}
                             cardUrl={leftPair.properties.webUrl}
-                            pillar={
-                                leftPair.properties.maybeContent
-                                    ? leftPair.properties.maybeContent.metadata
-                                          .pillar.name
-                                    : null
-                            }
+                            pillar={getPillarName(leftPair)}
                             imageSrc={
                                 leftPair.properties.maybeContent
                                     ? leftPair.properties.maybeContent.trail
@@ -166,12 +161,7 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
                                 kicker={getKickerText(rightPair)}
                                 isComment={rightPair.display.showQuotedHeadline}
                                 cardUrl={rightPair.properties.webUrl}
-                                pillar={
-                                    rightPair.properties.maybeContent
-                                        ? rightPair.properties.maybeContent
-                                              .metadata.pillar.name
-                                        : null
-                                }
+                                pillar={getPillarName(rightPair)}
                                 imageSrc={
                                     rightPair.properties.maybeContent
                                         ? rightPair.properties.maybeContent

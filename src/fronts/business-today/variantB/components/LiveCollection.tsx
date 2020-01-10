@@ -6,7 +6,7 @@ import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { OverlayCard } from "../../../../components/cards/OverlayCard";
-import { getKickerText } from "../../../../dataHelpers";
+import { getKickerText, getPillarName } from "../../../../dataHelpers";
 
 export const LiveCollection: React.FC<{
     collection: ICollection;
@@ -32,12 +32,7 @@ export const LiveCollection: React.FC<{
                         trailText={story.card.trailText}
                         cardUrl={story.properties.webUrl}
                         isComment={story.display.showQuotedHeadline}
-                        pillar={
-                            story.properties.maybeContent
-                                ? story.properties.maybeContent.metadata.pillar
-                                      .name
-                                : null
-                        }
+                        pillar={getPillarName(story)}
                         kicker={getKickerText(story)}
                         imageSrc={
                             story.properties.maybeContent

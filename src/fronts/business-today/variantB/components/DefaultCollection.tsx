@@ -6,7 +6,7 @@ import { palette } from "@guardian/src-foundations";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import { Multiline } from "../../../../components/Multiline";
 import { Padding } from "../../../../layout/Padding";
-import { getKickerText } from "../../../../dataHelpers";
+import { getKickerText, getPillarName } from "../../../../dataHelpers";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { Table, TableRowCell } from "../../../../layout/Table";
 
@@ -47,12 +47,7 @@ export const DefaultCollection: React.FC<{
                         trailText={story.card.trailText}
                         isComment={story.display.showQuotedHeadline}
                         cardUrl={story.properties.webUrl}
-                        pillar={
-                            story.properties.maybeContent
-                                ? story.properties.maybeContent.metadata.pillar
-                                      .name
-                                : null
-                        }
+                        pillar={getPillarName(story)}
                         byline={
                             story.properties.showByline &&
                             story.properties.byline

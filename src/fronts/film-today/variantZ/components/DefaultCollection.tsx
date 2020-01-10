@@ -7,7 +7,7 @@ import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import { DescriptiveCard } from "../../../../components/cards/DescriptiveCard";
 import { Padding } from "../../../../layout/Padding";
-import { getKickerText } from "../../../../dataHelpers";
+import { getKickerText, getPillarName } from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -33,12 +33,7 @@ export const DefaultCollection: React.FC<{
                 cardUrl={firstContent.properties.webUrl}
                 kicker={getKickerText(firstContent)}
                 isComment={firstContent.display.showQuotedHeadline}
-                pillar={
-                    firstContent.properties.maybeContent
-                        ? firstContent.properties.maybeContent.metadata.pillar
-                              .name
-                        : null
-                }
+                pillar={getPillarName(firstContent)}
                 imageSrc={
                     firstContent.properties.maybeContent.trail.trailPicture
                         .allImages[0].url
@@ -57,18 +52,13 @@ export const DefaultCollection: React.FC<{
                 trailText={lastContent.card.trailText}
                 isComment={lastContent.display.showQuotedHeadline}
                 cardUrl={lastContent.properties.webUrl}
-                pillar={
-                    lastContent.properties.maybeContent
-                        ? lastContent.properties.maybeContent.metadata.pillar
-                              .name
-                        : null
-                }
                 byline={
                     lastContent.properties.showByline &&
                     lastContent.properties.byline
                         ? lastContent.properties.byline
                         : ""
                 }
+                pillar={getPillarName(lastContent)}
                 kicker={getKickerText(lastContent)}
                 borderWidth="thick"
                 backgroundColor={palette.culture.faded}

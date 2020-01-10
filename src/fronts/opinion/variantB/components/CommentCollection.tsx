@@ -6,6 +6,7 @@ import { CommentCard } from "./../../../../components/cards/CommentCard";
 import { Padding } from "../../../../layout/Padding";
 import { TableRowCell } from "../../../../layout/Table";
 import { palette } from "@guardian/src-foundations";
+import { getPillarName } from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
     frontId: string;
@@ -19,7 +20,7 @@ export const CommentCollection: React.FC<{
     const leadStory = content[0];
     const bottomCollection = content.slice(1);
     const leadContributor = leadStory.properties.maybeContent.tags.tags.find(
-        tag => {
+        (tag: any) => {
             return tag.properties.tagType === "Contributor";
         }
     );
@@ -39,9 +40,7 @@ export const CommentCollection: React.FC<{
                     isComment={leadStory.header.isComment}
                     size="large"
                     shouldShowProfileImage
-                    pillar={
-                        leadStory.properties.maybeContent.metadata.pillar.name
-                    }
+                    pillar={getPillarName(leadStory)}
                     imageSrc={
                         leadContributor
                             ? leadContributor.properties
@@ -59,12 +58,7 @@ export const CommentCollection: React.FC<{
                                 byline={story.properties.byline}
                                 cardUrl={story.properties.webUrl}
                                 isComment={story.header.isComment}
-                                pillar={
-                                    story.properties.maybeContent
-                                        ? story.properties.maybeContent.metadata
-                                              .pillar.name
-                                        : null
-                                }
+                                pillar={getPillarName(story)}
                             />
                             {index < bottomCollection.length - 1 && (
                                 <Padding px={12} />

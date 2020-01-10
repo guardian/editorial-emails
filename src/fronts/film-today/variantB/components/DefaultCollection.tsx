@@ -7,7 +7,7 @@ import { Heading } from "../../../../components/Heading";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { palette } from "@guardian/src-foundations";
 import { TableRowCell } from "../../../../layout/Table";
-import { getKickerText } from "../../../../dataHelpers";
+import { getKickerText, getPillarName } from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
@@ -49,13 +49,8 @@ export const DefaultCollection: React.FC<{
                                     : null
                             }
                             kicker={getKickerText(content)}
+                            pillar={getPillarName(content)}
                             size="large"
-                            pillar={
-                                content.properties.maybeContent
-                                    ? content.properties.maybeContent.metadata
-                                          .pillar.name
-                                    : null
-                            }
                         />
                         <Padding px={12} />
                     </>
