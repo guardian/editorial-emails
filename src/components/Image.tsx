@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { palette } from "@guardian/src-foundations";
 import { ImageCSS } from "../css";
 import { Pillar } from "../api";
-
+import ImageContext from "../ImageContext";
+import { formatImage } from "../image";
 import { pillarProps } from "../utils/pillarProps";
 
 const ImageElement: React.FC<{
@@ -14,17 +15,6 @@ const ImageElement: React.FC<{
 }> = ({ src, alt, width, height, style }) => (
     <img src={src} alt={alt} width={width} height={height} style={style} />
 );
-
-interface Props {
-    src: string;
-    alt: string;
-    width?: number;
-    height?: number;
-    extraStyles?: ImageCSS;
-    linkTo?: string;
-    pillar?: Pillar;
-    ignoreWidth?: boolean;
-}
 
 const defaultImageStyles = (ignoreWidth: boolean): ImageCSS => {
     const sizingStyles: ImageCSS = {};
@@ -45,6 +35,18 @@ const defaultImageStyles = (ignoreWidth: boolean): ImageCSS => {
     };
 };
 
+interface Props {
+    src: string;
+    alt: string;
+    width?: number;
+    height?: number;
+    extraStyles?: ImageCSS;
+    linkTo?: string;
+    pillar?: Pillar;
+    rating?: number;
+    ignoreWidth?: boolean;
+}
+
 export const Image: React.FC<Props> = ({
     src,
     alt,
@@ -53,6 +55,7 @@ export const Image: React.FC<Props> = ({
     extraStyles,
     linkTo,
     pillar,
+    rating = null,
     ignoreWidth
 }) => {
     // If a pillar has been passed in, add its colour to the image styles
@@ -70,11 +73,18 @@ export const Image: React.FC<Props> = ({
         ...extraStyles
     };
 
+    // If salt available in context (likely when running server-side), use it to sign the image and get a Fastly URL
+    // Otherwise (likely when running client-side), render image using master URL (e.g. for Storybook)
+    const { imageSalt } = useContext(ImageContext);
+    const formattedImageSrc = imageSalt
+        ? formatImage(src, imageSalt, width, rating)
+        : src;
+
     if (linkTo) {
         return (
             <a href={linkTo}>
                 <ImageElement
-                    src={src}
+                    src={formattedImageSrc}
                     alt={alt}
                     width={width}
                     height={height}
@@ -85,7 +95,7 @@ export const Image: React.FC<Props> = ({
     }
     return (
         <ImageElement
-            src={src}
+            src={formattedImageSrc}
             alt={alt}
             width={width}
             height={height}

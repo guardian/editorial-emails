@@ -11,27 +11,22 @@ import { getDesignType } from "../../../utils/getDesignType";
 export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
-}> = ({ frontId, collections, salt }) => {
+}> = ({ frontId, collections }) => {
     const renderedCollections = collections.map(collection => {
-        const content = [].concat(collection.backfill, collection.curated); // TODO support curated too
-        const designType = getDesignType(content);
+        const designType = getDesignType(collection);
 
         switch (designType) {
             case "editorial":
-                return (
-                    <EditorialCollection collection={collection} salt={salt} />
-                );
+                return <EditorialCollection collection={collection} />;
             case "comment":
                 return (
                     <CommentCollection
                         frontId={frontId}
                         collection={collection}
-                        salt={salt}
                     />
                 );
             case "media":
-                return <MediaCollection collection={collection} salt={salt} />;
+                return <MediaCollection collection={collection} />;
             case "link":
                 // Ignore 'Guardian Subscribe/Masterclasses' collection without using 'display name'
                 // Look at combination of content type (curated/backfill),
@@ -43,11 +38,9 @@ export const Collections: React.FC<{
                     return null;
                 }
 
-                return <LinkCollection collection={collection} salt={salt} />;
+                return <LinkCollection collection={collection} />;
             case "default":
-                return (
-                    <DefaultCollection collection={collection} salt={salt} />
-                );
+                return <DefaultCollection collection={collection} />;
         }
     });
 

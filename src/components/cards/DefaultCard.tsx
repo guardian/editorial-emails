@@ -1,9 +1,7 @@
 import React from "react";
 import { TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content, Pillar } from "../../api";
-import { formatImage } from "../../image";
-import { kickerText } from "../../kicker";
+import { Pillar } from "../../api";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { Table, TableRowCell, RowCell } from "../../layout/Table";
@@ -56,91 +54,71 @@ const bottomPaddingStyle: TdCSS = {
 };
 
 interface Props {
-    content: Content;
-    salt: string;
+    headline: string;
+    isComment?: boolean;
+    cardUrl: string;
+    pillar?: Pillar;
+    byline: string;
+    kicker?: string;
+    imageSrc?: string;
+    imageAlt?: string;
+    imageRating?: number;
     size: Size;
     designName?: DesignName;
     isInsideGrid?: boolean;
     backgroundColor?: string;
 }
 
-const brazeParameter = "?##braze_utm##";
-
 export const DefaultCard: React.FC<Props> = ({
-    content,
-    salt,
-    size,
+    headline,
+    byline,
+    kicker,
+    isComment = false,
+    cardUrl,
+    pillar,
+    imageSrc,
+    imageAlt,
+    imageRating,
+    size = "small",
     designName = "background",
     isInsideGrid = false,
     backgroundColor
-}) => {
-    let imageURL;
-    if (content.properties.maybeContent) {
-        const image =
-            content.properties.maybeContent.trail.trailPicture.allImages[0];
-        imageURL = formatImage(
-            image.url,
-            salt,
-            size === "large" ? 600 : 300,
-            content.card.starRating
-        );
-    }
+}) => (
+    <TableRowCell
+        tableStyle={{ height: "100%" }}
+        tdStyle={tdStyle(designName, isInsideGrid, pillar, backgroundColor)}
+    >
+        <Table tableStyle={{ height: "100%" }}>
+            {imageSrc && (
+                <RowCell>
+                    <Image
+                        src={imageSrc}
+                        alt={imageAlt}
+                        width={size === "large" ? 600 : 294}
+                        pillar={pillar}
+                        rating={imageRating}
+                        linkTo={cardUrl}
+                    />
+                </RowCell>
+            )}
 
-    const headline = content.header.headline;
-    const webURL = content.properties.webUrl + brazeParameter;
+            <tr style={{ verticalAlign: "top" }}>
+                <td className="m-pad" style={metaWrapperStyle(size)}>
+                    <Headline
+                        text={headline}
+                        linkTo={cardUrl}
+                        size={size}
+                        pillar={pillar}
+                        kicker={kicker}
+                        byline={byline}
+                        showQuotation={isComment}
+                    />
+                </td>
+            </tr>
 
-    const showQuotation = content.display.showQuotedHeadline;
-
-    const pillar = content.properties.maybeContent
-        ? content.properties.maybeContent.metadata.pillar.name
-        : null;
-
-    const { showByline } = content.properties;
-    const byline =
-        showByline && content.properties.byline
-            ? content.properties.byline
-            : "";
-
-    const kicker = content.header.kicker
-        ? kickerText(content.header.kicker)
-        : "";
-
-    return (
-        <TableRowCell
-            tableStyle={{ height: "100%" }}
-            tdStyle={tdStyle(designName, isInsideGrid, pillar, backgroundColor)}
-        >
-            <Table tableStyle={{ height: "100%" }}>
-                {imageURL && (
-                    <RowCell>
-                        <Image
-                            src={imageURL}
-                            alt={headline}
-                            width={size === "large" ? 600 : 294}
-                            pillar={pillar}
-                            linkTo={webURL}
-                        />
-                    </RowCell>
-                )}
-
-                <tr style={{ verticalAlign: "top" }}>
-                    <td className="m-pad" style={metaWrapperStyle(size)}>
-                        <Headline
-                            text={headline}
-                            linkTo={webURL}
-                            size={size}
-                            pillar={pillar}
-                            kicker={kicker}
-                            byline={byline}
-                            showQuotation={showQuotation}
-                        />
-                    </td>
-                </tr>
-
-                <tr>
-                    <td className="m-col-pad" style={bottomPaddingStyle}></td>
-                </tr>
-            </Table>
-        </TableRowCell>
-    );
-};
+            <tr>
+                <td className="m-col-pad" style={bottomPaddingStyle}></td>
+            </tr>
+        </Table>
+    </TableRowCell>
+);

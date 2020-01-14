@@ -47,13 +47,9 @@ export const Kicker: React.FC<Props> = ({
     size,
     colour,
     isLive
-}) => {
-    return (
-        <>
-            {isLive && <Image ignoreWidth width={16} src={liveCircle} alt="" />}
-            <span
-                style={kickerStyle(size, pillar, colour)}
-            >{`${text} / `}</span>
-        </>
-    );
-};
+}) => (
+    <>
+        {isLive && <Image ignoreWidth width={16} src={liveCircle} alt="" />}
+        <span style={kickerStyle(size, pillar, colour)}>{`${text} / `}</span>
+    </>
+);

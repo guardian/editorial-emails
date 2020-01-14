@@ -1,6 +1,6 @@
 import React from "react";
-import { LinkCSS, ImageCSS } from "../../css";
-import { TableRowCell, Table } from "../../layout/Table";
+import { LinkCSS, ImageCSS } from "../css";
+import { TableRowCell, Table } from "../layout/Table";
 import { palette } from "@guardian/src-foundations";
 
 interface Props {

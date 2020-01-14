@@ -5,6 +5,7 @@ import { Heading } from "./../../../../components/Heading";
 import { Multiline } from "./../../../../components/Multiline";
 import { CommentCardC } from "../../../../components/cards/CommentCardC";
 import { Grid as CommentGrid } from "./Grid";
+import { getImageSrc, getCardUrl, getByline } from "../../../../dataHelpers";
 
 const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
     if (frontId === "email/opinion") {
@@ -16,68 +17,95 @@ const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
 export const CommentCollection: React.FC<{
     frontId: string;
     collection: ICollection;
-    salt: string;
-}> = ({ frontId, collection, salt }) => {
-    // TODO handle curated collections
+}> = ({ frontId, collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
-    const c0 = collection.backfill[0];
-    const c1 = collection.backfill[1];
-    const grid_2_5 = collection.backfill.slice(2, 6);
-    const c6 = collection.backfill[6];
-    const grid_7_8 = collection.backfill.slice(7, 9);
-    const c9 = collection.backfill[9];
+    const c0 = content[0];
+    const c1 = content[1];
+    const grid_2_5 = content.slice(2, 6);
+    const c6 = content[6];
+    const grid_7_8 = content.slice(7, 9);
+    const c9 = content[9];
 
-    // TODO
     return (
         <>
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
 
             <CommentCardC
-                content={c0}
-                salt={salt}
-                size={"large"}
-                shouldShowImage={false}
+                headline={c0.header.headline}
+                byline={getByline(c0)}
+                trailText={c0.card.trailText}
+                cardUrl={getCardUrl(c0)}
+                imageSrc={getImageSrc(c0)}
+                imageAlt={c0.header.headline}
+                imageRating={c0.card.starRating}
+                isComment={c0.header.isComment}
+                size="large"
+                contributorImageSrc={getImageSrc(c0, { isContributor: true })}
+                contributorImageAlt=""
             />
             <Padding px={12} />
 
             <CommentCardC
-                content={c1}
-                salt={salt}
-                size={"large"}
-                shouldShowImage={false}
+                headline={c1.header.headline}
+                byline={getByline(c1)}
+                trailText={c1.card.trailText}
+                cardUrl={getCardUrl(c1)}
+                imageSrc={getImageSrc(c1)}
+                imageAlt={c1.header.headline}
+                imageRating={c1.card.starRating}
+                isComment={c1.header.isComment}
+                size="large"
+                contributorImageSrc={getImageSrc(c1, { isContributor: true })}
+                contributorImageAlt=""
             />
             <Padding px={12} />
 
             <CommentGrid
                 content={grid_2_5}
-                salt={salt}
                 shouldShowGridImages={frontIdShouldShowCommentGridImages(
                     frontId
                 )}
             />
 
             <CommentCardC
-                content={c6}
-                salt={salt}
-                size={"large"}
-                shouldShowImage={false}
+                headline={c6.header.headline}
+                byline={getByline(c6)}
+                trailText={c6.card.trailText}
+                cardUrl={getCardUrl(c6)}
+                imageSrc={getImageSrc(c6)}
+                imageAlt={c6.header.headline}
+                imageRating={c6.card.starRating}
+                isComment={c6.header.isComment}
+                size="large"
+                contributorImageSrc={getImageSrc(c6, { isContributor: true })}
+                contributorImageAlt=""
             />
             <Padding px={12} />
 
             <CommentGrid
                 content={grid_7_8}
-                salt={salt}
                 shouldShowGridImages={frontIdShouldShowCommentGridImages(
                     frontId
                 )}
             />
 
             <CommentCardC
-                content={c9}
-                salt={salt}
-                size={"large"}
-                shouldShowImage={false}
+                headline={c9.header.headline}
+                byline={getByline(c9)}
+                trailText={c9.card.trailText}
+                cardUrl={getCardUrl(c9)}
+                imageSrc={getImageSrc(c9)}
+                imageAlt={c9.header.headline}
+                imageRating={c9.card.starRating}
+                isComment={c9.header.isComment}
+                contributorImageSrc={getImageSrc(c9, { isContributor: true })}
+                contributorImageAlt=""
+                size="large"
             />
         </>
     );

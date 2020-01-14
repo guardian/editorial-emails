@@ -10,11 +10,9 @@ import { CommentCollection } from "./components/CommentCollection";
 export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
-}> = ({ frontId, collections, salt }) => {
+}> = ({ frontId, collections }) => {
     const renderedCollections = collections.map(collection => {
-        const content = [].concat(collection.backfill, collection.curated); // TODO support curated too
-        const designType = getDesignType(content);
+        const designType = getDesignType(collection);
 
         switch (designType) {
             case "comment":
@@ -22,17 +20,12 @@ export const Collections: React.FC<{
                     <CommentCollection
                         frontId={frontId}
                         collection={collection}
-                        salt={salt}
                     />
                 );
             case "editorial":
-                return (
-                    <InstagramCollection collection={collection} salt={salt} />
-                );
+                return <InstagramCollection collection={collection} />;
             case "media":
-                return (
-                    <InstagramCollection collection={collection} salt={salt} />
-                );
+                return <InstagramCollection collection={collection} />;
             case "link":
                 // Ignore 'Guardian Subscribe/Masterclasses' collection without using 'display name'
                 // Look at combination of content type (curated/backfill),
@@ -44,10 +37,10 @@ export const Collections: React.FC<{
                     return null;
                 }
 
-                return <LinkCollection collection={collection} salt={salt} />;
+                return <LinkCollection collection={collection} />;
         }
 
-        return <GenericCollection collection={collection} salt={salt} />;
+        return <GenericCollection collection={collection} />;
     });
 
     return <TableRowCell>{renderedCollections}</TableRowCell>;

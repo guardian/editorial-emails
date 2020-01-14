@@ -29,16 +29,13 @@ const getQuotationImgSrc = (pillar: Pillar, shouldUseWhite: boolean) => {
     return pillarProps.Arts.quote;
 };
 
-export const QuotationMark: React.FC<Props> = ({ pillar, shouldUseWhite }) => {
-    const imageSrc = getQuotationImgSrc(pillar, shouldUseWhite);
-    return (
-        <>
-            <img
-                height={"14"}
-                style={quoteIconStyle}
-                src={imageSrc}
-                alt="quote icon"
-            />{" "}
-        </>
-    );
-};
+export const QuotationMark: React.FC<Props> = ({ pillar, shouldUseWhite }) => (
+    <>
+        <img
+            height={"14"}
+            style={quoteIconStyle}
+            src={getQuotationImgSrc(pillar, shouldUseWhite)}
+            alt="quote icon"
+        />{" "}
+    </>
+);

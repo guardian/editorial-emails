@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FontCSS, TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { Content, Tag, Pillar } from "../../api";
-import { formatImage } from "../../image";
+import { Pillar } from "../../api";
 import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell, TableRow } from "../../layout/Table";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
 import { headline } from "../../styles/typography";
 import { pillarProps } from "../../utils/pillarProps";
-import { fontSizes } from "@guardian/src-foundations/theme";
 
 type Size = "small" | "large";
 
@@ -28,7 +26,7 @@ const metaWrapperStyle = (size: Size): TdCSS => {
     };
 };
 
-const standfirstStyle: TdCSS = {
+const trailTextStyle: TdCSS = {
     padding: "20px 10px 10px 10px",
     verticalAlign: "bottom"
 };
@@ -50,41 +48,40 @@ const columnStyleRight: TdCSS = {
 };
 
 interface Props {
-    content: Content;
-    salt: string;
+    headline: string;
+    byline: string;
+    cardUrl: string;
+    isComment?: boolean;
     size?: "large" | "small";
-    shouldShowImage?: boolean;
     shouldShowProfileImage?: boolean;
+    trailText?: string;
+    pillar?: Pillar;
+    imageSrc?: string;
+    imageAlt?: string;
 }
-
-const brazeParameter = "?##braze_utm##";
 
 const TrailText: React.FC<{
     text: string;
     linkURL: string;
     size: Size;
-}> = ({ text, linkURL }) => {
-    return (
-        <td className="m-pad" style={standfirstStyle}>
-            <a style={linkStyle} href={linkURL}>
-                <span style={spanStyle}>{text}</span>
-            </a>
-        </td>
-    );
-};
+}> = ({ text, linkURL }) => (
+    <td className="m-pad" style={trailTextStyle}>
+        <a style={linkStyle} href={linkURL}>
+            <span style={spanStyle}>{text}</span>
+        </a>
+    </td>
+);
 
 const ContributorImage: React.FC<{
     src: string;
-    salt: string;
     width: number;
     alt: string;
-}> = ({ src, salt, width, alt }) => {
+}> = ({ src, width, alt }) => {
     if (!src) {
         return null;
     }
 
-    const formattedImage = formatImage(src, salt, width);
-    return <Image src={formattedImage} width={width} alt={alt} ignoreWidth />;
+    return <Image src={src} width={width} alt={alt} ignoreWidth />;
 };
 
 // TODO make testable, and also separate layout logic from individual components
@@ -96,21 +93,18 @@ const SupplementaryMeta: React.FC<{
     contributorImageAlt?: string;
     size: Size;
     width: number;
-    salt: string;
 }> = ({
     trailText,
-    contributorImageSrc,
     linkURL,
-    size,
-    width,
+    contributorImageSrc,
     contributorImageAlt,
-    salt
+    size,
+    width
 }) => {
     const contributorImage = (
         <td style={columnStyleRight}>
             <ContributorImage
                 width={width}
-                salt={salt}
                 src={contributorImageSrc}
                 alt={contributorImageAlt}
             />
@@ -147,31 +141,20 @@ const SupplementaryMeta: React.FC<{
 };
 
 export const CommentCard: React.FC<Props> = ({
-    content,
-    salt,
+    headline,
+    byline,
+    trailText,
+    cardUrl,
+    isComment = false,
     size = "small",
-    shouldShowProfileImage = false
+    shouldShowProfileImage = false,
+    pillar,
+    imageSrc,
+    imageAlt
 }) => {
-    const headerHeadline = content.header.headline;
-    const { byline } = content.properties;
-    const webURL = content.properties.webUrl + brazeParameter;
-    const showQuotation = content.header.isComment;
-
-    const contributor = content.properties.maybeContent.tags.tags.find(tag => {
-        return tag.properties.tagType === "Contributor";
-    });
-
-    const profilePic = contributor
-        ? contributor.properties.contributorLargeImagePath
-        : null;
-
-    const trailText = sanitizeHtml(content.card.trailText, {
+    const sanitisedTrailText = sanitizeHtml(trailText, {
         allowedTags: []
     });
-
-    const pillar = content.properties.maybeContent
-        ? content.properties.maybeContent.metadata.pillar.name
-        : null;
 
     return (
         <TableRowCell tdStyle={tdStyle(pillar)}>
@@ -179,56 +162,27 @@ export const CommentCard: React.FC<Props> = ({
                 <tr>
                     <td className="m-pad" style={metaWrapperStyle(size)}>
                         <Headline
-                            text={headerHeadline}
-                            linkTo={webURL}
+                            text={headline}
+                            linkTo={cardUrl}
                             size={size}
                             pillar={pillar}
                             byline={byline}
-                            showQuotation={showQuotation}
+                            showQuotation={isComment}
                         />
                     </td>
                 </tr>
 
                 {size === "large" && shouldShowProfileImage && (
                     <SupplementaryMeta
-                        salt={salt}
-                        trailText={trailText}
-                        linkURL={webURL}
-                        contributorImageSrc={profilePic}
-                        contributorImageAlt={
-                            contributor && contributor.properties.webTitle
-                        }
+                        trailText={sanitisedTrailText}
+                        linkURL={cardUrl}
+                        contributorImageSrc={imageSrc}
+                        contributorImageAlt={imageAlt}
                         size={size}
                         width={size === "large" ? 180 : 147}
                     />
                 )}
             </Table>
         </TableRowCell>
-    );
-};
-
-export const getContributor = (content: Content): Tag => {
-    return content.properties.maybeContent.tags.tags.find(tag => {
-        return tag.properties.tagType === "Contributor";
-    });
-};
-
-export const ContributorImageWrapper: React.FC<{
-    content: Content;
-    salt: string;
-}> = ({ content, salt }) => {
-    const contributor = getContributor(content);
-    if (!contributor) {
-        return null;
-    }
-
-    const profilePic = contributor.properties.contributorLargeImagePath || null;
-    return (
-        <ContributorImage
-            salt={salt}
-            width={147}
-            src={profilePic}
-            alt={contributor.properties.webTitle}
-        />
     );
 };

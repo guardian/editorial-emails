@@ -24,24 +24,20 @@ const freeTextStyle: FontCSS = {
 };
 
 interface Props {
-    content: Content;
+    bodyText: string;
 }
 
-export const FreeTextCard: React.FC<Props> = ({ content }) => {
-    const { headline } = content.header;
-
-    return (
-        <TableRowCell tdStyle={outerTdStyle}>
-            <TableRow>
-                <td style={innerTdStyle}>
-                    <span
-                        style={freeTextStyle}
-                        dangerouslySetInnerHTML={{
-                            __html: getTransformedFreeText(headline)
-                        }}
-                    ></span>
-                </td>
-            </TableRow>
-        </TableRowCell>
-    );
-};
+export const FreeTextCard: React.FC<Props> = ({ bodyText }) => (
+    <TableRowCell tdStyle={outerTdStyle}>
+        <TableRow>
+            <td style={innerTdStyle}>
+                <span
+                    style={freeTextStyle}
+                    dangerouslySetInnerHTML={{
+                        __html: getTransformedFreeText(bodyText)
+                    }}
+                ></span>
+            </td>
+        </TableRow>
+    </TableRowCell>
+);

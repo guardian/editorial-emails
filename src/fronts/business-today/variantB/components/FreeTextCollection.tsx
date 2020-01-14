@@ -8,15 +8,13 @@ import { FreeTextCard } from "../../../../components/cards/FreeTextCard";
 
 export const FreeTextCollection: React.FC<{
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
-    const content = collection.curated.concat(collection.backfill);
+}> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
     if (content.length < 1) {
         return null;
     }
 
     const lightGrey = palette.neutral[97];
-
     return (
         <>
             <Padding px={12} backgroundColor={lightGrey} />
@@ -27,7 +25,7 @@ export const FreeTextCollection: React.FC<{
             />
             {content.map((story, index) => (
                 <>
-                    <FreeTextCard content={story} />
+                    <FreeTextCard bodyText={story.header.headline} />
                     {index < content.length - 1 && (
                         <Padding px={12} backgroundColor={lightGrey} />
                     )}
