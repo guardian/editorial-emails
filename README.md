@@ -23,6 +23,9 @@ You can run the first locally to troubleshoot.
 
 ## Supported Emails & Variants
 
+Variants named B/C/D were active by the end of the A/B testing phase.
+Variants named X/Y/Z had been switched off by then.
+
     Film Today
         Variant B
         Variant Z
