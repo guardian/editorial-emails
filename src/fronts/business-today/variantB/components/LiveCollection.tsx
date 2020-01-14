@@ -1,23 +1,26 @@
 import React from "react";
 import { Collection as ICollection } from "../../../../api";
-import { DefaultGrid } from "../../../../layout/Grid";
 import { Heading } from "../../../../components/Heading";
 import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { OverlayCard } from "../../../../components/cards/OverlayCard";
-import { kickerText } from "../../../../kicker";
+import {
+    getKickerText,
+    getPillarName,
+    getImageSrc,
+    getCardUrl
+} from "../../../../dataHelpers";
 
 export const LiveCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    const content = collection.curated.concat(collection.backfill);
+    const content = [].concat(collection.curated, collection.backfill);
     if (content.length < 1) {
         return null;
     }
 
     const lightGrey = palette.neutral[97];
-
     return (
         <>
             <Padding px={12} backgroundColor={lightGrey} />
@@ -31,25 +34,11 @@ export const LiveCollection: React.FC<{
                     <OverlayCard
                         headline={story.header.headline}
                         trailText={story.card.trailText}
-                        cardUrl={story.properties.webUrl}
+                        cardUrl={getCardUrl(story)}
                         isComment={story.display.showQuotedHeadline}
-                        pillar={
-                            story.properties.maybeContent
-                                ? story.properties.maybeContent.metadata.pillar
-                                      .name
-                                : null
-                        }
-                        kicker={
-                            story.header.kicker
-                                ? kickerText(story.header.kicker)
-                                : ""
-                        }
-                        imageSrc={
-                            story.properties.maybeContent
-                                ? story.properties.maybeContent.trail
-                                      .trailPicture.allImages[0].url
-                                : null
-                        }
+                        pillar={getPillarName(story)}
+                        kicker={getKickerText(story)}
+                        imageSrc={getImageSrc(story)}
                         imageAlt={story.header.headline}
                         imageRating={story.card.starRating}
                         layout="expanded"

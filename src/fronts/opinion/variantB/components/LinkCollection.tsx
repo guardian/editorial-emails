@@ -6,14 +6,23 @@ import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
-import { kickerText } from "../../../../kicker";
+import {
+    getKickerText,
+    getPillarName,
+    getCardUrl,
+    getByline
+} from "../../../../dataHelpers";
 
 export const LinkCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
+
     const lightGrey = palette.neutral[97];
     const white = palette.neutral[100];
-    const content = collection.curated;
     return (
         <>
             <Padding px={12} backgroundColor={lightGrey} />
@@ -29,24 +38,10 @@ export const LinkCollection: React.FC<{
                             headline={story.header.headline}
                             trailText={story.card.trailText}
                             isComment={story.display.showQuotedHeadline}
-                            cardUrl={story.properties.webUrl}
-                            pillar={
-                                story.properties.maybeContent
-                                    ? story.properties.maybeContent.metadata
-                                          .pillar.name
-                                    : null
-                            }
-                            byline={
-                                story.properties.showByline &&
-                                story.properties.byline
-                                    ? story.properties.byline
-                                    : ""
-                            }
-                            kicker={
-                                story.header.kicker
-                                    ? kickerText(story.header.kicker)
-                                    : ""
-                            }
+                            cardUrl={getCardUrl(story)}
+                            pillar={getPillarName(story)}
+                            byline={getByline(story)}
+                            kicker={getKickerText(story)}
                             borderWidth="thin"
                             borderColor={palette.opinion.main}
                             backgroundColor={white}

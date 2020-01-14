@@ -12,8 +12,7 @@ export const Collections: React.FC<{
     collections: ICollection[];
 }> = ({ collections }) => {
     const renderedCollections = collections.map(collection => {
-        const content = [].concat(collection.backfill, collection.curated);
-        const designType = getDesignType(content);
+        const designType = getDesignType(collection);
 
         switch (designType) {
             case "comment":

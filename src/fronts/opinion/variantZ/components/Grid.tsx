@@ -2,24 +2,19 @@ import React from "react";
 import { palette } from "@guardian/src-foundations";
 import { TableRow, TableRowCell } from "../../../../layout/Table";
 import { Padding } from "../../../../layout/Padding";
-import { Content, Tag } from "../../../../api";
+import { Content } from "../../../../api";
 import { GridRow, partition } from "../../../../layout/Grid";
 import {
     CommentCardC,
     ContributorImageWrapper
 } from "../../../../components/cards/CommentCardC";
 import { LinkCardC } from "../../../../components/cards/LinkCardC";
+import { getImageSrc, getCardUrl, getByline } from "../../../../dataHelpers";
 
 interface CommentGridProps {
     content: Content[];
     shouldShowGridImages: boolean;
 }
-
-const getContributor = (content: Content): Tag => {
-    return content.properties.maybeContent.tags.tags.find(tag => {
-        return tag.properties.tagType === "Contributor";
-    });
-};
 
 export const Grid: React.FC<CommentGridProps> = ({
     content,
@@ -27,25 +22,21 @@ export const Grid: React.FC<CommentGridProps> = ({
 }) => {
     const rows = partition(content, 2).map((pair, i) => {
         const leftPair = pair[0];
-        const leftContributor = getContributor(leftPair);
-        const leftContributorImg = leftContributor
-            ? leftContributor.properties.contributorLargeImagePath
-            : null;
         const contributorLeftWrapper = (
             <ContributorImageWrapper
-                contributorImageSrc={leftContributorImg}
+                contributorImageSrc={getImageSrc(leftPair, {
+                    isContributor: true
+                })}
                 contributorImageAlt=""
             />
         );
 
         const rightPair = pair[1];
-        const rightContributor = getContributor(rightPair);
-        const rightContributorImg = rightContributor
-            ? rightContributor.properties.contributorLargeImagePath
-            : null;
         const contributorRightWrapper = (
             <ContributorImageWrapper
-                contributorImageSrc={rightContributorImg}
+                contributorImageSrc={getImageSrc(rightPair, {
+                    isContributor: true
+                })}
                 contributorImageAlt=""
             />
         );
@@ -63,15 +54,10 @@ export const Grid: React.FC<CommentGridProps> = ({
                     left={
                         <CommentCardC
                             headline={leftPair.header.headline}
-                            byline={leftPair.properties.byline}
+                            byline={getByline(leftPair)}
                             trailText={leftPair.card.trailText}
-                            cardUrl={leftPair.properties.webUrl}
-                            imageSrc={
-                                leftPair.properties.maybeContent
-                                    ? leftPair.properties.maybeContent.trail
-                                          .trailPicture.allImages[0].url
-                                    : null
-                            }
+                            cardUrl={getCardUrl(leftPair)}
+                            imageSrc={getImageSrc(leftPair)}
                             imageAlt={leftPair.header.headline}
                             imageRating={leftPair.card.starRating}
                             isComment={leftPair.header.isComment}
@@ -82,15 +68,10 @@ export const Grid: React.FC<CommentGridProps> = ({
                     right={
                         <CommentCardC
                             headline={rightPair.header.headline}
-                            byline={rightPair.properties.byline}
+                            byline={getByline(rightPair)}
                             trailText={rightPair.card.trailText}
-                            cardUrl={rightPair.properties.webUrl}
-                            imageSrc={
-                                rightPair.properties.maybeContent
-                                    ? rightPair.properties.maybeContent.trail
-                                          .trailPicture.allImages[0].url
-                                    : null
-                            }
+                            cardUrl={getCardUrl(rightPair)}
+                            imageSrc={getImageSrc(rightPair)}
                             imageAlt={rightPair.header.headline}
                             imageRating={rightPair.card.starRating}
                             isComment={rightPair.header.isComment}
@@ -165,14 +146,14 @@ export const LinkGrid: React.FC<LinkGridProps> = ({ content }) => {
                 left={
                     <LinkCardC
                         headline={pair[0].header.headline}
-                        cardUrl={pair[0].properties.href}
+                        cardUrl={getCardUrl(pair[0])}
                     />
                 }
                 right={
                     pair[1] ? (
                         <LinkCardC
                             headline={pair[1].header.headline}
-                            cardUrl={pair[1].properties.href}
+                            cardUrl={getCardUrl(pair[1])}
                         />
                     ) : null
                 }

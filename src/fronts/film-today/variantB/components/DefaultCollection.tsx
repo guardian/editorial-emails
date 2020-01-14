@@ -7,15 +7,26 @@ import { Heading } from "../../../../components/Heading";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { palette } from "@guardian/src-foundations";
 import { TableRowCell } from "../../../../layout/Table";
-import { kickerText } from "../../../../kicker";
+import {
+    getKickerText,
+    getPillarName,
+    getImageSrc,
+    getCardUrl,
+    getByline
+} from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    const topCollection = collection.backfill.slice(0, 2);
-    const gridContent = collection.backfill.slice(2, 6);
-    const lightGrey = palette.neutral[97];
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
+    const topCollection = content.slice(0, 2);
+    const gridContent = content.slice(2, 6);
+
+    const lightGrey = palette.neutral[97];
     return (
         <>
             <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
@@ -27,34 +38,15 @@ export const DefaultCollection: React.FC<{
                     <>
                         <DefaultCard
                             headline={content.header.headline}
-                            cardUrl={content.properties.webUrl}
+                            cardUrl={getCardUrl(content)}
                             isComment={content.display.showQuotedHeadline}
-                            imageSrc={
-                                content.properties.maybeContent
-                                    ? content.properties.maybeContent.trail
-                                          .trailPicture.allImages[0].url
-                                    : null
-                            }
+                            imageSrc={getImageSrc(content)}
                             imageAlt={content.header.headline}
                             imageRating={content.card.starRating}
-                            byline={
-                                content.properties.showByline &&
-                                content.properties.byline
-                                    ? content.properties.byline
-                                    : null
-                            }
-                            kicker={
-                                content.header.kicker
-                                    ? kickerText(content.header.kicker)
-                                    : ""
-                            }
+                            byline={getByline(content)}
+                            kicker={getKickerText(content)}
+                            pillar={getPillarName(content)}
                             size="large"
-                            pillar={
-                                content.properties.maybeContent
-                                    ? content.properties.maybeContent.metadata
-                                          .pillar.name
-                                    : null
-                            }
                         />
                         <Padding px={12} />
                     </>

@@ -37,7 +37,7 @@ export const MediaCardC: React.FC<Props> = ({
             <RowCell>
                 <Image
                     src={imageSrc}
-                    linkTo={`${cardUrl}?##braze_utm##`}
+                    linkTo={cardUrl}
                     alt={imageAlt}
                     width={579}
                     rating={imageRating}

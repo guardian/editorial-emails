@@ -48,7 +48,7 @@ export const CommercialCard: React.FC<Props> = ({
                     {imageUrl && (
                         <Image
                             src={imageUrl}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                             alt={imageAlt}
                             rating={imageRating}
                             width={imageSize}
@@ -57,7 +57,7 @@ export const CommercialCard: React.FC<Props> = ({
                 </RowCell>
                 <RowCell tdStyle={textTdStyle}>
                     <a
-                        href={`${cardUrl}?##braze_utm##`}
+                        href={cardUrl}
                         style={freeTextStyle}
                         dangerouslySetInnerHTML={{
                             __html: getTransformedFreeText(headline)

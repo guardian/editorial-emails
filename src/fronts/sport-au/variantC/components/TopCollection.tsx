@@ -7,15 +7,26 @@ import { Heading } from "../../../../components/Heading";
 import { DefaultGrid } from "../../../../layout/Grid";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { palette } from "@guardian/src-foundations";
-import { kickerText } from "../../../../kicker";
+import {
+    getKickerText,
+    getPillarName,
+    getImageSrc,
+    getCardUrl,
+    getByline
+} from "../../../../dataHelpers";
 
 export const TopCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    const firstCollection = collection.backfill[0];
-    const secondCollection = collection.backfill.slice(1, 3);
-    const thirdCollection = collection.backfill[3];
-    const fourthCollection = collection.backfill.slice(4, 6);
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
+
+    const firstCollection = content[0];
+    const secondCollection = content.slice(1, 3);
+    const thirdCollection = content[3];
+    const fourthCollection = content.slice(4, 6);
 
     // Pass a background color and border styles to be used by the grid cell.
     // This ensures all cells in a row will have the same background and border,
@@ -33,33 +44,14 @@ export const TopCollection: React.FC<{
             <Heading heading={collection.displayName} />
             <DefaultCard
                 headline={firstCollection.header.headline}
-                cardUrl={firstCollection.properties.webUrl}
+                cardUrl={getCardUrl(firstCollection)}
                 isComment={firstCollection.display.showQuotedHeadline}
-                imageSrc={
-                    firstCollection.properties.maybeContent
-                        ? firstCollection.properties.maybeContent.trail
-                              .trailPicture.allImages[0].url
-                        : null
-                }
+                imageSrc={getImageSrc(firstCollection)}
                 imageAlt={firstCollection.header.headline}
                 imageRating={firstCollection.card.starRating}
-                byline={
-                    firstCollection.properties.showByline &&
-                    firstCollection.properties.byline
-                        ? firstCollection.properties.byline
-                        : null
-                }
-                kicker={
-                    firstCollection.header.kicker
-                        ? kickerText(firstCollection.header.kicker)
-                        : ""
-                }
-                pillar={
-                    firstCollection.properties.maybeContent
-                        ? firstCollection.properties.maybeContent.metadata
-                              .pillar.name
-                        : null
-                }
+                byline={getByline(firstCollection)}
+                kicker={getKickerText(firstCollection)}
+                pillar={getPillarName(firstCollection)}
                 size="large"
                 designName="border"
             />
@@ -78,33 +70,14 @@ export const TopCollection: React.FC<{
             <Padding px={12} />
             <DefaultCard
                 headline={thirdCollection.header.headline}
-                cardUrl={thirdCollection.properties.webUrl}
+                cardUrl={getCardUrl(thirdCollection)}
                 isComment={thirdCollection.display.showQuotedHeadline}
-                imageSrc={
-                    thirdCollection.properties.maybeContent
-                        ? thirdCollection.properties.maybeContent.trail
-                              .trailPicture.allImages[0].url
-                        : null
-                }
+                imageSrc={getImageSrc(thirdCollection)}
                 imageAlt={thirdCollection.header.headline}
                 imageRating={thirdCollection.card.starRating}
-                byline={
-                    thirdCollection.properties.showByline &&
-                    thirdCollection.properties.byline
-                        ? thirdCollection.properties.byline
-                        : null
-                }
-                kicker={
-                    thirdCollection.header.kicker
-                        ? kickerText(thirdCollection.header.kicker)
-                        : ""
-                }
-                pillar={
-                    thirdCollection.properties.maybeContent
-                        ? thirdCollection.properties.maybeContent.metadata
-                              .pillar.name
-                        : null
-                }
+                byline={getByline(thirdCollection)}
+                kicker={getKickerText(thirdCollection)}
+                pillar={getPillarName(thirdCollection)}
                 size="large"
                 designName="border"
             />

@@ -12,8 +12,7 @@ export const Collections: React.FC<{
     collections: ICollection[];
 }> = ({ frontId, collections }) => {
     const renderedCollections = collections.map(collection => {
-        const content = [].concat(collection.backfill, collection.curated); // TODO support curated too
-        const designType = getDesignType(content);
+        const designType = getDesignType(collection);
 
         switch (designType) {
             case "comment":

@@ -167,7 +167,7 @@ export const CommentCardC: React.FC<Props> = ({
                             src={imageSrc}
                             alt={imageAlt}
                             rating={imageRating}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                             width={size === "large" ? 599 : 294}
                             pillar="Opinion"
                         />
@@ -177,7 +177,7 @@ export const CommentCardC: React.FC<Props> = ({
                     <td className="m-pad" style={metaWrapperStyle(size)}>
                         <Headline
                             text={headline}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                             size={size}
                             pillar="Opinion"
                             byline={byline}
@@ -188,7 +188,7 @@ export const CommentCardC: React.FC<Props> = ({
                 {size === "large" && (
                     <SupplementaryMeta
                         trailText={sanitisedTrailText}
-                        linkTo={`${cardUrl}?##braze_utm##`}
+                        linkTo={cardUrl}
                         contributorImageSrc={contributorImageSrc}
                         contributorImageAlt={contributorImageAlt}
                         size={size}

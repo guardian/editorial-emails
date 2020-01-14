@@ -33,7 +33,7 @@ export const LinkCardB: React.FC<{
 
     return (
         <TableRowCell tdStyle={containerStyle}>
-            <a style={fontStyle(theme)} href={`${cardUrl}?##braze_utm##`}>
+            <a style={fontStyle(theme)} href={cardUrl}>
                 {headline}
                 <br />
                 <br />

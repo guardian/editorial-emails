@@ -97,7 +97,7 @@ export const DefaultCard: React.FC<Props> = ({
                         width={size === "large" ? 600 : 294}
                         pillar={pillar}
                         rating={imageRating}
-                        linkTo={`${cardUrl}?##braze_utm##`}
+                        linkTo={cardUrl}
                     />
                 </RowCell>
             )}
@@ -106,7 +106,7 @@ export const DefaultCard: React.FC<Props> = ({
                 <td className="m-pad" style={metaWrapperStyle(size)}>
                     <Headline
                         text={headline}
-                        linkTo={`${cardUrl}?##braze_utm##`}
+                        linkTo={cardUrl}
                         size={size}
                         pillar={pillar}
                         kicker={kicker}

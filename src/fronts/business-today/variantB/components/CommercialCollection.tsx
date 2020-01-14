@@ -4,17 +4,17 @@ import { Heading } from "../../../../components/Heading";
 import { palette } from "@guardian/src-foundations";
 import { CommercialCard } from "../../../../components/cards/CommercialCard";
 import { Padding } from "../../../../layout/Padding";
+import { getImageSrc, getCardUrl } from "../../../../dataHelpers";
 
 export const CommercialCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    const content = collection.curated.concat(collection.backfill);
+    const content = [].concat(collection.curated, collection.backfill);
     if (content.length < 1) {
         return null;
     }
 
     const darkGrey = palette.neutral[86];
-
     return (
         <>
             <Padding px={12} backgroundColor={darkGrey} />
@@ -26,8 +26,8 @@ export const CommercialCollection: React.FC<{
                 <>
                     <CommercialCard
                         headline={story.header.headline}
-                        cardUrl={story.properties.href}
-                        imageSrc={story.properties.image.item.imageSrc}
+                        cardUrl={getCardUrl(story)}
+                        imageSrc={getImageSrc(story, { isCommercial: true })}
                         imageAlt={story.header.headline}
                         imageRating={story.card.starRating}
                     />
