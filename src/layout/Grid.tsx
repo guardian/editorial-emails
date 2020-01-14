@@ -3,9 +3,10 @@ import { Content } from "../api";
 import { DefaultCard } from "../components/cards/DefaultCard";
 import { TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
-import { TableRow, TableRowCell } from "./Table";
+import { TableRowCell } from "./Table";
 import { Padding } from "./Padding";
-import { kickerText } from "../kicker";
+import { getKickerText, getPillarName } from "../dataHelpers";
+import { getImageSrc, getCardUrl, getByline } from "../dataHelpers";
 
 const gutterStyle: TdCSS = {
     width: "2%",
@@ -99,7 +100,6 @@ type GridCard = {
 
 interface DefaultGridProps {
     content: Content[];
-    salt: string;
     card?: GridCard;
     leftStyles?: RowStyle;
     rightStyles?: RowStyle;
@@ -110,11 +110,8 @@ const defaultCard = {
     props: {}
 };
 
-// TODO really should accept a React element so that it doesn't have to know
-// about Card or salt.
 export const DefaultGrid: React.FC<DefaultGridProps> = ({
     content,
-    salt,
     card = defaultCard,
     leftStyles,
     rightStyles
@@ -130,33 +127,13 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
                     left={
                         <Component
                             headline={leftPair.header.headline}
-                            byline={
-                                leftPair.properties.showByline &&
-                                leftPair.properties.byline
-                                    ? leftPair.properties.byline
-                                    : null
-                            }
-                            kicker={
-                                leftPair.header.kicker
-                                    ? kickerText(leftPair.header.kicker)
-                                    : ""
-                            }
+                            byline={getByline(leftPair)}
+                            kicker={getKickerText(leftPair)}
                             isComment={leftPair.display.showQuotedHeadline}
-                            cardUrl={leftPair.properties.webUrl}
-                            pillar={
-                                leftPair.properties.maybeContent
-                                    ? leftPair.properties.maybeContent.metadata
-                                          .pillar.name
-                                    : null
-                            }
-                            imageSrc={
-                                leftPair.properties.maybeContent
-                                    ? leftPair.properties.maybeContent.trail
-                                          .trailPicture.allImages[0].url
-                                    : null
-                            }
+                            cardUrl={getCardUrl(leftPair)}
+                            pillar={getPillarName(leftPair)}
+                            imageSrc={getImageSrc(leftPair)}
                             imageAlt={leftPair.header.headline}
-                            imageSalt={salt}
                             imageRating={leftPair.card.starRating}
                             size="small"
                             {...props}
@@ -166,34 +143,13 @@ export const DefaultGrid: React.FC<DefaultGridProps> = ({
                         rightPair ? (
                             <Component
                                 headline={rightPair.header.headline}
-                                byline={
-                                    rightPair.properties.showByline &&
-                                    rightPair.properties.byline
-                                        ? rightPair.properties.byline
-                                        : null
-                                }
-                                kicker={
-                                    rightPair.header.kicker
-                                        ? kickerText(rightPair.header.kicker)
-                                        : ""
-                                }
+                                byline={getByline(rightPair)}
+                                kicker={getKickerText(rightPair)}
                                 isComment={rightPair.display.showQuotedHeadline}
-                                cardUrl={rightPair.properties.webUrl}
-                                pillar={
-                                    rightPair.properties.maybeContent
-                                        ? rightPair.properties.maybeContent
-                                              .metadata.pillar.name
-                                        : null
-                                }
-                                imageSrc={
-                                    rightPair.properties.maybeContent
-                                        ? rightPair.properties.maybeContent
-                                              .trail.trailPicture.allImages[0]
-                                              .url
-                                        : null
-                                }
+                                cardUrl={getCardUrl(rightPair)}
+                                pillar={getPillarName(rightPair)}
+                                imageSrc={getImageSrc(rightPair)}
                                 imageAlt={rightPair.header.headline}
-                                imageSalt={salt}
                                 imageRating={rightPair.card.starRating}
                                 {...props}
                             />

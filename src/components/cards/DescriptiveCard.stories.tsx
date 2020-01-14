@@ -22,8 +22,7 @@ export const defaultStory = () => {
                     byline="Florian Schneider"
                     bodyText="<p>In libero sem, auctor ultricies elit eu, ultrices bibendum libero. Duis non nunc eros.</p><p>Maecenas non sagittis turpis. Sed semper sit amet sapien semper sollicitudin. Vivamus non purus risus.</p>"
                     isComment
-                    imageSrc="https://media.guim.co.uk/9f937dd8dc5603f28f9a65b458c53ac5b2379c74/0_342_5250_3151/master/5250.jpg"
-                    imageSalt="Uz34q0qIkz"
+                    imageSrc="https://images.unsplash.com/photo-1506102383123-c8ef1e872756?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80"
                     imageRating={4}
                     pillar="Sport"
                     showPillarColours
@@ -49,8 +48,7 @@ export const newsPillarStory = () => {
                     byline="Ralf Hütter"
                     bodyText="<p>In libero sem, auctor ultricies elit eu, ultrices bibendum libero. Duis non nunc eros.</p><p>Maecenas non sagittis turpis. Sed semper sit amet sapien semper sollicitudin. Vivamus non purus risus.</p>"
                     isComment
-                    imageSrc="https://media.guim.co.uk/9f937dd8dc5603f28f9a65b458c53ac5b2379c74/0_342_5250_3151/master/5250.jpg"
-                    imageSalt="Uz34q0qIkz"
+                    imageSrc="https://images.unsplash.com/photo-1506102383123-c8ef1e872756?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80"
                     imageRating={4}
                     pillar="News"
                     showPillarColours

@@ -21,7 +21,7 @@ export const defaultStory = () => {
                     cardUrl="https://www.theguardian.com/world/2019/dec/31/looking-back-i-realise-i-was-naive-reporting-on-the-refugee-crisis"
                     isComment
                     pillar="News"
-                    imageSrc="https://i.guim.co.uk/img/media/b8c2393d1e38ba1859f6fa01996933cc382a6776/0_0_5568_3712/master/5568.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=2222a23bb4ee59b1cf09aec53d8c599b"
+                    imageSrc="https://images.unsplash.com/photo-1506102383123-c8ef1e872756?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80"
                     imageAlt="Vestibulum non orci tortor"
                     size="large"
                 />
@@ -44,7 +44,7 @@ export const smallStory = () => {
                     kicker="Golf"
                     cardUrl="https://www.theguardian.com/world/2019/dec/31/looking-back-i-realise-i-was-naive-reporting-on-the-refugee-crisis"
                     pillar="Sport"
-                    imageSrc="https://i.guim.co.uk/img/media/b8c2393d1e38ba1859f6fa01996933cc382a6776/0_0_5568_3712/master/5568.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=2222a23bb4ee59b1cf09aec53d8c599b"
+                    imageSrc="https://images.unsplash.com/photo-1506102383123-c8ef1e872756?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80"
                     imageAlt="Vestibulum non orci tortor"
                     size="small"
                 />
@@ -67,7 +67,7 @@ export const backgroundStory = () => {
                     isComment
                     cardUrl="https://www.theguardian.com/world/2019/dec/31/looking-back-i-realise-i-was-naive-reporting-on-the-refugee-crisis"
                     pillar="Arts"
-                    imageSrc="https://i.guim.co.uk/img/media/b8c2393d1e38ba1859f6fa01996933cc382a6776/0_0_5568_3712/master/5568.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=2222a23bb4ee59b1cf09aec53d8c599b"
+                    imageSrc="https://images.unsplash.com/photo-1506102383123-c8ef1e872756?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80"
                     imageAlt="Vestibulum non orci tortor"
                     size="small"
                     designName="border"

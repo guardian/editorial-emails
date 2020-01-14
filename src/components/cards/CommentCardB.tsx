@@ -58,10 +58,9 @@ const TrailText: React.FC<{
 // TODO add alt text
 const ContributorImage: React.FC<{
     src: string;
-    salt: string;
     width: number;
     alt: string;
-}> = ({ src, salt, width, alt }) => {
+}> = ({ src, width, alt }) => {
     if (!src) {
         return null;
     }
@@ -79,21 +78,18 @@ const SupplementaryMeta: React.FC<{
     contributorImageAlt?: string;
     size: Size;
     width: number;
-    salt: string;
 }> = ({
     trailText,
     contributorImageSrc,
     contributorImageAlt,
     linkTo,
     size,
-    width,
-    salt
+    width
 }) => {
     const contributorImage = (
         <td style={columnStyleRight}>
             <ContributorImage
                 width={width}
-                salt={salt}
                 src={contributorImageSrc}
                 alt={contributorImageAlt}
             />
@@ -138,7 +134,6 @@ interface Props {
     imageSrc?: string;
     imageAlt?: string;
     imageRating?: number;
-    imageSalt?: string;
     contributorImageSrc?: string;
     contributorImageAlt?: string;
     size: "large" | "small";
@@ -153,8 +148,7 @@ export const CommentCardB: React.FC<Props> = ({
     isComment = false,
     imageSrc,
     imageAlt,
-    imageRating = 1,
-    imageSalt,
+    imageRating,
     contributorImageSrc,
     contributorImageAlt,
     size,
@@ -172,7 +166,8 @@ export const CommentCardB: React.FC<Props> = ({
                         <Image
                             src={imageSrc}
                             alt={imageAlt}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            rating={imageRating}
+                            linkTo={cardUrl}
                             width={size === "large" ? 600 : 294}
                             pillar="Opinion"
                         />
@@ -182,7 +177,7 @@ export const CommentCardB: React.FC<Props> = ({
                     <td className="m-pad" style={metaWrapperStyle(size)}>
                         <Headline
                             text={headline}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                             size={size}
                             pillar="Opinion"
                             byline={byline}
@@ -193,9 +188,8 @@ export const CommentCardB: React.FC<Props> = ({
 
                 {size === "large" && (
                     <SupplementaryMeta
-                        salt={imageSalt}
                         trailText={sanitisedTrailText}
-                        linkTo={`${cardUrl}?##braze_utm##`}
+                        linkTo={cardUrl}
                         contributorImageSrc={contributorImageSrc}
                         contributorImageAlt={contributorImageAlt}
                         size={size}
@@ -210,8 +204,7 @@ export const CommentCardB: React.FC<Props> = ({
 export const ContributorImageWrapper: React.FC<{
     contributorImageSrc: string;
     contributorImageAlt: string;
-    imageSalt: string;
-}> = ({ contributorImageSrc, contributorImageAlt, imageSalt }) => {
+}> = ({ contributorImageSrc, contributorImageAlt }) => {
     if (!contributorImageSrc) {
         return null;
     }
@@ -219,7 +212,6 @@ export const ContributorImageWrapper: React.FC<{
         <ContributorImage
             src={contributorImageSrc}
             alt={contributorImageAlt}
-            salt={imageSalt}
             width={147}
         />
     );

@@ -51,7 +51,6 @@ interface Props {
     imageSrc?: string;
     imageAlt?: string;
     imageRating?: number;
-    imageSalt?: string;
     backgroundColor?: string;
     layout?: "expanded" | "compact";
     isLive?: boolean;
@@ -67,8 +66,7 @@ export const OverlayCard: React.FC<Props> = ({
     backgroundColor,
     imageSrc,
     imageAlt,
-    imageRating = 1,
-    imageSalt,
+    imageRating,
     layout = "compact",
     isLive = false
 }) => (
@@ -86,8 +84,9 @@ export const OverlayCard: React.FC<Props> = ({
                             src={imageSrc}
                             alt={imageAlt}
                             width={600}
+                            rating={imageRating}
                             pillar={pillar}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                         />
                     </td>
                 </tr>
@@ -97,7 +96,7 @@ export const OverlayCard: React.FC<Props> = ({
                 <td className="m-pad" style={headlineCellStyle(isLive, pillar)}>
                     <Headline
                         text={headline}
-                        linkTo={`${cardUrl}?##braze_utm##`}
+                        linkTo={cardUrl}
                         size="large"
                         pillar={pillar}
                         shouldUseWhite

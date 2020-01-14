@@ -8,9 +8,11 @@ import { palette } from "@guardian/src-foundations";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
-}> = ({ collection, salt }) => {
-    const content = collection.backfill;
+}> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
     // Pass a background color and border styles to be used by the grid cell.
     // This ensures all cells in a row will have the same background and border,
@@ -29,7 +31,6 @@ export const DefaultCollection: React.FC<{
 
             <DefaultGrid
                 content={content}
-                salt={salt}
                 card={{
                     Component: DefaultCard,
                     props: { designName: "border", isInsideGrid: true }

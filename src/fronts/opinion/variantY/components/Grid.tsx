@@ -2,55 +2,42 @@ import React from "react";
 import { palette } from "@guardian/src-foundations";
 import { TableRowCell, TableRow } from "../../../../layout/Table";
 import { Padding } from "../../../../layout/Padding";
-import { Content, Tag } from "../../../../api";
+import { Content } from "../../../../api";
 import { GridRow, partition } from "../../../../layout/Grid";
 import {
     CommentCardB,
     ContributorImageWrapper
 } from "../../../../components/cards/CommentCardB";
 import { LinkCardB } from "../../../../components/cards/LinkCardB";
+import { getImageSrc, getCardUrl, getByline } from "../../../../dataHelpers";
 
 interface CommentGridProps {
     content: Content[];
-    salt: string;
     shouldShowGridImages: boolean;
 }
 
-const getContributor = (content: Content): Tag => {
-    return content.properties.maybeContent.tags.tags.find(tag => {
-        return tag.properties.tagType === "Contributor";
-    });
-};
-
 export const Grid: React.FC<CommentGridProps> = ({
     content,
-    salt,
     shouldShowGridImages
 }) => {
     const rows = partition(content, 2).map((pair, i) => {
         const leftPair = pair[0];
-        const leftContributor = getContributor(leftPair);
-        const leftContributorImg = leftContributor
-            ? leftContributor.properties.contributorLargeImagePath
-            : null;
         const contributorLeftWrapper = (
             <ContributorImageWrapper
-                contributorImageSrc={leftContributorImg}
+                contributorImageSrc={getImageSrc(leftPair, {
+                    isContributor: true
+                })}
                 contributorImageAlt=""
-                imageSalt={salt}
             />
         );
 
         const rightPair = pair[1];
-        const rightContributor = getContributor(rightPair);
-        const rightContributorImg = rightContributor
-            ? rightContributor.properties.contributorLargeImagePath
-            : null;
         const contributorRightWrapper = (
             <ContributorImageWrapper
-                contributorImageSrc={rightContributorImg}
+                contributorImageSrc={getImageSrc(rightPair, {
+                    isContributor: true
+                })}
                 contributorImageAlt=""
-                imageSalt={salt}
             />
         );
 
@@ -67,18 +54,12 @@ export const Grid: React.FC<CommentGridProps> = ({
                     left={
                         <CommentCardB
                             headline={leftPair.header.headline}
-                            byline={leftPair.properties.byline}
+                            byline={getByline(leftPair)}
                             trailText={leftPair.card.trailText}
-                            cardUrl={leftPair.properties.webUrl}
-                            imageSrc={
-                                leftPair.properties.maybeContent
-                                    ? leftPair.properties.maybeContent.trail
-                                          .trailPicture.allImages[0].url
-                                    : null
-                            }
+                            cardUrl={getCardUrl(leftPair)}
+                            imageSrc={getImageSrc(leftPair)}
                             imageAlt={leftPair.header.headline}
                             imageRating={leftPair.card.starRating}
-                            imageSalt={salt}
                             isComment={leftPair.header.isComment}
                             size={"small"}
                             shouldShowImage={shouldShowGridImages}
@@ -87,18 +68,12 @@ export const Grid: React.FC<CommentGridProps> = ({
                     right={
                         <CommentCardB
                             headline={rightPair.header.headline}
-                            byline={rightPair.properties.byline}
+                            byline={getByline(rightPair)}
                             trailText={rightPair.card.trailText}
-                            cardUrl={rightPair.properties.webUrl}
-                            imageSrc={
-                                rightPair.properties.maybeContent
-                                    ? rightPair.properties.maybeContent.trail
-                                          .trailPicture.allImages[0].url
-                                    : null
-                            }
+                            cardUrl={getCardUrl(rightPair)}
+                            imageSrc={getImageSrc(rightPair)}
                             imageAlt={rightPair.header.headline}
                             imageRating={rightPair.card.starRating}
-                            imageSalt={salt}
                             isComment={rightPair.header.isComment}
                             size={"small"}
                             shouldShowImage={shouldShowGridImages}
@@ -132,12 +107,9 @@ export const Grid: React.FC<CommentGridProps> = ({
 
 interface LinkGridProps {
     content: Content[];
-    salt: string;
 }
 
-// TODO really should accept a React element so that it doesn't have to know
-// about Card or salt.
-export const LinkGrid: React.FC<LinkGridProps> = ({ content, salt }) => {
+export const LinkGrid: React.FC<LinkGridProps> = ({ content }) => {
     const rowsArray = partition(content, 2);
     const rows = rowsArray.map((pair, index) => (
         <React.Fragment key={index}>
@@ -145,7 +117,7 @@ export const LinkGrid: React.FC<LinkGridProps> = ({ content, salt }) => {
                 left={
                     <LinkCardB
                         headline={pair[0].header.headline}
-                        cardUrl={pair[0].properties.href}
+                        cardUrl={getCardUrl(pair[0])}
                         theme="dark"
                     />
                 }
@@ -153,7 +125,7 @@ export const LinkGrid: React.FC<LinkGridProps> = ({ content, salt }) => {
                     pair[1] ? (
                         <LinkCardB
                             headline={pair[1].header.headline}
-                            cardUrl={pair[1].properties.href}
+                            cardUrl={getCardUrl(pair[1])}
                             theme="light"
                         />
                     ) : null

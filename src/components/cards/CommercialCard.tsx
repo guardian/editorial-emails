@@ -1,7 +1,6 @@
 import React from "react";
 import { TdCSS, FontCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
-import { formatImage } from "../../image";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
 import { Image } from "../../components/Image";
 import { textBody } from "../../styles/typography";
@@ -30,7 +29,6 @@ interface Props {
     imageSrc?: string;
     imageAlt?: string;
     imageRating?: number;
-    imageSalt: string;
 }
 
 export const CommercialCard: React.FC<Props> = ({
@@ -38,14 +36,10 @@ export const CommercialCard: React.FC<Props> = ({
     cardUrl,
     imageSrc,
     imageAlt,
-    imageRating = 1,
-    imageSalt
+    imageRating
 }) => {
     const imageSize = 580;
-    const imageUrl = imageSrc
-        ? // ? formatImage(imageSrc, imageSalt, imageSize, imageRating)
-          imageSrc
-        : null;
+    const imageUrl = imageSrc ? imageSrc : null;
 
     return (
         <TableRowCell tdStyle={outerTdStyle}>
@@ -54,15 +48,16 @@ export const CommercialCard: React.FC<Props> = ({
                     {imageUrl && (
                         <Image
                             src={imageUrl}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                             alt={imageAlt}
+                            rating={imageRating}
                             width={imageSize}
                         />
                     )}
                 </RowCell>
                 <RowCell tdStyle={textTdStyle}>
                     <a
-                        href={`${cardUrl}?##braze_utm##`}
+                        href={cardUrl}
                         style={freeTextStyle}
                         dangerouslySetInnerHTML={{
                             __html: getTransformedFreeText(headline)

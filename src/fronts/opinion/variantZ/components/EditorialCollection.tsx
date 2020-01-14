@@ -3,14 +3,17 @@ import { Collection as ICollection } from "../../../../api";
 import { Heading } from "./../../../../components/Heading";
 import { Multiline } from "./../../../../components/Multiline";
 import { CommentCardC } from "../../../../components/cards/CommentCardC";
+import { getImageSrc, getCardUrl, getByline } from "../../../../dataHelpers";
 
 export const EditorialCollection: React.FC<{
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
-    const contentOne = collection.backfill[0];
+}> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
-    // TODO
+    const contentOne = content[0];
     return (
         <>
             <Multiline topPadding />
@@ -18,18 +21,12 @@ export const EditorialCollection: React.FC<{
 
             <CommentCardC
                 headline={contentOne.header.headline}
-                byline={contentOne.properties.byline}
+                byline={getByline(contentOne)}
                 trailText={contentOne.card.trailText}
-                cardUrl={contentOne.properties.webUrl}
-                imageSrc={
-                    contentOne.properties.maybeContent
-                        ? contentOne.properties.maybeContent.trail.trailPicture
-                              .allImages[0].url
-                        : null
-                }
+                cardUrl={getCardUrl(contentOne)}
+                imageSrc={getImageSrc(contentOne)}
                 imageAlt={contentOne.header.headline}
                 imageRating={contentOne.card.starRating}
-                imageSalt={salt}
                 isComment={contentOne.header.isComment}
                 size="large"
                 shouldShowImage

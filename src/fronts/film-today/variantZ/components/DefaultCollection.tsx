@@ -7,75 +7,53 @@ import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import { DescriptiveCard } from "../../../../components/cards/DescriptiveCard";
 import { Padding } from "../../../../layout/Padding";
-import { kickerText } from "../../../../kicker";
+import {
+    getKickerText,
+    getPillarName,
+    getImageSrc,
+    getCardUrl,
+    getByline
+} from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
-}> = ({ collection, salt }) => {
-    const firstContent = collection.backfill[0];
-    const gridContent = collection.backfill.slice(1, 5);
-    const lastContent = collection.backfill[5];
+}> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
-    const kicker = firstContent.header.kicker
-        ? kickerText(firstContent.header.kicker)
-        : "";
-
+    const firstContent = content[0];
+    const gridContent = content.slice(1, 5);
+    const lastContent = content[5];
     return (
         <>
             <DescriptiveCard
                 headline={firstContent.header.headline}
-                byline={
-                    firstContent.properties.showByline
-                        ? firstContent.header.headline
-                        : null
-                }
+                byline={getByline(firstContent)}
                 trailText={firstContent.card.trailText}
-                cardUrl={firstContent.properties.webUrl}
-                kicker={kicker}
+                cardUrl={getCardUrl(firstContent)}
+                kicker={getKickerText(firstContent)}
                 isComment={firstContent.display.showQuotedHeadline}
-                pillar={
-                    firstContent.properties.maybeContent
-                        ? firstContent.properties.maybeContent.metadata.pillar
-                              .name
-                        : null
-                }
-                imageSrc={
-                    firstContent.properties.maybeContent.trail.trailPicture
-                        .allImages[0].url
-                }
+                pillar={getPillarName(firstContent)}
+                imageSrc={getImageSrc(firstContent)}
                 imageAlt={firstContent.header.headline}
-                imageSalt={salt}
                 imageRating={firstContent.card.starRating}
                 showPillarColours
                 bodyText={firstContent.properties.maybeContent.fields.body}
             />
             <Multiline />
             <Heading heading="More top stories" />
-            {gridContent && <DefaultGrid content={gridContent} salt={salt} />}
+            {gridContent && <DefaultGrid content={gridContent} />}
             <Padding px={12} />
             <HeadlineCard
                 headline={lastContent.header.headline}
                 trailText={lastContent.card.trailText}
                 isComment={lastContent.display.showQuotedHeadline}
-                cardUrl={lastContent.properties.webUrl}
-                pillar={
-                    lastContent.properties.maybeContent
-                        ? lastContent.properties.maybeContent.metadata.pillar
-                              .name
-                        : null
-                }
-                byline={
-                    lastContent.properties.showByline &&
-                    lastContent.properties.byline
-                        ? lastContent.properties.byline
-                        : ""
-                }
-                kicker={
-                    lastContent.header.kicker
-                        ? kickerText(lastContent.header.kicker)
-                        : ""
-                }
+                cardUrl={getCardUrl(lastContent)}
+                byline={getByline(lastContent)}
+                pillar={getPillarName(lastContent)}
+                kicker={getKickerText(lastContent)}
                 borderWidth="thick"
                 backgroundColor={palette.culture.faded}
             />

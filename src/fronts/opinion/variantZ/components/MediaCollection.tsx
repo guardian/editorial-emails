@@ -3,32 +3,29 @@ import { Collection as ICollection } from "../../../../api";
 import { Heading } from "./../../../../components/Heading";
 import { Multiline } from "./../../../../components/Multiline";
 import { MediaCardC } from "../../../../components/cards/MediaCardC";
+import { getImageSrc, getCardUrl } from "../../../../dataHelpers";
 
 export const MediaCollection: React.FC<{
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
-    const items = collection.backfill.map(content => (
-        <MediaCardC
-            headline={content.header.headline}
-            cardUrl={content.properties.webUrl}
-            imageSrc={
-                content.properties.maybeContent
-                    ? content.properties.maybeContent.trail.trailPicture
-                          .allImages[0].url
-                    : null
-            }
-            imageAlt={content.header.headline}
-            imageSalt={salt}
-            imageRating={content.card.starRating}
-        />
-    ));
+}> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
     return (
         <>
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
-            {items}
+            {content.map(content => (
+                <MediaCardC
+                    headline={content.header.headline}
+                    cardUrl={getCardUrl(content)}
+                    imageSrc={getImageSrc(content)}
+                    imageAlt={content.header.headline}
+                    imageRating={content.card.starRating}
+                />
+            ))}
         </>
     );
 };

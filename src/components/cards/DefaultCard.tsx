@@ -62,7 +62,6 @@ interface Props {
     kicker?: string;
     imageSrc?: string;
     imageAlt?: string;
-    imageSalt?: string;
     imageRating?: number;
     size: Size;
     designName?: DesignName;
@@ -79,7 +78,6 @@ export const DefaultCard: React.FC<Props> = ({
     pillar,
     imageSrc,
     imageAlt,
-    imageSalt,
     imageRating,
     size = "small",
     designName = "background",
@@ -98,7 +96,8 @@ export const DefaultCard: React.FC<Props> = ({
                         alt={imageAlt}
                         width={size === "large" ? 600 : 294}
                         pillar={pillar}
-                        linkTo={`${cardUrl}?##braze_utm##`}
+                        rating={imageRating}
+                        linkTo={cardUrl}
                     />
                 </RowCell>
             )}
@@ -107,7 +106,7 @@ export const DefaultCard: React.FC<Props> = ({
                 <td className="m-pad" style={metaWrapperStyle(size)}>
                     <Headline
                         text={headline}
-                        linkTo={`${cardUrl}?##braze_utm##`}
+                        linkTo={cardUrl}
                         size={size}
                         pillar={pillar}
                         kicker={kicker}

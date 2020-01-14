@@ -2,7 +2,7 @@ import React from "react";
 import sanitizeHtml from "sanitize-html";
 import { FontCSS, TdCSS, TableCSS } from "../../css";
 import { sanitizeOptions } from "../../utils/sanitizeOptions";
-import { ContinueButton } from "../buttons/ContinueButton";
+import { ContinueButton } from "../ContinueButton";
 import { palette } from "@guardian/src-foundations";
 import { Pillar } from "../../api";
 import { Headline } from "../../components/Headline";
@@ -62,7 +62,6 @@ interface Props {
     showPillarColours?: boolean;
     imageSrc?: string;
     imageAlt?: string;
-    imageSalt?: string;
     imageRating?: number;
 }
 
@@ -77,7 +76,6 @@ export const DescriptiveCard: React.FC<Props> = ({
     pillar,
     imageSrc,
     imageAlt,
-    imageSalt,
     imageRating,
     showPillarColours
 }) => {
@@ -89,7 +87,7 @@ export const DescriptiveCard: React.FC<Props> = ({
                     <td className="m-pad" style={metaWrapperStyle}>
                         <Headline
                             text={headline}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                             size="large"
                             pillar={showPillarColours ? pillar : null}
                             kicker={kicker}
@@ -107,7 +105,8 @@ export const DescriptiveCard: React.FC<Props> = ({
                             width={600}
                             alt={imageAlt}
                             src={imageSrc}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            rating={imageRating}
+                            linkTo={cardUrl}
                             pillar={pillar}
                         />
                     </RowCell>
@@ -150,7 +149,7 @@ export const DescriptiveCard: React.FC<Props> = ({
                     <td className="m-pad" style={bottomPadding}>
                         <ContinueButton
                             label="Continue reading"
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                         />
                     </td>
                 </tr>

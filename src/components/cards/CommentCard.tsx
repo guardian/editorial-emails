@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FontCSS, TdCSS } from "../../css";
 import { palette } from "@guardian/src-foundations";
 import { Pillar } from "../../api";
-import { formatImage } from "../../image";
 import sanitizeHtml from "sanitize-html";
 import { Table, RowCell, TableRowCell, TableRow } from "../../layout/Table";
 import { Headline } from "../../components/Headline";
@@ -59,7 +58,6 @@ interface Props {
     pillar?: Pillar;
     imageSrc?: string;
     imageAlt?: string;
-    imageSalt?: string;
 }
 
 const TrailText: React.FC<{
@@ -76,13 +74,13 @@ const TrailText: React.FC<{
 
 const ContributorImage: React.FC<{
     src: string;
-    salt: string;
     width: number;
     alt: string;
-}> = ({ src, salt, width, alt }) => {
+}> = ({ src, width, alt }) => {
     if (!src) {
         return null;
     }
+
     return <Image src={src} width={width} alt={alt} ignoreWidth />;
 };
 
@@ -95,21 +93,18 @@ const SupplementaryMeta: React.FC<{
     contributorImageAlt?: string;
     size: Size;
     width: number;
-    salt: string;
 }> = ({
     trailText,
     linkURL,
     contributorImageSrc,
     contributorImageAlt,
     size,
-    width,
-    salt
+    width
 }) => {
     const contributorImage = (
         <td style={columnStyleRight}>
             <ContributorImage
                 width={width}
-                salt={salt}
                 src={contributorImageSrc}
                 alt={contributorImageAlt}
             />
@@ -155,12 +150,12 @@ export const CommentCard: React.FC<Props> = ({
     shouldShowProfileImage = false,
     pillar,
     imageSrc,
-    imageAlt,
-    imageSalt
+    imageAlt
 }) => {
     const sanitisedTrailText = sanitizeHtml(trailText, {
         allowedTags: []
     });
+
     return (
         <TableRowCell tdStyle={tdStyle(pillar)}>
             <Table>
@@ -168,7 +163,7 @@ export const CommentCard: React.FC<Props> = ({
                     <td className="m-pad" style={metaWrapperStyle(size)}>
                         <Headline
                             text={headline}
-                            linkTo={`${cardUrl}?##braze_utm##`}
+                            linkTo={cardUrl}
                             size={size}
                             pillar={pillar}
                             byline={byline}
@@ -179,9 +174,8 @@ export const CommentCard: React.FC<Props> = ({
 
                 {size === "large" && shouldShowProfileImage && (
                     <SupplementaryMeta
-                        salt={imageSalt}
                         trailText={sanitisedTrailText}
-                        linkURL={`${cardUrl}?##braze_utm##`}
+                        linkURL={cardUrl}
                         contributorImageSrc={imageSrc}
                         contributorImageAlt={imageAlt}
                         size={size}

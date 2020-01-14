@@ -14,6 +14,7 @@ import { default as minifyCssString } from "minify-css-string";
 import { fontStyles } from "./styles/fonts";
 import { responsiveStyles } from "./styles/responsive-styles";
 import { TableRowCell } from "./layout/Table";
+import { ImageProvider } from "./ImageContext";
 
 enum Fronts {
     Opinion = "email/opinion",
@@ -43,7 +44,7 @@ export const getPageTitle = (front: Front): string => {
     return getTitleFromFrontId(front.id);
 };
 
-const renderFront = (front: Front, salt: string, variant?: string) => {
+const renderFront = (front: Front, variant?: string) => {
     const { id, collections } = front;
     switch (front.id) {
         case Fronts.FilmToday:
@@ -51,7 +52,6 @@ const renderFront = (front: Front, salt: string, variant?: string) => {
                 <FilmToday
                     frontId={id}
                     collections={collections}
-                    salt={salt}
                     variant={variant}
                 />
             );
@@ -60,7 +60,6 @@ const renderFront = (front: Front, salt: string, variant?: string) => {
                 <MediaBriefing
                     frontId={id}
                     collections={collections}
-                    salt={salt}
                     variant={variant}
                 />
             );
@@ -69,7 +68,6 @@ const renderFront = (front: Front, salt: string, variant?: string) => {
                 <Opinion
                     frontId={id}
                     collections={collections}
-                    salt={salt}
                     variant={variant}
                 />
             );
@@ -78,7 +76,6 @@ const renderFront = (front: Front, salt: string, variant?: string) => {
                 <SportAu
                     frontId={id}
                     collections={collections}
-                    salt={salt}
                     variant={variant}
                 />
             );
@@ -87,18 +84,11 @@ const renderFront = (front: Front, salt: string, variant?: string) => {
                 <BusinessToday
                     frontId={id}
                     collections={collections}
-                    salt={salt}
                     variant={variant}
                 />
             );
         default:
-            return (
-                <Collections
-                    frontId={id}
-                    collections={collections}
-                    salt={salt}
-                />
-            );
+            return <Collections frontId={id} collections={collections} />;
     }
 };
 
@@ -106,13 +96,15 @@ export const Email = (front: Front, salt: string, variant?: string): string => {
     const pageTitle = getPageTitle(front);
 
     const body = renderToStaticMarkup(
-        <Center>
-            <TableRowCell>
-                <Banner title={pageTitle} frontId={front.id} imageSalt={salt} />
-                {renderFront(front, salt, variant)}
-                <Footer title={pageTitle} frontId={front.id} />
-            </TableRowCell>
-        </Center>
+        <ImageProvider value={{ imageSalt: salt }}>
+            <Center>
+                <TableRowCell>
+                    <Banner title={pageTitle} frontId={front.id} />
+                    {renderFront(front, variant)}
+                    <Footer title={pageTitle} frontId={front.id} />
+                </TableRowCell>
+            </Center>
+        </ImageProvider>
     );
 
     const favicon =

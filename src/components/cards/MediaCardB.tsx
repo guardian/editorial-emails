@@ -22,7 +22,6 @@ interface Props {
     imageSrc?: string;
     imageAlt?: string;
     imageRating?: number;
-    imageSalt?: string;
 }
 
 export const MediaCardB: React.FC<Props> = ({
@@ -30,8 +29,7 @@ export const MediaCardB: React.FC<Props> = ({
     cardUrl,
     imageSrc,
     imageAlt,
-    imageRating = 1,
-    imageSalt
+    imageRating
 }) => (
     <TableRowCell tdStyle={tdStyle}>
         <Table>
@@ -42,8 +40,9 @@ export const MediaCardB: React.FC<Props> = ({
             <RowCell tdStyle={{ padding: "0" }}>
                 <Image
                     src={imageSrc}
-                    linkTo={`${cardUrl}?##braze_utm##`}
+                    linkTo={cardUrl}
                     alt={imageAlt}
+                    rating={imageRating}
                     width={580}
                     pillar="Opinion"
                 />

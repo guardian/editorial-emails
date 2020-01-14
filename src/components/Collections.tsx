@@ -7,11 +7,10 @@ import { Padding } from "../layout/Padding";
 export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
-}> = ({ collections, salt }) => {
+}> = ({ collections }) => {
     const renderedCollections = collections.map((collection, index) => (
         <>
-            <GenericCollection collection={collection} salt={salt} />
+            <GenericCollection collection={collection} />
             {index < collections.length - 1 && <Padding px={12} />}
         </>
     ));

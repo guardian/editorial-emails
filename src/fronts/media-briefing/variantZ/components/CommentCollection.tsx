@@ -5,15 +5,23 @@ import { Padding } from "../../../../layout/Padding";
 import { Multiline } from "../../../../components/Multiline";
 import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
-import { kickerText } from "../../../../kicker";
+import {
+    getKickerText,
+    getPillarName,
+    getCardUrl,
+    getByline
+} from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
 }> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
+
     const lightGrey = palette.neutral[97];
     const white = palette.neutral[100];
-
     return (
         <>
             <Padding px={12} backgroundColor={lightGrey} />
@@ -22,7 +30,7 @@ export const CommentCollection: React.FC<{
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            {collection.backfill.map((story, index) => (
+            {content.map((story, index) => (
                 <>
                     {index > 0 && (
                         <Padding px={12} backgroundColor={lightGrey} />
@@ -31,24 +39,10 @@ export const CommentCollection: React.FC<{
                         headline={story.header.headline}
                         trailText={story.card.trailText}
                         isComment={story.display.showQuotedHeadline}
-                        cardUrl={story.properties.webUrl}
-                        pillar={
-                            story.properties.maybeContent
-                                ? story.properties.maybeContent.metadata.pillar
-                                      .name
-                                : null
-                        }
-                        byline={
-                            story.properties.showByline &&
-                            story.properties.byline
-                                ? story.properties.byline
-                                : ""
-                        }
-                        kicker={
-                            story.header.kicker
-                                ? kickerText(story.header.kicker)
-                                : ""
-                        }
+                        cardUrl={getCardUrl(story)}
+                        pillar={getPillarName(story)}
+                        byline={getByline(story)}
+                        kicker={getKickerText(story)}
                         backgroundColor={white}
                         showPillarColours
                         borderWidth="thin"

@@ -6,22 +6,25 @@ import { CommentCard } from "./../../../../components/cards/CommentCard";
 import { Padding } from "../../../../layout/Padding";
 import { TableRowCell } from "../../../../layout/Table";
 import { palette } from "@guardian/src-foundations";
+import {
+    getPillarName,
+    getImageSrc,
+    getCardUrl,
+    getByline
+} from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
     frontId: string;
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
+}> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
+
+    const leadStory = content[0];
+    const bottomCollection = content.slice(1);
     const lightGrey = palette.neutral[97];
-    const leadStory = collection.backfill[0];
-    const bottomCollection = collection.backfill.slice(1);
-
-    const leadContributor = leadStory.properties.maybeContent.tags.tags.find(
-        tag => {
-            return tag.properties.tagType === "Contributor";
-        }
-    );
-
     return (
         <>
             <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
@@ -30,23 +33,15 @@ export const CommentCollection: React.FC<{
                 <Heading heading={collection.displayName} />
                 <CommentCard
                     headline={leadStory.header.headline}
-                    byline={leadStory.properties.byline}
+                    byline={getByline(leadStory)}
                     trailText={leadStory.card.trailText}
-                    cardUrl={leadStory.properties.webUrl}
+                    cardUrl={getCardUrl(leadStory)}
                     isComment={leadStory.header.isComment}
                     size="large"
                     shouldShowProfileImage
-                    pillar={
-                        leadStory.properties.maybeContent.metadata.pillar.name
-                    }
-                    imageSrc={
-                        leadContributor
-                            ? leadContributor.properties
-                                  .contributorLargeImagePath
-                            : null
-                    }
+                    pillar={getPillarName(leadStory)}
+                    imageSrc={getImageSrc(leadStory, { isContributor: true })}
                     imageAlt={leadStory.header.headline}
-                    imageSalt={salt}
                 />
                 <Padding px={12} />
                 {bottomCollection.map((story, index) => {
@@ -54,16 +49,10 @@ export const CommentCollection: React.FC<{
                         <>
                             <CommentCard
                                 headline={story.header.headline}
-                                byline={story.properties.byline}
-                                cardUrl={story.properties.webUrl}
+                                byline={getByline(story)}
+                                cardUrl={getCardUrl(story)}
                                 isComment={story.header.isComment}
-                                pillar={
-                                    story.properties.maybeContent
-                                        ? story.properties.maybeContent.metadata
-                                              .pillar.name
-                                        : null
-                                }
-                                imageSalt={salt}
+                                pillar={getPillarName(story)}
                             />
                             {index < bottomCollection.length - 1 && (
                                 <Padding px={12} />

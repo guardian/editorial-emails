@@ -6,15 +6,19 @@ import { palette } from "@guardian/src-foundations";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
 import { Multiline } from "../../../../components/Multiline";
 import { Padding } from "../../../../layout/Padding";
-import { kickerText } from "../../../../kicker";
+import {
+    getKickerText,
+    getPillarName,
+    getCardUrl,
+    getByline
+} from "../../../../dataHelpers";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
-import { Table, TableRowCell } from "../../../../layout/Table";
+import { TableRowCell } from "../../../../layout/Table";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
-    const content = collection.curated.concat(collection.backfill);
+}> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
     if (content.length < 1) {
         return null;
     }
@@ -24,7 +28,6 @@ export const DefaultCollection: React.FC<{
 
     const lightGrey = palette.neutral[97];
     const white = palette.neutral[100];
-
     return (
         <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
             <Padding px={12} />
@@ -32,7 +35,6 @@ export const DefaultCollection: React.FC<{
             <Heading heading={collection.displayName} />
             <DefaultGrid
                 content={gridContent}
-                salt={salt}
                 card={{
                     Component: DefaultCard,
                     props: {
@@ -49,24 +51,10 @@ export const DefaultCollection: React.FC<{
                         headline={story.header.headline}
                         trailText={story.card.trailText}
                         isComment={story.display.showQuotedHeadline}
-                        cardUrl={story.properties.webUrl}
-                        pillar={
-                            story.properties.maybeContent
-                                ? story.properties.maybeContent.metadata.pillar
-                                      .name
-                                : null
-                        }
-                        byline={
-                            story.properties.showByline &&
-                            story.properties.byline
-                                ? story.properties.byline
-                                : ""
-                        }
-                        kicker={
-                            story.header.kicker
-                                ? kickerText(story.header.kicker)
-                                : ""
-                        }
+                        cardUrl={getCardUrl(story)}
+                        pillar={getPillarName(story)}
+                        byline={getByline(story)}
+                        kicker={getKickerText(story)}
                         showPillarColours
                         backgroundColor={white}
                     />
