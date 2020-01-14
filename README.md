@@ -24,25 +24,25 @@ You can run the first locally to troubleshoot.
 ## Supported Emails & Variants
 
     Film Today
-        Variant B (ON)
-        Variant Z (OFF)
+        Variant B
+        Variant Z
 
     Media Briefing
-        Variant B (ON)
-        Variant C (ON)
-        Variant Z (OFF)
+        Variant B
+        Variant C
+        Variant Z
 
     Business Today
-        Variant B (ON)
+        Variant B
 
     Opinion
-        Variant B (ON)
-        Variant Y (OFF)
-        Variant Z (OFF)
+        Variant B
+        Variant Y
+        Variant Z
 
     Sport AU
-        Variant B (ON)
-        Variant C (ON)
+        Variant B
+        Variant C
 
 ## Logs and troubleshooting
 
