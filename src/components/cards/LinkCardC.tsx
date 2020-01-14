@@ -1,10 +1,7 @@
 import React from "react";
-import { Content } from "../../api";
 import { TableRowCell } from "../../layout/Table";
 import { TdCSS, LinkCSS, ImageCSS } from "../../css";
 import { headline } from "../../styles/typography";
-
-const brazeParameter = "?##braze_utm##"; // TODO solve link generation
 
 const containerStyle: TdCSS = {
     padding: "10px 10px 30px 10px"
@@ -23,20 +20,16 @@ const iconStyle: ImageCSS = {
 };
 
 export const LinkCardC: React.FC<{
-    content: Content;
-}> = ({ content }) => {
-    const webURL =
-        "https://www.theguardian.com" +
-        content.properties.href +
-        brazeParameter; // TODO type curated content separately?
-
+    headline: string;
+    cardUrl: string;
+}> = ({ headline, cardUrl }) => {
     const arrow =
         "https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5dcebdcb9ae1683cc77465a5/original.png?1573830091";
 
     return (
         <TableRowCell tdStyle={containerStyle}>
-            <a style={fontStyle} href={webURL}>
-                {content.header.headline}
+            <a style={fontStyle} href={cardUrl}>
+                {headline}
                 <br />
                 <br />
                 <img height="23" style={iconStyle} src={arrow} alt="arrow" />

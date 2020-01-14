@@ -5,14 +5,23 @@ import { TableRowCell } from "../../../../layout/Table";
 import { Padding } from "../../../../layout/Padding";
 import { Heading } from "../../../../components/Heading";
 import { HeadlineCard } from "../../../../components/cards/HeadlineCard";
+import {
+    getKickerText,
+    getPillarName,
+    getCardUrl,
+    getByline
+} from "../../../../dataHelpers";
 
 export const LinkCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
 }> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
+
     const lightGrey = palette.neutral[97];
     const marineBlue = "#00A194";
-
     return (
         <>
             <Padding px={12} backgroundColor={lightGrey} />
@@ -27,9 +36,15 @@ export const LinkCollection: React.FC<{
                     color={palette.neutral[100]}
                 />
                 <TableRowCell tdStyle={{ padding: "0 10px" }}>
-                    {collection.curated.map(story => (
+                    {content.map(story => (
                         <HeadlineCard
-                            content={story}
+                            headline={story.header.headline}
+                            trailText={story.card.trailText}
+                            isComment={story.display.showQuotedHeadline}
+                            cardUrl={getCardUrl(story)}
+                            byline={getByline(story)}
+                            pillar={getPillarName(story)}
+                            kicker={getKickerText(story)}
                             borderWidth="thin"
                             showUseWhite
                             layout="compact"

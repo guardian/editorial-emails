@@ -7,15 +7,26 @@ import { Heading } from "../../../../components/Heading";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { palette } from "@guardian/src-foundations";
 import { TableRowCell } from "../../../../layout/Table";
+import {
+    getKickerText,
+    getPillarName,
+    getImageSrc,
+    getCardUrl,
+    getByline
+} from "../../../../dataHelpers";
 
 export const DefaultCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
-}> = ({ collection, salt }) => {
-    const topCollection = collection.backfill.slice(0, 2);
-    const gridContent = collection.backfill.slice(2, 6);
-    const lightGrey = palette.neutral[97];
+}> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
+    const topCollection = content.slice(0, 2);
+    const gridContent = content.slice(2, 6);
+
+    const lightGrey = palette.neutral[97];
     return (
         <>
             <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
@@ -26,15 +37,22 @@ export const DefaultCollection: React.FC<{
                 return (
                     <>
                         <DefaultCard
-                            content={content}
-                            salt={salt}
+                            headline={content.header.headline}
+                            cardUrl={getCardUrl(content)}
+                            isComment={content.display.showQuotedHeadline}
+                            imageSrc={getImageSrc(content)}
+                            imageAlt={content.header.headline}
+                            imageRating={content.card.starRating}
+                            byline={getByline(content)}
+                            kicker={getKickerText(content)}
+                            pillar={getPillarName(content)}
                             size="large"
                         />
                         <Padding px={12} />
                     </>
                 );
             })}
-            {gridContent && <DefaultGrid content={gridContent} salt={salt} />}
+            {gridContent && <DefaultGrid content={gridContent} />}
         </>
     );
 };

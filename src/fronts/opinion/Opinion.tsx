@@ -8,15 +8,13 @@ import { Collections as CollectionsVariantZ } from "./variantZ/Collections";
 export const Opinion: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
     variant?: string;
-}> = ({ frontId, collections, salt, variant }) => {
+}> = ({ frontId, collections, variant }) => {
     if (variant === "z") {
         return (
             <CollectionsVariantZ
                 frontId={frontId}
                 collections={collections}
-                salt={salt}
             ></CollectionsVariantZ>
         );
     } else if (variant === "y") {
@@ -24,7 +22,6 @@ export const Opinion: React.FC<{
             <CollectionsVariantY
                 frontId={frontId}
                 collections={collections}
-                salt={salt}
             ></CollectionsVariantY>
         );
     } else if (variant === "b") {
@@ -32,12 +29,9 @@ export const Opinion: React.FC<{
             <CollectionsVariantB
                 frontId={frontId}
                 collections={collections}
-                salt={salt}
             ></CollectionsVariantB>
         );
     }
 
-    return (
-        <Collections frontId={frontId} collections={collections} salt={salt} />
-    );
+    return <Collections frontId={frontId} collections={collections} />;
 };

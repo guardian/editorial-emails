@@ -8,25 +8,19 @@ import { DefaultCollection } from "./components/DefaultCollection";
 export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
-}> = ({ collections, salt }) => {
+}> = ({ collections }) => {
     const renderedCollections = collections.map(collection => {
-        const content = [].concat(collection.backfill, collection.curated);
-        const designType = getDesignType(content);
+        const designType = getDesignType(collection);
 
         switch (designType) {
             case "default":
                 // Render different collection for 'Top stories' collection without using 'display name'
                 // Look at 'au/sport' value in href, which is not set in the other collection
                 if (collection.href === "au/sport") {
-                    return (
-                        <TopCollection collection={collection} salt={salt} />
-                    );
+                    return <TopCollection collection={collection} />;
                 }
 
-                return (
-                    <DefaultCollection collection={collection} salt={salt} />
-                );
+                return <DefaultCollection collection={collection} />;
         }
     });
 

@@ -3,8 +3,10 @@ import { Content } from "../api";
 import { DefaultCard } from "../components/cards/DefaultCard";
 import { TdCSS } from "../css";
 import { palette } from "@guardian/src-foundations";
-import { TableRow, TableRowCell } from "./Table";
+import { TableRowCell } from "./Table";
 import { Padding } from "./Padding";
+import { getKickerText, getPillarName } from "../dataHelpers";
+import { getImageSrc, getCardUrl, getByline } from "../dataHelpers";
 
 const gutterStyle: TdCSS = {
     width: "2%",
@@ -98,7 +100,6 @@ type GridCard = {
 
 interface DefaultGridProps {
     content: Content[];
-    salt: string;
     card?: GridCard;
     leftStyles?: RowStyle;
     rightStyles?: RowStyle;
@@ -109,44 +110,58 @@ const defaultCard = {
     props: {}
 };
 
-// TODO really should accept a React element so that it doesn't have to know
-// about Card or salt.
 export const DefaultGrid: React.FC<DefaultGridProps> = ({
     content,
-    salt,
     card = defaultCard,
     leftStyles,
     rightStyles
 }) => {
     const rowsArray = partition(content, 2);
     const { Component, props } = card;
-    const rows = rowsArray.map((pair, index) => (
-        <React.Fragment key={index}>
-            <GridRow
-                left={
-                    <Component
-                        content={pair[0]}
-                        salt={salt}
-                        size="small"
-                        {...props}
-                    />
-                }
-                right={
-                    pair[1] ? (
+    const rows = rowsArray.map((pair, index) => {
+        const leftPair = pair[0];
+        const rightPair = pair[1];
+        return (
+            <React.Fragment key={index}>
+                <GridRow
+                    left={
                         <Component
-                            content={pair[1]}
-                            salt={salt}
+                            headline={leftPair.header.headline}
+                            byline={getByline(leftPair)}
+                            kicker={getKickerText(leftPair)}
+                            isComment={leftPair.display.showQuotedHeadline}
+                            cardUrl={getCardUrl(leftPair)}
+                            pillar={getPillarName(leftPair)}
+                            imageSrc={getImageSrc(leftPair)}
+                            imageAlt={leftPair.header.headline}
+                            imageRating={leftPair.card.starRating}
                             size="small"
                             {...props}
                         />
-                    ) : null
-                }
-                leftStyles={leftStyles}
-                rightStyles={rightStyles}
-            />
-            {index < rowsArray.length - 1 && <Padding px={12} />}
-        </React.Fragment>
-    ));
+                    }
+                    right={
+                        rightPair ? (
+                            <Component
+                                headline={rightPair.header.headline}
+                                byline={getByline(rightPair)}
+                                kicker={getKickerText(rightPair)}
+                                isComment={rightPair.display.showQuotedHeadline}
+                                cardUrl={getCardUrl(rightPair)}
+                                pillar={getPillarName(rightPair)}
+                                imageSrc={getImageSrc(rightPair)}
+                                imageAlt={rightPair.header.headline}
+                                imageRating={rightPair.card.starRating}
+                                {...props}
+                            />
+                        ) : null
+                    }
+                    leftStyles={leftStyles}
+                    rightStyles={rightStyles}
+                />
+                {index < rowsArray.length - 1 && <Padding px={12} />}
+            </React.Fragment>
+        );
+    });
 
     return <TableRowCell>{rows}</TableRowCell>;
 };

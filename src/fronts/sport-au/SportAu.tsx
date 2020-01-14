@@ -7,15 +7,13 @@ import { Collections as CollectionsVariantC } from "./variantC/Collections";
 export const SportAu: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
     variant?: string;
-}> = ({ frontId, collections, salt, variant }) => {
+}> = ({ frontId, collections, variant }) => {
     if (variant === "c") {
         return (
             <CollectionsVariantC
                 frontId={frontId}
                 collections={collections}
-                salt={salt}
             ></CollectionsVariantC>
         );
     }
@@ -25,12 +23,9 @@ export const SportAu: React.FC<{
             <CollectionsVariantB
                 frontId={frontId}
                 collections={collections}
-                salt={salt}
             ></CollectionsVariantB>
         );
     }
 
-    return (
-        <Collections frontId={frontId} collections={collections} salt={salt} />
-    );
+    return <Collections frontId={frontId} collections={collections} />;
 };

@@ -2,20 +2,28 @@ import React from "react";
 import sanitizeHtml from "sanitize-html";
 import { FontCSS, TdCSS, TableCSS } from "../../css";
 import { sanitizeOptions } from "../../utils/sanitizeOptions";
-import { ContinueButton } from "../buttons/ContinueButton";
+import { ContinueButton } from "../ContinueButton";
 import { palette } from "@guardian/src-foundations";
-import { Content } from "../../api";
-import { formatImage } from "../../image";
-import { kickerText } from "../../kicker";
+import { Pillar } from "../../api";
 import { Headline } from "../../components/Headline";
 import { Image } from "../../components/Image";
+import { pillarProps } from "../../utils/pillarProps";
 import { headline, textBody } from "../../styles/typography";
 import { Table, RowCell, TableRowCell } from "../../layout/Table";
 
-const tdStyle: TdCSS = {
-    verticalAlign: "top",
-    backgroundColor: palette.culture.faded,
-    borderTop: `2px solid ${palette.culture.main}`
+const tdStyle = (showPillarColours: boolean, pillar: string): TdCSS => {
+    if (showPillarColours && pillar && pillarProps[pillar]) {
+        return {
+            verticalAlign: "top",
+            backgroundColor: pillarProps[pillar].faded,
+            borderTop: `2px solid ${pillarProps[pillar].colour}`
+        };
+    }
+    return {
+        verticalAlign: "top",
+        backgroundColor: palette.culture.faded,
+        borderTop: `2px solid ${palette.culture.main}`
+    };
 };
 
 const metaWrapperStyle = {
@@ -43,77 +51,62 @@ const bottomPaddingStyle: TdCSS = {
 };
 
 interface Props {
-    content: Content;
-    salt: string;
+    headline: string;
+    byline: string;
+    trailText?: string;
+    bodyText: string;
+    kicker?: string;
+    pillar?: Pillar;
+    isComment?: boolean;
+    cardUrl: string;
     showPillarColours?: boolean;
+    imageSrc?: string;
+    imageAlt?: string;
+    imageRating?: number;
 }
 
-const brazeParameter = "?##braze_utm##";
-
 export const DescriptiveCard: React.FC<Props> = ({
-    content,
-    salt,
+    headline,
+    byline,
+    trailText,
+    bodyText,
+    cardUrl,
+    kicker,
+    isComment = false,
+    pillar,
+    imageSrc,
+    imageAlt,
+    imageRating,
     showPillarColours
 }) => {
-    const image =
-        content.properties.maybeContent.trail.trailPicture.allImages[0];
-    const formattedImage = formatImage(
-        image.url,
-        salt,
-        600,
-        content.card.starRating
-    );
-
-    const { headline } = content.header;
-    const { trailText } = content.card;
-    const webURL = content.properties.webUrl + brazeParameter;
-    const imageURL = formattedImage;
-    const imageAlt = content.header.headline;
-    const showQuotation = content.display.showQuotedHeadline;
-
-    const kicker = content.header.kicker
-        ? kickerText(content.header.kicker)
-        : "";
-
-    const pillar = content.properties.maybeContent
-        ? content.properties.maybeContent.metadata.pillar.name
-        : null;
-
-    const { showByline } = content.properties;
-    const byline =
-        showByline && content.properties.byline
-            ? content.properties.byline
-            : "";
-
-    const bodyText = content.properties.maybeContent.fields.body;
-    const bodyParagraphs = bodyText.split("</p>");
-
+    const bodyPars = bodyText.split("</p>");
     return (
-        <TableRowCell tdStyle={tdStyle}>
+        <TableRowCell tdStyle={tdStyle(showPillarColours, pillar)}>
             <Table>
                 <tr>
                     <td className="m-pad" style={metaWrapperStyle}>
                         <Headline
                             text={headline}
-                            linkTo={webURL}
+                            linkTo={cardUrl}
                             size="large"
                             pillar={showPillarColours ? pillar : null}
                             kicker={kicker}
                             byline={byline}
-                            showQuotation={showQuotation}
+                            showQuotation={isComment}
                         />
                     </td>
                 </tr>
                 <tr>
                     <td className="m-col-pad" style={bottomPaddingStyle}></td>
                 </tr>
-                {imageURL && (
+                {imageSrc && (
                     <RowCell>
                         <Image
                             width={600}
                             alt={imageAlt}
-                            src={imageURL}
-                            linkTo={webURL}
+                            src={imageSrc}
+                            rating={imageRating}
+                            linkTo={cardUrl}
                             pillar={pillar}
                         />
                     </RowCell>
@@ -128,7 +121,7 @@ export const DescriptiveCard: React.FC<Props> = ({
                         />
                     </td>
                 </tr>
-                {bodyParagraphs.map((pText, pIndex) => {
+                {bodyPars.map((pText, pIndex) => {
                     if (pIndex < 2) {
                         if (pText) {
                             return (
@@ -156,7 +149,7 @@ export const DescriptiveCard: React.FC<Props> = ({
                     <td className="m-pad" style={bottomPadding}>
                         <ContinueButton
                             label="Continue reading"
-                            linkTo={webURL}
+                            linkTo={cardUrl}
                         />
                     </td>
                 </tr>

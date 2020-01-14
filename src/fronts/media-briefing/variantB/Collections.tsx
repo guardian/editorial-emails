@@ -10,11 +10,9 @@ import { DefaultCollection } from "./components/DefaultCollection";
 export const Collections: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
-}> = ({ collections, salt }) => {
+}> = ({ collections }) => {
     const renderedCollections = collections.map(collection => {
-        const content = [].concat(collection.backfill, collection.curated);
-        const designType = getDesignType(content);
+        const designType = getDesignType(collection);
 
         switch (designType) {
             case "comment":
@@ -28,11 +26,9 @@ export const Collections: React.FC<{
                     return null;
                 }
 
-                return (
-                    <CommentCollection collection={collection} salt={salt} />
-                );
+                return <CommentCollection collection={collection} />;
             case "link":
-                return <LinkCollection collection={collection} salt={salt} />;
+                return <LinkCollection collection={collection} />;
             case "default":
                 // Render different collection for 'TV & Radio' collection without using 'display name'
                 // Look at 'tv-and-radio' substring in href
@@ -40,15 +36,10 @@ export const Collections: React.FC<{
                     collection.href &&
                     collection.href.indexOf("tv-and-radio") > -1
                 ) {
-                    return (
-                        <DefaultCollection
-                            collection={collection}
-                            salt={salt}
-                        />
-                    );
+                    return <DefaultCollection collection={collection} />;
                 }
 
-                return <TopCollection collection={collection} salt={salt} />;
+                return <TopCollection collection={collection} />;
         }
     });
 

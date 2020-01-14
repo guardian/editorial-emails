@@ -5,18 +5,22 @@ import { Padding } from "../../../../layout/Padding";
 import { palette } from "@guardian/src-foundations";
 import { Multiline } from "../../../../components/Multiline";
 import { CommentCard } from "../../../../components/cards/CommentCard";
+import {
+    getPillarName,
+    getImageSrc,
+    getCardUrl,
+    getByline
+} from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
-    const content = collection.curated.concat(collection.backfill);
+}> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
     if (content.length < 1) {
         return null;
     }
 
     const lightGrey = palette.neutral[97];
-
     return (
         <>
             <Padding px={12} backgroundColor={lightGrey} />
@@ -25,16 +29,20 @@ export const CommentCollection: React.FC<{
                 heading={collection.displayName}
                 backgroundColor={lightGrey}
             />
-            {content.map(story => {
-                return (
-                    <CommentCard
-                        content={story}
-                        salt={salt}
-                        shouldShowProfileImage
-                        size="large"
-                    />
-                );
-            })}
+            {content.map(story => (
+                <CommentCard
+                    headline={story.header.headline}
+                    byline={getByline(story)}
+                    cardUrl={getCardUrl(story)}
+                    trailText={story.card.trailText}
+                    isComment={story.header.isComment}
+                    shouldShowProfileImage
+                    size="large"
+                    pillar={getPillarName(story)}
+                    imageSrc={getImageSrc(story, { isContributor: true })}
+                    imageAlt={story.header.headline}
+                />
+            ))}
         </>
     );
 };

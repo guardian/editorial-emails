@@ -6,23 +6,25 @@ import { CommentCard } from "./../../../../components/cards/CommentCard";
 import { Padding } from "../../../../layout/Padding";
 import { TableRowCell } from "../../../../layout/Table";
 import { palette } from "@guardian/src-foundations";
-
-const frontIdShouldShowCommentGridImages = (frontId: string): boolean => {
-    if (frontId === "email/opinion") {
-        return false;
-    }
-    return true;
-};
+import {
+    getPillarName,
+    getImageSrc,
+    getCardUrl,
+    getByline
+} from "../../../../dataHelpers";
 
 export const CommentCollection: React.FC<{
     frontId: string;
     collection: ICollection;
-    salt: string;
-}> = ({ collection, salt }) => {
-    const lightGrey = palette.neutral[97];
-    const firstCollection = collection.backfill[0];
-    const rest = collection.backfill.slice(1);
+}> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
 
+    const leadStory = content[0];
+    const bottomCollection = content.slice(1);
+    const lightGrey = palette.neutral[97];
     return (
         <>
             <TableRowCell tdStyle={{ backgroundColor: lightGrey }}>
@@ -30,22 +32,34 @@ export const CommentCollection: React.FC<{
                 <Multiline />
                 <Heading heading={collection.displayName} />
                 <CommentCard
-                    content={firstCollection}
-                    salt={salt}
+                    headline={leadStory.header.headline}
+                    byline={getByline(leadStory)}
+                    trailText={leadStory.card.trailText}
+                    cardUrl={getCardUrl(leadStory)}
+                    isComment={leadStory.header.isComment}
                     size="large"
                     shouldShowProfileImage
+                    pillar={getPillarName(leadStory)}
+                    imageSrc={getImageSrc(leadStory, { isContributor: true })}
+                    imageAlt={leadStory.header.headline}
                 />
                 <Padding px={12} />
-                {rest.map((story, index) => (
-                    <>
-                        <CommentCard
-                            content={story}
-                            salt={salt}
-                            shouldShowImage={false}
-                        />
-                        {index < rest.length - 1 && <Padding px={12} />}
-                    </>
-                ))}
+                {bottomCollection.map((story, index) => {
+                    return (
+                        <>
+                            <CommentCard
+                                headline={story.header.headline}
+                                byline={getByline(story)}
+                                cardUrl={getCardUrl(story)}
+                                isComment={story.header.isComment}
+                                pillar={getPillarName(story)}
+                            />
+                            {index < bottomCollection.length - 1 && (
+                                <Padding px={12} />
+                            )}
+                        </>
+                    );
+                })}
             </TableRowCell>
         </>
     );

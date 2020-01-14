@@ -8,9 +8,8 @@ import { Collections as CollectionsVariantB } from "./variantB/Collections";
 export const MediaBriefing: React.FC<{
     frontId: string;
     collections: ICollection[];
-    salt: string;
     variant?: string;
-}> = ({ frontId, collections, salt, variant }) => {
+}> = ({ frontId, collections, variant }) => {
     if (variant === "z") {
         // NOT IN USE
         // FKA VARIANT C
@@ -18,7 +17,6 @@ export const MediaBriefing: React.FC<{
             <CollectionsVariantZ
                 frontId={frontId}
                 collections={collections}
-                salt={salt}
             ></CollectionsVariantZ>
         );
     } else if (variant === "c") {
@@ -26,7 +24,6 @@ export const MediaBriefing: React.FC<{
             <CollectionsVariantC
                 frontId={frontId}
                 collections={collections}
-                salt={salt}
             ></CollectionsVariantC>
         );
     } else if (variant === "b") {
@@ -34,16 +31,11 @@ export const MediaBriefing: React.FC<{
             <CollectionsVariantB
                 frontId={frontId}
                 collections={collections}
-                salt={salt}
             ></CollectionsVariantB>
         );
     }
 
     return (
-        <Collections
-            frontId={frontId}
-            collections={collections}
-            salt={salt}
-        ></Collections>
+        <Collections frontId={frontId} collections={collections}></Collections>
     );
 };

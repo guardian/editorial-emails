@@ -7,15 +7,26 @@ import { Heading } from "../../../../components/Heading";
 import { DefaultGrid } from "../../../../layout/Grid";
 import { DefaultCard } from "../../../../components/cards/DefaultCard";
 import { palette } from "@guardian/src-foundations";
+import {
+    getKickerText,
+    getPillarName,
+    getImageSrc,
+    getCardUrl,
+    getByline
+} from "../../../../dataHelpers";
 
 export const TopCollection: React.FC<{
     collection: ICollection;
-    salt?: string;
-}> = ({ collection, salt }) => {
-    const firstCollection = collection.backfill[0];
-    const secondCollection = collection.backfill.slice(1, 3);
-    const thirdCollection = collection.backfill[3];
-    const fourthCollection = collection.backfill.slice(4, 6);
+}> = ({ collection }) => {
+    const content = [].concat(collection.curated, collection.backfill);
+    if (content.length < 1) {
+        return null;
+    }
+
+    const firstCollection = content[0];
+    const secondCollection = content.slice(1, 3);
+    const thirdCollection = content[3];
+    const fourthCollection = content.slice(4, 6);
 
     // Pass a background color and border styles to be used by the grid cell.
     // This ensures all cells in a row will have the same background and border,
@@ -32,8 +43,15 @@ export const TopCollection: React.FC<{
             <Multiline topPadding />
             <Heading heading={collection.displayName} />
             <DefaultCard
-                content={firstCollection}
-                salt={salt}
+                headline={firstCollection.header.headline}
+                cardUrl={getCardUrl(firstCollection)}
+                isComment={firstCollection.display.showQuotedHeadline}
+                imageSrc={getImageSrc(firstCollection)}
+                imageAlt={firstCollection.header.headline}
+                imageRating={firstCollection.card.starRating}
+                byline={getByline(firstCollection)}
+                kicker={getKickerText(firstCollection)}
+                pillar={getPillarName(firstCollection)}
                 size="large"
                 designName="border"
             />
@@ -41,7 +59,6 @@ export const TopCollection: React.FC<{
             {secondCollection && (
                 <DefaultGrid
                     content={secondCollection}
-                    salt={salt}
                     card={{
                         Component: DefaultCard,
                         props: { designName: "border", isInsideGrid: true }
@@ -52,8 +69,15 @@ export const TopCollection: React.FC<{
             )}
             <Padding px={12} />
             <DefaultCard
-                content={thirdCollection}
-                salt={salt}
+                headline={thirdCollection.header.headline}
+                cardUrl={getCardUrl(thirdCollection)}
+                isComment={thirdCollection.display.showQuotedHeadline}
+                imageSrc={getImageSrc(thirdCollection)}
+                imageAlt={thirdCollection.header.headline}
+                imageRating={thirdCollection.card.starRating}
+                byline={getByline(thirdCollection)}
+                kicker={getKickerText(thirdCollection)}
+                pillar={getPillarName(thirdCollection)}
                 size="large"
                 designName="border"
             />
@@ -61,7 +85,6 @@ export const TopCollection: React.FC<{
             {fourthCollection && (
                 <DefaultGrid
                     content={fourthCollection}
-                    salt={salt}
                     card={{
                         Component: DefaultCard,
                         props: { designName: "border", isInsideGrid: true }
