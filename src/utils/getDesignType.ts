@@ -11,7 +11,7 @@ export type DesignType =
 export const getDesignType = (collection: ICollection): DesignType => {
     const designTypes: Set<string> = new Set();
 
-    const content = [].concat(collection.curated).concat(collection.backfill);
+    const content = [].concat(collection.curated, collection.backfill);
     content.forEach(c => {
         if (c.type === "LinkSnap") {
             designTypes.add("LinkSnap");

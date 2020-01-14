@@ -7,7 +7,7 @@ import { LinkGrid as LinkGridC } from "./Grid";
 export const LinkCollection: React.FC<{
     collection: ICollection;
 }> = ({ collection }) => {
-    const content = [].concat(collection.curated).concat(collection.backfill);
+    const content = [].concat(collection.curated, collection.backfill);
     if (content.length < 1) {
         return null;
     }
