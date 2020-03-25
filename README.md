@@ -152,3 +152,10 @@ adding styles for 'background-repeat', 'background-position' and 'background-ima
 Because of that, Lotus Notes 8.5 was stripping out all of the inline styles, including 'background-color', which would normally work fine.
 
 More details on the PR can be found here: https://github.com/guardian/editorial-emails/pull/16
+
+## Testing with Braze
+
+Braze provides a comprehensive visual testing solution called _Inbox Vision_.
+
+[Follow our guide](https://docs.google.com/document/d/1zXUq2BIVEVEj0zolB77tskO0bvtVkB3CWj8eaiADMCo/) (internal document)
+on how to visually test your emails using Braze.
