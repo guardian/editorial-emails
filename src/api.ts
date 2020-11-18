@@ -69,7 +69,7 @@ export interface Tag {
 export type Pillar = "News" | "Opinion" | "Sport" | "Arts" | "Lifestyle";
 
 // e.g. see
-// https://github.com/guardian/frontend/blob/master/common/app/implicits/FaciaContentFrontendHelpers.scala#L19
+// https://github.com/guardian/frontend/blob/main/common/app/implicits/FaciaContentFrontendHelpers.scala#L19
 // for image
 interface InnerContent {
     trail: {

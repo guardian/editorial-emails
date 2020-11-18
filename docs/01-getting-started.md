@@ -14,7 +14,7 @@ yarn [test|tslint|tsc|..] // see package.json scripts for options here
 
 ## Deploying
 
-We use continuous delivery so merging to master will automatically deploy.
+We use continuous delivery so merging to `main` will automatically deploy.
 Behind the scenes (i.e. in TC), we run:
 
 ```bash
