@@ -6,7 +6,7 @@ export const starImage = (rating: number): string => {
 };
 
 // See:
-// https://github.com/guardian/frontend/blob/master/common/app/views/support/ImageProfile.scala#L242
+// https://github.com/guardian/frontend/blob/main/common/app/views/support/ImageProfile.scala#L242
 export const formatImage = (
     masterURL: string,
     salt: string,

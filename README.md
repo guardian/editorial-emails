@@ -12,7 +12,7 @@ repo so that we can move faster.
 
 ## Docs
 
-- [Getting Started](https://github.com/guardian/editorial-emails/blob/master/docs/01-getting-started.md)
-- [Email limitations](https://github.com/guardian/editorial-emails/blob/master/docs/02-email-limitations.md)
-- [Other rendering frameworks](https://github.com/guardian/editorial-emails/blob/master/docs/03-other-rendering-frameworks.md)
-- [How do we test emails?](https://github.com/guardian/editorial-emails/blob/master/docs/04-testing-emails.md)
+- [Getting Started](https://github.com/guardian/editorial-emails/blob/main/docs/01-getting-started.md)
+- [Email limitations](https://github.com/guardian/editorial-emails/blob/main/docs/02-email-limitations.md)
+- [Other rendering frameworks](https://github.com/guardian/editorial-emails/blob/main/docs/03-other-rendering-frameworks.md)
+- [How do we test emails?](https://github.com/guardian/editorial-emails/blob/main/docs/04-testing-emails.md)

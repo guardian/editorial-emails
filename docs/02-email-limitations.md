@@ -31,7 +31,7 @@ Useful reading:
 - [How to code emails for outlook 2016 - Email on acid](https://www.emailonacid.com/blog/article/email-development/how-to-code-emails-for-outlook-2016/)
 - [Fluid hybrid design primer - Email on acid](https://www.emailonacid.com/blog/article/email-development/a-fluid-hybrid-design-primer/)
 - [Useful bug fix snippets- Litmus](https://litmus.com/community/snippets)
-- [Working with email on frontend - The Guardian Github](https://github.com/guardian/frontend/blob/master/docs/03-dev-howtos/17-working-with-emails.md#email-rendering)
+- [Working with email on frontend - The Guardian Github](https://github.com/guardian/frontend/blob/main/docs/03-dev-howtos/17-working-with-emails.md#email-rendering)
 - [Example of a Guardian email front - Guardian Film Today](https://www.theguardian.com/email/film-today)
 
 ## Special fixes
