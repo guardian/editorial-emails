@@ -59,7 +59,7 @@
     "@guardian/image": "^1.0.2",
     "@guardian/src-foundations": "^0.2.3",
     "@types/react-html-parser": "^2.0.1",
-    "aws-sdk": "^2.554.0",
+    "aws-sdk": "^2.783.0",
     "aws-serverless-express": "^3.3.6",
     "compression": "^1.7.4",
     "express": "^4.17.1",
