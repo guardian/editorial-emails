@@ -53,9 +53,9 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "^1.15.0",
-    "@aws-cdk/aws-lambda": "^1.15.0",
-    "@aws-cdk/core": "^1.15.0",
+    "@aws-cdk/aws-apigateway": "^1.71.0",
+    "@aws-cdk/aws-lambda": "^1.71.0",
+    "@aws-cdk/core": "^1.71.0",
     "@guardian/image": "^1.0.2",
     "@guardian/src-foundations": "^0.2.3",
     "@types/react-html-parser": "^2.0.1",
