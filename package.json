@@ -57,7 +57,7 @@
     "@aws-cdk/aws-lambda": "^1.15.0",
     "@aws-cdk/core": "^1.15.0",
     "@guardian/image": "^1.0.2",
-    "@guardian/src-foundations": "^0.2.3",
+    "@guardian/src-foundations": "^0.18.1",
     "@types/react-html-parser": "^2.0.1",
     "aws-sdk": "^2.554.0",
     "aws-serverless-express": "^3.3.6",
