@@ -20,7 +20,7 @@ export class EmailService extends cdk.Stack {
         const key = `frontend/${stage.value}/lambda/lambda.zip`;
 
         const handler = new lambda.Function(this, "EditorialEmailsHandler", {
-            runtime: lambda.Runtime.NODEJS_10_X,
+            runtime: lambda.Runtime.NODEJS_12_X,
             code: lambda.Code.fromBucket(
                 s3.Bucket.fromBucketName(this, "lambda-code-bucket", bucket),
                 key
