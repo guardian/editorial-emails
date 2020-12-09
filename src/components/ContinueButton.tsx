@@ -66,7 +66,6 @@ export const ContinueButton: React.FC<Props> = ({ label, linkTo }) => {
                                 src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/5ddbbab098cf4b54f875f12f/original.png?1574681264"
                                 width="23"
                                 height="22"
-                                border="0"
                                 alt=""
                             />
                         </td>
