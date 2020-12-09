@@ -6,3 +6,4 @@ target/
 cdk.out/
 editorial-emails.zip
 cloudformation.yaml
+.idea
