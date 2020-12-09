@@ -51,13 +51,13 @@
     "typescript": "^4.1.2"
   },
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "^1.15.0",
-    "@aws-cdk/aws-lambda": "^1.15.0",
-    "@aws-cdk/core": "^1.15.0",
+    "@aws-cdk/aws-apigateway": "^1.74.0",
+    "@aws-cdk/aws-lambda": "^1.74.0",
+    "@aws-cdk/core": "^1.74.0",
     "@guardian/image": "^1.0.2",
     "@guardian/src-foundations": "^0.2.3",
     "@types/react-html-parser": "^2.0.1",
-    "aws-cdk": "^1.15.0",
+    "aws-cdk": "^1.74.0",
     "aws-sdk": "^2.554.0",
     "aws-serverless-express": "^3.3.6",
     "compression": "^1.7.4",
