@@ -77,7 +77,7 @@ export const OverlayCard: React.FC<Props> = ({
                     {/*
                     // @ts-ignore as JSX expects 'colSpan' but HTML only validates if used as 'colspan' */}
                     <td
-                        colspan={layout === "compact" ? null : 2}
+                        colSpan={layout === "compact" ? null : 2}
                         style={{ padding: 0 }}
                     >
                         <Image
@@ -113,7 +113,7 @@ export const OverlayCard: React.FC<Props> = ({
                     {/*
                     // @ts-ignore as JSX expects 'colSpan' but HTML only validates if used as 'colspan' */}
                     <td
-                        colspan={2}
+                        colSpan={2}
                         className="m-col-pad"
                         style={trailTextPadding(isLive)}
                     >

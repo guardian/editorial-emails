@@ -22,8 +22,12 @@ app.get("/healthcheck", (req, res) => res.send({ status: "okay" }));
 app.get(
     "/:path.json",
     asyncHandler(async (req, res) => {
-        const email = await getFront(req.params.path, req.query.variant);
-        res.send({ body: email });
+        if (typeof req.query.variant === "string") {
+            const email = await getFront(req.params.path, req.query.variant);
+            res.send({body: email});
+        } else {
+            res.send({status: 400, body: "Invalid variant type"});
+        }
     })
 );
 
@@ -31,13 +35,17 @@ app.get(
 app.get(
     "/:path",
     asyncHandler(async (req, res, next) => {
-        if (req.query.showModel) {
-            const model = await api.get(req.params.path);
-            res.send(model);
-            return;
+        if (typeof req.query.variant === "string") {
+            if (req.query.showModel) {
+                const model = await api.get(req.params.path);
+                res.send(model);
+                return;
+            }
+            const email = await getFront(req.params.path, req.query.variant);
+            res.send(email);
+        } else {
+            res.send({status: 400, body: "Invalid variant type"});
         }
-        const email = await getFront(req.params.path, req.query.variant);
-        res.send(email);
     })
 );
 
