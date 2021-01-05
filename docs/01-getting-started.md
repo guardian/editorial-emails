@@ -51,13 +51,6 @@ But the project is still useful!
 - Firstly, as a kind of documentation/example for how to do HTML in emails
 - Secondly, as a launch point for any future email-related OKR
 
-How to redeploy, etc.
-
-1. re-enable the Teamcity project (dotcom:editorial-emails) VCS trigger
-2. deploy to CODE or PROD
-
-(If the Teamcity project has been deleted you'll need to recreate it.)
-
 There are a few code changes that should be prioritised:
 
 1. Make the fronts 'generic'
@@ -73,6 +66,24 @@ There are a few code changes that should be prioritised:
     We have preserved even badly performing designs as a record of the work, but if
     you want to make this project 'real' again, you probably want to delete these.
     Our test results for CTO can be found here:
+
+
+### Project status (end of Q3 2020/2021)
+
+Some work has been done on this service starting mid Q3 2020/2021, mainly to keep the stack
+up to date, and to add the DNS configuration to the project. This is in preparation for a potential
+KR in Q1 2021/2022
+As of 05/01/2021 the project is running in production under the following URLs:
+ - https://email-newsletters.theguardian.com/
+ - https://email-newsletters.code.dev-theguardian.com/
+
+If the project has been removed from production:
+
+1. if it has been disabled, re-enable the Teamcity project (dotcom:editorial-emails) VCS trigger
+2. run the build and deploy to CODE and/or PROD
+3. in the cloudformation console, take a note of the output named `editorialemailshostname`
+4. Ask the DNS team to create CNAMES for email-newsletters.theguardian.com and email-newsletters.code.dev-theguardian.com
+to point to the cloudfront configuration noted in 3.
 
 ### Supported Emails & Variants
 
