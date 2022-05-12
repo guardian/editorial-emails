@@ -2,8 +2,9 @@
 
 **Note, this service is not currently running, although it was successfully used
 for numerous A/B tests in Q3 2019/20. It also represents a useful reference
-point for understanding the vagaries of HTML emails. See the `Project Status`
-section below for more info if you want to resurrect.**
+point for understanding the vagaries of HTML emails. See 
+https://github.com/guardian/editorial-emails/commit/3f8447f56e6934ed51323b015bf617516aa9bd65
+if you want to resurrect.**
 
 A prototype service to render editorial emails.
 
